@@ -1,0 +1,195 @@
+html, body {
+    height:100%;
+    padding:0;
+    margin:0;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    height: 4rem;
+    font-size: 90%;
+    color: #FFFFFF;
+}
+
+.navbar-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1700px;
+}
+
+.logo {
+    height: 4rem;
+}
+
+.d-flex {
+    display: flex;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.pl-4 {
+    padding-left: 1.5rem;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.page-font-size {
+    font-size: 1rem;
+}
+
+hr {
+    border: none; /* Убираем границу */
+    background-color: red; /* Цвет линии */
+    color: red; /* Цвет линии для IE6-7 */
+    height: 2px; /* Толщина линии */
+}
+
+.cinema-container {
+
+}
+
+.movie-container {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie-card {
+    display: inline-block;
+    width: 20%;
+    border: 3px solid red; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+    color: white;
+}
+
+.movie-poster {
+    width: 50%;
+    height: 50%;
+    padding-top: 10px;
+}
+
+.movie-card > a > img:hover {
+    opacity: .5;
+    /*transition: 0.5s;*/
+}
+
+.align-center {
+    text-align: center;
+}
+
+
+.w-1170 {
+    max-width: 1170px;
+    margin: 50px auto;
+}
+
+.description {
+    color: white;
+    border: 3px solid red; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+}
+
+.px-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mlb-4 {
+    margin-left: 4px;
+    margin-bottom: 4px;
+}
+.ml-4 {
+    margin-left: 4px;
+}
+
+button {
+    height: 32px;
+    font-size: 15px;
+    padding: 0 16px;
+
+    border-radius: 100px;
+    background: red;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #cb0000;
+}
+
+button:active {
+    background-color: darkred;
+}
+
+input {
+    height: 32px;
+    font-size: 15px;
+    padding: 0 10px;
+
+    border-radius: 100px;
+    border: none;
+    outline: 0;
+
+    box-shadow: 0 0 0 2px #FFFFFF,
+    0 0 0 4px #c5c5c5;
+
+    margin: 4px;
+}
+
+input:focus,
+button:focus,
+a:focus {
+    box-shadow: 0 0 0 2px #FFFFFF,
+    0 0 0 4px red;
+    outline: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+
+    padding: 12px 20px 0;
+}
+
+form main {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+form main > * {
+    margin-bottom: 10px;
+}
+
+form main > *:last-child {
+    margin-bottom: 0;
+}
+
+.wrapper__form {
+    margin: auto;
+}
