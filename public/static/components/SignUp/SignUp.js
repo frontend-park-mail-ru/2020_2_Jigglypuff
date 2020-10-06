@@ -14,4 +14,5 @@ export class SignUpComponent {
     render() {
         this._el.innerHTML = window.fest['static/components/SignUp/SignUp.tmpl'](this._data)
     }
+
 }

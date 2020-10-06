@@ -7,10 +7,10 @@
         <main>
             <input type="email" placeholder="Логин"/>
             <input type="password" placeholder="Пароль"/>
-            <a class="pass" href="#">Восстановить пароль</a>
             <button type="submit">Войти</button>
+            <a class="pass" href="#">Восстановить пароль</a>
+            <a id="signUpPage">Регистрация</a>
         </main>
-        <button>Регистрация</button>
     </form>
 </fest:template>
 

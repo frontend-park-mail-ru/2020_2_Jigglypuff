@@ -45,27 +45,63 @@ cinemaRef.addEventListener('click', evt => {
 
 profileRef.addEventListener('click', evt => {
     evt.preventDefault();
-    /*profile.data = profileList[1];
-    profile.render(); */
 
+    let response = fetch('http://95.163.249.116:8080/getprofile/', {
+        method: 'GET',
+        credentials: "include",
+        headers: {
+            "Origin": "http://localhost:63342",
+        }
+    })
+        .then((res) => response = res)
+        .catch((res) => response = res);
+    alert(response);
+
+    //profile.data = profileList[1];
+    //profile.render();
+    signInPage();
+});
+
+
+function signUpPage() {
+    signUp.render();
+    let signUpForm = document.getElementById('signUpForm');
+    signUpForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const response = fetch('http://95.163.249.116:8080/signup/', {
+            method: 'POST',
+            body: '{"Login":"Bussat1223", "Password":"password"}',
+            credentials: "same-origin",
+            headers: {
+                "Origin": "http://localhost:63342",
+                "Content-Type":"application/json",
+            }
+        });
+    });
+}
+
+
+function signInPage() {
     signIn.render();
-
     let signInForm = document.getElementById('signInForm');
     signInForm.addEventListener('submit', e => {
         e.preventDefault();
-        const response = fetch('http://95.163.249.116:8080/signin', {
+        const response = fetch('http://95.163.249.116:8080/signin/', {
             method: 'POST',
-            body: {
-                "Login":"Bussat1223", "Password":"password",
-            },
-            credentials: "include",
+            body: '{"Login":"Bussat1223", "Password":"password"}',
+            credentials: "same-origin",
             headers: {
                 "Origin": "http://localhost:63342",
-            }
+                "Content-Type":"application/json"
+            },
         });
-        alert (response.statusCode);
     });
-});
 
+    let signUp = document.getElementById('signUpPage');
+    signUp.addEventListener('click', e => {
+        e.preventDefault();
+        signUpPage();
+    });
+}
 
 
