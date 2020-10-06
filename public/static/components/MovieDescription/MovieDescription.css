@@ -1,0 +1,25 @@
+.movie-poster-description {
+    display: inline-block;
+    width: 50%;
+    height: 50%;
+    border: 3px solid red; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+    /*margin-bottom: 4px;*/
+    color: white;
+}
+
+.description {
+    color: white;
+    border: 3px solid red; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+}
+
+.px-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mlb-4 {
+    margin-left: 4px;
+    margin-bottom: 4px;
+}

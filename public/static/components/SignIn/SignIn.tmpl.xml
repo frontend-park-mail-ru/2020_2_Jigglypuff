@@ -1,0 +1,13 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context-name="something">
+    <form method="POST" class="wrapper__form">
+        <h2>Вход</h2>
+        <main>
+            <input type="email" placeholder="Логин"/>
+            <input type="password" placeholder="Пароль"/>
+            <a href="#">Восстановить пароль</a>
+            <button type="submit">Войти</button>
+        </main>
+        <button>Регистрация</button>
+    </form>
+</fest:template>
+

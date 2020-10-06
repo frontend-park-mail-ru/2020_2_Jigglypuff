@@ -1,0 +1,26 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="moviesData">
+    <style type="text/css">
+        <fest:insert src="./MovieDescription.css"/>
+    </style>
+    <div class="d-flex w-1170 align-center">
+        <div class="movie-poster-description">
+            <img alt="">
+                <fest:attributes>
+                    <fest:attribute name="src">
+                        <fest:value>moviesData.poster</fest:value>
+                    </fest:attribute>
+                </fest:attributes>
+            </img>
+        </div>
+        <div>
+            <div class="description mlb-4 px-10">
+                <h2 align="left">
+                    <fest:value>moviesData.name</fest:value>
+                </h2>
+                <p align="justify">
+                    <fest:value>moviesData.description</fest:value>
+                </p>
+            </div>
+        </div>
+    </div>
+</fest:template>
