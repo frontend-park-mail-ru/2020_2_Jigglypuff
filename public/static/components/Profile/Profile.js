@@ -12,6 +12,6 @@ export class ProfileComponent {
 	}
 
 	render() {
-		this._el.appendChild(window.fest['static/components/Profile/Profile.tmpl'](this._data))
+		this._el.innerHTML = window.fest['static/components/Profile/Profile.tmpl'](this._data);
 	}
 }

@@ -1,4 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="movie">
+    <style>
+        <fest:insert src="./MovieCard.css"/>
+    </style>
     <div class="movie-card">
         <a>
             <fest:attributes>

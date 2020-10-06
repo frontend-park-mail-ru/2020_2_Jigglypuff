@@ -12,6 +12,6 @@ export class MovieDescriptionComponent {
     }
 
     render() {
-        this._el.appendChild(window.fest['static/components/MovieDescription/MovieDescription.tmpl'](this._data))
+        this._el.innerHTML = window.fest['static/components/MovieDescription/MovieDescription.tmpl'](this._data)
     }
 }

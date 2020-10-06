@@ -1,7 +1,10 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="profile">
+    <style>
+        <fest:insert src="./Profile.css"/>
+    </style>
     <div class="d-flex w-1170 align-center">
-        <div class="movie-card border-margin">
-            <img class="movie-poster" alt="">
+        <div class="avatar border-margin">
+            <img class="avatar-img" alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
                         <fest:value>profile.avatar</fest:value>
@@ -10,30 +13,32 @@
             </img>
         </div>
         <div>
-            <div class="description border border-padding border-margin">
-                <div class="d-flex flex-column border-padding">
-                    <h2 align="left">
-                        Фамилия:
-                    </h2>
-                    <h2 align="left">
-                        Имя:
-                    </h2>
-                    <h2 align="left">
-                        Логин:
-                    </h2>
+            <div class="border border-padding border-margin">
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column border-padding">
+                        <h2 align="left">
+                            Фамилия:
+                        </h2>
+                        <h2 align="left">
+                            Имя:
+                        </h2>
+                        <h2 align="left">
+                            Логин:
+                        </h2>
+                    </div>
+                    <div class="d-flex flex-column border-padding">
+                        <h2 align="left">
+                            <fest:value>profile.name</fest:value>
+                        </h2>
+                        <h2 align="left">
+                            <fest:value>profile.surname</fest:value>
+                        </h2>
+                        <h2 align="left">
+                            <fest:value>profile.login</fest:value>
+                        </h2>
+                    </div>
                 </div>
-                <div class="d-flex flex-column border-padding">
-                    <h2 align="left">
-                        <fest:value>profile.name</fest:value>
-                    </h2>
-                    <h2 align="left">
-                        <fest:value>profile.surname</fest:value>
-                    </h2>
-                    <h2 align="left">
-                        <fest:value>profile.login</fest:value>
-                    </h2>
-                </div>
-                <button>Редактировать</button>
+                <button id="edit">Редактировать</button>
             </div>
         </div>
     </div>

@@ -160,14 +160,6 @@ input {
     margin: 4px;
 }
 
-input:focus,
-button:focus,
-a:focus {
-    box-shadow: 0 0 0 2px #FFFFFF,
-    0 0 0 4px red;
-    outline: none;
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -179,7 +171,7 @@ form {
 form main {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
 }
 
 form main > * {

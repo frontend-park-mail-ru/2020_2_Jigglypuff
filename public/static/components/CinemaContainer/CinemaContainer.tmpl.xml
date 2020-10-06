@@ -1,4 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="cinemaList">
+    <style>
+        <fest:insert src="./CinemaContainer.css"/>
+    </style>
     <div class="d-flex w-1170 h-100 flex-column">
         <fest:for iterate="cinemaList" index="i" value="v">
             <fest:include context="v" src="../CinemaCard/CinemaCard.tmpl.xml"/>

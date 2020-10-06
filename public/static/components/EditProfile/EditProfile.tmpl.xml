@@ -1,24 +1,27 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="profile">
+    <style>
+        <fest:insert src="./EditProfile.css"/>
+    </style>
     <div class="d-flex w-1170 h-100 align-center">
-        <div class="movie-card">
-            <img class="movie-poster" alt="">
+        <div class="avatar-card">
+            <img class="avatar-poster" alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
-                        <fest:value>profile.poster</fest:value>
+                        <fest:value>profile.avatar</fest:value>
                     </fest:attribute>
                 </fest:attributes>
             </img>
         </div>
-        <div class="description ml-4">
+        <div class="ml-4">
             <form method="POST" class="wrapper__form">
-                <h2 align="center">Редактирование</h2>
+                <h2 class="align-center">Редактирование</h2>
                 <main>
                     <input type="text" placeholder="Имя"/>
                     <input type="text" placeholder="Фамилия"/>
                     <input type="email" placeholder="Логин"/>
                     <input type="password" placeholder="Пароль"/>
                     <input type="password" placeholder="Повторите пароль"/>
-                    <input type="image" placeholder="Аватар"/>
+                    <input type="image" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" placeholder="Аватар"/>
                     <button type="submit">Принять</button>
                 </main>
             </form>

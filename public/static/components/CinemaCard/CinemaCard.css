@@ -1,0 +1,8 @@
+.cinema-card {
+    display: inline-block;
+    width: 100%;
+    border: 3px solid red; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+    margin-bottom: 4px;
+    color: white;
+}

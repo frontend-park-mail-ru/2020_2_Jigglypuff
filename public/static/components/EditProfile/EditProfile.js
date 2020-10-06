@@ -12,6 +12,6 @@ export class EditProfileComponent {
     }
 
     render() {
-        this._el.appendChild(window.fest['static/components/EditProfile/EditProfile.tmpl'](this._data))
+        this._el.innerHTML = window.fest['static/components/EditProfile/EditProfile.tmpl'](this._data)
     }
 }

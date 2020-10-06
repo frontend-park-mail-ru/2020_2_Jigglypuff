@@ -12,6 +12,6 @@ export class SignInComponent {
     }
 
     render() {
-        this._el.appendChild(window.fest['static/components/SignIn/SignIn.tmpl'](this._data))
+        this._el.innerHTML = window.fest['static/components/SignIn/SignIn.tmpl'](this._data);
     }
 }

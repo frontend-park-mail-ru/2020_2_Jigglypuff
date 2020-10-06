@@ -12,6 +12,6 @@ export class CinemaContainerComponent {
     }
 
     render() {
-        this._el.appendChild(window.fest['static/components/CinemaContainer/CinemaContainer.tmpl'](this._data))
+        this._el.innerHTML = window.fest['static/components/CinemaContainer/CinemaContainer.tmpl'](this._data)
     }
 }
