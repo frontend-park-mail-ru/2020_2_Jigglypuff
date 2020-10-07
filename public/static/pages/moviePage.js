@@ -40,6 +40,7 @@ export async function moviePage() {
                 const ratingResponse = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
                 if (ratingResponse.status === 200) {
                     movieDescription.data.Rating = await ratingResponse.json();
+                    movieDescription.render();
                 } else {
                     movieDescription.render();
 
