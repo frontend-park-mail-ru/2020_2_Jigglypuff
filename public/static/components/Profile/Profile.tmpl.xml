@@ -2,7 +2,8 @@
     <style>
         <fest:insert src="./Profile.css"/>
     </style>
-    <div class="d-flex w-1170 align-center">
+    <main>
+        <div class="d-flex w-1170 align-center">
         <div class="avatar border-margin">
             <img class="avatar-img" alt="">
             </img>
@@ -19,8 +20,9 @@
                         </h2>
                     </div>
                 </div>
-                <a id="edit" href="#">Редактировать</a>
+                    <a id="edit" href="">Редактировать</a>
             </div>
         </div>
     </div>
+    </main>
 </fest:template>
