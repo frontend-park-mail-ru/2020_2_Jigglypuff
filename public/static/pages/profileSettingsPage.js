@@ -13,9 +13,6 @@ export default function profileSettingsPage() {
             method: 'POST',
             body: new FormData(profileSettingsForm),
             credentials: "include",
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
         });
         await response.json()
             .then(({status}) => {
