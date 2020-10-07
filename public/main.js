@@ -4,6 +4,7 @@ import {CinemaContainerComponent} from "./static/components/CinemaContainer/Cine
 import {ProfileComponent} from "./static/components/Profile/Profile.js";
 import {SignUpComponent} from "./static/components/SignUp/SignUp.js";
 import {SignInComponent} from "./static/components/SignIn/SignIn.js";
+import {EditProfileComponent} from "./static/components/EditProfile/EditProfile.js";
 
 let container = document.getElementsByTagName('main')[0];
 let profile = new ProfileComponent({parentElement: container});
@@ -84,15 +85,40 @@ profileRef.addEventListener('click', evt => {
 });
 
 
+function profileSettingsPage() {
+    let profileSettings = new EditProfileComponent({parentElement: container});
+    profileSettings.render();
+
+    const profileSettingsForm = document.forms["profileSettingsForm"]
+
+    profileSettingsForm.addEventListener('submit', evt => {
+        evt.preventDefault();
+        let name = profileSettingsForm.elements.value("name");
+        let surname = profileSettingsForm.elements.value("surname");
+    });
+}
+
 function profilePage() {
     profile.render();
+    let profileSettingsRef = document.getElementById("edit");
+
+    profileSettingsRef.addEventListener('submit', e => {
+        e.preventDefault();
+        profileSettingsPage();
+    });
 }
 
 function isLoginValid(login) {
+    if (3 > login.length > 20) {
+        return false;
+    }
     return !!login.match(/^[0-9a-zA-Z]+$/);
 }
 
 function isPasswordValid(password) {
+    if (3 > password.length > 16) {
+        return false;
+    }
     return !!password.match(/^[0-9a-zA-Z]+$/);
 }
 
@@ -105,13 +131,13 @@ function signUpPage() {
 
         const login = signUpForm.elements.login.value.trim()
         if (!isLoginValid(login)) {
-            alert("Invalid login or password!");
+            alert("Login's length must be > 3 and < 20 ");
             e.preventDefault();
         }
 
         const password = signUpForm.elements.password.value.trim()
         if (!isPasswordValid(password)) {
-            alert("Invalid login or password!");
+            alert("Password's length must be > 3 and < 16");
             e.preventDefault();
         }
 
