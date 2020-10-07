@@ -62,7 +62,7 @@ function moviePage() {
                             console.log("4");
                             const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
                             ratingResponse.then(successRatingResponse => {
-                                res.json().then(r => {
+                                successRatingResponse.json().then(r => {
                                     console.log("5");
                                     movieContainer.data = r;
                                     movieContainer.render();
