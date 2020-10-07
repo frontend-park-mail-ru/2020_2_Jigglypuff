@@ -2,7 +2,7 @@ import profileSettingsPage from "./profileSettingsPage.js";
 import {container} from "../../main.js";
 import {ProfileComponent} from "../components/Profile/Profile.js";
 
-export function profilePage() {
+export async function profilePage() {
     let profile = new ProfileComponent({parentElement: container});
     let data = async () => {
         let response = await fetch('http://cinemascope.space/getprofile/', {
@@ -11,7 +11,7 @@ export function profilePage() {
         });
         return await response.json();
     };
-    profile.data = data();
+    profile.data = await data();
     profile.render();
 
     let profileSettingsRef = document.getElementById("edit");
