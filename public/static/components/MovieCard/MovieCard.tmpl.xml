@@ -1,0 +1,19 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="movie">
+    <style>
+        <fest:insert src="./MovieCard.css"/>
+    </style>
+    <div class="movie-card">
+        <a href="#">
+            <img class="movie-poster" alt="">
+                <fest:attributes>
+                    <fest:attribute name="src">
+                        <fest:text>http://cinemascope.space</fest:text><fest:value>movie.PathToAvatar</fest:value>
+                    </fest:attribute>
+                </fest:attributes>
+            </img>
+        </a>
+        <p>
+            <fest:value>movie.Name</fest:value>
+        </p>
+    </div>
+</fest:template>

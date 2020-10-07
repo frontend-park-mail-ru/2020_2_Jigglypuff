@@ -1,0 +1,39 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="profile">
+    <style>
+        <fest:insert src="./Profile.css"/>
+    </style>
+    <div class="d-flex w-1170 align-center">
+        <div class="avatar border-margin">
+            <img class="avatar-img" alt="">
+                <fest:attributes>
+                    <fest:attribute name="src">
+                        <fest:value>profile.AvatarPath</fest:value>
+                    </fest:attribute>
+                </fest:attributes>
+            </img>
+        </div>
+        <div>
+            <div class="border border-padding border-margin">
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column border-padding">
+                        <h2 align="left">
+                            Фамилия:
+                        </h2>
+                        <h2 align="left">
+                            Имя:
+                        </h2>
+                    </div>
+                    <div class="d-flex flex-column border-padding">
+                        <h2 align="left">
+                            <fest:value>profile.Name</fest:value>
+                        </h2>
+                        <h2 align="left">
+                            <fest:value>profile.Surname</fest:value>
+                        </h2>
+                    </div>
+                </div>
+                <button id="edit">Редактировать</button>
+            </div>
+        </div>
+    </div>
+</fest:template>
