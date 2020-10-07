@@ -104,7 +104,15 @@ function profileSettingsPage() {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }});
-
+        response
+            .then(({status}) => {
+                if (status === 200) {
+                    alert("OK");
+                } else if (status === 401){
+                    alert("Not ok");
+                }
+            })
+            .catch(({statusText}) => console.log(statusText));
     });
 }
 
