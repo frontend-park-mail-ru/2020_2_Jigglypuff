@@ -3,23 +3,17 @@
         <fest:insert src="./MovieCard.css"/>
     </style>
     <div class="movie-card">
-        <a>
-            <fest:attributes>
-                <fest:attribute name="href">
-                    <fest:value>movie.href</fest:value>
-                </fest:attribute>
-            </fest:attributes>
-
+        <a href="#">
             <img class="movie-poster" alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
-                        <fest:value>movie.poster</fest:value>
+                        <fest:text>http://95.163.249.116:8080</fest:text><fest:value>movie.PathToAvatar</fest:value>
                     </fest:attribute>
                 </fest:attributes>
             </img>
         </a>
         <p>
-            <fest:value>movie.name</fest:value>
+            <fest:value>movie.Name</fest:value>
         </p>
     </div>
 </fest:template>

@@ -6,42 +6,60 @@ import {SignUpComponent} from "./static/components/SignUp/SignUp.js";
 import {SignInComponent} from "./static/components/SignIn/SignIn.js";
 
 let container = document.getElementsByTagName('main')[0];
-let movieContainer = new MovieContainerComponent({parentElement: container});
-let cinemaContainer = new CinemaContainerComponent({parentElement: container});
-let movieDescription = new MovieDescriptionComponent({parentElement: container});
 let profile = new ProfileComponent({parentElement: container});
-
-movieContainer.render();
-
-let ref = container.getElementsByTagName("a");
-
-Object.keys(ref).map((key) => {
-    ref[key].addEventListener('click', evt => {
-        evt.preventDefault();
-        movieDescription.data = moviesData[key];
-        movieDescription.render();
-    })
-})
+let profileRef = document.getElementById('profile-navbar');
 
 let moviesRef = document.getElementById('movies-navbar');
 let cinemaRef = document.getElementById('cinema-navbar');
-let profileRef = document.getElementById('profile-navbar');
-
 
 moviesRef.addEventListener('click', evt => {
     evt.preventDefault();
-    movieContainer.data = moviesData;
-    movieContainer.render()
-    // container.innerHTML = window.fest['static/components/MovieContainer/MovieContainer.tmpl'](moviesData)
-})
-
+    moviePage();
+});
 
 cinemaRef.addEventListener('click', evt => {
     evt.preventDefault();
-    cinemaContainer.data = cinemaList;
-    cinemaContainer.render();
-})
+    cinemaPage();
+});
 
+function moviePage() {
+    container.innerHTML = ''
+
+    let movieContainer = new MovieContainerComponent({parentElement: container});
+    let movieDescription = new MovieDescriptionComponent({parentElement: container});
+
+    const response = fetch('http://95.163.249.116:8080/getmovielist/?limit=10&page=1');
+    response.then((res) => {
+            res.json().then(r => {
+                movieContainer.data = r;
+                movieContainer.render();
+
+                let ref = container.getElementsByTagName("a");
+                Object.keys(ref).map((key) => {
+                    ref[key].addEventListener('click', evt => {
+                        evt.preventDefault();
+                        movieDescription.data = movieContainer.data[key];
+                        movieDescription.render();
+                    })
+                })
+            });
+        }
+    ).catch((res) => alert(res.statusCode));
+}
+
+function cinemaPage() {
+    let cinemaContainer = new CinemaContainerComponent({parentElement: container});
+
+    const response = fetch('http://95.163.249.116:8080/getcinemalist/?limit=10&page=1');
+    response.then((res) => {
+            res.json().then(r => {
+                cinemaContainer.data = r;
+                cinemaContainer.render();
+            });
+        }
+    ).catch((res) => alert(res.statusCode));
+
+}
 
 profileRef.addEventListener('click', evt => {
     evt.preventDefault();
@@ -167,3 +185,5 @@ function signInPage() {
         signUpPage();
     });
 }
+
+moviePage();

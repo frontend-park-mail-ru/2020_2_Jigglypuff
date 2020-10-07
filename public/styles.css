@@ -107,7 +107,7 @@ hr {
     margin: 50px auto;
 }
 
-.description {
+.red-border {
     color: white;
     border: 3px solid red; /* Белая рамка */
     border-radius: 10px; /* Радиус скругления */

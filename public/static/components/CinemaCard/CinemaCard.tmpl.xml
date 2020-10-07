@@ -4,10 +4,10 @@
     </style>
     <div class="cinema-card description pl-10">
         <h2 align="left">
-            <fest:value>cinemaData.name</fest:value>
+            <fest:value>cinemaData.Name</fest:value>
         </h2>
         <p>
-            <fest:value>cinemaData.address</fest:value>
+            <fest:value>cinemaData.Address</fest:value>
         </p>
     </div>
-</fest:template>
+</fest:template>>

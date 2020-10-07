@@ -7,20 +7,45 @@
             <img alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
-                        <fest:value>moviesData.poster</fest:value>
+                        <fest:text>http://95.163.249.116:8080</fest:text><fest:value>moviesData.PathToAvatar</fest:value>
                     </fest:attribute>
                 </fest:attributes>
             </img>
         </div>
         <div>
-            <div class="description mlb-4 px-10">
+            <div class="red-border mlb-4 px-10">
                 <h2 align="left">
-                    <fest:value>moviesData.name</fest:value>
+                    <fest:value>moviesData.Name</fest:value>
                 </h2>
                 <p align="justify">
-                    <fest:value>moviesData.description</fest:value>
+                    <fest:value>moviesData.Description</fest:value>
                 </p>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="red-border mlb-4 px-10" style="padding-bottom: 10px">
+                    <h2 align="left">Оценка</h2>
+                    <form method="POST">
+                        <select class="custom-select">
+                            <option selected="true" disabled="true">Оцените фильм</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <button>Оценить</button>
+                    </form>
+                </div>
+                <div class="red-border mlb-4 px-10" style="padding-bottom: 10px">
+                    <h2 align="left">Рейтинг фильма:</h2>
+                    <h2 align="left"><fest:value>moviesData.Rating</fest:value>/10</h2>
+                </div>
             </div>
         </div>
     </div>
-</fest:template>
+</fest:template>>
