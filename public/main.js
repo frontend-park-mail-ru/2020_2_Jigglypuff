@@ -88,8 +88,10 @@ function profileSettingsPage() {
 
     profileSettingsForm.addEventListener('submit', evt => {
         evt.preventDefault();
-        let name = profileSettingsForm.elements.value("name");
-        let surname = profileSettingsForm.elements.value("surname");
+        let name = profileSettingsForm.elements.value.value("name");
+        let surname = profileSettingsForm.elements.value.value("surname");
+
+
     });
 }
 
@@ -148,8 +150,7 @@ function signUpPage() {
         response
             .then(({status}) => {
                 if (status === 200) {
-                    alert("Success!");
-                    signInPage();
+                    profilePage();
                 } else if (status === 401){
                     alert("Something went wrong!");
                 }
