@@ -5,8 +5,8 @@
     <form method="POST" class="wrapper__form" id="signInForm">
         <h2>Вход</h2>
         <main>
-            <input type="email" placeholder="Логин"/>
-            <input type="password" placeholder="Пароль"/>
+            <input name="login" type="login" placeholder="Логин"/>
+            <input name="password" type="password" placeholder="Пароль"/>
             <button type="submit">Войти</button>
             <a class="pass" href="#">Восстановить пароль</a>
             <a id="signUpPage">Регистрация</a>

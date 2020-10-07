@@ -2,11 +2,8 @@
     <form class="wrapper__form" id="signUpForm">
         <h2 align="center">Регистрация</h2>
         <main>
-            <input type="text" placeholder="Имя"/>
-            <input type="text" placeholder="Фамилия"/>
-            <input type="email" placeholder="Логин"/>
-            <input type="password" placeholder="Пароль"/>
-            <input type="password" placeholder="Повторите пароль"/>
+            <input name="login" type="login" placeholder="Логин"/>
+            <input name="password" type="password" placeholder="Пароль"/>
             <button>Зарегистрироваться</button>
         </main>
     </form>
