@@ -69,9 +69,8 @@ profileRef.addEventListener('click', evt => {
         method: 'GET',
         credentials: "include",
     })
-        .then(({status, body}) => {
+        .then(({status}) => {
             if (status === 200) {
-                profile.data(body);
                 profile.render();
             } else {
                 signInPage();
