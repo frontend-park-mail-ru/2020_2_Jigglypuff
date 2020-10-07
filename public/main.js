@@ -64,8 +64,8 @@ function moviePage() {
                             ratingResponse.then(successRatingResponse => {
                                 successRatingResponse.json().then(r => {
                                     console.log("5");
-                                    movieContainer.data = r;
-                                    movieContainer.render();
+                                    movieDescription.data = r;
+                                    movieDescription.render();
                                 });
                             });
                         });
