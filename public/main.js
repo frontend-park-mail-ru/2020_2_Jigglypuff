@@ -58,9 +58,8 @@ function moviePage() {
                                 "Content-Type": "application/json"
                             },
                         });
-                        if (rateResponse.status !== 401) {
-                            rateResponse.then(() => {
-
+                        rateResponse.then(() => {
+                            if (rateResponse.status !== 401) {
                                 const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
                                 ratingResponse.then(successRatingResponse => {
                                     successRatingResponse.json().then(r => {
@@ -69,8 +68,10 @@ function moviePage() {
                                         movieContainer.render();
                                     });
                                 });
-                            });
-                        }
+                            } else {
+                                movieDescription.render();
+                            }
+                        });
                     });
                 });
             });
@@ -134,12 +135,13 @@ function profileSettingsPage() {
             credentials: "include",
             headers: {
                 'Content-Type': 'multipart/form-data',
-            }});
+            }
+        });
         response
             .then(({status}) => {
                 if (status === 200) {
                     alert("OK");
-                } else if (status === 401){
+                } else if (status === 401) {
                     alert("Not ok");
                 }
             })
@@ -195,7 +197,7 @@ function signUpPage() {
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
             credentials: "include",
             headers: {
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
             }
         });
 
@@ -203,7 +205,7 @@ function signUpPage() {
             .then(({status}) => {
                 if (status === 200) {
                     profilePage();
-                } else if (status === 401){
+                } else if (status === 401) {
                 }
             })
             .catch(({statusText}) => console.log(statusText));
@@ -235,7 +237,7 @@ function signInPage() {
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
             credentials: "include",
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type": "application/json"
             },
         });
         response
