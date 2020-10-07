@@ -19,7 +19,7 @@
                         </h2>
                     </div>
                 </div>
-                <button id="edit">Редактировать</button>
+                <a id="edit">Редактировать</a>
             </div>
         </div>
     </div>
