@@ -1,4 +1,4 @@
-import moviePage from "./static/pages/moviePage.js";
+import {moviePage} from "./static/pages/moviePage.js";
 import signInPage from "./static/pages/signInPage.js";
 import cinemaPage from "./static/pages/cinemaPage.js";
 import {profilePage} from "./static/pages/profilePage.js";
