@@ -9,7 +9,7 @@
             <input name="password" type="password" placeholder="Пароль"/>
             <button type="submit">Войти</button>
             <a class="pass" href="#">Восстановить пароль</a>
-            <a id="signUpPage">Регистрация</a>
+            <a style="cursor:pointer;" id="signUpPage">Регистрация</a>
         </main>
     </form>
 </fest:template>

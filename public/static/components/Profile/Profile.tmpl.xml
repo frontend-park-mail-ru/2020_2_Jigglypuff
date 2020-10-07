@@ -20,7 +20,7 @@
                         </h2>
                     </div>
                 </div>
-                    <a id="edit">Редактировать</a>
+                    <a style="cursor:pointer;" id="edit">Редактировать</a>
             </div>
         </div>
     </div>

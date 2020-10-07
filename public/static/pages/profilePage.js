@@ -1,7 +1,9 @@
 import profileSettingsPage from "./profileSettingsPage.js";
-import {profile} from "../../main.js";
+import {container} from "../../main.js";
+import {ProfileComponent} from "../components/Profile/Profile.js";
 
 export function profilePage() {
+    let profile = new ProfileComponent({parentElement: container});
     profile.render();
 
     let profileSettingsRef = document.getElementById("edit");

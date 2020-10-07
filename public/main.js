@@ -1,10 +1,9 @@
-import {ProfileComponent} from "./static/components/Profile/Profile.js";
 import moviePage from "./static/pages/moviePage.js";
 import signInPage from "./static/pages/signInPage.js";
 import cinemaPage from "./static/pages/cinemaPage.js";
+import {profilePage} from "./static/pages/profilePage.js";
 
 export const container = document.getElementsByTagName('main')[0];
-export const profile = new ProfileComponent({parentElement: container});
 let profileRef = document.getElementById('profile-navbar');
 let moviesRef = document.getElementById('movies-navbar');
 let cinemaRef = document.getElementById('cinema-navbar');
@@ -28,7 +27,7 @@ profileRef.addEventListener('click', evt => {
     })
         .then(({status}) => {
             if (status === 200) {
-                profile.render();
+                profilePage();
             } else {
                 signInPage();
             }
