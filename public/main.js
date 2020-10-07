@@ -93,9 +93,9 @@ function profileSettingsPage() {
         let avatar = profileSettingsForm.elements.avatar.value;
 
         const formData = new FormData();
-        formData.append('name', name);
-        formData.append('surname', surname);
-        formData.append('avatar', avatar);
+        formData.append('Name', name);
+        formData.append('Surname', surname);
+        formData.append('AvatarPath', avatar);
 
         const response = fetch('http://cinemascope.space/updateprofile/', {
             method: 'POST',
