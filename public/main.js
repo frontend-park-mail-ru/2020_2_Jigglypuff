@@ -58,17 +58,19 @@ function moviePage() {
                                 "Content-Type": "application/json"
                             },
                         });
-                        rateResponse.then(successResponse => {
-                            console.log("4");
-                            const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
-                            ratingResponse.then(successRatingResponse => {
-                                successRatingResponse.json().then(r => {
-                                    console.log("5");
-                                    movieDescription.data = r;
-                                    movieDescription.render();
+                        if (rateResponse.status !== 401) {
+                            rateResponse.then(() => {
+
+                                const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
+                                ratingResponse.then(successRatingResponse => {
+                                    successRatingResponse.json().then(r => {
+                                        console.log("5");
+                                        movieContainer.data.Rating = r;
+                                        movieContainer.render();
+                                    });
                                 });
                             });
-                        });
+                        }
                     });
                 });
             });
