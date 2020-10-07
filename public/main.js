@@ -50,9 +50,9 @@ function moviePage() {
                     rateButton.addEventListener('click', event => {
                         event.preventDefault();
                         console.log("3");
-                        const rateResponse = fetch('http://cinemascope.space/ratemovie', {
+                        const rateResponse = fetch('http://cinemascope.space/ratemovie/', {
                             method: 'POST',
-                            body: '{"Name":"' + movieDescription.data.Name + '", "Rating":"' + rate.value + '"}',
+                            body: '{"Name":"' + movieDescription.data.Name + '", "Rating":' + rate.value + '}',
                             credentials: "include",
                             headers: {
                                 "Content-Type": "application/json"
