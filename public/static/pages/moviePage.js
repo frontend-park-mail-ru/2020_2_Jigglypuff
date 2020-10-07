@@ -14,18 +14,15 @@ export async function moviePage() {
 
     let ref = container.getElementsByTagName("a");
     Object.keys(ref).map(key => {
-        ref[key].addEventListener('click', evt => {
+        ref[key].addEventListener('click', async evt => {
             evt.preventDefault();
 
-            let l = async function () {
-                movieDescription.data = movieContainer.data[key];
-                const movieRating = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
-                if (movieRating.status === 200) {
-                    movieDescription.data.Rating = await movieRating.json();
-                }
-                movieDescription.render();
-            };
-            l();
+            movieDescription.data = movieContainer.data[key];
+            const movieRating = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
+            if (movieRating.status === 200) {
+                movieDescription.data.Rating = await movieRating.json();
+            }
+            movieDescription.render();
 
             const rateButton = document.getElementById('rate');
             const rate = document.getElementsByTagName('select')[0];
