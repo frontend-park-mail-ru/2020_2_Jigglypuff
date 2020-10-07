@@ -7,7 +7,28 @@ export default function profileSettingsPage() {
 
     const profileSettingsForm = document.forms["profileSettingsForm"]
 
-    profileSettingsForm.addEventListener('submit', evt => {
+    profileSettingsForm.onsubmit = async (e) => {
+        e.preventDefault();
+        let response = await fetch('http://cinemascope.space/updateprofile/', {
+            method: 'POST',
+            body: new FormData(profileSettingsForm),
+            credentials: "include",
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        await response.json()
+            .then(({status}) => {
+                if (status === 200) {
+                    alert("OK");
+                } else if (status === 401) {
+                    alert("Not ok");
+                }
+            })
+            .catch(() => alert("fail"));
+    }
+
+    /* profileSettingsForm.addEventListener('submit', evt => {
         evt.preventDefault();
         let name = profileSettingsForm.elements.name.value;
         let surname = profileSettingsForm.elements.surname.value;
@@ -35,5 +56,5 @@ export default function profileSettingsPage() {
                 }
             })
             .catch(({statusText}) => console.log(statusText));
-    });
+    }); */
 }
