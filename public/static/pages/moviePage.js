@@ -29,7 +29,6 @@ export async function moviePage() {
 
             rateButton.addEventListener('click', async event => {
                 event.preventDefault();
-                console.log("3");
                 const rateResponse = await fetch('http://cinemascope.space/ratemovie/', {
                     method: 'POST',
                     body: '{"Name":"' + movieDescription.data.Name + '", "Rating":' + rate.value + '}',
@@ -39,8 +38,17 @@ export async function moviePage() {
                     },
                 });
                 const ratingResponse = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
-                movieDescription.data.Rating = await ratingResponse.json();
-                movieDescription.render();
+                if (ratingResponse.status === 200) {
+                    movieDescription.data.Rating = await ratingResponse.json();
+                } else {
+                    movieDescription.render();
+
+                    let rateBtn = document.getElementById("rate");
+                    const errorMessage = document.createElement('p');
+                    errorMessage.style.cssText = "border: 3px solid red; border-radius: 10px;"
+                    errorMessage.innerHTML = "Please sign in";
+                    rateBtn.outerHTML = errorMessage.outerHTML;
+                }
             });
         });
     });
