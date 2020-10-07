@@ -7,7 +7,6 @@
             <img class="avatar-poster" alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
-                        <fest:value>profile.avatar</fest:value>
                     </fest:attribute>
                 </fest:attributes>
             </img>
@@ -16,9 +15,8 @@
             <form method="POST" class="wrapper__form" id="profileSettingsForm">
                 <h2 class="align-center">Редактирование</h2>
                 <main>
-                    <input id="name" type="text" placeholder="Имя"/>
-                    <input id="surname" type="text" placeholder="Фамилия"/>
-                    <input id="passwordRepeat" type="password" placeholder="Повторите пароль"/>
+                    <input name="name" type="text" placeholder="Имя"/>
+                    <input name="surname" type="text" placeholder="Фамилия"/>
                     <input id="avatar" type="image" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" placeholder="Аватар"/>
                     <button type="submit">Принять</button>
                 </main>
