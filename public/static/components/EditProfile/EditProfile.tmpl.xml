@@ -17,7 +17,7 @@
                 <main>
                     <input name="name" type="text" placeholder="Имя"/>
                     <input name="surname" type="text" placeholder="Фамилия"/>
-                    <input id="avatar" type="image" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" placeholder="Аватар"/>
+                    <input type="file" name="avatar" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" placeholder="Аватар"/>
                     <button type="submit">Принять</button>
                 </main>
             </form>

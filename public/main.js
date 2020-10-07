@@ -88,8 +88,9 @@ function profileSettingsPage() {
 
     profileSettingsForm.addEventListener('submit', evt => {
         evt.preventDefault();
-        let name = profileSettingsForm.element.name.value;
+        let name = profileSettingsForm.elements.name.value;
         let surname = profileSettingsForm.elements.surname.value;
+        //let avatar = profileSettingsForm.elements.avatar.value;
 
         alert(name);
         alert(surname);
