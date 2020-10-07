@@ -13,13 +13,19 @@ export async function moviePage() {
     movieContainer.render();
 
     let ref = container.getElementsByTagName("a");
-    Object.keys(ref).map(async (key) => {
+    Object.keys(ref).map(key => {
         ref[key].addEventListener('click', evt => {
             evt.preventDefault();
 
-            movieDescription.data = movieContainer.data[key];
-            movieDescription.render();
-            console.log(movieDescription.data.Name);
+            let l = async function () {
+                movieDescription.data = movieContainer.data[key];
+                const movieRating = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
+                if (movieRating.status === 200) {
+                    movieDescription.data.Rating = await movieRating.json();
+                }
+                movieDescription.render();
+            };
+            l();
 
             const rateButton = document.getElementById('rate');
             const rate = document.getElementsByTagName('select')[0];
@@ -27,16 +33,16 @@ export async function moviePage() {
             rateButton.addEventListener('click', async event => {
                 event.preventDefault();
                 console.log("3");
-                const rateResponse = await fetch('http://cinemascope.space/ratemovie', {
+                const rateResponse = await fetch('http://cinemascope.space/ratemovie/', {
                     method: 'POST',
-                    body: '{"Name":"' + movieDescription.data.Name + '", "Rating":"' + rate.value + '"}',
+                    body: '{"Name":"' + movieDescription.data.Name + '", "Rating":' + rate.value + '}',
                     credentials: "include",
                     headers: {
                         "Content-Type": "application/json"
                     },
                 });
                 const ratingResponse = await fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
-                movieDescription.data.Rating = await rateResponse.json();
+                movieDescription.data.Rating = await ratingResponse.json();
                 movieDescription.render();
             });
         });
