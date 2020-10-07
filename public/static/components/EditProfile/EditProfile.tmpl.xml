@@ -18,8 +18,6 @@
                 <main>
                     <input id="name" type="text" placeholder="Имя"/>
                     <input id="surname" type="text" placeholder="Фамилия"/>
-                    <input id="login" type="login" placeholder="Логин"/>
-                    <input id="password" type="password" placeholder="Пароль"/>
                     <input id="passwordRepeat" type="password" placeholder="Повторите пароль"/>
                     <input id="avatar" type="image" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" placeholder="Аватар"/>
                     <button type="submit">Принять</button>
