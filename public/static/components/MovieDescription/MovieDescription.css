@@ -23,3 +23,13 @@
     margin-left: 4px;
     margin-bottom: 4px;
 }
+
+.custom-select {
+    display: inline-block;
+    padding: .375rem 1.75rem .375rem .75rem;
+    font-weight: 400;
+    vertical-align: middle;
+    border: 1px solid red;
+    border-radius: 10px;
+    margin-bottom: 4px;
+}

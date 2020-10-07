@@ -29,7 +29,7 @@ function moviePage() {
     let movieContainer = new MovieContainerComponent({parentElement: container});
     let movieDescription = new MovieDescriptionComponent({parentElement: container});
 
-    const response = fetch('http://95.163.249.116:8080/getmovielist/?limit=10&page=1');
+    const response = fetch('http://cinemascope.space/getmovielist/?limit=10&page=1');
     response.then((res) => {
             res.json().then(r => {
                 movieContainer.data = r;
@@ -51,7 +51,7 @@ function moviePage() {
 function cinemaPage() {
     let cinemaContainer = new CinemaContainerComponent({parentElement: container});
 
-    const response = fetch('http://95.163.249.116:8080/getcinemalist/?limit=10&page=1');
+    const response = fetch('http://cinemascope.space/getcinemalist/?limit=10&page=1');
     response.then((res) => {
             res.json().then(r => {
                 cinemaContainer.data = r;
@@ -65,16 +65,13 @@ function cinemaPage() {
 profileRef.addEventListener('click', evt => {
     evt.preventDefault();
 
-    fetch('http://95.163.249.116:8080/getprofile/', {
+    fetch('http://cinemascope.space/getprofile/', {
         method: 'GET',
         credentials: "include",
-        headers: {
-            "Origin": "http://localhost:63342",
-        },
     })
-        .then(({status}) => {
+        .then(({status, body}) => {
             if (status === 200) {
-                profile.data = profileList[1];
+                profile.data(body);
                 profile.render();
             } else {
                 signInPage();
@@ -140,12 +137,11 @@ function signUpPage() {
             e.preventDefault();
         }
 
-        const response = fetch('http://95.163.249.116:8080/signup/', {
+        const response = fetch('http://cinemascope.space/signup/', {
             method: 'POST',
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
             credentials: "include",
             headers: {
-                "Origin": "http://localhost:63342",
                 "Content-Type":"application/json",
             }
         });
@@ -183,12 +179,11 @@ function signInPage() {
             e.preventDefault();
         }
 
-        const response = fetch('http://95.163.249.116:8080/signin/', {
+        const response = fetch('http://cinemascope.space/signin/', {
             method: 'POST',
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
             credentials: "include",
             headers: {
-                "Origin": "http://localhost:63342",
                 "Content-Type":"application/json"
             },
         });

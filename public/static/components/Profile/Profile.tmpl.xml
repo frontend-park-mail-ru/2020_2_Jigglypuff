@@ -5,11 +5,6 @@
     <div class="d-flex w-1170 align-center">
         <div class="avatar border-margin">
             <img class="avatar-img" alt="">
-                <fest:attributes>
-                    <fest:attribute name="src">
-                        <fest:value>profile.avatar</fest:value>
-                    </fest:attribute>
-                </fest:attributes>
             </img>
         </div>
         <div>
@@ -17,24 +12,10 @@
                 <div class="d-flex flex-row">
                     <div class="d-flex flex-column border-padding">
                         <h2 align="left">
-                            Фамилия:
+                            Фамилия: Пусто
                         </h2>
                         <h2 align="left">
-                            Имя:
-                        </h2>
-                        <h2 align="left">
-                            Логин:
-                        </h2>
-                    </div>
-                    <div class="d-flex flex-column border-padding">
-                        <h2 align="left">
-                            <fest:value>profile.name</fest:value>
-                        </h2>
-                        <h2 align="left">
-                            <fest:value>profile.surname</fest:value>
-                        </h2>
-                        <h2 align="left">
-                            <fest:value>profile.login</fest:value>
+                            Имя: Пусто
                         </h2>
                     </div>
                 </div>
