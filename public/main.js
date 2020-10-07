@@ -90,11 +90,20 @@ function profileSettingsPage() {
         evt.preventDefault();
         let name = profileSettingsForm.elements.name.value;
         let surname = profileSettingsForm.elements.surname.value;
-        //let avatar = profileSettingsForm.elements.avatar.value;
+        let avatar = profileSettingsForm.elements.avatar.value;
 
-        alert(name);
-        alert(surname);
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('surname', surname);
+        formData.append('avatar', avatar);
 
+        const response = fetch('http://cinemascope.space/updateprofile/', {
+            method: 'POST',
+            body: formData,
+            credentials: "include",
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }});
 
     });
 }
