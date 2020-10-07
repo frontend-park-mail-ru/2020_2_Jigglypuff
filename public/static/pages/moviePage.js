@@ -1,6 +1,6 @@
-import {container} from "../../main";
-import {MovieDescriptionComponent} from "../components/MovieDescription/MovieDescription";
-import {MovieContainerComponent} from "../components/MovieContainer/MovieContainer";
+import {container} from "../../main.js";
+import {MovieDescriptionComponent} from "../components/MovieDescription/MovieDescription.js";
+import {MovieContainerComponent} from "../components/MovieContainer/MovieContainer.js";
 
 export default function moviePage() {
     container.innerHTML = ''
@@ -37,8 +37,8 @@ export default function moviePage() {
                                 "Content-Type": "application/json"
                             },
                         });
-                        rateResponse.then(() => {
-                            if (rateResponse.status !== 401) {
+                        rateResponse.then((rateRes) => {
+                            if (rateRes.status !== 401) {
                                 const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
                                 ratingResponse.then(successRatingResponse => {
                                     successRatingResponse.json().then(r => {

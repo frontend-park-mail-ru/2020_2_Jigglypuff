@@ -1,5 +1,5 @@
-import {EditProfileComponent} from "../components/EditProfile/EditProfile";
-import {container} from "../../main";
+import {EditProfileComponent} from "../components/EditProfile/EditProfile.js";
+import {container} from "../../main.js";
 
 export default function profileSettingsPage() {
     let profileSettings = new EditProfileComponent({parentElement: container});

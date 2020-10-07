@@ -1,7 +1,7 @@
 import {ProfileComponent} from "./static/components/Profile/Profile.js";
 import moviePage from "./static/pages/moviePage.js";
-import signInPage from "./static/pages/signInPage";
-import cinemaPage from "./static/pages/cinemaPage";
+import signInPage from "./static/pages/signInPage.js";
+import cinemaPage from "./static/pages/cinemaPage.js";
 
 export const container = document.getElementsByTagName('main')[0];
 export const profile = new ProfileComponent({parentElement: container});

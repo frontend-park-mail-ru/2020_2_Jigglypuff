@@ -1,5 +1,5 @@
-import {CinemaContainerComponent} from "../components/CinemaContainer/CinemaContainer";
-import {container} from "../../main";
+import {CinemaContainerComponent} from "../components/CinemaContainer/CinemaContainer.js";
+import {container} from "../../main.js";
 
 export default function cinemaPage() {
     let cinemaContainer = new CinemaContainerComponent({parentElement: container});

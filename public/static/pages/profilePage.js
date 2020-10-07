@@ -1,5 +1,5 @@
-import profileSettingsPage from "./profileSettingsPage";
-import {profile} from "../../main";
+import profileSettingsPage from "./profileSettingsPage.js";
+import {profile} from "../../main.js";
 
 export function profilePage() {
     profile.render();

@@ -1,5 +1,5 @@
-import {SignInComponent} from "../components/SignIn/SignIn";
-import {container, isLoginValid, isPasswordValid} from "../../main";
+import {SignInComponent} from "../components/SignIn/SignIn.js";
+import {container, isLoginValid, isPasswordValid} from "../../main.js";
 import signUpPage from "./signUpPage";
 import {profilePage} from "./profilePage";
 

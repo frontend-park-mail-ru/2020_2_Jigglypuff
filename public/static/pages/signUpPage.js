@@ -1,6 +1,6 @@
-import {SignUpComponent} from "../components/SignUp/SignUp";
-import {container, isLoginValid, isPasswordValid} from "../../main";
-import {profilePage} from "./profilePage";
+import {SignUpComponent} from "../components/SignUp/SignUp.js";
+import {container, isLoginValid, isPasswordValid} from "../../main.js";
+import {profilePage} from "./profilePage.js";
 
 export default function signUpPage() {
     const signUp = new SignUpComponent({parentElement: container});
