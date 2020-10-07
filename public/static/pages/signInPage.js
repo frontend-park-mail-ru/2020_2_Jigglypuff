@@ -1,6 +1,6 @@
 import {SignInComponent} from "../components/SignIn/SignIn";
 import {container, isLoginValid, isPasswordValid} from "../../main";
-import signUpPage from "../../../signUpPage";
+import signUpPage from "./signUpPage";
 import {profilePage} from "./profilePage";
 
 export default function signInPage() {
