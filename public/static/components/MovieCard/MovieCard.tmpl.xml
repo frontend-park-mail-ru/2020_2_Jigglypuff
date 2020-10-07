@@ -7,7 +7,7 @@
             <img class="movie-poster" alt="">
                 <fest:attributes>
                     <fest:attribute name="src">
-                        <fest:text>http://95.163.249.116:8080</fest:text><fest:value>movie.PathToAvatar</fest:value>
+                        <fest:text>http://cinemascope.space</fest:text><fest:value>movie.PathToAvatar</fest:value>
                     </fest:attribute>
                 </fest:attributes>
             </img>

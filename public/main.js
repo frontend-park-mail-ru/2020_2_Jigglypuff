@@ -31,22 +31,51 @@ function moviePage() {
 
     const response = fetch('http://cinemascope.space/getmovielist/?limit=10&page=1');
     response.then((res) => {
-            res.json().then(r => {
-                movieContainer.data = r;
-                movieContainer.render();
+        res.json().then(r => {
+            movieContainer.data = r;
+            movieContainer.render();
+            console.log("1");
+            let ref = container.getElementsByTagName("a");
+            Object.keys(ref).map((key) => {
+                ref[key].addEventListener('click', evt => {
+                    evt.preventDefault();
+                    console.log("2");
 
-                let ref = container.getElementsByTagName("a");
-                Object.keys(ref).map((key) => {
-                    ref[key].addEventListener('click', evt => {
-                        evt.preventDefault();
-                        movieDescription.data = movieContainer.data[key];
-                        movieDescription.render();
-                    })
-                })
+                    movieDescription.data = movieContainer.data[key];
+                    movieDescription.render();
+
+                    const rateButton = document.getElementById('rate');
+                    const rate = document.getElementsByTagName('select')[0];
+
+                    rateButton.addEventListener('click', event => {
+                        event.preventDefault();
+                        console.log("3");
+                        const rateResponse = fetch('http://cinemascope.space/ratemovie', {
+                            method: 'POST',
+                            body: '{"Name":"' + movieDescription.data.Name + '", "Rating":"' + rate.value + '"}',
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                        });
+                        rateResponse.then(successResponse => {
+                            console.log("4");
+                            const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
+                            ratingResponse.then(successRatingResponse => {
+                                res.json().then(r => {
+                                    console.log("5");
+                                    movieContainer.data = r;
+                                    movieContainer.render();
+                                });
+                            });
+                        });
+                    });
+                });
             });
-        }
-    ).catch((res) => alert(res.statusCode));
+        });
+    }).catch((res) => alert(res.statusCode));
 }
+
 
 function cinemaPage() {
     let cinemaContainer = new CinemaContainerComponent({parentElement: container});
