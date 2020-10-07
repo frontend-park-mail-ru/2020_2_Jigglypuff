@@ -67,10 +67,9 @@ profileRef.addEventListener('click', evt => {
 
     fetch('http://95.163.249.116:8080/getprofile/', {
         method: 'GET',
-        credentials: "same-origin",
+        credentials: "include",
         headers: {
             "Origin": "http://localhost:63342",
-            "Cookie": "session_id=XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDa"
         },
     })
         .then(({status}) => {
@@ -144,7 +143,7 @@ function signUpPage() {
         const response = fetch('http://95.163.249.116:8080/signup/', {
             method: 'POST',
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 "Origin": "http://localhost:63342",
                 "Content-Type":"application/json",
@@ -187,7 +186,7 @@ function signInPage() {
         const response = fetch('http://95.163.249.116:8080/signin/', {
             method: 'POST',
             body: '{"Login":"' + login + '", "Password":"' + password + '"}',
-            credentials: "same-origin",
+            credentials: "include",
             headers: {
                 "Origin": "http://localhost:63342",
                 "Content-Type":"application/json"
