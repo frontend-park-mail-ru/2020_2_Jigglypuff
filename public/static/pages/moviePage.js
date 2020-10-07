@@ -21,6 +21,17 @@ export default function moviePage() {
                     console.log("2");
 
                     movieDescription.data = movieContainer.data[key];
+                    const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
+                    ratingResponse.then((rateRes) => {
+                        console.log("2.1");
+                        if (rateRes.status !== 401) {
+                            rateRes.json().then(rating => {
+                                movieDescription.data.Rating = rating;
+                            })
+                        } else {
+                            movieDescription.data.Rating = 0;
+                        }
+                    });
                     movieDescription.render();
 
                     const rateButton = document.getElementById('rate');
@@ -43,14 +54,17 @@ export default function moviePage() {
                                 ratingResponse.then(successRatingResponse => {
                                     successRatingResponse.json().then(r => {
                                         console.log("5");
-                                        movieContainer.data.Rating = r;
-                                        movieContainer.render();
+                                        movieDescription.data.Rating = r;
+                                        movieDescription.render();
                                     });
                                 });
                             } else {
                                 movieDescription.render();
-                                const rateBtn = document.getElementById("rate");
-                                rateBtn.hidden = true;
+                                let rateBtn = document.getElementById("rate");
+                                const errorMessage = document.createElement('p');
+                                errorMessage.style.cssText = "border: 3px solid red; border-radius: 10px;"
+                                errorMessage.innerHTML = "Please sign in";
+                                rateBtn.outerHTML = errorMessage.outerHTML;
                             }
                         });
                     });
