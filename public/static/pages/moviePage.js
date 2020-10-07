@@ -24,7 +24,9 @@ export default function moviePage() {
                     const ratingResponse = fetch('http://cinemascope.space/getmovierating/?name=' + movieDescription.data.Name);
                     ratingResponse.then((rateRes) => {
                         console.log("2.1");
+                        console.log(rateRes.status);
                         if (rateRes.status !== 401) {
+                            console.log("2.3")
                             rateRes.json().then(rating => {
                                 movieDescription.data.Rating = rating;
                             })
