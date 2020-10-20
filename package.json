@@ -14,11 +14,6 @@
     "eslint-config-google": "^0.14.0",
     "express-history-api-fallback": "^2.2.1"
   },
-  "cache": {
-    "directories": [
-      "node_modules"
-    ]
-  },
   "scripts": {
     "start": "node ./server",
     "tmpl": "./node_modules/.bin/fest-build fest-build --dir=public",

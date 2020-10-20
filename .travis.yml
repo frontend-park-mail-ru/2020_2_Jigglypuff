@@ -7,9 +7,5 @@ notifications:
 before_script:
   - npm install eslint --save-dev
 
-cache:
-  directories:
-    - node_modules
-
 script:
   - npm run lint
