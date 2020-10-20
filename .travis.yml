@@ -1,8 +1,11 @@
 language: node_js
-node_js: v8.10.0
+node_js: v14.9.0
 
 notifications:
   email: false
+
+before_script:
+  - npm install eslint --save-dev
 
 cache:
   directories:
