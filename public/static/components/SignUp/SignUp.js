@@ -8,11 +8,10 @@ export class SignUpComponent {
     }
 
     get data() {
-        return this._data
+        return this._data;
     }
 
     render() {
-        this._el.innerHTML = window.fest['static/components/SignUp/SignUp.tmpl'](this._data)
+        this._el.innerHTML = window.fest['static/components/SignUp/SignUp.tmpl'](this._data);
     }
-
 }

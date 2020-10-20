@@ -8,7 +8,7 @@ export class MovieContainerComponent {
     }
 
     get data() {
-        return this._data
+        return this._data;
     }
 
     render() {

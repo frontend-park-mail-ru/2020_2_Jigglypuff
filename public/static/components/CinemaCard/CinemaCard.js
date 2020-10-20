@@ -8,10 +8,10 @@ export class CinemaCard {
     }
 
     get data() {
-        return this._data
+        return this._data;
     }
 
     render() {
-        this._el.appendChild(window.fest['static/components/CinemaCard/CinemaCard.tmpl'](this._data))
+        this._el.appendChild(window.fest['static/components/CinemaCard/CinemaCard.tmpl'](this._data));
     }
 }

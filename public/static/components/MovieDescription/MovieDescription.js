@@ -8,10 +8,10 @@ export class MovieDescriptionComponent {
     }
 
     get data() {
-        return this._data
+        return this._data;
     }
 
     render() {
-        this._el.innerHTML = window.fest['static/components/MovieDescription/MovieDescription.tmpl'](this._data)
+        this._el.innerHTML = window.fest['static/components/MovieDescription/MovieDescription.tmpl'](this._data);
     }
 }

@@ -8,10 +8,10 @@ export class CinemaContainerComponent {
     }
 
     get data() {
-        return this._data
+        return this._data;
     }
 
     render() {
-        this._el.innerHTML = window.fest['static/components/CinemaContainer/CinemaContainer.tmpl'](this._data)
+        this._el.innerHTML = window.fest['static/components/CinemaContainer/CinemaContainer.tmpl'](this._data);
     }
 }

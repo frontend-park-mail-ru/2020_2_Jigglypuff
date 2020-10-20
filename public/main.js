@@ -1,29 +1,29 @@
-import {moviePage} from "./static/pages/moviePage.js";
-import signInPage from "./static/pages/signInPage.js";
-import cinemaPage from "./static/pages/cinemaPage.js";
-import {profilePage} from "./static/pages/profilePage.js";
+import {moviePage} from './static/pages/moviePage.js';
+import signInPage from './static/pages/signInPage.js';
+import cinemaPage from './static/pages/cinemaPage.js';
+import {profilePage} from './static/pages/profilePage.js';
 
 export const container = document.getElementsByTagName('main')[0];
-let profileRef = document.getElementById('profile-navbar');
-let moviesRef = document.getElementById('movies-navbar');
-let cinemaRef = document.getElementById('cinema-navbar');
+const profileRef = document.getElementById('profile-navbar');
+const moviesRef = document.getElementById('movies-navbar');
+const cinemaRef = document.getElementById('cinema-navbar');
 
-moviesRef.addEventListener('click', evt => {
+moviesRef.addEventListener('click', (evt) => {
     evt.preventDefault();
     moviePage();
 });
 
-cinemaRef.addEventListener('click', evt => {
+cinemaRef.addEventListener('click', (evt) => {
     evt.preventDefault();
     cinemaPage();
 });
 
-profileRef.addEventListener('click', evt => {
+profileRef.addEventListener('click', (evt) => {
     evt.preventDefault();
 
     fetch('http://cinemascope.space/getprofile/', {
         method: 'GET',
-        credentials: "include",
+        credentials: 'include',
     })
         .then(({status}) => {
             if (status === 200) {
@@ -32,7 +32,7 @@ profileRef.addEventListener('click', evt => {
                 signInPage();
             }
         })
-        .catch(() => console.log("failed to get profile"));
+        .catch(() => console.log('failed to get profile'));
 });
 
 export function isLoginValid(login) {
