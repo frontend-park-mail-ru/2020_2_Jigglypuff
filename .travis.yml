@@ -6,6 +6,8 @@ notifications:
 
 before_script:
   - npm install eslint --save-dev
+  - npm install webpack webpack-cli -D
+  - npm install style-loader css-loader --save-dev
 
 script:
   - npm run lint
