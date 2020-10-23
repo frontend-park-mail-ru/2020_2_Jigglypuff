@@ -15,7 +15,7 @@ export default class SignUpViewModel {
     }
 
     /**
-     * Register user after filling fields
+     * Register user after filling fields.
      * @return {Promise<Response>}
      */
     async register() {

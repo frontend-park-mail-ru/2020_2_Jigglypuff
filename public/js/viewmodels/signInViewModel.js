@@ -14,7 +14,7 @@ export default class SignInViewModel {
     }
 
     /**
-     * SignIn user after filling fields
+     * SignIn user after filling fields.
      * @return {Promise<Response>}
      */
     async signIn() {
