@@ -21,9 +21,7 @@
   },
   "scripts": {
     "start": "node ./server",
-    "tmpl": "./node_modules/.bin/fest-build fest-build --dir=public",
-    "prestart": "npm run tmpl",
-    "lint": "eslint ."
+    "lint": "eslint --debug --ext .js public/"
   },
   "script": [
     "npm run lint"

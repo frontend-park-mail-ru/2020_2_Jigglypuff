@@ -1,0 +1,7 @@
+node_modules
+server
+.idea
+public/js/views/SignUpView.js
+public/index.js
+public/index_dev.html
+public/index.html
