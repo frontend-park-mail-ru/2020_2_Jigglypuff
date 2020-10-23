@@ -41,6 +41,6 @@ export default class SignUpViewModel {
             return promise;
         }
 
-        await userModel.register();
+        return await userModel.register();
     }
 }
