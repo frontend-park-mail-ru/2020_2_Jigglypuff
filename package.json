@@ -8,6 +8,7 @@
     "opn": "^6.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "cookie-parser": "^1.4.5",
     "css-loader": "^5.0.0",
     "eslint": "^7.11.0",
