@@ -1,3 +1,4 @@
+os: linux
 language: node_js
 node_js: v14.9.0
 
@@ -6,6 +7,7 @@ notifications:
 
 before_script:
   - npm install eslint --save-dev
+  - npm install babel-eslint --save-dev
 
 script:
   - npm run lint
