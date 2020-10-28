@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "node ./server",
-    "lint": "eslint --debug --ext .js public/"
+    "lint": "eslint --debug --ext .js src/"
   },
   "script": [
     "npm run lint"
