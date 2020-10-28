@@ -39,4 +39,63 @@ export default class Validator {
         const regExp = /^[A-Za-zА-Яа-я]$/;
         return regExp.test(String(name));
     }
+
+    /**
+     * Represents movie name validation.
+     * @return {boolean} true - if movie name is valid
+     * @param {string} movieName
+     */
+    static validateMovieName(movieName) {
+        const regExp = /^[A-Za-zА-Яа-я\w]{1, 50}$/;
+        return regExp.test(String(movieName));
+    }
+
+    /**
+     * Represents movie description validation.
+     * @return {boolean} true - if movie description is valid
+     * @param {string} movieDescription
+     */
+    static validateMovieDescription(movieDescription) {
+        const regExp = /^[A-Za-zА-Яа-я\w]{1, 500}$/;
+        return regExp.test(String(movieDescription));
+    }
+
+    /**
+     * Represents movie age limit validation.
+     * @return {boolean} true - if movie age limit is valid
+     * @param {int} movieAgeLimit
+     */
+    static validateMovieAgeLimit(movieAgeLimit) {
+        if (Number.isInteger(movieAgeLimit)) {
+            if ((movieAgeLimit >= 0) && (movieAgeLimit < 150)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Represents movie duration validation.
+     * Duration is calculated in minutes.
+     * @return {boolean} true - if movie age limit is valid
+     * @param {int} movieDuration
+     */
+    static validateMovieDuration(movieDuration) {
+        if (Number.isInteger(movieDuration)) {
+            if ((movieDuration > 0) && (movieDuration < 1000)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Represents movie genre validation.
+     * @return {boolean} true - if movie genre is valid
+     * @param {string} movieGenre
+     */
+    static validateMovieGenre(movieGenre) {
+        const regExp = /^[A-Za-zА-Яа-я\w]{1, 500}$/;
+        return regExp.test(String(movieGenre));
+    }
 }
