@@ -2,10 +2,20 @@
 export default class Checker {
     /**
      * Check if number is float.
-     * @param {any} n
+     * @param {any} number
      * @return {boolean} true - if number is float
      */
-    static isFloat(n) {
-        return Number(n) === n && n % 1 !== 0;
+    static isFloat(number) {
+        return Number(number) === number && number % 1 !== 0;
+    }
+
+    /**
+     * Check if number is unsigned int.
+     * @param {any} number
+     * @return {boolean} true - if number is unsigned int
+     */
+    static isUINT(number) {
+        const regExp = /^\d+$/;
+        return regExp.test(number);
     }
 }
