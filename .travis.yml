@@ -1,0 +1,12 @@
+os: linux
+language: node_js
+node_js: v14.9.0
+
+notifications:
+  email: false
+
+before_script:
+  - npm install
+
+script:
+  - npm run lint
