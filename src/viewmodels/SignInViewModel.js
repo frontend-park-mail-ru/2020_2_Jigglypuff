@@ -19,18 +19,15 @@ export default class SignInViewModel {
      */
     async signIn() {
         const userModel = new UserModel();
-        const promise = new Promise((resolve, reject) => {
-            reject(new Error('invalid login or password'));
-        });
 
         userModel.login = this.state.login;
-        if (userModel.login === undefined) {
-            return promise;
+        if (!userModel.login) {
+            throw Error('invalid login or password');
         }
 
         userModel.password = this.state.password;
-        if (userModel.password === undefined) {
-            return promise;
+        if (!userModel.password) {
+            throw Error('invalid login or password');
         }
 
         return await userModel.signIn();

@@ -8,6 +8,7 @@ export default class SignUpViewModel {
     constructor() {
         this.state = {
             login: '',
+            email: '',
             password: '',
             passwordRepeated: '',
         };
@@ -20,25 +21,27 @@ export default class SignUpViewModel {
      */
     async register() {
         const userModel = new UserModel();
-        const promise = new Promise((resolve, reject) => {
-            reject(new Error('invalid form data'));
-        });
 
         userModel.login = this.state.login;
-        if (userModel.login === undefined) {
-            return promise;
+        if (!userModel.login) {
+            throw new Error('invalid form data');
         }
 
-        const passwordRepeated = undefined;
+        userModel.email = this.state.email;
+        if (!userModel.email) {
+            throw new Error('invalid form data');
+        }
+
+        const passwordRepeated = null;
         userModel.password = this.state.passwordRepeated;
-        if (userModel.password !== undefined) {
+        if (userModel.password) {
             userModel.password = passwordRepeated;
         } else {
-            return promise;
+            throw new Error('invalid form data');
         }
         userModel.password = this.state.password;
-        if (userModel.password === undefined || userModel.password !== passwordRepeated) {
-            return promise;
+        if (!userModel.password || userModel.password !== passwordRepeated) {
+            throw new Error('invalid form data');
         }
 
         return await userModel.register();
