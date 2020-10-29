@@ -13,12 +13,21 @@ export default class MovieModel {
         this._director = null;
         this._duration = null;
         this._genre = null;
+        this._id = null;
         this._name = null;
         this._ratingGlobal = null;
         this._ratingUser = null;
         this._reviews = null;
         this._starring = null;
         this._year = null;
+    }
+
+    /**
+     * Get movie id.
+     * @return {null} {int}
+     */
+    get id() {
+        return this._id;
     }
 
     /**
@@ -215,6 +224,18 @@ export default class MovieModel {
     }
 
     /**
+     * Set movie id to "id" variable value if valid else, null.
+     * @param {any} id
+     */
+    set id(id) {
+        if (Validator.validateUINT(id)) {
+            this._id = Number(id);
+        } else {
+            this._id = null;
+        }
+    }
+
+    /**
      * Set movie global rating to "ratingGlobal" variable value if valid else, null.
      * @param {any} ratingGlobal
      */
@@ -277,5 +298,61 @@ export default class MovieModel {
                 this._starring.append(starring.toString());
             }
         }
+    }
+
+    /**
+     * Rate movie.
+     * @return {Promise<Response>}
+     */
+    async rate() {
+        const response = await fetch('http://cinemascope.space/movie/rate', {
+            method: 'POST',
+            body: JSON.stringify({'id': this._id, 'rating': this._ratingUser}),
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return await response.json();
+    }
+
+    /**
+     * Get movie info.
+     * @return {Promise<Response>}
+     */
+    async getMovie() {
+        const response = await fetch('http://cinemascope.space/movie/' + this._id + '/', {
+            method: 'GET',
+            credentials: 'include',
+        });
+        return await response.json();
+    }
+
+    /**
+     * Get movie list info.
+     * @param {int} limit
+     * @param {int} page
+     * @return {Promise<Response>}
+     */
+    async getMovieList(limit = 10, page = 1) {
+        const response = await fetch('http://cinemascope.space/movie/?limit=' + limit + '&page=' + page, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        return await response.json();
+    }
+
+    /**
+     * Get actual movie list info.
+     * @param {int} limit
+     * @param {int} page
+     * @return {Promise<Response>}
+     */
+    async getMovieActual(limit = 10, page = 1) {
+        const response = await fetch('http://cinemascope.space/movie/actual/?limit=' + limit + '&page=' + page, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        return await response.json();
     }
 }
