@@ -152,4 +152,13 @@ export default class Validator {
         const regExp = /^[А-Яа-я\w\s]{10, 5000}$/;
         return regExp.test(String(text));
     }
+
+    /**
+     * Represents unsigned int validation.
+     * @return {*}
+     * @param {string} number
+     */
+    static validateUINT(number) {
+        return Checker.isUINT(number);
+    }
 }
