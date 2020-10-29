@@ -136,9 +136,9 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        const response = await fetch('http://cinemascope.space/signup/', {
+        const response = await fetch('http://cinemascope.space/auth/register/', {
             method: 'POST',
-            body: '{"Login":"' + this._login + '", "Password":"' + this._password + '"}',
+            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
@@ -154,9 +154,9 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        const response = await fetch('http://cinemascope.space/signin/', {
+        const response = await fetch('http://cinemascope.space/auth/login/', {
             method: 'POST',
-            body: '{"Login":"' + this._login + '", "Password":"' + this._password + '"}',
+            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,8 +193,8 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch('http://cinemascope.space/updateprofile/', {
-            method: 'POST',
+        const response = await fetch('http://cinemascope.space/profile/', {
+            method: 'PUT',
             body: new FormData(profileSettingsForm),
             credentials: 'include',
         });
@@ -207,7 +207,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async get() {
-        const response = await fetch('http://cinemascope.space/getprofile/', {
+        const response = await fetch('http://cinemascope.space/profile/', {
             method: 'GET',
             credentials: 'include',
         });
@@ -217,9 +217,14 @@ export default class UserModel {
 
     /**
      * Logout user.
-     * @return {Promise<void>}
+     * @return {Promise<Response>}
      */
     async logout() {
+        const response = await fetch('http://cinemascope.space/auth/logout/', {
+            method: 'POST',
+            credentials: 'include',
+        });
 
+        return await response.json();
     }
 }
