@@ -139,7 +139,6 @@ export default class UserModel {
         const response = await fetch('http://cinemascope.space/auth/register/', {
             method: 'POST',
             body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -157,7 +156,6 @@ export default class UserModel {
         const response = await fetch('http://cinemascope.space/auth/login/', {
             method: 'POST',
             body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -196,7 +194,6 @@ export default class UserModel {
         const response = await fetch('http://cinemascope.space/profile/', {
             method: 'PUT',
             body: new FormData(profileSettingsForm),
-            credentials: 'include',
         });
 
         return await response.json();
@@ -209,7 +206,6 @@ export default class UserModel {
     async get() {
         const response = await fetch('http://cinemascope.space/profile/', {
             method: 'GET',
-            credentials: 'include',
         });
 
         return await response.json();
@@ -222,7 +218,6 @@ export default class UserModel {
     async logout() {
         const response = await fetch('http://cinemascope.space/auth/logout/', {
             method: 'POST',
-            credentials: 'include',
         });
 
         return await response.json();
