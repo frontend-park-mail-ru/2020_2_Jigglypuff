@@ -308,7 +308,6 @@ export default class MovieModel {
         const response = await fetch('http://cinemascope.space/movie/rate', {
             method: 'POST',
             body: JSON.stringify({'id': this._id, 'rating': this._ratingUser}),
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -323,7 +322,6 @@ export default class MovieModel {
     async getMovie() {
         const response = await fetch('http://cinemascope.space/movie/' + this._id + '/', {
             method: 'GET',
-            credentials: 'include',
         });
         return await response.json();
     }
@@ -337,7 +335,6 @@ export default class MovieModel {
     async getMovieList(limit = 10, page = 1) {
         const response = await fetch('http://cinemascope.space/movie/?limit=' + limit + '&page=' + page, {
             method: 'GET',
-            credentials: 'include',
         });
         return await response.json();
     }
@@ -351,7 +348,6 @@ export default class MovieModel {
     async getMovieActual(limit = 10, page = 1) {
         const response = await fetch('http://cinemascope.space/movie/actual/?limit=' + limit + '&page=' + page, {
             method: 'GET',
-            credentials: 'include',
         });
         return await response.json();
     }
