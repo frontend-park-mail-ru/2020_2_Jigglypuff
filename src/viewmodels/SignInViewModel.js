@@ -21,12 +21,12 @@ export default class SignInViewModel {
         const userModel = new UserModel();
 
         userModel.login = this.state.login;
-        if (userModel.login === undefined) {
+        if (!userModel.login) {
             throw Error('invalid login or password');
         }
 
         userModel.password = this.state.password;
-        if (userModel.password === undefined) {
+        if (!userModel.password) {
             throw Error('invalid login or password');
         }
 

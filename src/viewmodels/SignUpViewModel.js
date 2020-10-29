@@ -8,6 +8,7 @@ export default class SignUpViewModel {
     constructor() {
         this.state = {
             login: '',
+            email: '',
             password: '',
             passwordRepeated: '',
         };
@@ -22,19 +23,24 @@ export default class SignUpViewModel {
         const userModel = new UserModel();
 
         userModel.login = this.state.login;
-        if (userModel.login === undefined) {
+        if (!userModel.login) {
             throw new Error('invalid form data');
         }
 
-        const passwordRepeated = undefined;
+        userModel.email = this.state.email;
+        if (!userModel.email) {
+            throw new Error('invalid form data');
+        }
+
+        const passwordRepeated = null;
         userModel.password = this.state.passwordRepeated;
-        if (userModel.password !== undefined) {
+        if (userModel.password) {
             userModel.password = passwordRepeated;
         } else {
             throw new Error('invalid form data');
         }
         userModel.password = this.state.password;
-        if (userModel.password === undefined || userModel.password !== passwordRepeated) {
+        if (!userModel.password || userModel.password !== passwordRepeated) {
             throw new Error('invalid form data');
         }
 
