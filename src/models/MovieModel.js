@@ -213,4 +213,69 @@ export default class MovieModel {
             this._genre.append(genre.toString());
         }
     }
+
+    /**
+     * Set movie global rating to "ratingGlobal" variable value if valid else, null.
+     * @param {any} ratingGlobal
+     */
+    set ratingGlobal(ratingGlobal) {
+        if (Validator.validateMovieRatingGlobal(ratingGlobal)) {
+            this._ratingGlobal = Number(ratingGlobal);
+        } else {
+            this._ratingGlobal = null;
+        }
+    }
+
+    /**
+     * Set movie user rating to "ratingUser" variable value if valid else, null.
+     * @param {any} ratingUser
+     */
+    set ratingUser(ratingUser) {
+        if (Validator.validateMovieRatingUser(ratingUser)) {
+            this._ratingUser = Number(ratingUser);
+        } else {
+            this._ratingUser = null;
+        }
+    }
+
+    /**
+     * Set movie year to "year" variable value if valid else, null.
+     * @param {any} year
+     */
+    set year(year) {
+        if (Validator.validateMovieYear(year)) {
+            this._year = year;
+        } else {
+            this._year = null;
+        }
+    }
+
+    /**
+     * Set movie reviews to "reviews" variable value if valid else, null.
+     * @param {any} reviews
+     */
+    set reviews(reviews) {
+        if (Validator.validateText(reviews)) {
+            if (!reviews) {
+                this._reviews = [];
+            }
+            this._reviews.append(reviews.toString());
+        }
+    }
+
+    /**
+     * Set movie starring to "starring" variable value if valid else, null.
+     * @param {any} starring
+     */
+    set starring(starring) {
+        const nameParts = starring.toString().split(' ');
+        for (const part of nameParts) {
+            if (Validator.validateName(part)) {
+                if (!starring) {
+                    this._starring = [];
+                }
+                this._starring.append(starring.toString());
+            }
+        }
+    }
 }

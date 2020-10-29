@@ -1,3 +1,5 @@
+import Checker from './Checker';
+
 /** Class that contains validation methods */
 export default class Validator {
     /**
@@ -46,7 +48,7 @@ export default class Validator {
      * @param {string} movieName
      */
     static validateMovieName(movieName) {
-        const regExp = /^[A-Za-zА-Яа-я\w]{1, 50}$/;
+        const regExp = /^[А-Яа-я\w]{1, 50}$/;
         return regExp.test(String(movieName));
     }
 
@@ -56,7 +58,7 @@ export default class Validator {
      * @param {string} movieDescription
      */
     static validateMovieDescription(movieDescription) {
-        const regExp = /^[A-Za-zА-Яа-я\w]{1, 500}$/;
+        const regExp = /^[А-Яа-я\w]{1, 500}$/;
         return regExp.test(String(movieDescription));
     }
 
@@ -95,7 +97,59 @@ export default class Validator {
      * @param {string} movieGenre
      */
     static validateMovieGenre(movieGenre) {
-        const regExp = /^[A-Za-zА-Яа-я\w]{1, 500}$/;
+        const regExp = /^[А-Яа-я\w]{1, 500}$/;
         return regExp.test(String(movieGenre));
+    }
+
+    /**
+     * Represents movie global rating validation.
+     * @return {boolean} true - if movie global rating is valid
+     * @param {float} movieGlobalRating
+     */
+    static validateMovieRatingGlobal(movieGlobalRating) {
+        if (Checker.isFloat(movieGlobalRating)) {
+            if ((movieGlobalRating > 0) && (movieGlobalRating < 1000)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Represents movie user rating validation.
+     * @return {boolean} true - if movie user rating is valid
+     * @param {int} movieUserRating
+     */
+    static validateMovieRatingUser(movieUserRating) {
+        if (Number.isInteger(movieUserRating)) {
+            if ((movieUserRating >= 0) && (movieUserRating < 10)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Represents movie year validation.
+     * @return {boolean} true - if movie year is valid
+     * @param {int} movieYear
+     */
+    static validateMovieYear(movieYear) {
+        if (Number.isInteger(movieYear)) {
+            if ((movieYear >= 1895) && (movieYear < 2100)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Represents text validation.
+     * @return {boolean} true - if text is valid
+     * @param {string} text
+     */
+    static validateText(text) {
+        const regExp = /^[А-Яа-я\w\s]{10, 5000}$/;
+        return regExp.test(String(text));
     }
 }
