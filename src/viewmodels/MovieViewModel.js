@@ -31,7 +31,7 @@ export default class MovieViewModel {
      * @return {Promise<void>}
      */
     async getMovie() {
-        let movieModel = new MovieModel();
+        const movieModel = new MovieModel();
         await movieModel.getMovie();
 
         const extractedMovieDataMap = Extractor.extractMovieData(movieModel);
