@@ -20,13 +20,10 @@ export default class SignUpViewModel {
      */
     async register() {
         const userModel = new UserModel();
-        const promise = new Promise((resolve, reject) => {
-            reject(new Error('invalid form data'));
-        });
 
         userModel.login = this.state.login;
         if (userModel.login === undefined) {
-            return promise;
+            throw new Error('invalid form data');
         }
 
         const passwordRepeated = undefined;
@@ -34,11 +31,11 @@ export default class SignUpViewModel {
         if (userModel.password !== undefined) {
             userModel.password = passwordRepeated;
         } else {
-            return promise;
+            throw new Error('invalid form data');
         }
         userModel.password = this.state.password;
         if (userModel.password === undefined || userModel.password !== passwordRepeated) {
-            return promise;
+            throw new Error('invalid form data');
         }
 
         return await userModel.register();
