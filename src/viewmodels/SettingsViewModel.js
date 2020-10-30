@@ -7,10 +7,12 @@ export default class SettingsViewModel {
      * Represents Settings ViewModel constructor
      */
     constructor() {
+        this._userModel = new UserModel();
         this.state = {
             login: '',
             name: '',
             surname: '',
+            avatar: '',
             avatarPath: '',
         };
         this.editCommand = {exec: () => this.edit()};
@@ -22,18 +24,18 @@ export default class SettingsViewModel {
      */
     async edit() {
         const response = await this.getProfile();
-        if (response.statusCode !== response.status.HTTP_STATUS_OK) {
+
+        const statusCode = Number(response.json().statusCode);
+        if (statusCode !== Number(response.status.HTTP_STATUS_OK)) {
             throw new Error('failed to get profile');
         }
 
-        const userModel = new UserModel();
-
         const extractedDataMap = Extractor.extractFormData(this.state);
         for (const field of extractedDataMap) {
-            userModel[field.keys()] = field.values();
+            this._userModel[field.keys()] = field.values();
         }
 
-        return await userModel.edit();
+        return await this._userModel.edit();
     }
 
     /**
@@ -41,16 +43,15 @@ export default class SettingsViewModel {
      * @return {Promise<Response>}
      */
     async getProfile() {
-        const userModel = new UserModel();
-        const response = userModel.get();
+        const response = this._userModel.get();
 
-        const statusCode = response.json().statusCode;
+        const statusCode = Number(response.json().statusCode);
 
         if (statusCode === response.status.HTTP_STATUS_OK) {
-            this.state.login = userModel.login;
-            this.state.name = userModel.name;
-            this.state.surname = userModel.surname;
-            this.state.avatarPath = userModel.avatarPath;
+            this.state.login = this._userModel.login;
+            this.state.name = this._userModel.name;
+            this.state.surname = this._userModel.surname;
+            this.state.avatarPath = this._userModel.avatarPath;
         }
 
         return await response.json();
