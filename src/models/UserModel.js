@@ -1,4 +1,5 @@
 import Validator from '../utils/Validator';
+import Checker from '../utils/Checker';
 
 /** Class that contains User model */
 export default class UserModel {
@@ -12,6 +13,7 @@ export default class UserModel {
         this._name = null;
         this._surname = null;
         this._avatar = null;
+        this._avatarPath = null;
         this._isPremuim = null;
     }
 
@@ -56,11 +58,11 @@ export default class UserModel {
     }
 
     /**
-     * Get user avatar.
+     * Get user avatar path.
      * @return {null} {string}
      */
-    get avatar() {
-        return this._avatar;
+    get avatarPath() {
+        return this._avatarPath;
     }
 
     /**
@@ -72,63 +74,83 @@ export default class UserModel {
     }
 
     /**
-     * Set user login to "login" variable value if valid else, undefined.
+     * Set user login to "login" variable value if valid else, null.
      * @param {any} login
      */
     set login(login) {
         if (Validator.validateLogin(login)) {
             this._login = login.toString();
         } else {
-            this._login = undefined;
+            this._login = null;
         }
     }
 
     /**
-     * Set user email to "email" variable value if valid else, undefined.
+     * Set user email to "email" variable value if valid else, null.
      * @param {any} email
      */
     set email(email) {
         if (Validator.validateEmail(email)) {
             this._email = email.toString();
         } else {
-            this._email = undefined;
+            this._email = null;
         }
     }
 
     /**
-     * Set user password to "password" variable value if valid else, undefined.
+     * Set user password to "password" variable value if valid else, null.
      * @param {any} password
      */
     set password(password) {
         if (Validator.validatePassword(password)) {
             this._password = password.toString();
         } else {
-            this._password = undefined;
+            this._password = null;
         }
     }
 
     /**
-     * Set user name to "name" variable value if valid else, undefined.
+     * Set user name to "name" variable value if valid else, null.
      * @param {any} name
      */
     set name(name) {
         if (Validator.validateName(name)) {
             this._name = name.toString();
         } else {
-            this._name = undefined;
+            this._name = null;
         }
     }
 
     /**
-     * Set user surname to "surname" variable value if valid else, undefined.
+     * Set user surname to "surname" variable value if valid else, null.
      * @param {any} surname
      */
     set surname(surname) {
         if (Validator.validateName(surname)) {
             this._surname = surname.toString();
         } else {
-            this._surname = undefined;
+            this._surname = null;
         }
+    }
+
+    /**
+     * Set user avatar to "avatar" variable value
+     * @param {any} avatar
+     */
+    set avatar(avatar) {
+        if (Checker.isImage(avatar)) {
+            this._avatar = avatar;
+        } else {
+            this._avatar = null;
+        }
+    }
+
+    /**
+     * Set user path to avatar to "avatarPath" variable value if valid else.
+     * @param {any} avatarPath
+     */
+    set avatarPath(avatarPath) {
+        this._avatarPath = avatarPath.toString();
     }
 
     /**

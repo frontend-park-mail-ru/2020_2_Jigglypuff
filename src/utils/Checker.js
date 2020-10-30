@@ -18,4 +18,13 @@ export default class Checker {
         const regExp = /^\d+$/;
         return regExp.test(number);
     }
+
+    /**
+     * Check if given argument is image
+     * @param {any} image
+     * @return {boolean} true - if given argument is image
+     */
+    static isImage(image) {
+        return image instanceof HTMLImageElement;
+    }
 }

@@ -7,12 +7,13 @@ export default class SettingsViewModel {
      * Represents Settings ViewModel constructor
      */
     constructor() {
+        this._userModel = new UserModel();
         this.state = {
             login: '',
-            password: '',
             name: '',
             surname: '',
             avatar: '',
+            avatarPath: '',
         };
         this.editCommand = {exec: () => this.edit()};
     }
@@ -22,13 +23,37 @@ export default class SettingsViewModel {
      * @return {Promise<Response>}
      */
     async edit() {
-        const userModel = new UserModel();
+        const response = await this.getProfile();
+
+        const statusCode = Number(response.json().statusCode);
+        if (statusCode !== Number(response.status.HTTP_STATUS_OK)) {
+            throw new Error('failed to get profile');
+        }
 
         const extractedDataMap = Extractor.extractFormData(this.state);
         for (const field of extractedDataMap) {
-            userModel[field.keys()] = field.values();
+            this._userModel[field.keys()] = field.values();
         }
 
-        return await userModel.edit();
+        return await this._userModel.edit();
+    }
+
+    /**
+     * Get user info.
+     * @return {Promise<Response>}
+     */
+    async getProfile() {
+        const response = this._userModel.get();
+
+        const statusCode = Number(response.json().statusCode);
+
+        if (statusCode === response.status.HTTP_STATUS_OK) {
+            this.state.login = this._userModel.login;
+            this.state.name = this._userModel.name;
+            this.state.surname = this._userModel.surname;
+            this.state.avatarPath = this._userModel.avatarPath;
+        }
+
+        return await response.json();
     }
 }
