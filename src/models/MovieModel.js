@@ -6,9 +6,9 @@ export default class MovieModel {
      * Declare MovieModel attributes.
      */
     constructor() {
-        this._ageLimit = null;
+        this._ageGroup = null;
         this._country = null;
-        this._cover = null;
+        this._pathToAvatar = null;
         this._description = null;
         this._director = null;
         this._duration = null;
@@ -19,7 +19,7 @@ export default class MovieModel {
         this._ratingUser = null;
         this._reviews = null;
         this._starring = null;
-        this._year = null;
+        this._releaseYear = null;
     }
 
     /**
@@ -39,11 +39,11 @@ export default class MovieModel {
     }
 
     /**
-     * Get movie cover.
-     * @return {null} {Image}
+     * Get movie path to avatar.
+     * @return {null} {string}
      */
-    get cover() {
-        return this._cover;
+    get pathToAvatar() {
+        return this._pathToAvatar;
     }
 
     /**
@@ -90,8 +90,8 @@ export default class MovieModel {
      * Get movie year.
      * @return {null} {int}
      */
-    get year() {
-        return this._year;
+    get releaseYear() {
+        return this._releaseYear;
     }
 
     /**
@@ -114,8 +114,8 @@ export default class MovieModel {
      * Get movie age limit.
      * @return {null} {int}
      */
-    get ageLimit() {
-        return this._ageLimit;
+    get ageGroup() {
+        return this._ageGroup;
     }
 
     /**
@@ -174,14 +174,14 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie age limit to "ageLimit" variable value if valid else, null.
-     * @param {any} ageLimit
+     * Set movie age limit to "ageGroup" variable value if valid else, null.
+     * @param {any} ageGroup
      */
-    set ageLimit(ageLimit) {
-        if (Validator.validateMovieAgeLimit(ageLimit)) {
-            this._ageLimit = ageLimit;
+    set ageGroup(ageGroup) {
+        if (Validator.validateMovieAgeLimit(ageGroup)) {
+            this._ageGroup = ageGroup;
         } else {
-            this._ageLimit = null;
+            this._ageGroup = null;
         }
     }
 
@@ -263,11 +263,11 @@ export default class MovieModel {
      * Set movie year to "year" variable value if valid else, null.
      * @param {any} year
      */
-    set year(year) {
+    set releaseYear(year) {
         if (Validator.validateMovieYear(year)) {
-            this._year = year;
+            this._releaseYear = year;
         } else {
-            this._year = null;
+            this._releaseYear = null;
         }
     }
 
@@ -348,7 +348,7 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    async getMovieActual(limit = 10, page = 1) {
+    async getMovieActualList(limit = 10, page = 1) {
         const response = await fetch('http://cinemascope.space/movie/actual/?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
