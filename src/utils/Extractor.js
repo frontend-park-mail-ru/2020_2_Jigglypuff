@@ -44,16 +44,16 @@ export default class Extractor {
     static extractMovieData(data) {
         const result = new Map();
 
-        if (!data.ageLimit.length) {
-            result['ageLimit'] = data.ageLimit;
+        if (!data.ageGroup.length) {
+            result['ageGroup'] = data.ageGroup;
         }
 
         if (!data.country.length) {
             result['country'] = data.country;
         }
 
-        if (!data.cover.length) {
-            result['cover'] = data.cover;
+        if (!data.pathToAvatar.length) {
+            result['pathToAvatar'] = data.pathToAvatar;
         }
 
         if (!data.description.length) {
@@ -92,8 +92,8 @@ export default class Extractor {
             result['starring'] = data.starring;
         }
 
-        if (!data.year.length) {
-            result['year'] = data.year;
+        if (!data.releaseYear.length) {
+            result['year'] = data.releaseYear;
         }
 
         return result;

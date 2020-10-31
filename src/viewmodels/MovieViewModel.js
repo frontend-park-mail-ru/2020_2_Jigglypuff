@@ -7,10 +7,11 @@ export default class MovieViewModel {
      * Represents Movie ViewModel constructor
      */
     constructor() {
+        this._movieModel = new MovieModel();
         this.state = {
-            ageLimit: '',
+            ageGroup: '',
             country: '',
-            cover: '',
+            pathToAvatar: '',
             description: '',
             director: '',
             duration: '',
@@ -31,10 +32,9 @@ export default class MovieViewModel {
      * @return {Promise<void>}
      */
     async getMovie() {
-        const movieModel = new MovieModel();
-        await movieModel.getMovie();
+        await this._movieModel.getMovie();
 
-        const extractedMovieDataMap = Extractor.extractMovieData(movieModel);
+        const extractedMovieDataMap = Extractor.extractMovieData(this._movieModel);
         for (const field of extractedMovieDataMap) {
             this.state[field.keys()] = field.values();
         }
@@ -45,8 +45,7 @@ export default class MovieViewModel {
      * @return {Promise<number>}
      */
     async rateMovie() {
-        const movieModel = new MovieModel();
-        const response = await movieModel.rate();
+        const response = await this._movieModel.rate();
 
         return response.json().statusCode;
     }
