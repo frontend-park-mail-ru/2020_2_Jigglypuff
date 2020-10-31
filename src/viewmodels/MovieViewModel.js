@@ -9,9 +9,9 @@ export default class MovieViewModel {
     constructor() {
         this._movieModel = new MovieModel();
         this.state = {
-            ageLimit: '',
+            ageGroup: '',
             country: '',
-            cover: '',
+            pathToAvatar: '',
             description: '',
             director: '',
             duration: '',
