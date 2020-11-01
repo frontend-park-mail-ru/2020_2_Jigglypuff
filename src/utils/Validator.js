@@ -18,7 +18,7 @@ export default class Validator {
      * @param {string} password
      */
     static validatePassword(password) {
-        const regExp = /^[$\w]{4, 20}$/;
+        const regExp = /^[$\w]{4,20}$/;
         return regExp.test(String(password));
     }
 
@@ -38,7 +38,7 @@ export default class Validator {
      * @param {string} movieName
      */
     static validateMovieName(movieName) {
-        const regExp = /^[А-Яа-я\w]{1, 50}$/;
+        const regExp = /^[А-Яа-я\w]{1,50}$/;
         return regExp.test(String(movieName));
     }
 
@@ -48,7 +48,7 @@ export default class Validator {
      * @param {string} movieDescription
      */
     static validateMovieDescription(movieDescription) {
-        const regExp = /^[А-Яа-я\w]{1, 500}$/;
+        const regExp = /^[А-Яа-я\w]{1,500}$/;
         return regExp.test(String(movieDescription));
     }
 
@@ -87,7 +87,7 @@ export default class Validator {
      * @param {string} movieGenre
      */
     static validateMovieGenre(movieGenre) {
-        const regExp = /^[А-Яа-я\w]{1, 500}$/;
+        const regExp = /^[А-Яа-я\w]{1,500}$/;
         return regExp.test(String(movieGenre));
     }
 
@@ -139,7 +139,7 @@ export default class Validator {
      * @param {string} text
      */
     static validateText(text) {
-        const regExp = /^[А-Яа-я\w\s]{10, 5000}$/;
+        const regExp = /^[А-Яа-я\w\s]{10,5000}$/;
         return regExp.test(String(text));
     }
 
