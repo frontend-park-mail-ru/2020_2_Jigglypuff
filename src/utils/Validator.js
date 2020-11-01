@@ -8,8 +8,8 @@ export default class Validator {
      * @param {string} login
      */
     static validateLogin(login) {
-        const regExp = /^[a-zA-Z][\w]{4, 18}$/;
-        return regExp.test(String(login));
+        const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regExp.test(String(login).toLowerCase());
     }
 
     /**
@@ -20,16 +20,6 @@ export default class Validator {
     static validatePassword(password) {
         const regExp = /^[$\w]{4, 20}$/;
         return regExp.test(String(password));
-    }
-
-    /**
-     * Represents email validation.
-     * @return {boolean} true - if email is valid
-     * @param {string} email
-     */
-    static validateEmail(email) {
-        const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regExp.test(String(email).toLowerCase());
     }
 
     /**
