@@ -16,10 +16,6 @@ export default class Extractor {
             result['password'] = data['state'].password;
         }
 
-        if (!data['state'].email.length) {
-            result['email'] = data['state'].email;
-        }
-
         if (!data['state'].name.length) {
             result['name'] = data['state'].name;
         }

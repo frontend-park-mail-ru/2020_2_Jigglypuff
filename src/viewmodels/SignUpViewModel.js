@@ -8,7 +8,6 @@ export default class SignUpViewModel {
     constructor() {
         this.state = {
             login: '',
-            email: '',
             password: '',
             passwordRepeated: '',
         };
@@ -24,11 +23,6 @@ export default class SignUpViewModel {
 
         userModel.login = this.state.login;
         if (!userModel.login) {
-            throw new Error('invalid form data');
-        }
-
-        userModel.email = this.state.email;
-        if (!userModel.email) {
             throw new Error('invalid form data');
         }
 

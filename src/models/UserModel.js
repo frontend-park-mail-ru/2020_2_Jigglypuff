@@ -8,7 +8,6 @@ export default class UserModel {
      */
     constructor() {
         this._login = null;
-        this._email = null;
         this._password = null;
         this._name = null;
         this._surname = null;
@@ -23,14 +22,6 @@ export default class UserModel {
      */
     get login() {
         return this._login;
-    }
-
-    /**
-     * Get user email.
-     * @return {null} {string}
-     */
-    get email() {
-        return this._email;
     }
 
     /**
@@ -82,18 +73,6 @@ export default class UserModel {
             this._login = login.toString();
         } else {
             this._login = null;
-        }
-    }
-
-    /**
-     * Set user email to "email" variable value if valid else, null.
-     * @param {any} email
-     */
-    set email(email) {
-        if (Validator.validateEmail(email)) {
-            this._email = email.toString();
-        } else {
-            this._email = null;
         }
     }
 
@@ -196,7 +175,6 @@ export default class UserModel {
         const data = {
             'name': this._name,
             'surname': this._surname,
-            'email': this._email,
             'avatar': this._avatar,
             'login': this._login,
             'password': this._password,
