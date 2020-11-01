@@ -16,7 +16,7 @@ export default class SignUpViewModel {
 
     /**
      * Register user after filling fields.
-     * @return {Promise<Response>}
+     * @return {Promise<boolean>}
      */
     async register() {
         const userModel = new UserModel();
@@ -26,18 +26,23 @@ export default class SignUpViewModel {
             throw new Error('invalid form data');
         }
 
-        const passwordRepeated = null;
+        let passwordRepeated = null;
         userModel.password = this.state.passwordRepeated;
         if (userModel.password) {
-            userModel.password = passwordRepeated;
+            passwordRepeated = userModel.password;
+            userModel.password = this.state.password;
+            if (!userModel.password || userModel.password !== passwordRepeated) {
+                throw new Error('invalid form data');
+            }
         } else {
             throw new Error('invalid form data');
         }
-        userModel.password = this.state.password;
-        if (!userModel.password || userModel.password !== passwordRepeated) {
-            throw new Error('invalid form data');
-        }
 
-        return await userModel.register();
+        const response = await userModel.register();
+        if (response.ok) {
+            return response.ok;
+        } else {
+            throw new Error('failed to request');
+        }
     }
 }
