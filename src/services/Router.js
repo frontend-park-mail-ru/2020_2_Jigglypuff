@@ -21,8 +21,10 @@ class Router {
 
     /**
      * Register route path
-     * @param {Path} path - route path.
+     * @param {String} path - route path.
      * @param {view} view - view that handles path.
+     *
+     * @return {Router}
      * */
     register(path, view) {
         this.routes.push({
@@ -73,7 +75,7 @@ class Router {
 
     /**
      * Go to route path
-     * @param {Path} path - route path.
+     * @param {String} path - route path.
      * */
     go(path) {
         const routeData = this.getDataFromPath(path);
@@ -113,7 +115,9 @@ class Router {
 
     /**
      * Get data from route path
-     * @param {Path} path - route path.
+     * @param {String} path - route path.
+     *
+     * @return {Object}
      * */
     getDataFromPath(path) {
         const result = {};
