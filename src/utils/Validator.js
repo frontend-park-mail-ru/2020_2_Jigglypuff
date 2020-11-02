@@ -151,4 +151,24 @@ export default class Validator {
     static validateUINT(number) {
         return Checker.isUINT(number);
     }
+
+    /**
+     * Represents cinema name validation.
+     * @return {boolean} true - if cinema name is valid
+     * @param {string} cinemaName
+     */
+    static validateCinemaName(cinemaName) {
+        const regExp = /^[А-Яа-я\w]{1,50}$/;
+        return regExp.test(String(cinemaName));
+    }
+
+    /**
+     * Represents address validation.
+     * @return {boolean} true - if address is valid
+     * @param {string} address
+     */
+    static validateAddress(address) {
+        const regExp = /^[А-Яа-я\w]{1,50}$/;
+        return regExp.test(String(address));
+    }
 }
