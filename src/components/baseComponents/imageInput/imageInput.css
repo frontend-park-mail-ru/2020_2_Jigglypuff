@@ -1,0 +1,68 @@
+.image-input {
+    height: 1.5em;
+    background: black;
+    border: 2px #5C5858 solid;
+    border-radius: .4em;
+    color: white;
+    padding: 5px 0 0 5px;
+    align-items: center;
+    margin-right: 10px;
+
+}
+
+.image-input__text {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1em;
+    color: #5C5858;
+    cursor: pointer;
+}
+
+.image-input:focus {
+    outline: none;
+    cursor: pointer;
+}
+
+.image-input__label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+}
+
+.default-input {
+    display: none;
+}
+
+.avatar__preview {
+    border: 3px solid #880000;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 3.6em;
+    width: 3.6em;
+}
+
+.label__text {
+    margin-bottom: 10px;
+}
+
+.avatar {
+    margin-left: auto;
+}
+
+.image-input__error-disabled {
+    display: none;
+}
+.image-input__error {
+    color: #880000;
+    text-align: left;
+    font-size: 0.8em;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.avatar-wrapper {
+    display: flex;
+    flex-direction: row;
+}

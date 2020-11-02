@@ -1,0 +1,8 @@
+.button {
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 0.5em;
+}
+.button:focus {
+    outline: none;
+}

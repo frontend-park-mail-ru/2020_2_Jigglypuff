@@ -1,0 +1,6 @@
+<label class="text-input__label" for="{{ inputID }}">
+    {{ inputName }}
+</label>
+<input id="{{ inputID }}" class="text-input text-input__text" placeholder="{{ inputPlaceholder }}"
+    {{#if inputPattern }} pattern="{{ inputPattern }}" {{/if}} type="{{ inputType }}"/>
+<span class="text-input__error">{{ inputErrorMessage }}</span>

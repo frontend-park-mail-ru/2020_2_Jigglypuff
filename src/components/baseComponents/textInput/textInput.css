@@ -1,0 +1,43 @@
+
+.text-input {
+    height: 1.5em;
+    background: black;
+    border: 2px #5C5858 solid;
+    border-radius: .4em;
+    margin-bottom: 15px;
+
+}
+
+.text-input__text {
+    color: white;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.text-input:focus {
+    outline: none;
+}
+
+.text-input__label {
+    display: inline-block;
+    margin-bottom: .5em;
+    margin-left: .2em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.text-input__error {
+    color: #c80000;
+    text-align: left;
+    font-size: 0.8em;
+    display: none;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.text-input:invalid:not(:placeholder-shown) {
+    border-color: #c80000;
+}
+.text-input:invalid:not(:placeholder-shown) + .text-input__error {
+    display: block;
+}
