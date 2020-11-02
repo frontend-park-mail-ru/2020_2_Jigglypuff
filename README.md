@@ -26,6 +26,6 @@
 </pre>
   
 ## Ссылка на сайт
-http://cinemascope.space/
+https://cinemascope.space/
 
 Технопарк, осень, 2020
