@@ -94,4 +94,35 @@ export default class Extractor {
 
         return result;
     }
+
+    /**
+     * Extract filled fields from cinemaData form.
+     * @param {CinemaModel} data
+     * @return {Map}
+     */
+    static extractCinemaData(data) {
+        const result = new Map();
+
+        if (!data.address.length) {
+            result['address'] = data.address;
+        }
+
+        if (!data.authorID.length) {
+            result['authorId'] = data.authorID;
+        }
+
+        if (!data.hallCount.length) {
+            result['hallCount'] = data.hallCount;
+        }
+
+        if (!data.id.length) {
+            result['id'] = data.id;
+        }
+
+        if (!data.name.length) {
+            result['name'] = data.name;
+        }
+
+        return result;
+    }
 }
