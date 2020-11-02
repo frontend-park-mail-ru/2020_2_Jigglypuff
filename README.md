@@ -13,8 +13,8 @@
 - [Сиразеев Айдар](https://github.com/Felix1Green)
 
 Менторы:
-- Фронтенд [Елагин Антон](https://github.com/AntonElagin)
-- Бэкенд [Даниил Никольский](https://github.com/DanikNik)
+- Фронтенд: [Елагин Антон](https://github.com/AntonElagin)
+- Бэкенд: [Даниил Никольский](https://github.com/DanikNik)
 
 ## Инструкция по запуску
 <pre>
