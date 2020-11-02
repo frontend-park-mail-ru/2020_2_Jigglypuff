@@ -1,0 +1,18 @@
+.button-watch {
+    background: linear-gradient(90deg, #c80000 0%, rgba(180, 5, 5, 0.66) 100%);
+    padding: 0.5em 1.5em;
+}
+.button-watch:hover {
+    background: linear-gradient(90deg, #b40101 0%, rgba(160, 5, 5, 0.66) 100%);
+}
+.button-watch:active {
+    background: linear-gradient(90deg, #a00000 0%, rgba(140, 5, 5, 0.66) 100%);
+}
+
+.button-watch__text {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: white;
+    line-height: 1.3em;
+}

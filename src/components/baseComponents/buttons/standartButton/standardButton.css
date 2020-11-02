@@ -1,0 +1,17 @@
+.button-standard {
+    background: #880000;
+}
+.button-standard:hover {
+    background: #b40101;
+}
+.button-standard:active {
+    background: #a00000;
+}
+
+.button-standard__text {
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 1em;
+    color: white;
+}
