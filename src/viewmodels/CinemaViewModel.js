@@ -1,5 +1,5 @@
 import CinemaModel from '../models/CinemaModel';
-import Extractor from "../utils/Extractor";
+import Extractor from '../utils/Extractor';
 
 /** Class that contains Cinema ViewModel */
 export default class CinemaViewModel {
