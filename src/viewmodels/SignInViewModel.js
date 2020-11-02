@@ -15,7 +15,7 @@ export default class SignInViewModel {
 
     /**
      * SignIn user after filling fields.
-     * @return {Promise<Response>}
+     * @return {Promise<boolean>}
      */
     async signIn() {
         const userModel = new UserModel();
@@ -30,6 +30,11 @@ export default class SignInViewModel {
             throw Error('invalid login or password');
         }
 
-        return await userModel.signIn();
+        const response = await userModel.signIn();
+        if (response.ok) {
+            return response.ok;
+        } else {
+            throw new Error('invalid login or password');
+        }
     }
 }

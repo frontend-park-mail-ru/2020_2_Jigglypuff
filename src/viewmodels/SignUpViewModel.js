@@ -42,7 +42,7 @@ export default class SignUpViewModel {
         if (response.ok) {
             return response.ok;
         } else {
-            throw new Error('failed to request');
+            throw new Error('already registered');
         }
     }
 }

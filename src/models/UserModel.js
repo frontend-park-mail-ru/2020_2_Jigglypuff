@@ -151,15 +151,13 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        const response = await fetch('http://cinemascope.space/auth/login/', {
+        return await fetch('http://cinemascope.space/auth/login/', {
             method: 'POST',
-            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
         });
-
-        return await response.json();
     }
 
     /**
