@@ -1,3 +1,4 @@
+import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
 
 /** Class that contains Movie model */
@@ -305,7 +306,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async rate() {
-        const response = await fetch('http://cinemascope.space/movie/rate', {
+        const response = await fetch(Routes.Host + Routes.RateMovie, {
             method: 'POST',
             body: JSON.stringify({'id': this._id, 'rating': this._ratingUser}),
             headers: {
@@ -320,7 +321,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovie() {
-        const response = await fetch('http://cinemascope.space/movie/' + this._id + '/', {
+        const response = await fetch(Routes.Host + Routes.MoviePage.replace(/:id/, this._id), {
             method: 'GET',
         });
         return await response.json();
@@ -333,7 +334,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovieList(limit = 10, page = 1) {
-        const response = await fetch('http://cinemascope.space/movie/?limit=' + limit + '&page=' + page, {
+        const response = await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
         return await response.json();
@@ -346,7 +347,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovieActualList(limit = 10, page = 1) {
-        const response = await fetch('http://cinemascope.space/movie/actual/?limit=' + limit + '&page=' + page, {
+        const response = await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
         return await response.json();
