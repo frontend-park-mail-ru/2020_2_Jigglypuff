@@ -28,7 +28,7 @@ export default class CinemaViewModel {
         const response = await this._cinemaModel.getCinema();
 
         if (response.ok) {
-            const extractedCinemaDataMap = Extractor.Extractor.extractCinemaData(this._cinemaModel);
+            const extractedCinemaDataMap = Extractor.extractCinemaData(this._cinemaModel);
             extractedCinemaDataMap.forEach((value, key) => {
                 this.state.set(key, value);
             });
