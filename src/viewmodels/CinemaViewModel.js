@@ -7,32 +7,34 @@ export default class CinemaViewModel {
      * Represents Movie ViewModel constructor
      */
     constructor() {
-        this._cinemaModel = new CinemaModel();
-        this.state = {
-            address: '',
-            authorID: '',
-            hallCount: '',
-            id: '',
-            name: '',
-        };
-        this.getCinemaCommand = {exec: () => this.getCinema()};
+        this._cinemaModel = new CinemaModel.CinemaModel();
+        this.state = new Map([
+            ['address', ''],
+            ['authorID', ''],
+            ['hallCount', ''],
+            ['id', ''],
+            ['name', ''],
+        ]);
+        this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }
 
     /**
      * Get cinema info.
-     * @return {Promise<Error>}
+     * @param {int} id - cinema id
+     * @return {Promise<any>}
      */
-    async getCinema() {
+    async getCinema(id) {
+        this._cinemaModel.id = Number(id);
         const response = await this._cinemaModel.getCinema();
 
         if (response.ok) {
             const extractedCinemaDataMap = Extractor.extractCinemaData(this._cinemaModel);
-            for (const field of extractedCinemaDataMap) {
-                this.state[field.keys()] = field.values();
-            }
-            return null;
+            extractedCinemaDataMap.forEach((value, key) => {
+                this.state.set(key, value);
+            });
+            return this.state;
         }
 
-        return new Error('failed to get cinema');
+        throw new Error('failed to get cinema');
     }
 }
