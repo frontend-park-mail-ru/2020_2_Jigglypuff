@@ -121,29 +121,27 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     static async getCinemaList(limit = 10, page = 1) {
-        return await fetch(Routes.Host + Routes.CinemaList +'?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.Routes.Host + Routes.Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
     }
 
     /**
      * Get cinema info.
-     * @param {int} limit
-     * @param {int} page
      * @return {Promise<Response>}
      */
-    async getCinema(limit = 10, page = 1) {
-        const response = await fetch(Routes.Host + Routes.CinemaPage.replace(/:id/, this._id), {
+    async getCinema() {
+        const response = await fetch(Routes.Routes.Host + Routes.Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
         });
 
         if (response.ok) {
-            const data = response.json();
-            this._address = data['address'];
-            this._authorID = data['authorID'];
-            this._hallCount = data['hallCount'];
-            this._id = data['id'];
-            this._name = data['name'];
+            const data = await response.json();
+            this._address = data['Address'];
+            this._authorID = data['AuthorID'];
+            this._hallCount = data['HallCount'];
+            this._id = data['ID'];
+            this._name = data['Name'];
         }
 
         return response;
