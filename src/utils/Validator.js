@@ -168,7 +168,7 @@ export default class Validator {
      * @param {string} address
      */
     static validateAddress(address) {
-        const regExp = /^[А-Яа-я\w]{1,50}$/;
+        const regExp = /^[А-Яа-я\w\s.,]{1,50}$/;
         return regExp.test(String(address));
     }
 }
