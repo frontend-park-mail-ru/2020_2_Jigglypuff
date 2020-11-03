@@ -7,13 +7,7 @@ export default class CinemaListViewModel {
      * Represents CinemaList ViewModel constructor
      */
     constructor() {
-        this.state = {
-            address: [],
-            authorID: [],
-            hallCount: [],
-            id: [],
-            name: [],
-        };
+        this.state = [];
         this.getCinemaListCommand = {exec: () => this.getCinemaList()};
     }
 
@@ -22,26 +16,34 @@ export default class CinemaListViewModel {
      * @return {Promise<Error>}
      */
     async getCinemaList() {
-        const response = await CinemaModel.getCinemaList();
+        const response = await CinemaModel.CinemaModel.getCinemaList();
 
         if (response.ok) {
-            const cinemaList = response.json();
+            const cinemaList = await response.json();
             for (const cinema of cinemaList) {
                 const cinemaModel = new CinemaModel();
-                cinemaModel.address = cinema['address'];
-                cinemaModel.authorID = cinema['authorID'];
-                cinemaModel.hallCount = cinema['hallCount'];
-                cinemaModel.id = cinema['id'];
-                cinemaModel.name = cinema['name'];
+                console.log(cinema);
+                cinemaModel.address = cinema['Address'];
+                cinemaModel.authorID = cinema['AuthorID'];
+                cinemaModel.hallCount = cinema['HallCount'];
+                cinemaModel.id = cinema['ID'];
+                cinemaModel.name = cinema['Name'];
 
-                const extractedCinemaDataMapList = Extractor.extractCinemaData(cinemaModel);
-                for (const field of extractedCinemaDataMapList) {
-                    this.state[field.keys()].append(field.values());
-                }
+                const extractedCinemaDataMap = Extractor.extractCinemaData(cinemaModel);
+                this.state.push(new Map([
+                    ['address', ''],
+                    ['authorID', ''],
+                    ['hallCount', ''],
+                    ['id', ''],
+                    ['name', ''],
+                ]));
+                extractedCinemaDataMap.forEach((value, key) => {
+                    this.state[this.state.length - 1].set(key, value);
+                });
             }
-            return null;
+            return this.state;
         }
 
-        return new Error('failed to get cinema list');
+        throw new Error('failed to get cinema list');
     }
 }
