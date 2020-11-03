@@ -1,3 +1,4 @@
+import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
 
 /** Class that contains Cinema model */
@@ -120,7 +121,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     static async getCinemaList(limit = 10, page = 1) {
-        return await fetch('http://cinemascope.space/cinema/?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.Host + Routes.CinemaList +'?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
     }
@@ -132,7 +133,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     async getCinema(limit = 10, page = 1) {
-        const response = await fetch('http://cinemascope.space/cinema/' + this._id + '/', {
+        const response = await fetch(Routes.Host + Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
         });
 

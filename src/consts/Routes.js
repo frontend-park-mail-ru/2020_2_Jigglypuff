@@ -1,14 +1,16 @@
 const Routes = {
-    Main: '/',
-    Login: '/auth/login/',
-    Logout: '/auth/logout/',
-    Register: '/auth/register/',
+    Host: 'https://cinemascope.space',
+
     CinemaList: '/cinema/',
     CinemaPage: '/cinema/:id/',
+    Login: '/auth/login/',
+    Logout: '/auth/logout/',
+    Main: '/',
     MovieList: '/movie/',
-    RateMovie: '/movie/rate/',
     MoviePage: '/movie/:id/',
     ProfilePage: '/profile/',
+    RateMovie: '/movie/rate/',
+    Register: '/auth/register/',
 };
 
 export default Routes;

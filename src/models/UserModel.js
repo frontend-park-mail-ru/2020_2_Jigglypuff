@@ -1,5 +1,6 @@
-import Validator from '../utils/Validator';
 import Checker from '../utils/Checker';
+import Routes from '../consts/Routes';
+import Validator from '../utils/Validator';
 
 /** Class that contains User model */
 export default class UserModel {
@@ -137,7 +138,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        return await fetch('http://cinemascope.space/auth/register/', {
+        return await fetch(Routes.Host + Routes.Register, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -151,7 +152,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        return await fetch('http://cinemascope.space/auth/login/', {
+        return await fetch(Routes.Host + Routes.Login, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -186,7 +187,7 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch('http://cinemascope.space/profile/', {
+        const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'PUT',
             body: new FormData(profileSettingsForm),
         });
@@ -199,7 +200,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async get() {
-        const response = await fetch('http://cinemascope.space/profile/', {
+        const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'GET',
         });
 
@@ -211,7 +212,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async logout() {
-        const response = await fetch('http://cinemascope.space/auth/logout/', {
+        const response = await fetch(Routes.Host + Routes.Logout, {
             method: 'POST',
         });
 
