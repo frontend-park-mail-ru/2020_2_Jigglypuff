@@ -103,25 +103,11 @@ export default class Extractor {
     static extractCinemaData(data) {
         const result = new Map();
 
-        if (!data.address.length) {
-            result['address'] = data.address;
-        }
-
-        if (!data.authorID.length) {
-            result['authorId'] = data.authorID;
-        }
-
-        if (!data.hallCount.length) {
-            result['hallCount'] = data.hallCount;
-        }
-
-        if (!data.id.length) {
-            result['id'] = data.id;
-        }
-
-        if (!data.name.length) {
-            result['name'] = data.name;
-        }
+        result.set('address', data.address);
+        result.set('authorID', data.authorID);
+        result.set('hallCount', data.hallCount);
+        result.set('id', data.id);
+        result.set('name', data.name);
 
         return result;
     }
