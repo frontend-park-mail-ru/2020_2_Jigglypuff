@@ -1,3 +1,5 @@
+import MovieModel from '../models/MovieModel';
+
 /** Class that contains methods to extract data from anything */
 export default class Extractor {
     /**
@@ -24,7 +26,6 @@ export default class Extractor {
             result['surname'] = data['state'].surname;
         }
 
-
         if (!data['state'].avatar.length) {
             result['avatar'] = data['state'].avatar;
         }
@@ -33,64 +34,50 @@ export default class Extractor {
     }
 
     /**
-     * Extract filled fields from movieData form.
+     * Extract movie data from json to model.
+     * @param {JSON} data
+     * @return {MovieModel}
+     */
+    static extractMovieDataFromJSON(data) {
+        const movieModel = new MovieModel();
+
+        movieModel.ageGroup = data['AgeGroup'];
+        movieModel.country = data['Country'];
+        movieModel.description = data['Description'];
+        movieModel.duration = data['Duration'];
+        movieModel.genre = data['Genre'];
+        movieModel.id = data['ID'];
+        movieModel.name = data['Name'];
+        movieModel.pathToAvatar = data['PathToAvatar'];
+        movieModel.producer = data['Producer'];
+        movieModel.rating = data['Rating'];
+        movieModel.ratingCount = data['RatingCount'];
+        movieModel.releaseYear = data['ReleaseYear'];
+
+        return movieModel;
+    }
+
+    /**
+     * Extract movie data from model to map.
      * @param {MovieModel} data
      * @return {Map}
      */
-    static extractMovieData(data) {
+    static extractMovieDataFromModel(data) {
         const result = new Map();
 
-        if (!data.ageGroup.length) {
-            result['ageGroup'] = data.ageGroup;
-        }
-
-        if (!data.country.length) {
-            result['country'] = data.country;
-        }
-
-        if (!data.pathToAvatar.length) {
-            result['pathToAvatar'] = data.pathToAvatar;
-        }
-
-        if (!data.description.length) {
-            result['description'] = data.description;
-        }
-
-        if (!data.director.length) {
-            result['director'] = data.director;
-        }
-
-        if (!data.duration.length) {
-            result['duration'] = data.duration;
-        }
-
-        if (!data.genre.length) {
-            result['genre'] = data.genre;
-        }
-
-        if (!data.name.length) {
-            result['name'] = data.name;
-        }
-
-        if (!data.ratingGlobal.length) {
-            result['ratingGlobal'] = data.ratingGlobal;
-        }
-
-        if (!data.ratingUser.length) {
-            result['ratingUser'] = data.ratingUser;
-        }
-
-        if (!data.reviews.length) {
-            result['reviews'] = data.reviews;
-        }
-
-        if (!data.starring.length) {
-            result['starring'] = data.starring;
-        }
-
-        if (!data.releaseYear.length) {
-            result['year'] = data.releaseYear;
-        }
+        result.set('ageGroup', data.ageGroup);
+        result.set('country', data.country);
+        result.set('description', data.description);
+        result.set('duration', data.duration);
+        result.set('genre', data.genre);
+        result.set('id', data.id);
+        result.set('name', data.name);
+        result.set('pathToAvatar', data.pathToAvatar);
+        result.set('personalRating', data.personalRating);
+        result.set('producer', data.producer);
+        result.set('rating', data.rating);
+        result.set('ratingCount', data.ratingCount);
+        result.set('releaseYear', data.releaseYear);
 
         return result;
     }
