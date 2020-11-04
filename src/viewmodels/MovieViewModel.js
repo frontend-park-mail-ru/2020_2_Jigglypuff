@@ -8,36 +8,44 @@ export default class MovieViewModel {
      */
     constructor() {
         this._movieModel = new MovieModel();
-        this.state = {
-            ageGroup: '',
-            country: '',
-            pathToAvatar: '',
-            description: '',
-            director: '',
-            duration: '',
-            genre: '',
-            name: '',
-            ratingGlobal: '',
-            ratingUser: '',
-            reviews: '',
-            starring: '',
-            year: '',
-        };
-        this.getMovieCommand = {exec: () => this.getMovie()};
+        this.state = new Map([
+            ['ageGroup', ''],
+            ['country', ''],
+            ['description', ''],
+            ['duration', ''],
+            ['genre', ''],
+            ['id', ''],
+            ['name', ''],
+            ['pathToAvatar', ''],
+            ['personalRating', 0],
+            ['producer', ''],
+            ['rating', ''],
+            ['ratingCount', 0],
+            ['releaseYear', ''],
+        ]);
+        this.getMovieCommand = {exec: (id) => this.getMovie(id)};
         this.rateMovieCommand = {exec: () => this.rateMovie()};
     }
 
     /**
      * Get movie info.
+     * @param {int} id - movie id
      * @return {Promise<void>}
      */
-    async getMovie() {
-        await this._movieModel.getMovie();
+    async getMovie(id) {
+        this._movieModel.id = Number(id);
+        const response = await this._movieModel.getMovie();
 
-        const extractedMovieDataMap = Extractor.extractMovieData(this._movieModel);
-        for (const field of extractedMovieDataMap) {
-            this.state[field.keys()] = field.values();
+        if (response.ok) {
+            const extractedMovieDataMap = Extractor.extractMovieData(this._movieModel);
+            extractedMovieDataMap.forEach((value, key) => {
+                this.state.set(key, value);
+            });
+
+            return this.state;
         }
+
+        throw new Error('failed to get movie');
     }
 
     /**
@@ -47,6 +55,6 @@ export default class MovieViewModel {
     async rateMovie() {
         const response = await this._movieModel.rate();
 
-        return response.json().statusCode;
+        return response.json();
     }
 }

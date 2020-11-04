@@ -28,7 +28,7 @@ export default class Validator {
      * @param {string} name
      */
     static validateName(name) {
-        const regExp = /^[A-Za-zА-Яа-я]$/;
+        const regExp = /^[A-Za-zА-Яа-я]{3,57}$/;
         return regExp.test(String(name));
     }
 
@@ -48,7 +48,7 @@ export default class Validator {
      * @param {string} movieDescription
      */
     static validateMovieDescription(movieDescription) {
-        const regExp = /^[А-Яа-я\w]{1,500}$/;
+        const regExp = /^[А-Яа-я\w\s]{1,500}$/;
         return regExp.test(String(movieDescription));
     }
 
@@ -92,17 +92,17 @@ export default class Validator {
     }
 
     /**
-     * Represents movie global rating validation.
-     * @return {boolean} true - if movie global rating is valid
-     * @param {float} movieGlobalRating
+     * Represents movie rating validation.
+     * @return {boolean} true - if movie rating is valid
+     * @param {float} movieRating
      */
-    static validateMovieRatingGlobal(movieGlobalRating) {
-        if (Checker.isFloat(movieGlobalRating)) {
-            if ((movieGlobalRating > 0) && (movieGlobalRating < 1000)) {
+    static validateMovieRating(movieRating) {
+        if (Checker.isFloat(movieRating)) {
+            if ((movieRating >= 0) && (movieRating <= 10)) {
                 return true;
             }
         }
-        return false;
+        return Number(movieRating) === 0;
     }
 
     /**
