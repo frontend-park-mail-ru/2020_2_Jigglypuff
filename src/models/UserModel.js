@@ -143,7 +143,12 @@ export default class UserModel {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
+            body: JSON.stringify({
+                'login': this._login.toString(),
+                'name': this._name.toString(),
+                'password': this._password.toString(),
+                'surname': this._surname.toString(),
+            }),
         });
     }
 
@@ -187,12 +192,10 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch(Routes.Host + Routes.ProfilePage, {
+        return await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'PUT',
-            body: new FormData(profileSettingsForm),
+            body: profileSettingsForm,
         });
-
-        return await response.json();
     }
 
     /**
@@ -204,7 +207,14 @@ export default class UserModel {
             method: 'GET',
         });
 
-        return await response.json();
+        if (response.ok) {
+            const data = await response.json();
+            this._name = data['Name'];
+            this._surname = data['Surname'];
+            this._avatarPath = data['AvatarPath'];
+        }
+
+        return response;
     }
 
     /**
@@ -212,10 +222,8 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async logout() {
-        const response = await fetch(Routes.Host + Routes.Logout, {
+        return await fetch(Routes.Host + Routes.Logout, {
             method: 'POST',
         });
-
-        return await response.json();
     }
 }
