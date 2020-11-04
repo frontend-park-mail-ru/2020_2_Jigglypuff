@@ -6,11 +6,13 @@ export default class SignUpViewModel {
      * Represents SignUp ViewModel constructor
      */
     constructor() {
-        this.state = {
-            login: '',
-            password: '',
-            passwordRepeated: '',
-        };
+        this.state = new Map([
+            ['login', ''],
+            ['name', ''],
+            ['password', ''],
+            ['passwordRepeated', ''],
+            ['surname', ''],
+        ]);
         this.registerCommand = {exec: () => this.register()};
     }
 
@@ -22,7 +24,12 @@ export default class SignUpViewModel {
         const userModel = new UserModel();
 
         userModel.login = this.state.login;
-        if (!userModel.login) {
+        userModel.name = this.state.name;
+        userModel.surname = this.state.name;
+
+        if (!userModel.login ||
+            !userModel.name ||
+            !userModel.surname) {
             throw new Error('invalid form data');
         }
 
@@ -41,8 +48,8 @@ export default class SignUpViewModel {
         const response = await userModel.register();
         if (response.ok) {
             return response.ok;
-        } else {
-            throw new Error('already registered');
         }
+
+        throw new Error('already registered');
     }
 }
