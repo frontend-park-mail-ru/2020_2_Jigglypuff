@@ -22,7 +22,6 @@ export default class CinemaListViewModel {
             const cinemaList = await response.json();
             for (const cinema of cinemaList) {
                 const cinemaModel = new CinemaModel();
-                console.log(cinema);
                 cinemaModel.address = cinema['Address'];
                 cinemaModel.authorID = cinema['AuthorID'];
                 cinemaModel.hallCount = cinema['HallCount'];
