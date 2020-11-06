@@ -37,7 +37,7 @@ export default class MovieViewModel {
         const response = await this._movieModel.getMovie();
 
         if (response.ok) {
-            const extractedMovieDataMap = Extractor.extractMovieData(this._movieModel);
+            const extractedMovieDataMap = Extractor.extractMovieDataFromModel(this._movieModel);
             extractedMovieDataMap.forEach((value, key) => {
                 this.state.set(key, value);
             });
