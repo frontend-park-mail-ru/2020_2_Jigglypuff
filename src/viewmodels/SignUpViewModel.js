@@ -6,13 +6,13 @@ export default class SignUpViewModel {
      * Represents SignUp ViewModel constructor
      */
     constructor() {
-        this.state = new Map([
-            ['login', ''],
-            ['name', ''],
-            ['password', ''],
-            ['passwordRepeated', ''],
-            ['surname', ''],
-        ]);
+        this.state = {
+            'login': '',
+            'name': '',
+            'password': '',
+            'passwordRepeated': '',
+            'surname': '',
+        };
         this.registerCommand = {exec: () => this.register()};
     }
 
