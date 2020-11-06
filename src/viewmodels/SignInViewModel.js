@@ -8,7 +8,7 @@ export default class SignInViewModel extends BaseView {
      */
     constructor() {
         super();
-      
+
         this.state = {
             'login': '',
             'password': '',

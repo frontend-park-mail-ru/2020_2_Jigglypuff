@@ -7,8 +7,8 @@ export default class SignUpViewModel extends BaseView {
      * Represents SignUp ViewModel constructor
      */
     constructor() {
-        super();  
-      
+        super();
+
         this.state = {
             'login': '',
             'name': '',
