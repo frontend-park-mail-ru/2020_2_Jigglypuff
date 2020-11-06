@@ -25,7 +25,7 @@ export default class SignUpViewModel {
 
         userModel.login = this.state.login;
         userModel.name = this.state.name;
-        userModel.surname = this.state.name;
+        userModel.surname = this.state.surname;
 
         if (!userModel.login ||
             !userModel.name ||
