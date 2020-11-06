@@ -6,10 +6,10 @@ export default class SignInViewModel {
      * Represents SignIn ViewModel constructor
      */
     constructor() {
-        this.state = new Map([
-            ['login', ''],
-            ['password', ''],
-        ]);
+        this.state = {
+            'login': '',
+            'password': '',
+        };
         this.signInCommand = {exec: () => this.signIn()};
     }
 
