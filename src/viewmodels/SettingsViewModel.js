@@ -8,13 +8,13 @@ export default class SettingsViewModel {
      */
     constructor() {
         this._userModel = new UserModel();
-        this.state = {
-            login: '',
-            name: '',
-            surname: '',
-            avatar: '',
-            avatarPath: '',
-        };
+        this.state = new Map([
+            ['login', ''],
+            ['name', ''],
+            ['surname', ''],
+            ['avatar', ''],
+            ['avatarPath', ''],
+        ]);
         this.editCommand = {exec: () => this.edit()};
     }
 
@@ -45,7 +45,7 @@ export default class SettingsViewModel {
     async getProfile() {
         const response = this._userModel.get();
 
-        const statusCode = Number(response.json().statusCode);
+        const statusCode = Number(await response.json().statusCode);
 
         if (statusCode === response.status.HTTP_STATUS_OK) {
             this.state.login = this._userModel.login;
