@@ -8,21 +8,21 @@ export default class MovieViewModel {
      */
     constructor() {
         this._movieModel = new MovieModel();
-        this.state = new Map([
-            ['ageGroup', ''],
-            ['country', ''],
-            ['description', ''],
-            ['duration', ''],
-            ['genre', ''],
-            ['id', ''],
-            ['name', ''],
-            ['pathToAvatar', ''],
-            ['personalRating', 0],
-            ['producer', ''],
-            ['rating', ''],
-            ['ratingCount', 0],
-            ['releaseYear', ''],
-        ]);
+        this.state = {
+            'ageGroup': '',
+            'country': '',
+            'description': '',
+            'duration': '',
+            'genre': '',
+            'id': '',
+            'name': '',
+            'pathToAvatar': '',
+            'personalRating': 0,
+            'producer': '',
+            'rating': '',
+            'ratingCount': 0,
+            'releaseYear': '',
+        };
         this.getMovieCommand = {exec: (id) => this.getMovie(id)};
         this.rateMovieCommand = {exec: () => this.rateMovie()};
     }
@@ -39,7 +39,7 @@ export default class MovieViewModel {
         if (response.ok) {
             const extractedMovieDataMap = Extractor.extractMovieDataFromModel(this._movieModel);
             extractedMovieDataMap.forEach((value, key) => {
-                this.state.set(key, value);
+                this.state[key] = value;
             });
 
             return this.state;

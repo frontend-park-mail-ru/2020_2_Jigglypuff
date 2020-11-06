@@ -19,23 +19,23 @@ export default class MovieListViewModel {
     _addMovie(movie) {
         const movieModel = Extractor.extractMovieDataFromJSON(movie);
         const extractedMovieListDataMap = Extractor.extractMovieDataFromModel(movieModel);
-        this.state.push(new Map([
-            ['ageGroup', ''],
-            ['country', ''],
-            ['description', ''],
-            ['duration', ''],
-            ['genre', ''],
-            ['id', ''],
-            ['name', ''],
-            ['pathToAvatar', ''],
-            ['personalRating', ''],
-            ['producer', ''],
-            ['rating', ''],
-            ['ratingCount', ''],
-            ['releaseYear', ''],
-        ]));
+        this.state.push({
+            'ageGroup': '',
+            'country': '',
+            'description': '',
+            'duration': '',
+            'genre': '',
+            'id': '',
+            'name': '',
+            'pathToAvatar': '',
+            'personalRating': '',
+            'producer': '',
+            'rating': '',
+            'ratingCount': '',
+            'releaseYear': '',
+        });
         extractedMovieListDataMap.forEach((value, key) => {
-            this.state[this.state.length - 1].set(key, value);
+            this.state[this.state.length - 1][key] = value;
         });
     }
 

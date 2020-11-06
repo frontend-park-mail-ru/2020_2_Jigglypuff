@@ -8,13 +8,13 @@ export default class CinemaViewModel {
      */
     constructor() {
         this._cinemaModel = new CinemaModel.CinemaModel();
-        this.state = new Map([
-            ['address', ''],
-            ['authorID', ''],
-            ['hallCount', ''],
-            ['id', ''],
-            ['name', ''],
-        ]);
+        this.state = {
+            'address': '',
+            'authorID': '',
+            'hallCount': '',
+            'id': '',
+            'name': '',
+        };
         this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }
 
@@ -30,7 +30,7 @@ export default class CinemaViewModel {
         if (response.ok) {
             const extractedCinemaDataMap = Extractor.extractCinemaData(this._cinemaModel);
             extractedCinemaDataMap.forEach((value, key) => {
-                this.state.set(key, value);
+                this.state[key] = value;
             });
             return this.state;
         }
