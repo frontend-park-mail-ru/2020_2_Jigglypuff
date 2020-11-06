@@ -1,12 +1,15 @@
+import BaseView from './BaseView';
 import Extractor from '../utils/Extractor';
 import UserModel from '../models/UserModel';
 
 /** Class that contains SignIn ViewModel */
-export default class SettingsViewModel {
+export default class SettingsViewModel extends BaseView {
     /**
      * Represents Settings ViewModel constructor
      */
     constructor() {
+        super();
+
         this._userModel = new UserModel();
         this.state = {
             login: '',

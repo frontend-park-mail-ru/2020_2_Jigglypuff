@@ -1,12 +1,15 @@
 import MovieModel from '../models/MovieModel';
+import BaseView from './BaseView';
 import Extractor from '../utils/Extractor';
 
 /** Class that contains Movie ViewModel*/
-export default class MovieViewModel {
+export default class MovieViewModel extends BaseView {
     /**
      * Represents Movie ViewModel constructor
      */
     constructor() {
+        super();
+
         this._movieModel = new MovieModel();
         this.state = new Map([
             ['ageGroup', ''],

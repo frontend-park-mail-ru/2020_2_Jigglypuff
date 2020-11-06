@@ -1,12 +1,15 @@
+import BaseView from './BaseView';
 import CinemaModel from '../models/CinemaModel';
 import Extractor from '../utils/Extractor';
 
 /** Class that contains CinemaList ViewModel */
-export default class CinemaListViewModel {
+export default class CinemaListViewModel extends BaseView {
     /**
      * Represents CinemaList ViewModel constructor
      */
     constructor() {
+        super();
+
         this.state = [];
         this.getCinemaListCommand = {exec: () => this.getCinemaList()};
     }

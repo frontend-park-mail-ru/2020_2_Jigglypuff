@@ -1,11 +1,14 @@
 import UserModel from '../models/UserModel';
+import BaseView from './BaseView';
 
 /** Class that contains SignUp ViewModel */
-export default class SignUpViewModel {
+export default class SignUpViewModel extends BaseView {
     /**
      * Represents SignUp ViewModel constructor
      */
     constructor() {
+        super();
+
         this.state = new Map([
             ['login', ''],
             ['name', ''],
