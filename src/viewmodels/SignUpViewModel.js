@@ -1,11 +1,14 @@
 import UserModel from '../models/UserModel';
+import BaseView from './BaseView';
 
 /** Class that contains SignUp ViewModel */
-export default class SignUpViewModel {
+export default class SignUpViewModel extends BaseView {
     /**
      * Represents SignUp ViewModel constructor
      */
     constructor() {
+        super();  
+      
         this.state = {
             'login': '',
             'name': '',
@@ -34,7 +37,7 @@ export default class SignUpViewModel {
         }
 
         let passwordRepeated = null;
-        userModel.password = this.state.passwordRepeated;
+        userModel.password = this.state.get(passwordRepeated);
         if (userModel.password) {
             passwordRepeated = userModel.password;
             userModel.password = this.state.password;

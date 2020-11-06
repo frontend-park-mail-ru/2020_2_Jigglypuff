@@ -1,12 +1,16 @@
+import BaseView from './BaseView';
 import CinemaModel from '../models/CinemaModel';
 import Extractor from '../utils/Extractor';
 
+
 /** Class that contains Cinema ViewModel */
-export default class CinemaViewModel {
+export default class CinemaViewModel extends BaseView {
     /**
      * Represents Movie ViewModel constructor
      */
     constructor() {
+        super();
+
         this._cinemaModel = new CinemaModel.CinemaModel();
         this.state = {
             'address': '',

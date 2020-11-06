@@ -1,12 +1,15 @@
+import BaseView from './BaseView';
 import Extractor from '../utils/Extractor';
 import MovieModel from '../models/MovieModel';
 
 /** Class that contains MovieList ViewModel */
-export default class MovieListViewModel {
+export default class MovieListViewModel extends BaseView {
     /**
      * Represents MovieList ViewModel constructor
      */
     constructor() {
+        super();
+
         this.state = [];
         this.getMovieActualListCommand = {exec: () => this.getMovieActualList()};
         this.getMovieListCommand = {exec: () => this.getMovieList()};
