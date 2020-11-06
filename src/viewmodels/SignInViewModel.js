@@ -9,10 +9,10 @@ export default class SignInViewModel extends BaseView {
     constructor() {
         super();
 
-        this.state = new Map([
-            ['login', ''],
-            ['password', ''],
-        ]);
+        this.state = {
+            'login': '',
+            'password': '',
+        };
         this.signInCommand = {exec: () => this.signIn()};
     }
 

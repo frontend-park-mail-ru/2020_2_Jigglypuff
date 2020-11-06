@@ -11,13 +11,13 @@ export default class SettingsViewModel extends BaseView {
         super();
 
         this._userModel = new UserModel();
-        this.state = new Map([
-            ['login', ''],
-            ['name', ''],
-            ['surname', ''],
-            ['avatar', ''],
-            ['avatarPath', ''],
-        ]);
+        this.state = {
+            'login': '',
+            'name': '',
+            'surname': '',
+            'avatar': '',
+            'avatarPath': '',
+        };
         this.editCommand = {exec: () => this.edit()};
     }
 
@@ -34,9 +34,9 @@ export default class SettingsViewModel extends BaseView {
         }
 
         const extractedDataMap = Extractor.extractFormData(this.state);
-        for (const field of extractedDataMap) {
-            this._userModel[field.keys()] = field.values();
-        }
+        extractedDataMap.forEach((value, key) => {
+            this._userModel[key] = value;
+        });
 
         return await this._userModel.edit();
     }

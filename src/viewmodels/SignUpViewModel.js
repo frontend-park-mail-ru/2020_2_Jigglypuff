@@ -9,13 +9,13 @@ export default class SignUpViewModel extends BaseView {
     constructor() {
         super();
 
-        this.state = new Map([
-            ['login', ''],
-            ['name', ''],
-            ['password', ''],
-            ['passwordRepeated', ''],
-            ['surname', ''],
-        ]);
+        this.state = {
+            'login': '',
+            'name': '',
+            'password': '',
+            'passwordRepeated': '',
+            'surname': '',
+        };
         this.registerCommand = {exec: () => this.register()};
     }
 
