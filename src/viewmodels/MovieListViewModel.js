@@ -1,6 +1,6 @@
 import BaseViewModel from './BaseViewModel';
-import Extractor from '../utils/Extractor';
 import Errors from '../consts/Errors';
+import Extractor from '../utils/Extractor';
 import MovieModel from '../models/MovieModel';
 
 /** Class that contains MovieList ViewModel */
