@@ -1,9 +1,10 @@
-import BaseView from './BaseView';
+import BaseViewModel from './BaseViewModel';
 import CinemaModel from '../models/CinemaModel';
+import Errors from '../consts/Errors';
 import Extractor from '../utils/Extractor';
 
 /** Class that contains CinemaList ViewModel */
-export default class CinemaListViewModel extends BaseView {
+export default class CinemaListViewModel extends BaseViewModel {
     /**
      * Represents CinemaList ViewModel constructor
      */
@@ -46,6 +47,6 @@ export default class CinemaListViewModel extends BaseView {
             return this.state;
         }
 
-        throw new Error('failed to get cinema list');
+        throw new Error(Errors.FailedToGetCinemaList);
     }
 }

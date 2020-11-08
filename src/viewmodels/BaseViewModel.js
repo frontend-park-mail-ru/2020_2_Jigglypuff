@@ -1,7 +1,8 @@
+import Errors from '../consts/Errors';
 import UserModel from '../models/UserModel';
 
-/** Class that contains BaseView ViewModel */
-export default class BaseView {
+/** Class that contains BaseViewModel ViewModel */
+export default class BaseViewModel {
     /**
      * Check if user is authorised.
      * @return {Promise<boolean>}
@@ -19,7 +20,7 @@ export default class BaseView {
      */
     static async logout() {
         if (!await this.isAuthorised()) {
-            throw new Error('you are not authorised');
+            throw new Error(Errors.NotAuthorised);
         }
 
         const userModel = new UserModel();
@@ -29,6 +30,6 @@ export default class BaseView {
             return null;
         }
 
-        throw new Error('failed to logout');
+        throw new Error(Errors.FailedToLogout);
     }
 }

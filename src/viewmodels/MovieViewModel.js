@@ -1,9 +1,10 @@
 import MovieModel from '../models/MovieModel';
-import BaseView from './BaseView';
+import BaseViewModel from './BaseViewModel';
+import Errors from '../consts/Errors';
 import Extractor from '../utils/Extractor';
 
 /** Class that contains Movie ViewModel*/
-export default class MovieViewModel extends BaseView {
+export default class MovieViewModel extends BaseViewModel {
     /**
      * Represents Movie ViewModel constructor
      */
@@ -48,7 +49,7 @@ export default class MovieViewModel extends BaseView {
             return this.state;
         }
 
-        throw new Error('failed to get movie');
+        throw new Error(Errors.FailedToGetMovie);
     }
 
     /**
