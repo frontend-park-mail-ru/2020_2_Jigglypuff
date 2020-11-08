@@ -15,19 +15,19 @@ export default class MovieViewModel extends BaseViewModel {
         this._movieModel = new MovieModel();
         this._scheduleModel = new ScheduleModel();
         this.state = {
-            'ageGroup': '',
-            'country': '',
-            'description': '',
-            'duration': '',
-            'genre': '',
-            'id': '',
-            'name': '',
-            'pathToAvatar': '',
-            'personalRating': 0,
-            'producer': '',
-            'rating': '',
-            'ratingCount': 0,
-            'releaseYear': '',
+            ageGroup: '',
+            country: '',
+            description: '',
+            duration: '',
+            genre: '',
+            id: '',
+            name: '',
+            pathToAvatar: '',
+            personalRating: 0,
+            producer: '',
+            rating: '',
+            ratingCount: 0,
+            releaseYear: '',
         };
         this.schedule = [];
 
@@ -43,11 +43,11 @@ export default class MovieViewModel extends BaseViewModel {
     _addScheduleElement(scheduleElement) {
         const extractedScheduleMap = Extractor.extractScheduleFromJSON(scheduleElement);
         this.schedule.push({
-            'cinemaID': '',
-            'hallID': '',
-            'id': '',
-            'movieID': '',
-            'premierTime': '',
+            cinemaID: '',
+            hallID: '',
+            id: '',
+            movieID: '',
+            premierTime: '',
         });
         extractedScheduleMap.forEach((value, key) => {
             this.schedule[this.schedule.length - 1][key] = value;
