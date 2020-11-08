@@ -7,19 +7,21 @@ const Errors = {
     FailedToGetMovieList: 5,
     FailedToGetMovie: 6,
     FailedToGetProfile: 7,
-    FailedToLogout: 8,
+    FailedToGetSchedule: 8,
+    FailedToLogout: 9,
 
-    InvalidLoginOrPassword: 9,
-    InvalidLogin: 10,
-    InvalidPassword: 11,
-    InvalidName: 12,
-    InvalidSurname: 13,
-    InvalidPasswordRepeated: 14,
+    InvalidLoginOrPassword: 10,
+    InvalidLogin: 11,
+    InvalidPassword: 12,
+    InvalidName: 13,
+    InvalidSurname: 14,
+    InvalidPasswordRepeated: 15,
 
-    MovieActualListIsEmpty: 5,
-    MovieListIsEmpty: 16,
+    MovieActualListIsEmpty: 16,
+    MovieListIsEmpty: 17,
+    ScheduleListIsEmpty: 18,
 
-    NotAuthorised: 17,
+    NotAuthorised: 19,
 };
 
 export default Errors;
