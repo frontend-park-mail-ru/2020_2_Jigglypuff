@@ -7,6 +7,7 @@ export default class MovieModel {
      * Declare MovieModel attributes.
      */
     constructor() {
+        this._actors = null;
         this._ageGroup = null;
         this._country = null;
         this._description = null;
@@ -15,12 +16,12 @@ export default class MovieModel {
         this._id = null;
         this._name = null;
         this._pathToAvatar = null;
+        this._pathToSliderAvatar = null;
         this._personalRating = null;
         this._producer = null;
         this._rating = null;
         this._ratingCount = null;
         this._reviews = null;
-        this._starring = null;
         this._releaseYear = null;
     }
 
@@ -46,6 +47,14 @@ export default class MovieModel {
      */
     get pathToAvatar() {
         return this._pathToAvatar;
+    }
+
+    /**
+     * Get movie path to slider avatar.
+     * @return {null|string}
+     */
+    get pathToSliderAvatar() {
+        return this._pathToSliderAvatar;
     }
 
     /**
@@ -140,8 +149,8 @@ export default class MovieModel {
      * Get movie cast.
      * @return {null|Array}
      */
-    get starring() {
-        return this._starring;
+    get actors() {
+        return this._actors;
     }
 
     /**
@@ -302,6 +311,14 @@ export default class MovieModel {
     }
 
     /**
+     * Set movie path to slider avatar to "pathToSliderAvatar" variable
+     * @param {any} pathToSliderAvatar
+     */
+    set pathToSliderAvatar(pathToSliderAvatar) {
+        this._pathToSliderAvatar = pathToSliderAvatar.toString();
+    }
+
+    /**
      * Set movie reviews to "reviews" variable value if valid else, null.
      * @param {any} reviews
      */
@@ -315,17 +332,17 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie starring to "starring" variable value if valid else, null.
-     * @param {any} starring
+     * Set movie actors to "actors" variable value if valid else, null.
+     * @param {any} actors
      */
-    set starring(starring) {
-        const nameParts = starring.toString().split(' ');
+    set actors(actors) {
+        const nameParts = actors.toString().split(' ');
         for (const part of nameParts) {
             if (Validator.validateName(part)) {
-                if (!starring) {
-                    this._starring = [];
+                if (!actors) {
+                    this._actors = [];
                 }
-                this._starring.append(starring.toString());
+                this._actors.append(actors.toString());
             }
         }
     }
@@ -355,6 +372,7 @@ export default class MovieModel {
 
         if (response.ok) {
             const data = await response.json();
+            this._actors = data['Actors'];
             this._ageGroup = data['AgeGroup'];
             this._country = data['Country'];
             this._description = data['Description'];
@@ -363,6 +381,7 @@ export default class MovieModel {
             this._id = data['ID'];
             this._name = data['Name'];
             this._pathToAvatar = data['PathToAvatar'];
+            this._pathToSliderAvatar = data['PathToSliderAvatar'];
             this._personalRating = data['PersonalRating'];
             this._producer = data['Producer'];
             this._rating = data['Rating'];

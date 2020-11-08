@@ -24,6 +24,7 @@ export default class MovieListViewModel extends BaseViewModel {
         const movieModel = Extractor.extractMovieDataFromJSON(movie);
         const extractedMovieListDataMap = Extractor.extractMovieDataFromModel(movieModel);
         this.state.push({
+            actors: '',
             ageGroup: '',
             country: '',
             description: '',
@@ -32,7 +33,7 @@ export default class MovieListViewModel extends BaseViewModel {
             id: '',
             name: '',
             pathToAvatar: '',
-            personalRating: '',
+            pathToSliderAvatar: '',
             producer: '',
             rating: '',
             ratingCount: '',
