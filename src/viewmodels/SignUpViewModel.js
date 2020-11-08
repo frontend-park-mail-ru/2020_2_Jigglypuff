@@ -22,7 +22,7 @@ export default class SignUpViewModel extends BaseViewModel {
 
     /**
      * Register user after filling fields.
-     * @return {Promise<boolean>}
+     * @return {Promise<Error>|Promise<boolean>}
      */
     async register() {
         const userModel = new UserModel();

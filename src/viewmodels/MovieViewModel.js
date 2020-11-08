@@ -34,7 +34,7 @@ export default class MovieViewModel extends BaseViewModel {
     /**
      * Get movie info.
      * @param {int} id - movie id
-     * @return {Promise<void>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getMovie(id) {
         this._movieModel.id = Number(id);
@@ -54,7 +54,7 @@ export default class MovieViewModel extends BaseViewModel {
 
     /**
      * Rate movie.
-     * @return {Promise<number>}
+     * @return {Promise<JSON>}
      */
     async rateMovie() {
         const response = await this._movieModel.rate();

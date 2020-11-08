@@ -16,7 +16,7 @@ export default class CinemaModel {
 
     /**
      * Get cinema address.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get address() {
         return this._address;
@@ -24,7 +24,7 @@ export default class CinemaModel {
 
     /**
      * Get cinema authorID.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get authorID() {
         return this._authorID;
@@ -32,7 +32,7 @@ export default class CinemaModel {
 
     /**
      * Get cinema hallCount.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get hallCount() {
         return this._hallCount;
@@ -40,7 +40,7 @@ export default class CinemaModel {
 
     /**
      * Get cinema id.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get id() {
         return this._id;
@@ -48,7 +48,7 @@ export default class CinemaModel {
 
     /**
      * Get cinema name.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get name() {
         return this._name;
@@ -121,7 +121,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     static async getCinemaList(limit = 10, page = 1) {
-        return await fetch(Routes.Routes.Host + Routes.Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.Host + Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
     }
@@ -131,7 +131,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     async getCinema() {
-        const response = await fetch(Routes.Routes.Host + Routes.Routes.CinemaPage.replace(/:id/, this._id), {
+        const response = await fetch(Routes.Host + Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
         });
 

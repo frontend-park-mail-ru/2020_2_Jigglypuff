@@ -26,7 +26,7 @@ export default class CinemaViewModel extends BaseViewModel {
     /**
      * Get cinema info.
      * @param {int} id - cinema id
-     * @return {Promise<any>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getCinema(id) {
         this._cinemaModel.id = Number(id);

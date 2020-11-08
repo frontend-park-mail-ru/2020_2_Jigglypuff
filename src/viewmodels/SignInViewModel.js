@@ -19,7 +19,7 @@ export default class SignInViewModel extends BaseViewModel {
 
     /**
      * SignIn user after filling fields.
-     * @return {Promise<boolean>}
+     * @return {Promise<Error>|Promise<boolean>}
      */
     async signIn() {
         const userModel = new UserModel();

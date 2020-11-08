@@ -19,7 +19,7 @@ export default class UserModel {
 
     /**
      * Get user login.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get login() {
         return this._login;
@@ -27,7 +27,7 @@ export default class UserModel {
 
     /**
      * Get user password.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get password() {
         return this._password;
@@ -35,7 +35,7 @@ export default class UserModel {
 
     /**
      * Get user name.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get name() {
         return this._name;
@@ -43,7 +43,7 @@ export default class UserModel {
 
     /**
      * Get user surname.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get surname() {
         return this._surname;
@@ -51,7 +51,7 @@ export default class UserModel {
 
     /**
      * Get user avatar path.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get avatarPath() {
         return this._avatarPath;
@@ -59,7 +59,7 @@ export default class UserModel {
 
     /**
      * Get user status info.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get isPremium() {
         return this._isPremuim;
