@@ -11,11 +11,11 @@ export default class SignUpViewModel extends BaseViewModel {
         super();
 
         this.state = {
-            'login': '',
-            'name': '',
-            'password': '',
-            'passwordRepeated': '',
-            'surname': '',
+            login: '',
+            name: '',
+            password: '',
+            passwordRepeated: '',
+            surname: '',
         };
         this.registerCommand = {exec: () => this.register()};
     }

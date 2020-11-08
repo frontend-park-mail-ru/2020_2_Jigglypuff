@@ -11,8 +11,8 @@ export default class SignInViewModel extends BaseViewModel {
         super();
 
         this.state = {
-            'login': '',
-            'password': '',
+            login: '',
+            password: '',
         };
         this.signInCommand = {exec: () => this.signIn()};
     }
