@@ -11,6 +11,7 @@ const Routes = {
     ProfilePage: '/profile/',
     RateMovie: '/movie/rate/',
     Register: '/auth/register/',
+    Schedule: '/schedule/',
 };
 
 export default Routes;
