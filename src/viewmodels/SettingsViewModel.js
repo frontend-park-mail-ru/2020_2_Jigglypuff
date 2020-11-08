@@ -13,11 +13,11 @@ export default class SettingsViewModel extends BaseViewModel {
 
         this._userModel = new UserModel();
         this.state = {
-            'login': '',
-            'name': '',
-            'surname': '',
-            'avatar': '',
-            'avatarPath': '',
+            login: '',
+            name: '',
+            surname: '',
+            avatar: '',
+            avatarPath: '',
         };
         this.editCommand = {exec: () => this.edit()};
     }

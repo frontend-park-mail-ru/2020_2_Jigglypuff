@@ -24,19 +24,19 @@ export default class MovieListViewModel extends BaseViewModel {
         const movieModel = Extractor.extractMovieDataFromJSON(movie);
         const extractedMovieListDataMap = Extractor.extractMovieDataFromModel(movieModel);
         this.state.push({
-            'ageGroup': '',
-            'country': '',
-            'description': '',
-            'duration': '',
-            'genre': '',
-            'id': '',
-            'name': '',
-            'pathToAvatar': '',
-            'personalRating': '',
-            'producer': '',
-            'rating': '',
-            'ratingCount': '',
-            'releaseYear': '',
+            ageGroup: '',
+            country: '',
+            description: '',
+            duration: '',
+            genre: '',
+            id: '',
+            name: '',
+            pathToAvatar: '',
+            personalRating: '',
+            producer: '',
+            rating: '',
+            ratingCount: '',
+            releaseYear: '',
         });
         extractedMovieListDataMap.forEach((value, key) => {
             this.state[this.state.length - 1][key] = value;
