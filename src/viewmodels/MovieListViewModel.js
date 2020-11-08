@@ -45,7 +45,7 @@ export default class MovieListViewModel extends BaseViewModel {
 
     /**
      * Get actual movie list.
-     * @return {Promise<number>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getMovieActualList() {
         const response = await MovieModel.getMovieActualList();
@@ -67,7 +67,7 @@ export default class MovieListViewModel extends BaseViewModel {
 
     /**
      * Get movie list.
-     * @return {Promise<number>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getMovieList() {
         const response = await MovieModel.getMovieList();

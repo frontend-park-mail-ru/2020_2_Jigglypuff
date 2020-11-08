@@ -17,7 +17,7 @@ export default class CinemaListViewModel extends BaseViewModel {
 
     /**
      * Get cinema list.
-     * @return {Promise<Error>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getCinemaList() {
         const response = await CinemaModel.CinemaModel.getCinemaList();

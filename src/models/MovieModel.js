@@ -26,7 +26,7 @@ export default class MovieModel {
 
     /**
      * Get movie id.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get id() {
         return this._id;
@@ -34,7 +34,7 @@ export default class MovieModel {
 
     /**
      * Get movie name.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get name() {
         return this._name;
@@ -42,7 +42,7 @@ export default class MovieModel {
 
     /**
      * Get movie path to avatar.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get pathToAvatar() {
         return this._pathToAvatar;
@@ -50,7 +50,7 @@ export default class MovieModel {
 
     /**
      * Get movie description.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get description() {
         return this._description;
@@ -58,7 +58,7 @@ export default class MovieModel {
 
     /**
      * Get movie producer.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get producer() {
         return this._producer;
@@ -66,7 +66,7 @@ export default class MovieModel {
 
     /**
      * Get movie genre.
-     * @return {null} {Array}
+     * @return {null|Array}
      */
     get genre() {
         return this._genre;
@@ -74,7 +74,7 @@ export default class MovieModel {
 
     /**
      * Get movie duration.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get duration() {
         return this._duration;
@@ -82,7 +82,7 @@ export default class MovieModel {
 
     /**
      * Get movie country.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get country() {
         return this._country;
@@ -90,7 +90,7 @@ export default class MovieModel {
 
     /**
      * Get movie year.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get releaseYear() {
         return this._releaseYear;
@@ -98,7 +98,7 @@ export default class MovieModel {
 
     /**
      * Get movie global rating.
-     * @return {null} {float}
+     * @return {null|float}
      */
     get rating() {
         return this._rating;
@@ -106,7 +106,7 @@ export default class MovieModel {
 
     /**
      * Get movie user rating.
-     * @return {null} {float}
+     * @return {null|float}
      */
     get personalRating() {
         return this._personalRating;
@@ -114,7 +114,7 @@ export default class MovieModel {
 
     /**
      * Get movie age limit.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get ageGroup() {
         return this._ageGroup;
@@ -122,7 +122,7 @@ export default class MovieModel {
 
     /**
      * Get movie rating count.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get ratingCount() {
         return this._ratingCount;
@@ -130,7 +130,7 @@ export default class MovieModel {
 
     /**
      * Get movie reviews.
-     * @return {null} {Array}
+     * @return {null|Array}
      */
     get reviews() {
         return this._reviews;
@@ -138,7 +138,7 @@ export default class MovieModel {
 
     /**
      * Get movie cast.
-     * @return {null} {Array}
+     * @return {null|Array}
      */
     get starring() {
         return this._starring;
@@ -379,7 +379,7 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    static async getMovieList(limit = 10, page = 0) {
+    static async getMovieList(limit = 10, page = 1) {
         return await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
@@ -391,7 +391,7 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    static async getMovieActualList(limit = 10, page = 0) {
+    static async getMovieActualList(limit = 10, page = 1) {
         return await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
         });
