@@ -27,6 +27,7 @@ export default class Extractor {
     static extractMovieDataFromJSON(data) {
         const movieModel = new MovieModel();
 
+        movieModel.actors = data['Actors'];
         movieModel.ageGroup = data['AgeGroup'];
         movieModel.country = data['Country'];
         movieModel.description = data['Description'];
@@ -35,6 +36,7 @@ export default class Extractor {
         movieModel.id = data['ID'];
         movieModel.name = data['Name'];
         movieModel.pathToAvatar = data['PathToAvatar'];
+        movieModel.pathToSliderAvatar = data['PathToSliderAvatar'];
         movieModel.producer = data['Producer'];
         movieModel.rating = data['Rating'];
         movieModel.ratingCount = data['RatingCount'];
@@ -51,6 +53,7 @@ export default class Extractor {
     static extractMovieDataFromModel(data) {
         const result = new Map();
 
+        result.set('actors', data.actors);
         result.set('ageGroup', data.ageGroup);
         result.set('country', data.country);
         result.set('description', data.description);
@@ -59,6 +62,7 @@ export default class Extractor {
         result.set('id', data.id);
         result.set('name', data.name);
         result.set('pathToAvatar', data.pathToAvatar);
+        result.set('pathToSliderAvatar', data.pathToSliderAvatar);
         result.set('personalRating', data.personalRating);
         result.set('producer', data.producer);
         result.set('rating', data.rating);
