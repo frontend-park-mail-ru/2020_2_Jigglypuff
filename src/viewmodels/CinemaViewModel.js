@@ -14,11 +14,12 @@ export default class CinemaViewModel extends BaseViewModel {
 
         this._cinemaModel = new CinemaModel.CinemaModel();
         this.state = {
-            address: '',
-            authorID: '',
-            hallCount: '',
-            id: '',
-            name: '',
+            'address': '',
+            'authorID': '',
+            'hallCount': '',
+            'id': '',
+            'name': '',
+            'pathToAvatar': '',
         };
         this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }

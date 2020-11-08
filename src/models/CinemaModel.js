@@ -12,6 +12,7 @@ export default class CinemaModel {
         this._hallCount = null;
         this._id = null;
         this._name = null;
+        this._pathToAvatar = null;
     }
 
     /**
@@ -52,6 +53,14 @@ export default class CinemaModel {
      */
     get name() {
         return this._name;
+    }
+
+    /**
+     * Get cinema path to avatar.
+     * @return {null|string}
+     */
+    get pathToAvatar() {
+        return this._pathToAvatar;
     }
 
     /**
@@ -115,6 +124,14 @@ export default class CinemaModel {
     }
 
     /**
+     * Set cinema path to avatar to "pathToAvatar" variable
+     * @param {any} pathToAvatar
+     */
+    set pathToAvatar(pathToAvatar) {
+        this._pathToAvatar = pathToAvatar.toString();
+    }
+
+    /**
      * Get cinema list info.
      * @param {int} limit
      * @param {int} page
@@ -142,6 +159,7 @@ export default class CinemaModel {
             this._hallCount = data['HallCount'];
             this._id = data['ID'];
             this._name = data['Name'];
+            this._pathToAvatar = data['PathToAvatar'];
         }
 
         return response;
