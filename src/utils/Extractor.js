@@ -84,4 +84,21 @@ export default class Extractor {
 
         return result;
     }
+
+    /**
+     * Extract schedule from json to map.
+     * @param {JSON} data
+     * @return {Map}
+     */
+    static extractScheduleFromJSON(data) {
+        const result = new Map();
+
+        result.set('cinemaID', data['CinemaID']);
+        result.set('hallID', data['HallID']);
+        result.set('id', data['ID']);
+        result.set('movieID', data['MovieID']);
+        result.set('premierTime', data['PremierTime']);
+
+        return result;
+    }
 }
