@@ -56,7 +56,7 @@ export default class MovieListViewModel extends BaseViewModel {
                 this._addMovie(movie);
             }
             if (!this.state.length) {
-                throw new Error(Errors.MovieActualListIsEmpty);
+                throw new Error(Errors.ListIsEmpty);
             }
 
             return this.state;
@@ -78,7 +78,7 @@ export default class MovieListViewModel extends BaseViewModel {
                 this._addMovie(movie);
             }
             if (!this.state.length) {
-                throw new Error(Errors.MovieListIsEmpty);
+                throw new Error(Errors.ListIsEmpty);
             }
 
             return this.state;

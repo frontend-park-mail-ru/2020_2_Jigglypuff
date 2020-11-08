@@ -42,7 +42,6 @@ export default class MovieViewModel extends BaseViewModel {
      */
     _addScheduleElement(scheduleElement) {
         const extractedScheduleMap = Extractor.extractScheduleFromJSON(scheduleElement);
-        console.log(extractedScheduleMap);
         this.schedule.push({
             'cinemaID': '',
             'hallID': '',
@@ -107,7 +106,7 @@ export default class MovieViewModel extends BaseViewModel {
                 this._addScheduleElement(scheduleElement);
             }
             if (!this.schedule.length) {
-                throw new Error(Errors.ScheduleListIsEmpty);
+                throw new Error(Errors.ListIsEmpty);
             }
 
             return this.schedule;

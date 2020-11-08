@@ -101,4 +101,70 @@ export default class Extractor {
 
         return result;
     }
+
+    /**
+     * Extract movie data from model to map.
+     * @param {TicketModel} data
+     * @return {Map}
+     */
+    static extractTicketDataFromModel(data) {
+        const result = new Map();
+
+        result.set('id', data.hallID);
+        result.set('login', data.login);
+        result.set('placeField', {
+            'place': data.placeField.place,
+            'row': data.placeField.row,
+        });
+        result.set('schedule', {
+            'cinemaID': data.scheduleModel.cinemaID,
+            'hallID': data.scheduleModel.hallID,
+            'id': data.scheduleModel.id,
+            'movieID': data.scheduleModel.movieID,
+            'premierTime': data.scheduleModel.premierTime,
+        });
+        result.set('transactionDate', data.transactionDate);
+
+        return result;
+    }
+
+    /**
+     * Extract ticket from json to map.
+     * @param {JSON} data
+     * @return {Map}
+     */
+    static extractTicketFromJSON(data) {
+        const result = new Map();
+
+        result.set('id', data['HallID']);
+        result.set('login', data['Login']);
+        result.set('placeField', {
+            'place': data['PlaceField']['Place'],
+            'row': data['PlaceField']['Row'],
+        });
+        result.set('schedule', {
+            'cinemaID': data['Schedule']['CinemaID'],
+            'hallID': data['Schedule']['HallID'],
+            'id': data['Schedule']['ID'],
+            'movieID': data['Schedule']['MovieID'],
+            'premierTime': data['Schedule']['PremierTime'],
+        });
+        result.set('transactionDate', data['TransactionDate']);
+
+        return result;
+    }
+
+    /**
+     * Extract ticket from json to map.
+     * @param {JSON} data
+     * @return {Map}
+     */
+    static extractTicketScheduleFromJSON(data) {
+        const result = new Map();
+
+        result.set('place', data['Place']);
+        result.set('row', data['Row']);
+
+        return result;
+    }
 }
