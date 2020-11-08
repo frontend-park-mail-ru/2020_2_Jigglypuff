@@ -1,9 +1,10 @@
-import BaseView from './BaseView';
+import BaseViewModel from './BaseViewModel';
+import Errors from '../consts/Errors';
 import Extractor from '../utils/Extractor';
 import UserModel from '../models/UserModel';
 
 /** Class that contains SignIn ViewModel */
-export default class SettingsViewModel extends BaseView {
+export default class SettingsViewModel extends BaseViewModel {
     /**
      * Represents Settings ViewModel constructor
      */
@@ -30,7 +31,7 @@ export default class SettingsViewModel extends BaseView {
 
         const statusCode = Number(response.json().statusCode);
         if (statusCode !== Number(response.status.HTTP_STATUS_OK)) {
-            throw new Error('failed to get profile');
+            throw new Error(Errors.FailedToGetProfile);
         }
 
         const extractedDataMap = Extractor.extractFormData(this.state);

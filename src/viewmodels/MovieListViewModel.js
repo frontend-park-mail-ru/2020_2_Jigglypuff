@@ -1,9 +1,10 @@
-import BaseView from './BaseView';
+import BaseViewModel from './BaseViewModel';
 import Extractor from '../utils/Extractor';
+import Errors from '../consts/Errors';
 import MovieModel from '../models/MovieModel';
 
 /** Class that contains MovieList ViewModel */
-export default class MovieListViewModel extends BaseView {
+export default class MovieListViewModel extends BaseViewModel {
     /**
      * Represents MovieList ViewModel constructor
      */
@@ -55,13 +56,13 @@ export default class MovieListViewModel extends BaseView {
                 this._addMovie(movie);
             }
             if (!this.state.length) {
-                throw new Error('movie actual list is empty');
+                throw new Error(Errors.MovieActualListIsEmpty);
             }
 
             return this.state;
         }
 
-        throw new Error('failed to get movie actual list');
+        throw new Error(Errors.FailedToGetActualMovieList);
     }
 
     /**
@@ -77,12 +78,12 @@ export default class MovieListViewModel extends BaseView {
                 this._addMovie(movie);
             }
             if (!this.state.length) {
-                throw new Error('movie list is empty');
+                throw new Error(Errors.MovieListIsEmpty);
             }
 
             return this.state;
         }
 
-        throw new Error('failed to get movie list');
+        throw new Error(Errors.FailedToGetMovieList);
     }
 }

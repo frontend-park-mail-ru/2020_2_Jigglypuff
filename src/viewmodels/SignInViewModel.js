@@ -1,8 +1,9 @@
+import BaseViewModel from './BaseViewModel';
+import Errors from '../consts/Errors';
 import UserModel from '../models/UserModel';
-import BaseView from './BaseView';
 
 /** Class that contains SignIn ViewModel */
-export default class SignInViewModel extends BaseView {
+export default class SignInViewModel extends BaseViewModel {
     /**
      * Represents SignIn ViewModel constructor
      */
@@ -27,7 +28,7 @@ export default class SignInViewModel extends BaseView {
         userModel.password = this.state.password;
 
         if (!userModel.login || !userModel.password) {
-            throw Error('invalid login or password');
+            throw Error(Errors.InvalidLoginOrPassword);
         }
 
         const response = await userModel.signIn();
@@ -35,6 +36,6 @@ export default class SignInViewModel extends BaseView {
             return response.ok;
         }
 
-        throw new Error('invalid login or password');
+        throw Error(Errors.InvalidLoginOrPassword);
     }
 }

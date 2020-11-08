@@ -1,8 +1,9 @@
+import BaseViewModel from './BaseViewModel';
+import Errors from '../consts/Errors';
 import UserModel from '../models/UserModel';
-import BaseView from './BaseView';
 
 /** Class that contains SignUp ViewModel */
-export default class SignUpViewModel extends BaseView {
+export default class SignUpViewModel extends BaseViewModel {
     /**
      * Represents SignUp ViewModel constructor
      */
@@ -27,13 +28,18 @@ export default class SignUpViewModel extends BaseView {
         const userModel = new UserModel();
 
         userModel.login = this.state.login;
-        userModel.name = this.state.name;
-        userModel.surname = this.state.surname;
+        if (!userModel.login) {
+            throw new Error(Errors.InvalidLogin);
+        }
 
-        if (!userModel.login ||
-            !userModel.name ||
-            !userModel.surname) {
-            throw new Error('invalid form data');
+        userModel.name = this.state.name;
+        if (!userModel.name) {
+            throw new Error(Errors.InvalidName);
+        }
+
+        userModel.surname = this.state.surname;
+        if (!userModel.surname) {
+            throw new Error(Errors.InvalidSurname);
         }
 
         let passwordRepeated = null;
@@ -42,10 +48,10 @@ export default class SignUpViewModel extends BaseView {
             passwordRepeated = userModel.password;
             userModel.password = this.state.password;
             if (!userModel.password || userModel.password !== passwordRepeated) {
-                throw new Error('invalid form data');
+                throw new Error(Errors.InvalidPasswordRepeated);
             }
         } else {
-            throw new Error('invalid form data');
+            throw new Error(Errors.InvalidPassword);
         }
 
         const response = await userModel.register();
@@ -53,6 +59,6 @@ export default class SignUpViewModel extends BaseView {
             return response.ok;
         }
 
-        throw new Error('already registered');
+        throw new Error(Errors.AlreadyRegistered);
     }
 }
