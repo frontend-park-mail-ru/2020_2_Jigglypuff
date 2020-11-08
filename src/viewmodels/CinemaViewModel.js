@@ -19,6 +19,7 @@ export default class CinemaViewModel extends BaseViewModel {
             'hallCount': '',
             'id': '',
             'name': '',
+            'pathToAvatar': '',
         };
         this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }

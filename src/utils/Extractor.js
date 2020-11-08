@@ -81,6 +81,7 @@ export default class Extractor {
         result.set('hallCount', data.hallCount);
         result.set('id', data.id);
         result.set('name', data.name);
+        result.set('pathToAvatar', data.pathToAvatar);
 
         return result;
     }

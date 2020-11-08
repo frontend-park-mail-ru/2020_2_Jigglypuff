@@ -31,6 +31,7 @@ export default class CinemaListViewModel extends BaseViewModel {
                 cinemaModel.hallCount = cinema['HallCount'];
                 cinemaModel.id = cinema['ID'];
                 cinemaModel.name = cinema['Name'];
+                cinemaModel.pathToAvatar = cinema['PathToAvatar'];
 
                 const extractedCinemaDataMap = Extractor.extractCinemaData(cinemaModel);
                 this.state.push({
@@ -39,6 +40,7 @@ export default class CinemaListViewModel extends BaseViewModel {
                     'hallCount': '',
                     'id': '',
                     'name': '',
+                    'pathToAvatar': '',
                 });
                 extractedCinemaDataMap.forEach((value, key) => {
                     this.state[this.state.length - 1][key] = value;
