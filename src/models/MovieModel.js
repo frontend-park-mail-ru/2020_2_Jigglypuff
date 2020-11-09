@@ -354,6 +354,7 @@ export default class MovieModel {
     async rate() {
         return await fetch(Routes.Host + Routes.RateMovie, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({'id': this._id, 'rating': this._personalRating}),
             headers: {
                 'Content-Type': 'application/json',
@@ -368,6 +369,7 @@ export default class MovieModel {
     async getMovie() {
         const response = await fetch(Routes.Host + Routes.MoviePage.replace(/:id/, this._id), {
             method: 'GET',
+            credentials: 'include',
         });
 
         if (response.ok) {
@@ -401,6 +403,7 @@ export default class MovieModel {
     static async getMovieList(limit = 10, page = 1) {
         return await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
+            credentials: 'include',
         });
     }
 
@@ -413,6 +416,7 @@ export default class MovieModel {
     static async getMovieActualList(limit = 10, page = 1) {
         return await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
+            credentials: 'include',
         });
     }
 }

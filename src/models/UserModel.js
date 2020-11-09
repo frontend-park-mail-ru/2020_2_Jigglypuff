@@ -140,6 +140,7 @@ export default class UserModel {
     async register() {
         return await fetch(Routes.Host + Routes.Register, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -159,6 +160,7 @@ export default class UserModel {
     async signIn() {
         return await fetch(Routes.Host + Routes.Login, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -190,6 +192,7 @@ export default class UserModel {
 
         return await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'PUT',
+            credentials: 'include',
             body: profileSettingsForm,
         });
     }
@@ -201,6 +204,7 @@ export default class UserModel {
     async get() {
         const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'GET',
+            credentials: 'include',
         });
 
         if (response.ok) {
@@ -221,6 +225,7 @@ export default class UserModel {
     async logout() {
         return await fetch(Routes.Host + Routes.Logout, {
             method: 'POST',
+            credentials: 'include',
         });
     }
 }
