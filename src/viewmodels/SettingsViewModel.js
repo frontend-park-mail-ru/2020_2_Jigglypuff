@@ -24,7 +24,7 @@ export default class SettingsViewModel extends BaseViewModel {
 
     /**
      * Change user info.
-     * @return {Promise<Error>|Promise<bool>}
+     * @return {Promise<Error>|Promise<boolean>}
      */
     async edit() {
         const responseGetProfile = await this.getProfile();
