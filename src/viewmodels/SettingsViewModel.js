@@ -51,7 +51,7 @@ export default class SettingsViewModel extends BaseViewModel {
         const response = await this._userModel.get();
 
         if (response.ok) {
-            const extractedProfileDataMap = Extractor.extractProfileDataFromModel(this._movieModel);
+            const extractedProfileDataMap = Extractor.extractProfileDataFromModel(this._userModel);
             extractedProfileDataMap.forEach((value, key) => {
                 this.state[key] = value;
             });
