@@ -4,23 +4,15 @@ import MovieModel from '../models/MovieModel';
 export default class Extractor {
     /**
      * Extract filled fields from Settings form.
-     * @param {Map} data
+     * @param {Object} data
      * @return {Map}
      */
     static extractFormData(data) {
         const result = new Map();
 
-        if (data.name) {
-            result['name'] = data.name;
-        }
-
-        if (data.surname) {
-            result['surname'] = data['state'].surname;
-        }
-
-        if (data.avatar) {
-            result['avatar'] = data.avatar;
-        }
+        result.set('name', data.name);
+        result.set('surname', data.surname);
+        result.set('avatar', data.avatar);
 
         return result;
     }
