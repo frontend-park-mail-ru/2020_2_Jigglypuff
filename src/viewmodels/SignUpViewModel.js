@@ -43,7 +43,7 @@ export default class SignUpViewModel extends BaseViewModel {
         }
 
         let passwordRepeated = null;
-        userModel.password = this.state.get(passwordRepeated);
+        userModel.password = this.state.passwordRepeated;
         if (userModel.password) {
             passwordRepeated = userModel.password;
             userModel.password = this.state.password;
