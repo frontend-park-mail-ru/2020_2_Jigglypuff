@@ -173,12 +173,10 @@ export default class UserModel {
      */
     _createFormData() {
         const formData = new FormData();
-        const data = {
-            'name': this._name,
-            'surname': this._surname,
-            'avatar': this._avatar,
-        };
-        formData.append('data', JSON.stringify(data));
+
+        formData.append('name', this._name);
+        formData.append('surname', this._surname);
+        formData.append('avatar', this._avatar);
 
         return formData;
     }
