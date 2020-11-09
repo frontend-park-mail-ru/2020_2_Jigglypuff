@@ -10,20 +10,16 @@ export default class Extractor {
     static extractFormData(data) {
         const result = new Map();
 
-        if (data['state'].login) {
-            result['login'] = data['state'].login;
+        if (data.name) {
+            result['name'] = data.name;
         }
 
-        if (data['state'].name) {
-            result['name'] = data['state'].name;
-        }
-
-        if (data['state'].surname) {
+        if (data.surname) {
             result['surname'] = data['state'].surname;
         }
 
-        if (data['state'].avatar) {
-            result['avatar'] = data['state'].avatar;
+        if (data.avatar) {
+            result['avatar'] = data.avatar;
         }
 
         return result;

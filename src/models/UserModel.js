@@ -177,8 +177,6 @@ export default class UserModel {
             'name': this._name,
             'surname': this._surname,
             'avatar': this._avatar,
-            'login': this._login,
-            'password': this._password,
         };
         formData.append('data', JSON.stringify(data));
 
