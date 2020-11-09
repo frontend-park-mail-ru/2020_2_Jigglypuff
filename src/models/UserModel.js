@@ -13,7 +13,7 @@ export default class UserModel {
         this._name = null;
         this._surname = null;
         this._avatar = null;
-        this._avatarPath = null;
+        this._pathToAvatar = null;
         this._isPremuim = null;
     }
 
@@ -53,8 +53,8 @@ export default class UserModel {
      * Get user avatar path.
      * @return {null|string}
      */
-    get avatarPath() {
-        return this._avatarPath;
+    get pathToAvatar() {
+        return this._pathToAvatar;
     }
 
     /**
@@ -129,8 +129,8 @@ export default class UserModel {
      * Set user path to avatar to "avatarPath" variable value if valid else.
      * @param {any} avatarPath
      */
-    set avatarPath(avatarPath) {
-        this._avatarPath = avatarPath.toString();
+    set pathToAvatar(avatarPath) {
+        this._pathToAvatar = avatarPath.toString();
     }
 
     /**
@@ -211,7 +211,8 @@ export default class UserModel {
             const data = await response.json();
             this._name = data['Name'];
             this._surname = data['Surname'];
-            this._avatarPath = data['AvatarPath'];
+            this._pathToAvatar = data['AvatarPath'];
+            this._login = data['UserCredentials']['login'];
         }
 
         return response;

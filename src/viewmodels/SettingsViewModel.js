@@ -17,20 +17,19 @@ export default class SettingsViewModel extends BaseViewModel {
             name: '',
             surname: '',
             avatar: '',
-            avatarPath: '',
+            pathToAvatar: '',
         };
         this.editCommand = {exec: () => this.edit()};
     }
 
     /**
      * Change user info.
-     * @return {Promise<Error>|Promise<Response>}
+     * @return {Promise<Error>|Promise<bool>}
      */
     async edit() {
-        const response = await this.getProfile();
+        const responseGetProfile = await this.getProfile();
 
-        const statusCode = Number(response.json().statusCode);
-        if (statusCode !== Number(response.status.HTTP_STATUS_OK)) {
+        if (!responseGetProfile.ok) {
             throw new Error(Errors.FailedToGetProfile);
         }
 
@@ -39,25 +38,27 @@ export default class SettingsViewModel extends BaseViewModel {
             this._userModel[key] = value;
         });
 
-        return await this._userModel.edit();
+        const responseEdit = await this._userModel.edit();
+
+        return responseEdit.ok;
     }
 
     /**
      * Get user info.
-     * @return {Promise<Response>}
+     * @return {Promise<Error>|Promise<Object>}
      */
     async getProfile() {
-        const response = this._userModel.get();
+        const response = await this._userModel.get();
 
-        const statusCode = Number(await response.json().statusCode);
+        if (response.ok) {
+            const extractedProfileDataMap = Extractor.extractProfileDataFromModel(this._movieModel);
+            extractedProfileDataMap.forEach((value, key) => {
+                this.state[key] = value;
+            });
 
-        if (statusCode === response.status.HTTP_STATUS_OK) {
-            this.state.login = this._userModel.login;
-            this.state.name = this._userModel.name;
-            this.state.surname = this._userModel.surname;
-            this.state.avatarPath = this._userModel.avatarPath;
+            return this.state;
         }
 
-        return await response.json();
+        throw new Error(Errors.NotAuthorised);
     }
 }

@@ -20,6 +20,22 @@ export default class Extractor {
     }
 
     /**
+     * Extract profile data from model to map.
+     * @param {UserModel} data
+     * @return {Map}
+     */
+    static extractProfileDataFromModel(data) {
+        const result = new Map();
+
+        result.set('login', data.login);
+        result.set('name', data.name);
+        result.set('surname', data.surname);
+        result.set('pathToAvatar', data.pathToAvatar);
+
+        return result;
+    }
+
+    /**
      * Extract movie data from json to model.
      * @param {JSON} data
      * @return {MovieModel}
