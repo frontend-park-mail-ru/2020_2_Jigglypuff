@@ -13,7 +13,7 @@ const Routes = {
     Register: '/auth/register/',
     Schedule: '/schedule/',
     Ticket: '/ticket/:id/',
-    TicketBuy: '/ticket/buy',
+    TicketBuy: '/ticket/buy/',
     TicketList: '/ticket/',
     TicketScheduleList: '/ticket/schedule/:id/',
 };
