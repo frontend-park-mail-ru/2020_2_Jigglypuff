@@ -27,12 +27,6 @@ export default class SettingsViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<boolean>}
      */
     async edit() {
-        const responseGetProfile = await this.getProfile();
-
-        if (!responseGetProfile.ok) {
-            throw new Error(Errors.FailedToGetProfile);
-        }
-
         const extractedDataMap = Extractor.extractFormData(this.state);
         extractedDataMap.forEach((value, key) => {
             this._userModel[key] = value;
@@ -59,6 +53,6 @@ export default class SettingsViewModel extends BaseViewModel {
             return this.state;
         }
 
-        throw new Error(Errors.NotAuthorised);
+        throw new Error(Errors.FailedToGetProfile);
     }
 }
