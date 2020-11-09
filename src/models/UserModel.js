@@ -212,7 +212,7 @@ export default class UserModel {
             this._name = data['Name'];
             this._surname = data['Surname'];
             this._pathToAvatar = data['AvatarPath'];
-            this._login = data['UserCredentials']['login'];
+            this._login = data['UserCredentials']['Login'];
         }
 
         return response;
