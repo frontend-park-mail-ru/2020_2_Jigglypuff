@@ -144,6 +144,7 @@ export default class TicketModel {
             this._placeField.place = data['PlaceField']['Place'];
             this._placeField.row = data['PlaceField']['Row'];
             this._scheduleModel.cinemaID = data['Schedule']['CinemaID'];
+            this._scheduleModel.cinemaID = data['Schedule']['Cost'];
             this._scheduleModel.hallID = data['Schedule']['HallID'];
             this._scheduleModel.id = data['Schedule']['ID'];
             this._scheduleModel.movieID = data['Schedule']['MovieID'];
