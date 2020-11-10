@@ -105,6 +105,21 @@ export default class Extractor {
     }
 
     /**
+     * Extract filled fields from hallData form.
+     * @param {HallModel} data
+     * @return {Map}
+     */
+    static extractHallData(data) {
+        const result = new Map();
+
+        result.set('id', data.id);
+        result.set('placeAmount', data.placeAmount);
+        result.set('placeConfig', data.placeConfig);
+
+        return result;
+    }
+
+    /**
      * Extract schedule from json to map.
      * @param {JSON} data
      * @return {Map}
