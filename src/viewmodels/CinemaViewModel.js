@@ -63,9 +63,9 @@ export default class CinemaViewModel extends BaseViewModel {
         if (response.ok) {
             const extractedHallDataMap = Extractor.extractHallData(this._hallModel);
             extractedHallDataMap.forEach((value, key) => {
-                this.state[key] = value;
+                this.stateHall[key] = value;
             });
-            return this.state;
+            return this.stateHall;
         }
 
         throw new Error(Errors.FailedToGetHall);
