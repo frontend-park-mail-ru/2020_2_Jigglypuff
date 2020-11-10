@@ -1,5 +1,6 @@
 import BaseViewModel from './BaseViewModel';
 import CinemaModel from '../models/CinemaModel';
+import HallModel from '../models/HallModel';
 import Extractor from '../utils/Extractor';
 import Errors from '../consts/Errors';
 
@@ -12,15 +13,21 @@ export default class CinemaViewModel extends BaseViewModel {
     constructor() {
         super();
 
-        this._cinemaModel = new CinemaModel.CinemaModel();
+        this._cinemaModel = new CinemaModel();
+        this._hallModel = new HallModel();
         this.state = {
-            'address': '',
-            'authorID': '',
-            'hallCount': '',
-            'id': '',
-            'name': '',
-            'pathToAvatar': '',
+            address: '',
+            authorID: '',
+            hallCount: '',
+            id: '',
+            name: '',
+            pathToAvatar: '',
         };
+        this.stateHall = {
+            id: '',
+            placeAmount: '',
+            placeConfig: '',
+        }
         this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }
 
@@ -42,5 +49,25 @@ export default class CinemaViewModel extends BaseViewModel {
         }
 
         throw new Error(Errors.FailedToGetCinema);
+    }
+
+    /**
+     * Get hall info.
+     * @param {int} id - hall id
+     * @return {Promise<Error>|Promise<Object>}
+     */
+    async getHall(id) {
+        this._hallModel.id = Number(id);
+        const response = await this._hallModel.getHall();
+
+        if (response.ok) {
+            const extractedHallDataMap = Extractor.extractHallData(this._hallModel);
+            extractedHallDataMap.forEach((value, key) => {
+                this.state[key] = value;
+            });
+            return this.state;
+        }
+
+        throw new Error(Errors.FailedToGetHall);
     }
 }
