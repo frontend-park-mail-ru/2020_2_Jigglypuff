@@ -13,7 +13,7 @@ export default class UserModel {
         this._name = null;
         this._surname = null;
         this._avatar = null;
-        this._avatarPath = null;
+        this._pathToAvatar = null;
         this._isPremuim = null;
     }
 
@@ -53,8 +53,8 @@ export default class UserModel {
      * Get user avatar path.
      * @return {null|string}
      */
-    get avatarPath() {
-        return this._avatarPath;
+    get pathToAvatar() {
+        return this._pathToAvatar;
     }
 
     /**
@@ -129,8 +129,8 @@ export default class UserModel {
      * Set user path to avatar to "avatarPath" variable value if valid else.
      * @param {any} avatarPath
      */
-    set avatarPath(avatarPath) {
-        this._avatarPath = avatarPath.toString();
+    set pathToAvatar(avatarPath) {
+        this._pathToAvatar = avatarPath.toString();
     }
 
     /**
@@ -140,6 +140,7 @@ export default class UserModel {
     async register() {
         return await fetch(Routes.Host + Routes.Register, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -159,6 +160,7 @@ export default class UserModel {
     async signIn() {
         return await fetch(Routes.Host + Routes.Login, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -173,14 +175,10 @@ export default class UserModel {
      */
     _createFormData() {
         const formData = new FormData();
-        const data = {
-            'name': this._name,
-            'surname': this._surname,
-            'avatar': this._avatar,
-            'login': this._login,
-            'password': this._password,
-        };
-        formData.append('data', JSON.stringify(data));
+
+        formData.append('name', this._name);
+        formData.append('surname', this._surname);
+        formData.append('avatar', this._avatar);
 
         return formData;
     }
@@ -194,6 +192,7 @@ export default class UserModel {
 
         return await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'PUT',
+            credentials: 'include',
             body: profileSettingsForm,
         });
     }
@@ -205,13 +204,15 @@ export default class UserModel {
     async get() {
         const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'GET',
+            credentials: 'include',
         });
 
         if (response.ok) {
             const data = await response.json();
             this._name = data['Name'];
             this._surname = data['Surname'];
-            this._avatarPath = data['AvatarPath'];
+            this._pathToAvatar = data['AvatarPath'];
+            this._login = data['UserCredentials']['Login'];
         }
 
         return response;
@@ -224,6 +225,7 @@ export default class UserModel {
     async logout() {
         return await fetch(Routes.Host + Routes.Logout, {
             method: 'POST',
+            credentials: 'include',
         });
     }
 }

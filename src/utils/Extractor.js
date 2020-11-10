@@ -4,17 +4,31 @@ import MovieModel from '../models/MovieModel';
 export default class Extractor {
     /**
      * Extract filled fields from Settings form.
-     * @param {Map} data
+     * @param {Object} data
      * @return {Map}
      */
     static extractFormData(data) {
         const result = new Map();
 
-        result['login'] = data['state'].login;
-        result['password'] = data['state'].password;
-        result['name'] = data['state'].name;
-        result['surname'] = data['state'].surname;
-        result['avatar'] = data['state'].avatar;
+        result.set('name', data.name);
+        result.set('surname', data.surname);
+        result.set('avatar', data.avatar);
+
+        return result;
+    }
+
+    /**
+     * Extract profile data from model to map.
+     * @param {UserModel} data
+     * @return {Map}
+     */
+    static extractProfileDataFromModel(data) {
+        const result = new Map();
+
+        result.set('login', data.login);
+        result.set('name', data.name);
+        result.set('surname', data.surname);
+        result.set('pathToAvatar', data.pathToAvatar);
 
         return result;
     }
