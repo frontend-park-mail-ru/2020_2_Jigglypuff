@@ -99,8 +99,8 @@ export default class HallViewModel {
             }
             this.statePlaces[place.Row - 1].push({
                 isOccupied: false,
-                seat: place.Place
-            })
+                seat: place.Place,
+            });
         });
 
         const occupiedPlacesArray = await this.getOccupiedPlaces(this.state.ticketID);
