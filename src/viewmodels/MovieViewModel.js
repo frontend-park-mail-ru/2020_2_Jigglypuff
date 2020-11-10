@@ -103,7 +103,7 @@ export default class MovieViewModel extends BaseViewModel {
     async getSchedule(movieID, cinemaID, premierTime) {
         this._scheduleModel.movieID = Number(movieID);
         this._scheduleModel.cinemaID = Number(cinemaID);
-        this._scheduleModel.premierTime = Number(premierTime);
+        this._scheduleModel.premierTime = premierTime;
 
         const response = await this._scheduleModel.getSchedule(movieID, cinemaID, premierTime);
 
