@@ -8,6 +8,7 @@ export default class ScheduleModel {
      */
     constructor() {
         this._cinemaID = null;
+        this._cost = null;
         this._hallID = null;
         this._id = null;
         this._movieID = null;
@@ -20,6 +21,15 @@ export default class ScheduleModel {
      */
     get cinemaID() {
         return this._cinemaID;
+    }
+
+
+    /**
+     * Get ticket cost.
+     * @return {null|Number}
+     */
+    get cost() {
+        return this._cost;
     }
 
     /**
@@ -63,6 +73,18 @@ export default class ScheduleModel {
             this._cinemaID = Number(cinemaID);
         } else {
             this._cinemaID = null;
+        }
+    }
+
+    /**
+     * Set ticket cost to "cost" variable value if valid else, null.
+     * @param {any} cost
+     */
+    set cost(cost) {
+        if (Validator.validateUINT(cost)) {
+            this._cost = Number(cost);
+        } else {
+            this._cost = null;
         }
     }
 

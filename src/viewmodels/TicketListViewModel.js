@@ -9,9 +9,7 @@ export default class TicketViewModel {
      */
     constructor() {
         this.state = [];
-        this.stateSchedule = [];
         this.getTicketListCommand = {exec: () => this.getTicketList()};
-        this.getScheduleHallTicketListCommand = {exec: () => this.getScheduleHallTicketList()};
     }
 
     /**
@@ -30,6 +28,7 @@ export default class TicketViewModel {
             },
             schedule: {
                 cinemaID: '',
+                cost: '',
                 hallID: '',
                 id: '',
                 movieID: '',
@@ -41,22 +40,6 @@ export default class TicketViewModel {
             this.state[this.state.length - 1][key] = value;
         });
     }
-
-    /**
-     * Add ticket to state array.
-     * @param {JSON} ticket
-     */
-    _addSchedule(ticket) {
-        const extractedScheduleDataMap = Extractor.extractTicketScheduleFromJSON(ticket);
-        this.state.push({
-            place: '',
-            row: '',
-        });
-        extractedScheduleDataMap.forEach((value, key) => {
-            this.stateSchedule[this.stateSchedule.length - 1][key] = value;
-        });
-    }
-
 
     /**
      * Get ticket list.
@@ -79,28 +62,5 @@ export default class TicketViewModel {
         }
 
         throw new Error(Errors.FailedToGetTicketList);
-    }
-
-    /**
-     * Get schedule hall ticket list.
-     * @return {Promise<Error>|Promise<Object>}
-     */
-    async getScheduleHallTicketList() {
-        const ticketModel = new TicketModel();
-        const response = await ticketModel.getScheduleHallTicketList();
-
-        if (response.ok) {
-            const ticketScheduleList = await response.json();
-            for (const ticketSchedule of ticketScheduleList) {
-                this._addSchedule(ticketSchedule);
-            }
-            if (!this.state.length) {
-                throw new Error(Errors.ListIsEmpty);
-            }
-
-            return this.state;
-        }
-
-        throw new Error(Errors.FailedToGetTicketScheduleList);
     }
 }

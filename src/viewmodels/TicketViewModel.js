@@ -18,6 +18,7 @@ export default class TicketViewModel {
             },
             schedule: {
                 cinemaID: '',
+                cost: '',
                 hallID: '',
                 id: '',
                 movieID: '',
