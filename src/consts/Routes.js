@@ -3,6 +3,7 @@ const Routes = {
 
     CinemaList: '/cinema/',
     CinemaPage: '/cinema/:id/',
+    Hall: '/hall/:id/',
     Login: '/auth/login/',
     Logout: '/auth/logout/',
     Main: '/',
