@@ -128,6 +128,7 @@ export default class Extractor {
         const result = new Map();
 
         result.set('cinemaID', data['CinemaID']);
+        result.set('cost', data['Cost']);
         result.set('hallID', data['HallID']);
         result.set('id', data['ID']);
         result.set('movieID', data['MovieID']);
@@ -152,6 +153,7 @@ export default class Extractor {
         });
         result.set('schedule', {
             'cinemaID': data.scheduleModel.cinemaID,
+            'cost': data.scheduleModel.cost,
             'hallID': data.scheduleModel.hallID,
             'id': data.scheduleModel.id,
             'movieID': data.scheduleModel.movieID,
@@ -178,6 +180,7 @@ export default class Extractor {
         });
         result.set('schedule', {
             'cinemaID': data['Schedule']['CinemaID'],
+            'cost': data['Schedule']['Cost'],
             'hallID': data['Schedule']['HallID'],
             'id': data['Schedule']['ID'],
             'movieID': data['Schedule']['MovieID'],

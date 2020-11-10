@@ -46,14 +46,20 @@ export default class MovieViewModel extends BaseViewModel {
         const extractedScheduleMap = Extractor.extractScheduleFromJSON(scheduleElement);
         this.schedule.push({
             cinemaID: '',
+            cost: '',
             hallID: '',
             id: '',
             movieID: '',
             premierTime: '',
+            time: '',
         });
         extractedScheduleMap.forEach((value, key) => {
             this.schedule[this.schedule.length - 1][key] = value;
         });
+
+        this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time'].replace(/\d{4}-\d{2}-\d{2}T/, '');
+        this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time']
+            .replace(this.schedule[this.schedule.length - 1]['time'].replace(/\d{2}:\d{2}/, ''), '');
     }
 
     /**
@@ -104,7 +110,6 @@ export default class MovieViewModel extends BaseViewModel {
         if (response.ok) {
             const scheduleList = await response.json();
             for (const scheduleElement of scheduleList) {
-                console.log(scheduleElement);
                 this._addScheduleElement(scheduleElement);
             }
             if (!this.schedule.length) {

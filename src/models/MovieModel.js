@@ -324,10 +324,10 @@ export default class MovieModel {
      */
     set reviews(reviews) {
         if (Validator.validateText(reviews)) {
-            if (!reviews) {
+            if (!this._reviews) {
                 this._reviews = [];
             }
-            this._reviews.append(reviews.toString());
+            this._reviews.push(reviews.toString());
         }
     }
 
@@ -339,10 +339,10 @@ export default class MovieModel {
         const nameParts = actors.toString().split(' ');
         for (const part of nameParts) {
             if (Validator.validateName(part)) {
-                if (!actors) {
+                if (!this._actors) {
                     this._actors = [];
                 }
-                this._actors.append(actors.toString());
+                this._actors.push(actors.toString());
             }
         }
     }
