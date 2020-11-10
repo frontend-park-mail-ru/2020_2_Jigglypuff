@@ -27,7 +27,7 @@ export default class CinemaViewModel extends BaseViewModel {
             id: '',
             placeAmount: '',
             placeConfig: '',
-        }
+        };
         this.getCinemaCommand = {exec: (id) => this.getCinema(id)};
     }
 
