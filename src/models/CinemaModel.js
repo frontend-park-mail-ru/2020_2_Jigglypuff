@@ -140,7 +140,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     static async getCinemaList(limit = 10, page = 1) {
-        const response = await fetch(Routes.Host + Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
+        const response = await fetch(Routes.HostAPI + Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
@@ -161,7 +161,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     async getCinema() {
-        const response = await fetch(Routes.Host + Routes.CinemaPage.replace(/:id/, this._id), {
+        const response = await fetch(Routes.HostAPI + Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });
