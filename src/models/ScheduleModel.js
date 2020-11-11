@@ -1,5 +1,7 @@
 import Validator from '../utils/Validator';
 import Routes from '../consts/Routes';
+import http from 'http';
+import CSRF from '../utils/CSRF';
 
 /** Class that contains Schedule model */
 export default class ScheduleModel {
@@ -140,9 +142,19 @@ export default class ScheduleModel {
      * @return {Promise<Response>}
      */
     async getSchedule(movieID = 0, cinemaID = 0, premierTime='2020-11-10') {
-        return await fetch(Routes.Host + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
+        const response = await fetch(Routes.Host + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
             method: 'GET',
             credentials: 'include',
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.getSchedule(movieID, cinemaID, premierTime);
+            }
+        });
+
+        return response;
     }
 }
