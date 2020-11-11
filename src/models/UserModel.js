@@ -255,6 +255,9 @@ export default class UserModel {
         });
 
         response.catch((err) => {
+            console.log("IM HERE");
+            console.log(err);
+            console.log(http.STATUS_CODES.FORBIDDEN);
             if (err === http.STATUS_CODES.FORBIDDEN) {
                 CSRF.getCSRF();
                 response.resolve();
