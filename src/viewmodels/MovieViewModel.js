@@ -57,7 +57,7 @@ export default class MovieViewModel extends BaseViewModel {
             this.schedule[this.schedule.length - 1][key] = value;
         });
 
-        this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time'].replace(/\d{4}-\d{2}-\d{2}T/, '');
+        this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['premierTime'].replace(/\d{4}-\d{2}-\d{2}T/, '');
         this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time']
             .replace(this.schedule[this.schedule.length - 1]['time'].replace(/\d{2}:\d{2}/, ''), '');
     }
@@ -103,7 +103,7 @@ export default class MovieViewModel extends BaseViewModel {
     async getSchedule(movieID, cinemaID, premierTime) {
         this._scheduleModel.movieID = Number(movieID);
         this._scheduleModel.cinemaID = Number(cinemaID);
-        this._scheduleModel.premierTime = Number(premierTime);
+        this._scheduleModel.premierTime = premierTime;
 
         const response = await this._scheduleModel.getSchedule(movieID, cinemaID, premierTime);
 

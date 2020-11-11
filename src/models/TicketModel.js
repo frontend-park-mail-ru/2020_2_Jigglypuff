@@ -160,14 +160,17 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async buyTicket() {
+        console.log(JSON.stringify({'login': this._login.toString(),
+            'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
+            'scheduleID': this._scheduleID}));
         return await fetch(Routes.Host + Routes.TicketBuy, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'hallID': this._hallID, 'login': this._login.toString(),
-                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
+            body: JSON.stringify({'login': this._login.toString(),
+                'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
                 'scheduleID': this._scheduleID}),
         });
     }
