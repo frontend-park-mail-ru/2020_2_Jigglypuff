@@ -118,11 +118,12 @@ export default class UserModel {
      * @param {any} avatar
      */
     set avatar(avatar) {
-        if (Checker.isImage(avatar)) {
+
+        // if (Checker.isImage(avatar)) {
             this._avatar = avatar;
-        } else {
-            this._avatar = null;
-        }
+        // } else {
+        //     this._avatar = null;
+        // }
     }
 
     /**
@@ -178,7 +179,12 @@ export default class UserModel {
 
         formData.append('name', this._name);
         formData.append('surname', this._surname);
-        formData.append('avatar', this._avatar);
+
+        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
+        console.log(this._avatar.name);
+        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
+
+        formData.append('avatar', this._avatar, this._avatar.name);
 
         return formData;
     }

@@ -17,12 +17,13 @@ class Router {
         this.routes = [];
 
         EventBus.on(Events.ChangePath, this.onChangePath.bind(this));
+        EventBus.on(Events.ScrollToBlock, this.onScrollToBlock.bind(this));
     }
 
     /**
      * Register route path
      * @param {String} path - route path.
-     * @param {view} view - view that handles path.
+     * @param {MovieView} view - view that handles path.
      *
      * @return {Router}
      * */
@@ -40,34 +41,41 @@ class Router {
      * */
     start() {
         this.application.addEventListener('click', (e) => {
-            const clickTarget = e.target;
+            let clickTarget = e.target;
 
-            if (clickTarget.matches('a')) {
+            if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button')) {
                 e.preventDefault();
 
-                const data = Object.assign({}, clickTarget.dataset);
-                data.id = clickTarget.id;
-
-                EventBus.emit(data.event, data);
-            } else if (clickTarget.matches('button')) {
-                e.preventDefault();
+                if (clickTarget.parentNode.matches('button')) {
+                    clickTarget = clickTarget.parentNode;
+                }
 
                 const data = Object.assign({}, clickTarget.dataset);
+                if (clickTarget.hasOwnProperty('id')) {
+                    data.id = clickTarget.id;
+                }
+                data.target = clickTarget;
 
                 EventBus.emit(data.event, data);
             }
         });
-        this.application.addEventListener('change', (e) => {
-            const changeTarget = e.target;
+        this.application.addEventListener('change', (evt) => {
+            const changeTarget = evt.target;
 
-            if (changeTarget.className === 'default-input') {
-                e.preventDefault();
 
-                EventBus.emit(changeTarget.dataset.event, e);
+            if (changeTarget.matches('input')) {
+                evt.preventDefault();
+
+                const data = Object.assign({}, changeTarget.dataset);
+                data.id = changeTarget.id;
+                data.value = changeTarget.value;
+                data.target = changeTarget;
+
+                EventBus.emit(data.event, data);
             }
         });
-        window.addEventListener('popstate', () => {
-            this.go(window.location.pathname);
+        window.addEventListener('popstate', (e) => {
+            this.go(window.location.pathname, window.history.state);
         });
 
         this.go(window.location.pathname);
@@ -76,27 +84,23 @@ class Router {
     /**
      * Go to route path
      * @param {String} path - route path.
+     * @param data
      * */
-    go(path) {
-        const routeData = this.getDataFromPath(path);
+    go(path, data = {}) {
+        const routeData = Object.assign({}, this.getDataFromPath(path), data);
+
+        console.log(routeData);
 
         if (this.currentView === routeData.view) {
             return;
         }
-        if (this.currentView) {
-            this.currentView.show();
-        }
-        this.currentView = routeData.view;
 
-        if (!this.currentView) {
-            path = Routes.Main;
-            this.currentView = this.getDataFromPath(path).view;
-        }
+        this.currentView = routeData.view;
 
         if (window.location.pathname !== path) {
             window.history.pushState(null, null, path);
         }
-        this.currentView.show();
+        this.currentView.show(routeData);
     }
 
     /**
@@ -141,7 +145,13 @@ class Router {
      * @param {Object} data - handler data.
      * */
     onChangePath(data) {
-        this.go(data.path);
+        this.go(data.path, data);
+    }
+
+    onScrollToBlock(data) {
+        let target = document.getElementById(data.id);
+        document.body.scrollTo(target);
+        document.body.animate({scrollTop: data.offset}, 1500);
     }
 }
 

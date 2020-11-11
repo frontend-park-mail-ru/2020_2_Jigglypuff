@@ -166,8 +166,8 @@ export default class TicketModel {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({'hallID': this._hallID, 'login': this._login.toString(),
-                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
+            body: JSON.stringify({'login': this._login.toString(),
+                'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
                 'scheduleID': this._scheduleID}),
         });
     }

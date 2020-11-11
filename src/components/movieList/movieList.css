@@ -1,0 +1,14 @@
+.movie-list {
+    width: var(--main-page-width);
+    margin: 5rem auto 0;
+}
+
+.movie-list__content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-list__header {
+    font-size: 2rem;
+    font-weight: bold;
+}
