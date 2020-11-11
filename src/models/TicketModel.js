@@ -207,19 +207,9 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getScheduleHallTicketList() {
-        const response = await fetch(Routes.HostAPI + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
+        return await fetch(Routes.HostAPI + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
             method: 'GET',
             credentials: 'include',
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getScheduleHallTicketList();
-            }
-        });
-
-        return response;
     }
 }

@@ -71,14 +71,6 @@ export default class HallModel {
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getHall();
-            }
-        });
-
         if (response.ok) {
             const data = await response.json();
             this._id = data['ID'];

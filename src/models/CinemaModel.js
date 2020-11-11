@@ -140,20 +140,10 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     static async getCinemaList(limit = 10, page = 1) {
-        const response = await fetch(Routes.HostAPI + Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.HostAPI + Routes.CinemaList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getCinemaList();
-            }
-        });
-
-        return response;
     }
 
     /**
@@ -164,14 +154,6 @@ export default class CinemaModel {
         const response = await fetch(Routes.HostAPI + Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
-        });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getCinema();
-            }
         });
 
         if (response.ok) {
