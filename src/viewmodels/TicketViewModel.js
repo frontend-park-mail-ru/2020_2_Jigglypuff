@@ -37,7 +37,6 @@ export default class TicketViewModel {
     async buyTicket() {
         const ticketModel = new TicketModel();
 
-        ticketModel.hallID = this.state.hallID;
         ticketModel.login = this.state.login;
         ticketModel.placeField.place = this.state.placeField.place;
         ticketModel.placeField.row = this.state.placeField.row;
