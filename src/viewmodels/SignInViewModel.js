@@ -35,7 +35,7 @@ export default class SignInViewModel extends BaseViewModel {
         const response = await userModel.signIn();
         if (response.ok) {
             const responseCSRF = await CSRF.getCSRF();
-            return response.ok & responseCSRF;
+            return response.ok & responseCSRF.ok;
         }
 
         throw Error(Errors.InvalidLoginOrPassword);
