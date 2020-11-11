@@ -1,0 +1,35 @@
+<div class="movie-card">
+<!--    <div class="movie-card__poster">-->
+        <img class="movie-card__poster_img" src="{{ pathToAvatar }}" alt="">
+<!--    </div>-->
+
+    <div class="movie-card__description">
+        <a href="#" class="movie-card__description_title">
+            {{ name }}
+        </a>
+        <div class="movie-card__description_specification">
+            <span class="description_specification__info">
+                {{ duration }} мин
+            </span>
+            <span class="description_specification__info">
+                {{ genre }}
+            </span>
+        </div>
+        <div class="movie-card__description_schedule">
+            <span class="movie-card__description_schedule-title">
+                Сегодня
+            </span>
+            <hr class="movie-card__description_schedule-line">
+            <div class="movie-card__description_schedule-block">
+                {{#each ScheduleButtons }}
+                    {{{ this }}}
+                {{/each}}
+            </div>
+            <hr class="movie-card__description_schedule-line">
+
+            <div class="movie-card__description_schedule-button">
+                {{{ StandardButton }}}
+            </div>
+        </div>
+    </div>
+</div>

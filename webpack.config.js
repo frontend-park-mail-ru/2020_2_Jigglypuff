@@ -4,11 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: [
-        "core-js/modules/es6.promise",
-        "core-js/modules/es6.array.iterator",
-        path.resolve(__dirname, 'src/index.js'),
-    ],
+    entry: path.resolve(__dirname, 'src/index.js'),
     module: {
         rules: [
             {test: /\.css$/, use: ['style-loader', 'css-loader']},

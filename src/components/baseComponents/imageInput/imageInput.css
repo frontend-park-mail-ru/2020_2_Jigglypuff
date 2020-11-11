@@ -4,17 +4,16 @@
     border: 2px #5C5858 solid;
     border-radius: .4em;
     color: white;
-    padding: 5px 0 0 5px;
+    padding: 6px 0 6px 8px;
     align-items: center;
     margin-right: 10px;
-
 }
 
 .image-input__text {
     font-family: inherit;
-    font-weight: normal;
+    font-weight: inherit;
     font-size: 1em;
-    color: #5C5858;
+    color: rgb(118, 118, 118);
     cursor: pointer;
 }
 
@@ -39,8 +38,8 @@
     border: 3px solid #880000;
     border-radius: 10px;
     object-fit: cover;
-    height: 3.6em;
-    width: 3.6em;
+    height: 3.9em;
+    width: 3.9em;
 }
 
 .label__text {

@@ -1,0 +1,32 @@
+<div class="hall-layout">
+    <div class="hall-layout__header-name">{{ name }}</div>
+    <div class="hall-layout__header">
+        <div>
+            Кинотеатр:
+            <span class="hall-layout__header-cinema">{{ cinema }}</span>
+        </div>
+        <div>
+            Дата:
+            <span class="hall-layout__header-date">{{ date }}</span>
+        </div>
+    </div>
+
+    <div class="hall-layout__hall">
+        {{#each hallLayout }}
+            <div class="hall-layout__row">
+                <div class="hall-layout__row-number">
+                    Ряд {{ rowNumber }}
+                </div>
+                {{#each this.row }}
+                    <div class="hall-layout__row-seat">
+                        {{{ this }}}
+                    </div>
+                {{/each}}
+                <div class="hall-layout__row-number">
+                    Ряд {{ rowNumber }}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    {{{ StandardButton }}}
+</div>

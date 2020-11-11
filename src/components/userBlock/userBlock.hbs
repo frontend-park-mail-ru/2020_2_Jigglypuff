@@ -1,0 +1,11 @@
+{{#if isAuthorized }}
+    <a id="profile" class="userblock__item" data-event="changePath" href="#" data-path="/profile/">{{ name }} {{ surname }}</a>
+    <div class="userblock__item">
+        <a href="/profile/" data-event="changePath" data-path="/profile/"><img class="userblock__avatar {{#if isPremium }} userblock__avatar_premium {{else}} userblock__avatar_regular {{/if}}" src="{{ pathToAvatar }}" alt=""/></a>
+    </div>
+{{else}}
+    <div class="userblock__item">
+        {{{ StandardButton }}}
+    </div>
+    <a id="register" class="userblock__item" data-event="changePath" href="#" data-path="/auth/register/">Регистрация</a>
+{{/if}}
