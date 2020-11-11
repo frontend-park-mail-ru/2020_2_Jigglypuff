@@ -421,20 +421,10 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieList(limit = 10, page = 1) {
-        const response = await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getMovieList(limit, page);
-            }
-        });
-
-        return response;
     }
 
     /**
@@ -444,19 +434,9 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieActualList(limit = 10, page = 1) {
-        const response = await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getMovieActualList();
-            }
-        });
-
-        return response;
     }
 }

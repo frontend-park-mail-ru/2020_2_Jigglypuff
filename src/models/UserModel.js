@@ -180,6 +180,8 @@ export default class UserModel {
             body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
         });
 
+        await console.log("IM HERE");
+        response.then((res) => console.log("THIS IS RESPONSE", res));
         response.catch((err) => {
             console.log("ERR IS ", err);
             console.log("STATUS CODE IS ", http.STATUS_CODES.FORBIDDEN);
