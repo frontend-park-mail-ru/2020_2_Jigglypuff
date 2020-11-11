@@ -181,6 +181,8 @@ export default class UserModel {
         });
 
         response.catch((err) => {
+            console.log("ERR IS ", err);
+            console.log("STATUS CODE IS ", http.STATUS_CODES.FORBIDDEN);
             if (err === http.STATUS_CODES.FORBIDDEN) {
                 CSRF.getCSRF();
                 response.resolve();
