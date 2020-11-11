@@ -28,11 +28,9 @@ class HallView extends View {
         let session = await Getter.getSession(routeData.id);
         let hallContext = await this.getHallContext(session);
 
-
         let data = {
             hallLayout: (new HallLayout(hallContext).render()),
         };
-
 
         await super.show(this.template(data));
     }
@@ -42,7 +40,7 @@ class HallView extends View {
         let selectedPlaceDataset = document.getElementsByClassName('button-seat')[0].dataset;
 
         const ticketViewModel = new TicketViewModel();
-        ticketViewModel.state.login = Getter.getProfile();
+        ticketViewModel.state.login = Getter.getProfile().login;
         ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
         ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
         ticketViewModel.state.scheduleID = selectedPlaceDataset.sessionID;
@@ -63,9 +61,6 @@ class HallView extends View {
 
         EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
     }
-
-
-
 
     async getHallContext(session) {
 

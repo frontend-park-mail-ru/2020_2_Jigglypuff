@@ -23,7 +23,7 @@ class Router {
     /**
      * Register route path
      * @param {String} path - route path.
-     * @param {MovieView} view - view that handles path.
+     * @param {MainView} view - view that handles path.
      *
      * @return {Router}
      * */

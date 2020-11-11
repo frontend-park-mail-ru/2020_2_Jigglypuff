@@ -7,6 +7,7 @@ import Routes from '../../consts/Routes';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import MovieViewModel from '../../viewmodels/MovieViewModel';
+import Getter from '../../utils/Getter';
 
 class View {
     constructor(title = 'CinemaScope', context = {}) {
@@ -27,7 +28,7 @@ class View {
         if (templateDate.hasOwnProperty('isSlider')) {
             this.context.isSlider = true;
             sliderContext = await this.getSliderContext();
-            this.context.Slider = await (new Slider(sliderContext)).render();
+            this.context.Slider = (new Slider(sliderContext)).render();
         }
 
         this.context.Content = contentTemplate;
@@ -53,37 +54,24 @@ class View {
         });
 
         if (headerContext.userBlockContext.isAuthorized) {
-            await this.settingsViewModel.getProfile()
-                .then((response) => {
-                    headerContext.userBlockContext.pathToAvatar = Routes.Host + response.pathToAvatar;
-                    headerContext.userBlockContext.name = response.name;
-                    headerContext.userBlockContext.surname = response.surname;
-                })
-                .catch((err) => {
-                    console.log('\n\nVIEW:GET_HEADER_CONTEXT() :: ERR');
-                    console.log(err);
-                    console.log('VIEW:GET_HEADER_CONTEXT() :: ERR\n\n');
-                });
+            let userInfo = await Getter.getProfile();
+            if (userInfo) {
+                headerContext.userBlockContext.pathToAvatar = Routes.Host + userInfo.pathToAvatar;
+                headerContext.userBlockContext.name = userInfo.name;
+                headerContext.userBlockContext.surname = userInfo.surname;
+            }
         }
         return headerContext;
     }
 
     async getSliderContext() {
-        let sliderContext = {};
-        let responseMovieViewModel = (new MovieViewModel()).getMovieCommand.exec(3);
 
-        await responseMovieViewModel
-            .then((response) => {
-                sliderContext = response;
-            })
-            .catch((err) => {
-                console.log('\n\nSLIDER:GET_SLIDER_CONTEXT() :: ERR');
-                console.log(err);
-                console.log('SLIDER:GET_SLIDER_CONTEXT() :: ERR\n\n');
-            });
-
-        sliderContext.pathToAvatar = Routes.Host + sliderContext.pathToAvatar;
-        sliderContext.pathToSliderAvatar = Routes.Host + sliderContext.pathToSliderAvatar;
+        let movieID = 3;
+        let sliderContext = await Getter.getMovie(movieID);
+        if (sliderContext) {
+            sliderContext.pathToAvatar = Routes.Host + sliderContext.pathToAvatar;
+            sliderContext.pathToSliderAvatar = Routes.Host + sliderContext.pathToSliderAvatar;
+        }
 
         return sliderContext;
     }

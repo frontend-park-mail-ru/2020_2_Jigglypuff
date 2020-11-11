@@ -8,6 +8,7 @@ import SettingsViewModel from '../../viewmodels/SettingsViewModel';
 import Routes from '../../consts/Routes';
 import ProfileEditItems from '../../consts/ProfileEditItems';
 import TicketListViewModel from '../../viewmodels/TicketListViewModel';
+import Getter from '../../utils/Getter';
 
 class ProfileView extends View {
     constructor(title = 'CinemaScope', context = {}) {
@@ -41,27 +42,35 @@ class ProfileView extends View {
                 console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
             });
 
-        profileContext.profileEdit = ProfileEditItems;
+        profileContext.profileEdit = await this.getProfileEditContext();
 
-        await this.settingsViewModel.getProfile()
-            .then((response) => {
-                for (let i in profileContext.profileEdit) {
-                    if (response.hasOwnProperty(i) && i !== 'avatar') {
-                        profileContext.profileEdit[i].inputPlaceholder = response[i];
-                    }
-                }
-                profileContext.profileEdit.avatar.pathToAvatar = Routes.Host + response.pathToAvatar;
-            })
-            .catch(() => {
-                EventBus.emit(Events.ChangePath, {path: '/auth/login/'});
-            });
-
+        console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
+        console.log(profileContext);
         console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
+
 
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
         };
         super.show(this.template(data));
+    }
+
+    async getProfileEditContext() {
+        let profileEdit = ProfileEditItems;
+
+        let userProfile = await Getter.getProfile();
+        for (let i in profileEdit) {
+            if (userProfile.hasOwnProperty(i) && i !== 'avatar') {
+                profileEdit[i].inputPlaceholder = userProfile[i];
+            }
+        }
+        profileEdit.avatar.pathToAvatar = Routes.Host + userProfile.pathToAvatar;
+
+        return profileEdit;
+    }
+
+    async getProfileTicketContext() {
+
     }
 
     onLogout() {

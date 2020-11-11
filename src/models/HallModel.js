@@ -64,7 +64,7 @@ export default class HallModel {
      * @return {Promise<Response>}
      */
     async getHall() {
-        const response = await fetch(Routes.Host + Routes.Hall.replace(/:id/, this._id), {
+        const response = await fetch(Routes.HostAPI + Routes.Hall.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });

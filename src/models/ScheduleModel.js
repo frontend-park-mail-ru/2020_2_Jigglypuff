@@ -140,7 +140,7 @@ export default class ScheduleModel {
      * @return {Promise<Response>}
      */
     async getSchedule(movieID = 0, cinemaID = 0, premierTime='2020-11-10') {
-        return await fetch(Routes.Host + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
+        return await fetch(Routes.HostAPI + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
             method: 'GET',
             credentials: 'include',
         });
