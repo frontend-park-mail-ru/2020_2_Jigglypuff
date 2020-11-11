@@ -1,6 +1,7 @@
 import BaseViewModel from './BaseViewModel';
 import Errors from '../consts/Errors';
 import UserModel from '../models/UserModel';
+import CSRF from '../utils/CSRF';
 
 /** Class that contains SignIn ViewModel */
 export default class SignInViewModel extends BaseViewModel {
@@ -33,7 +34,8 @@ export default class SignInViewModel extends BaseViewModel {
 
         const response = await userModel.signIn();
         if (response.ok) {
-            return response.ok;
+            const responseCSRF = await CSRF.getCSRF();
+            return response.ok & responseCSRF;
         }
 
         throw Error(Errors.InvalidLoginOrPassword);

@@ -1,6 +1,8 @@
 import Checker from '../utils/Checker';
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
+import http from 'http';
+import CSRF from '../utils/CSRF';
 
 /** Class that contains User model */
 export default class UserModel {
@@ -190,11 +192,21 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        return await fetch(Routes.Host + Routes.ProfilePage, {
+        const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'PUT',
             credentials: 'include',
             body: profileSettingsForm,
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.edit();
+            }
+        });
+
+        return response;
     }
 
     /**
@@ -205,6 +217,14 @@ export default class UserModel {
         const response = await fetch(Routes.Host + Routes.ProfilePage, {
             method: 'GET',
             credentials: 'include',
+        });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.get();
+            }
         });
 
         if (response.ok) {

@@ -1,4 +1,5 @@
 import BaseViewModel from './BaseViewModel';
+import CSRF from '../utils/CSRF';
 import Errors from '../consts/Errors';
 import UserModel from '../models/UserModel';
 
@@ -56,9 +57,9 @@ export default class SignUpViewModel extends BaseViewModel {
 
         const response = await userModel.register();
         if (response.ok) {
-            return response.ok;
+            const responseCSRF = await CSRF.getCSRF();
+            return response.ok & responseCSRF;
         }
-
         throw new Error(Errors.AlreadyRegistered);
     }
 }
