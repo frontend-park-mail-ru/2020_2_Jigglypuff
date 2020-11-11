@@ -123,7 +123,7 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getTicketList() {
-        const response = await fetch(Routes.Host + Routes.TicketList, {
+        const response = await fetch(Routes.HostAPI + Routes.TicketList, {
             method: 'GET',
             credentials: 'include',
         });
@@ -180,7 +180,7 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async buyTicket() {
-        const response = await fetch(Routes.Host + Routes.TicketBuy, {
+        const response = await fetch(Routes.HostAPI + Routes.TicketBuy, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -207,7 +207,7 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getScheduleHallTicketList() {
-        const response = await fetch(Routes.Host + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
+        const response = await fetch(Routes.HostAPI + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
             method: 'GET',
             credentials: 'include',
         });

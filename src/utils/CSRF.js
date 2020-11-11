@@ -12,8 +12,16 @@ export default class CSRF {
             credentials: 'include',
         });
 
+        console.log("GET CSRF");
+        console.log("GET CSRF");
+        console.log("GET CSRF");
+        console.log("GET CSRF");
+        console.log("GET CSRF");
+        console.log("GET CSRF");
+        console.log("GET CSRF");
         if (response.ok) {
             const token = localStorage.getItem('token');
+            console.log("TOKEN", token);
             localStorage.set('X-CSRF-Token', token);
         }
         return response.ok;

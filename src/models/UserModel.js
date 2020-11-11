@@ -198,7 +198,7 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch(Routes.Host + Routes.ProfilePage, {
+        const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
             method: 'PUT',
             credentials: 'include',
             body: profileSettingsForm,
@@ -249,9 +249,19 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async logout() {
-        return await fetch(Routes.HostAPI + Routes.Logout, {
+        const response = await fetch(Routes.HostAPI + Routes.Logout, {
             method: 'POST',
             credentials: 'include',
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.logout();
+            }
+        });
+
+        return response;
     }
 }
