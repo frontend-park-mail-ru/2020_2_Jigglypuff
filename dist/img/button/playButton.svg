@@ -1,0 +1,11 @@
+/* Polygon 1 */
+
+        position: absolute;
+        width: 29px;
+        height: 31px;
+        left: 1320px;
+        top: 619px;
+
+        background: #000000;
+        border-radius: 2px;
+        transform: rotate(90deg);
