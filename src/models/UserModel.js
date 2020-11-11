@@ -141,7 +141,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        return await fetch(Routes.HostAPI + Routes.Register, {
+        const response = await fetch(Routes.HostAPI + Routes.Register, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -154,6 +154,16 @@ export default class UserModel {
                 'surname': this._surname.toString(),
             }),
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.register();
+            }
+        });
+
+        return response;
     }
 
     /**
@@ -161,7 +171,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        return await fetch(Routes.HostAPI + Routes.Login, {
+        const response = await fetch(Routes.HostAPI + Routes.Login, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -169,6 +179,16 @@ export default class UserModel {
             },
             body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.signIn();
+            }
+        });
+
+        return response;
     }
 
     /**
