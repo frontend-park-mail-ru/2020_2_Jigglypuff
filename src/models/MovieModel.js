@@ -1,5 +1,7 @@
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
+import http from 'http';
+import CSRF from '../utils/CSRF';
 
 /** Class that contains Movie model */
 export default class MovieModel {
@@ -352,7 +354,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async rate() {
-        return await fetch(Routes.HostAPI + Routes.RateMovie, {
+        const response = await fetch(Routes.Host + Routes.RateMovie, {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({'id': this._id, 'rating': this._personalRating}),
@@ -360,6 +362,16 @@ export default class MovieModel {
                 'Content-Type': 'application/json',
             },
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.getMovie();
+            }
+        });
+
+        return response;
     }
 
     /**
@@ -370,6 +382,14 @@ export default class MovieModel {
         const response = await fetch(Routes.HostAPI + Routes.MoviePage.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
+        });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.getMovie();
+            }
         });
 
         if (response.ok) {
@@ -401,10 +421,20 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieList(limit = 10, page = 1) {
-        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        const response = await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.getMovieList(limit, page);
+            }
+        });
+
+        return response;
     }
 
     /**
@@ -414,9 +444,19 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieActualList(limit = 10, page = 1) {
-        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        const response = await fetch(Routes.Host + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
         });
+
+        response.catch((err) => {
+            if (err === http.STATUS_CODES.FORBIDDEN) {
+                CSRF.getCSRF();
+                response.resolve();
+                this.getMovieActualList();
+            }
+        });
+
+        return response;
     }
 }

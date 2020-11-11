@@ -4,6 +4,7 @@ const Routes = {
 
     CinemaList: '/cinema/',
     CinemaPage: '/cinema/:id/',
+    CSRF: '/api/csrf/',
     Hall: '/hall/:id/',
     Login: '/auth/login/',
     Logout: '/auth/logout/',
