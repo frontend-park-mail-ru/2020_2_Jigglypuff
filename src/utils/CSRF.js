@@ -7,7 +7,7 @@ export default class CSRF {
      * @return {Promise<boolean>} true if got token without problems
      */
     static async getCSRF() {
-        const response = await fetch(Routes.Host + Routes.CSRF, {
+        const response = await fetch(Routes.HostAPI + Routes.CSRF, {
             method: 'GET',
             credentials: 'include',
         });
