@@ -1,0 +1,28 @@
+.button-seat {
+    background: var(--main-red-color);
+    padding: 8px 8px 11px;
+    width: 30px;
+    height: 35px;
+}
+.button-seat-selected {
+    background: #BC8110 !important;
+}
+
+.button-seat-occupied{
+    background: #9e9d9d !important;
+}
+
+.button-seat:hover {
+    background: #640000;
+}
+
+.button-seat__text {
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: bold;
+    font-size: 1em;
+    color: white;
+    align-items: center;
+}
+
+

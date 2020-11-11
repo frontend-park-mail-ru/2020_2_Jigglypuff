@@ -1,5 +1,6 @@
 const Routes = {
     Host: 'https://cinemascope.space',
+    HostAPI: 'https://cinemascope.space/api',
 
     CinemaList: '/cinema/',
     CinemaPage: '/cinema/:id/',
@@ -14,6 +15,7 @@ const Routes = {
     RateMovie: '/movie/rate/',
     Register: '/auth/register/',
     Schedule: '/schedule/',
+    ScheduleID: '/schedule/:id/',
     Ticket: '/ticket/:id/',
     TicketBuy: '/ticket/buy/',
     TicketList: '/ticket/',

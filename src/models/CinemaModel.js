@@ -161,7 +161,7 @@ export default class CinemaModel {
      * @return {Promise<Response>}
      */
     async getCinema() {
-        const response = await fetch(Routes.Host + Routes.CinemaPage.replace(/:id/, this._id), {
+        const response = await fetch(Routes.HostAPI + Routes.CinemaPage.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });

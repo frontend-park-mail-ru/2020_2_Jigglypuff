@@ -379,7 +379,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovie() {
-        const response = await fetch(Routes.Host + Routes.MoviePage.replace(/:id/, this._id), {
+        const response = await fetch(Routes.HostAPI + Routes.MoviePage.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });

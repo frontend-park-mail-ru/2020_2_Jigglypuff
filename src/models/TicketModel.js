@@ -144,7 +144,7 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getTicket() {
-        const response = await fetch(Routes.Host + Routes.Ticket.replace(/:id/, this._id), {
+        const response = await fetch(Routes.HostAPI + Routes.Ticket.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });
