@@ -147,6 +147,9 @@ export default class TicketModel {
         const response = await fetch(Routes.HostAPI + Routes.Ticket.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
 
         response.catch((err) => {
@@ -185,6 +188,7 @@ export default class TicketModel {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
             body: JSON.stringify({'login': this._login.toString(),
                 'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
