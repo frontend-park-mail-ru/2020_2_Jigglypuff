@@ -42,9 +42,9 @@ export default class SettingsViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<Object>}
      */
     async getProfile() {
-        const responseIsSuccess = await this._userModel.get();
+        const response = await this._userModel.get();
 
-        if (responseIsSuccess) {
+        if (response.ok) {
             const extractedProfileDataMap = Extractor.extractProfileDataFromModel(this._userModel);
             extractedProfileDataMap.forEach((value, key) => {
                 this.state[key] = value;

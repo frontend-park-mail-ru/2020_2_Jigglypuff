@@ -236,7 +236,7 @@ export default class UserModel {
             this._login = data['UserCredentials']['Login'];
         }
 
-        return response.ok;
+        return response;
     }
 
     /**
