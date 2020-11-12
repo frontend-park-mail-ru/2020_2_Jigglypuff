@@ -412,7 +412,7 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    static async getMovieList(limit = 10, page = 1) {
+    static async getMovieList(limit = 11, page = 1) {
         return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
@@ -425,7 +425,7 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    static async getMovieActualList(limit = 10, page = 1) {
+    static async getMovieActualList(limit = 11, page = 1) {
         return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
             method: 'GET',
             credentials: 'include',
