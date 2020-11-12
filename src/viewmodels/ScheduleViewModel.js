@@ -12,19 +12,23 @@ export default class ScheduleViewModel {
         this.state = {
             cinemaID: '',
             cost: '',
+            date: '',
             hallID: '',
             id: '',
             movieID: '',
             premierTime: '',
+            time: '',
         };
+
+        this.getSessionCommand = {exec: (id) => this.getSchedule(id)};
     }
 
     /**
      * Get schedule by id.
-     * @param {int} id - movie id
+     * @param {int} id - schedule id
      * @return {Promise<Error>|Promise<Object>}
      */
-    async getMovie(id) {
+    async getSchedule(id) {
         this._scheduleModel.id = Number(id);
         const response = await this._scheduleModel.getScheduleByID();
 
@@ -36,6 +40,13 @@ export default class ScheduleViewModel {
 
             return this.state;
         }
+
+        this.state.time = this.state.premierTime.replace(/\d{4}-\d{2}-\d{2}T/, '');
+        this.state.time = this.state.time.replace(this.state.time.replace(/\d{2}:\d{2}/, ''), '');
+
+        this.state.date = this.state.premierTime.slice(8, 10) + '.' +
+                           this.state.premierTime.slice(5, 7) + '.' +
+                           this.state.premierTime.slice(0, 4);
 
         throw new Error(Errors.FailedToGetSchedule);
     }
