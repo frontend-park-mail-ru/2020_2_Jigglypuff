@@ -368,7 +368,7 @@ export default class MovieModel {
             if (err === http.STATUS_CODES.FORBIDDEN) {
                 CSRF.getCSRF();
                 response.resolve();
-                this.getMovie();
+                this.rate();
             }
         });
 
