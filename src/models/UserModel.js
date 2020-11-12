@@ -179,6 +179,11 @@ export default class UserModel {
         const formData = new FormData();
 
         if (this._name) {
+            console.log("CHANGING NAME... ", this._name);
+            console.log("CHANGING NAME... ", this._name);
+            console.log("CHANGING NAME... ", this._name);
+            console.log("CHANGING NAME... ", this._name);
+            console.log("CHANGING NAME... ", this._name);
             formData.append('name', this._name);
         }
 
