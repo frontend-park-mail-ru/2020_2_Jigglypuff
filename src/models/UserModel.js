@@ -243,8 +243,12 @@ export default class UserModel {
         const response = await fetch(Routes.HostAPI + Routes.Logout, {
             method: 'POST',
             credentials: 'include',
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
 
+        console.log("IM HERE");
         response.catch((err) => {
             console.log("IM HERE");
             console.log(err);
