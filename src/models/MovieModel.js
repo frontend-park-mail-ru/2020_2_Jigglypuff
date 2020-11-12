@@ -360,6 +360,7 @@ export default class MovieModel {
             body: JSON.stringify({'id': this._id, 'rating': this._personalRating}),
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
         });
 
