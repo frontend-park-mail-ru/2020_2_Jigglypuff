@@ -1,4 +1,3 @@
-import Checker from '../utils/Checker';
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
 import http from 'http';
@@ -141,7 +140,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        const response = await fetch(Routes.HostAPI + Routes.Register, {
+        return await fetch(Routes.HostAPI + Routes.Register, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -154,16 +153,6 @@ export default class UserModel {
                 'surname': this._surname.toString(),
             }),
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.register();
-            }
-        });
-
-        return response;
     }
 
     /**
@@ -171,7 +160,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        const response = await fetch(Routes.HostAPI + Routes.Login, {
+        return await fetch(Routes.HostAPI + Routes.Login, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -179,20 +168,6 @@ export default class UserModel {
             },
             body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
         });
-
-        await console.log("IM HERE");
-        response.then((res) => console.log("THIS IS RESPONSE", res));
-        response.catch((err) => {
-            console.log("ERR IS ", err);
-            console.log("STATUS CODE IS ", http.STATUS_CODES.FORBIDDEN);
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.signIn();
-            }
-        });
-
-        return response;
     }
 
     /**
