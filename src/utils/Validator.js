@@ -38,7 +38,7 @@ export default class Validator {
      * @param {string} movieName
      */
     static validateMovieName(movieName) {
-        const regExp = /^[А-Яа-яA-Za-z\w\s.]{1,100}$/;
+        const regExp = /^[А-Яа-яA-Za-z\w\s.…]{1,100}$/;
         return regExp.test(String(movieName));
     }
 
