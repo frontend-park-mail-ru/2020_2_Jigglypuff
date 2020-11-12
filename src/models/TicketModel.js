@@ -128,13 +128,12 @@ export default class TicketModel {
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getTicketList();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.getTicketList();
             }
-        });
+        }
 
         return response;
     }
@@ -152,13 +151,12 @@ export default class TicketModel {
             },
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getTicket();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.getTicket();
             }
-        });
+        }
 
         if (response.ok) {
             const data = await response.json();
