@@ -92,6 +92,7 @@ class Router {
         console.log(routeData);
 
         if (this.currentView === routeData.view) {
+            this.currentView.show(routeData);
             return;
         }
 
