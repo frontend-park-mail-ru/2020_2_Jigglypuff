@@ -195,13 +195,12 @@ export default class TicketModel {
                 'scheduleID': this._scheduleID}),
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.buyTicket();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.buyTicket();
             }
-        });
+        }
 
         return response;
     }

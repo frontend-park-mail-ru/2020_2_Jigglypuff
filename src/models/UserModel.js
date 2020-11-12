@@ -236,6 +236,12 @@ export default class UserModel {
             this._login = data['UserCredentials']['Login'];
         }
 
+        if (response.status === 401) {
+            response.catch(() => {
+                response.resolve("NOT AUTH");
+            })
+        }
+
         return response;
     }
 
