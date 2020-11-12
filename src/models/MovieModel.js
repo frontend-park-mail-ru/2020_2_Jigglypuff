@@ -384,14 +384,6 @@ export default class MovieModel {
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getMovie();
-            }
-        });
-
         if (response.ok) {
             const data = await response.json();
             this._actors = data['Actors'];
