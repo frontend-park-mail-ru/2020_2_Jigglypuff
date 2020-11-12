@@ -13,7 +13,7 @@ export default class HallViewModel {
         this._ticketModel = new TicketModel();
         this.state = {
             hallID: '',
-            ticketID: '',
+            scheduleID: '',
         };
         this.stateHallStructure = {
             id: '',
@@ -23,7 +23,7 @@ export default class HallViewModel {
         this.stateOccupiedPlaces = [];
         this.statePlaces = [];
         this.getHallStructureCommand = {exec: (id) => this.getHallStructure(id)};
-        this.getOccupiedPlacesCommand = {exec: () => this.getOccupiedPlaces()};
+        this.getOccupiedPlacesCommand = {exec: (id) => this.getOccupiedPlaces(id)};
         this.getPlacesCommand = {exec: () => this.getPlaces()};
     }
 
@@ -69,7 +69,7 @@ export default class HallViewModel {
      * @return {Promise<Error>|Promise<Object>}
      */
     async getOccupiedPlaces(ticketID) {
-        this._ticketModel.scheduleID = Number(this.state.ticketID);
+        this._ticketModel.scheduleID = Number(this.state.scheduleID);
         const response = await this._ticketModel.getScheduleHallTicketList();
 
         if (response.ok) {
@@ -99,11 +99,12 @@ export default class HallViewModel {
             }
             this.statePlaces[place.Row - 1].push({
                 isOccupied: false,
-                seat: place.Place,
+                place: place.Place,
+                row: place.Row,
             });
         });
 
-        const occupiedPlacesArray = await this.getOccupiedPlaces(this.state.ticketID);
+        const occupiedPlacesArray = await this.getOccupiedPlaces(this.state.scheduleID);
         occupiedPlacesArray.forEach((occupiedPlace) => {
             this.statePlaces[occupiedPlace.row - 1][occupiedPlace.place - 1].isOccupied = true;
         });

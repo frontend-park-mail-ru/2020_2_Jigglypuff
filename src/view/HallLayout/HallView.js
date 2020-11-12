@@ -68,7 +68,7 @@ class HallView extends View {
 
         const hallViewModel = new HallViewModel();
         hallViewModel.state.hallID = session.hallID;
-        hallViewModel.state.ticketID = session.id;
+        hallViewModel.state.scheduleID = session.id;
 
         const responseHallViewModel = hallViewModel.getPlacesCommand.exec();
         hallContext.name = await Getter.getMovie(session.movieID).name;
