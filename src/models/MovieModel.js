@@ -365,7 +365,13 @@ export default class MovieModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            await console.log("STATUS IS:", response.status);
+            await console.log("STATUS IS:", response.status);
+            await console.log("STATUS IS:", response.status);
+            await console.log("STATUS IS:", response.status);
+            await console.log("STATUS IS:", response.status);
+            await console.log("STATUS IS:", response.status);
+            if (response.status === 403 || response.status === 400) {
                 await CSRF.getCSRF();
                 await this.rate();
             }
