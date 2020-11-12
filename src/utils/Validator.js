@@ -112,7 +112,7 @@ export default class Validator {
      */
     static validateMovieRatingUser(movieUserRating) {
         if (Number.isInteger(movieUserRating)) {
-            if ((movieUserRating >= 0) && (movieUserRating < 10)) {
+            if ((movieUserRating >= 0) && (movieUserRating < 11)) {
                 return true;
             }
         }
