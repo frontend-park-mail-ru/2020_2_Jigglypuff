@@ -207,7 +207,17 @@ export default class UserModel {
         });
 
         response.catch((err) => {
+            console.log("IM HERE");
+            console.log("IM HERE");
+            console.log("IM HERE");
+            console.log("IM HERE");
+            console.log("IM HERE");
             if (err === http.STATUS_CODES.FORBIDDEN) {
+                console.log("IM HERE");
+                console.log("IM HERE");
+                console.log("IM HERE");
+                console.log("IM HERE");
+                console.log("IM HERE");
                 CSRF.getCSRF();
                 response.resolve();
                 this.edit();
