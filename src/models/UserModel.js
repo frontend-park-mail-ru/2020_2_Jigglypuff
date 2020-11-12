@@ -122,7 +122,6 @@ export default class UserModel {
 
         // if (Checker.isImage(avatar)) {
             this._avatar = avatar;
-        // } else {
         //     this._avatar = null;
         // }
     }
@@ -179,21 +178,12 @@ export default class UserModel {
         const formData = new FormData();
 
         if (this._name) {
-            console.log("CHANGING NAME... ", this._name);
-            console.log("CHANGING NAME... ", this._name);
-            console.log("CHANGING NAME... ", this._name);
-            console.log("CHANGING NAME... ", this._name);
-            console.log("CHANGING NAME... ", this._name);
             formData.append('name', this._name);
         }
 
         if (this.surname) {
             formData.append('surname', this._surname);
         }
-
-        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
-        console.log(this._avatar.name);
-        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
 
         if (this._avatar) {
             formData.append('avatar', this._avatar, this._avatar.name);
