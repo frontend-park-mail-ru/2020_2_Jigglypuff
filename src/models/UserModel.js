@@ -226,8 +226,7 @@ export default class UserModel {
         const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
             method: 'GET',
             credentials: 'include',
-        })
-            .catch();
+        });
 
         if (response.ok) {
             const data = await response.json();
