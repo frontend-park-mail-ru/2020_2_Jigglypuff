@@ -195,7 +195,9 @@ export default class UserModel {
         console.log(this._avatar.name);
         console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
 
-        formData.append('avatar', this._avatar, this._avatar.name);
+        if (this._avatar) {
+            formData.append('avatar', this._avatar, this._avatar.name);
+        }
 
         return formData;
     }
@@ -266,14 +268,7 @@ export default class UserModel {
                 await this.logout();
             }
         }
-/*        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.logout();
-            }
-        });
-*/
+
         return response;
     }
 }
