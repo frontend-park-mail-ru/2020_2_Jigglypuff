@@ -206,23 +206,12 @@ export default class UserModel {
             },
         });
 
-        response.catch((err) => {
-            console.log("IM HERE");
-            console.log("IM HERE");
-            console.log("IM HERE");
-            console.log("IM HERE");
-            console.log("IM HERE");
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                console.log("IM HERE");
-                console.log("IM HERE");
-                console.log("IM HERE");
-                console.log("IM HERE");
-                console.log("IM HERE");
-                CSRF.getCSRF();
-                response.resolve();
-                this.edit();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.edit();
             }
-        });
+        }
 
         return response;
     }
@@ -261,14 +250,21 @@ export default class UserModel {
             },
         });
 
-        response.catch((err) => {
+        if (!response.ok) {
+            console.log("IM HERE");
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.edit();
+            }
+        }
+/*        response.catch((err) => {
             if (err === http.STATUS_CODES.FORBIDDEN) {
                 CSRF.getCSRF();
                 response.resolve();
                 this.logout();
             }
         });
-
+*/
         return response;
     }
 }
