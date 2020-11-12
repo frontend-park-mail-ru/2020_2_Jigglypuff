@@ -178,8 +178,13 @@ export default class UserModel {
     _createFormData() {
         const formData = new FormData();
 
-        formData.append('name', this._name);
-        formData.append('surname', this._surname);
+        if (this._name) {
+            formData.append('name', this._name);
+        }
+
+        if (this.surname) {
+            formData.append('surname', this._surname);
+        }
 
         console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
         console.log(this._avatar.name);
@@ -251,10 +256,9 @@ export default class UserModel {
         });
 
         if (!response.ok) {
-            console.log("IM HERE");
             if (response.status === 403) {
                 await CSRF.getCSRF();
-                await this.edit();
+                await this.logout();
             }
         }
 /*        response.catch((err) => {
