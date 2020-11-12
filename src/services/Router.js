@@ -43,14 +43,15 @@ class Router {
         this.application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
-            if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button')) {
+            if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
                 e.preventDefault();
 
-                if (clickTarget.parentNode.matches('button')) {
+                if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
                     clickTarget = clickTarget.parentNode;
                 }
 
                 const data = Object.assign({}, clickTarget.dataset);
+
                 if (clickTarget.hasOwnProperty('id')) {
                     data.id = clickTarget.id;
                 }
@@ -61,7 +62,6 @@ class Router {
         });
         this.application.addEventListener('change', (evt) => {
             const changeTarget = evt.target;
-
 
             if (changeTarget.matches('input')) {
                 evt.preventDefault();

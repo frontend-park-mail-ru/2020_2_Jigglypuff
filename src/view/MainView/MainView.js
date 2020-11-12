@@ -48,9 +48,6 @@ class MainView extends View {
 
             await responseMovieVM
                 .then((response) => {
-                    console.log('\n\nMAIN_VIEW:GET_MOVIE_LIST_CONTEXT()');
-                    console.log(response);
-                    console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT()\n\n');
 
                     movieListContext[i].scheduleContext = response;
                 })

@@ -364,13 +364,12 @@ export default class MovieModel {
             },
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.rate();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.rate();
             }
-        });
+        }
 
         return response;
     }

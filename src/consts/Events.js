@@ -13,6 +13,7 @@ const Events = {
     ProfileEditSubmit: 'profileEditSubmit',
     TicketSelect: 'ticketSelect',
     TicketsBuy: 'ticketsBuy',
+    MovieRate: 'movieRate',
 };
 
 

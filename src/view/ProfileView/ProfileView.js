@@ -31,23 +31,12 @@ class ProfileView extends View {
             profileTickets: {},
         };
 
-        let responseTicketList = this.ticketListViewModel.getTicketListCommand.exec();
-        await responseTicketList
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((err) => {
-                console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
-                console.log(err);
-                console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
-            });
-
         profileContext.profileEdit = await this.getProfileEditContext();
+        profileContext.profileTickets = await this.getProfileTicketContext();
 
         console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
         console.log(profileContext);
         console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
-
 
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
@@ -71,6 +60,38 @@ class ProfileView extends View {
 
     async getProfileTicketContext() {
 
+        let profileTicketContext = [];
+        let responseTicketList = this.ticketListViewModel.getTicketListCommand.exec();
+
+        let ticketList = [];
+        await responseTicketList
+            .then((response) => {
+                ticketList = response;
+            })
+            .catch((err) => {
+                console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
+                console.log(err);
+                console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
+            });
+
+        if (!ticketList) {
+            return profileTicketContext;
+        }
+
+        let ticket = {};
+        for (const value of ticketList) {
+            ticket.hall = value.schedule.hallID;
+            ticket.row = value.placeField.row;
+            ticket.place = value.placeField.place;
+            ticket.movie = await Getter.getMovie(value.schedule.movieID).name;
+            ticket.cinema = await Getter.getCinema(value.schedule.cinemaID).cinema;
+            ticket.date = value.schedule.date;
+            ticket.time = value.schedule.time;
+
+            profileTicketContext.push(ticket);
+        }
+
+        return profileTicketContext;
     }
 
     onLogout() {
@@ -81,7 +102,7 @@ class ProfileView extends View {
                 console.log('SUCCESS');
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
 
-                EventBus.emit(Events.ChangePath, {path: '/'});
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
 
@@ -89,7 +110,7 @@ class ProfileView extends View {
                 console.log(err);
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
 
-                EventBus.emit(Events.ChangePath, {path: '/'});
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
             });
     }
 
