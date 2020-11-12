@@ -43,7 +43,6 @@ class LoginView extends View {
             .then((response) => {
 
                 console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
-                console.log(response);
                 console.log('OK');
                 console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 

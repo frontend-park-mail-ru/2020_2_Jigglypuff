@@ -226,7 +226,8 @@ export default class UserModel {
         const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
             method: 'GET',
             credentials: 'include',
-        });
+        })
+            .catch();
 
         if (response.ok) {
             const data = await response.json();
@@ -234,13 +235,6 @@ export default class UserModel {
             this._surname = data['Surname'];
             this._pathToAvatar = data['AvatarPath'];
             this._login = data['UserCredentials']['Login'];
-        }
-
-        if (response.status === 401) {
-            response.then()
-            response.catch(() => {
-                response.resolve("NOT AUTH");
-            })
         }
 
         return response;

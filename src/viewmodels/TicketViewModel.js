@@ -38,9 +38,9 @@ export default class TicketViewModel {
         const ticketModel = new TicketModel();
 
         ticketModel.login = this.state.login;
-        ticketModel.placeField.place = this.state.placeField.place;
-        ticketModel.placeField.row = this.state.placeField.row;
-        ticketModel.scheduleID = this.state.scheduleID;
+        ticketModel.placeField.place = Number(this.state.placeField.place);
+        ticketModel.placeField.row = Number(this.state.placeField.row);
+        ticketModel.scheduleID = Number(this.state.scheduleID);
 
         return ticketModel.buyTicket();
     }

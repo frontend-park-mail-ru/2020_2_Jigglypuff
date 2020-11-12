@@ -20,21 +20,7 @@ export default class ProfileTickets extends Component {
     constructor(context = {}, parent = {}) {
         super(context, parent);
         this.template = template;
-        this.context.input = [];
 
-        for (let i in RegistrationItems) {
-            if (i === 'avatar') {
-                this.context.input.push((new ImageInput(RegistrationItems[i]).render()));
-                continue;
-            }
-            this.context.input.push((new TextInput(RegistrationItems[i])).render());
-        }
-
-
-        this.context.StandardButton = (new StandardButton({
-            buttonName: 'Редактировать',
-            event: Events.RegisterSubmit,
-        })).render();
     }
 
 }

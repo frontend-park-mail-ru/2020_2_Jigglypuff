@@ -26,7 +26,7 @@ export default class HallLayout extends Component {
 
         for (let i in this.context.hall) {
             let rowSeats = [];
-            let rowNum = this.context.hall[i][0];
+            let rowNum = this.context.hall[i][0].row;
             for (let j in this.context.hall[i]) {
                 rowSeats.push((new SeatButton({
                     buttonName: this.context.hall[i][j].place,
@@ -51,12 +51,24 @@ export default class HallLayout extends Component {
 
         let hallPlaces = document.getElementsByClassName('button-seat');
 
+
         for (let i in hallPlaces) {
+
+            if (hallPlaces.length - 1 === +i) {
+                break;
+            }
 
             let hallPlacesClassList = hallPlaces[i].classList;
             let hallPlacesDataset = hallPlaces[i].dataset;
 
             if (!hallPlacesClassList.contains('button-seat-occupied') && hallPlacesClassList.contains('button-seat-selected')) {
+                console.log(data);
+                console.log(hallPlacesDataset);
+
+
+                hallPlacesClassList.remove('button-seat-selected');
+
+            } else if (!hallPlacesClassList.contains('button-seat-selected')) {
                 if (data.place !== hallPlacesDataset.place || data.row !== hallPlacesDataset.row) {
                     hallPlacesClassList.remove('button-seat-selected');
                 } else {

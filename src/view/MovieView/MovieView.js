@@ -40,6 +40,8 @@ class MovieView extends View {
             return;
         }
 
+        console.log('123');
+
         let movieViewModel = new MovieViewModel();
         movieViewModel.state.personalRating = rating.value;
         movieViewModel.state.id = rating.dataset.movie;
