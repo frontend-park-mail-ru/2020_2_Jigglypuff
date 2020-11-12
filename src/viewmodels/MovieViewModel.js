@@ -47,6 +47,7 @@ export default class MovieViewModel extends BaseViewModel {
         this.schedule.push({
             cinemaID: '',
             cost: '',
+            data: '',
             hallID: '',
             id: '',
             movieID: '',
@@ -60,6 +61,10 @@ export default class MovieViewModel extends BaseViewModel {
         this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['premierTime'].replace(/\d{4}-\d{2}-\d{2}T/, '');
         this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time']
             .replace(this.schedule[this.schedule.length - 1]['time'].replace(/\d{2}:\d{2}/, ''), '');
+
+        this.schedule[this.schedule.length - 1]['date'] = this.schedule[this.schedule.length - 1]['premierTime'].slice(8, 10) + '.' +
+            this.schedule[this.schedule.length - 1]['premierTime'].slice(5, 7) + '.' +
+            this.schedule[this.schedule.length - 1]['premierTime'].slice(0, 4);
     }
 
     /**
