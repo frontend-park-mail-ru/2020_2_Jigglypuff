@@ -145,4 +145,27 @@ export default class ScheduleModel {
             credentials: 'include',
         });
     }
+
+    /**
+     * Get movie schedule.
+     * @return {Promise<Response>}
+     */
+    async getScheduleByID() {
+        const response = await fetch(Routes.HostAPI + Routes.ScheduleID.replace(/:id/, this._id), {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            this._cinemaID = data['CinemaID'];
+            this._cost = data['Cost'];
+            this._hallID = data['HallID'];
+            this._id = data['ID'];
+            this._movieID = data['MovieID'];
+            this._premierTime = data['PremierTime'];
+        }
+
+        return response;
+    }
 }

@@ -204,4 +204,22 @@ export default class Extractor {
 
         return result;
     }
+
+    /**
+     * Extract schedule data from model to map.
+     * @param {ScheduleModel} data
+     * @return {Map}
+     */
+    static extractScheduleDataFromModel(data) {
+        const result = new Map();
+
+        result.set('cinemaID', data.cinemaID);
+        result.set('cost', data.cost);
+        result.set('hallID', data.hallID);
+        result.set('id', data.id);
+        result.set('movieID', data.movieID);
+        result.set('premierTime', data.premierTime);
+
+        return result;
+    }
 }
