@@ -11,6 +11,12 @@ export default class BaseViewModel {
         const userModel = new UserModel();
         const response = await userModel.get();
 
+        response.catch((err) => {
+            if (err === 401) {
+                response.resolve();
+            }
+        });
+
         return response.ok;
     }
 
