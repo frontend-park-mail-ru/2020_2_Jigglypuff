@@ -360,16 +360,16 @@ export default class MovieModel {
             body: JSON.stringify({'id': this._id, 'rating': this._personalRating}),
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getMovie();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.rate();
             }
-        });
+        }
 
         return response;
     }
