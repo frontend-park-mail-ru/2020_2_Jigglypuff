@@ -4,7 +4,7 @@ import Routes from '../consts/Routes';
 export default class CSRF {
     /**
      * Get CSRF token.
-     * @return {Promise<boolean>} true if got token without problems
+     * @return {Promise<Response>} true if got token without problems
      */
     static async getCSRF() {
         const response = await fetch(Routes.HostAPI + Routes.CSRF, {
@@ -12,17 +12,11 @@ export default class CSRF {
             credentials: 'include',
         });
 
-        console.log("GET CSRF");
-        console.log("GET CSRF");
-        console.log("GET CSRF");
-        console.log("GET CSRF");
-        console.log("GET CSRF");
-        console.log("GET CSRF");
-        console.log("GET CSRF");
         if (response.ok) {
             const token = (await response.json())['Token'];
             localStorage.setItem('X-CSRF-Token', token);
         }
-        return response.ok;
+
+        return response;
     }
 }
