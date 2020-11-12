@@ -19,6 +19,10 @@ export default class MovieCard extends Component {
         super(context);
         this.template = template;
 
+
+
+        this.context.path = Routes.MoviePage.replace(':id', this.context.id) ;
+        this.context.event = Events.ChangePath;
         this.context.pathToAvatar = Routes.Host + this.context.pathToAvatar;
 
         this.context.ScheduleButtons = [];

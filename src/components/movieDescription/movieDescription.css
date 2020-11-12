@@ -155,3 +155,6 @@
     color: #FFC700;
 }
 
+.hidden {
+    visibility: hidden;
+}

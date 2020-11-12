@@ -1,10 +1,9 @@
 <div class="movie-card">
-<!--    <div class="movie-card__poster">-->
-        <img class="movie-card__poster_img" src="{{ pathToAvatar }}" alt="">
-<!--    </div>-->
+    <img data-path="{{ path }}" data-event="{{ event }}" class="movie-card__poster_img" src="{{ pathToAvatar }}"
+         alt="">
 
     <div class="movie-card__description">
-        <a href="#" class="movie-card__description_title">
+        <a href="{{ path }}" data-path="{{ path }}" data-event="{{ event }}" class="movie-card__description_title">
             {{ name }}
         </a>
         <div class="movie-card__description_specification">
