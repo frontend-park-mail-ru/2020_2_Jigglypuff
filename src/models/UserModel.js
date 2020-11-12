@@ -237,10 +237,7 @@ export default class UserModel {
         }
 
         if (response.status === 401) {
-            response.then()
-            response.catch(() => {
-                response.resolve("NOT AUTH");
-            })
+            response.then(null, error => console.log(error));
         }
 
         return response;
