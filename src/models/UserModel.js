@@ -224,14 +224,6 @@ export default class UserModel {
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.get();
-            }
-        });
-
         if (response.ok) {
             const data = await response.json();
             this._name = data['Name'];
