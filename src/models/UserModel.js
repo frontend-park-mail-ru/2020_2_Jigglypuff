@@ -178,13 +178,8 @@ export default class UserModel {
     _createFormData() {
         const formData = new FormData();
 
-        if (this._name) {
-            formData.append('name', this._name);
-        }
-
-        if (this.surname) {
-            formData.append('surname', this._surname);
-        }
+        formData.append('name', this._name);
+        formData.append('surname', this._surname);
 
         console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
         console.log(this._avatar.name);
