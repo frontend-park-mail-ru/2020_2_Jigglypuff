@@ -20,7 +20,7 @@ export default class CSRF {
         console.log("GET CSRF");
         console.log("GET CSRF");
         if (response.ok) {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('Token');
             console.log("TOKEN", token);
             localStorage.set('X-CSRF-Token', token);
         }
