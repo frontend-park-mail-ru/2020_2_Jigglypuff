@@ -25,6 +25,7 @@ class HallView extends View {
 
     async show(routeData) {
 
+
         let session = await Getter.getSession(routeData.id);
         let hallContext = await this.getHallContext(session);
 
@@ -37,20 +38,20 @@ class HallView extends View {
 
     async onBuy(data) {
 
-        let selectedPlaceDataset = document.getElementsByClassName('button-seat')[0].dataset;
+        let selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
 
         const ticketViewModel = new TicketViewModel();
-        ticketViewModel.state.login = Getter.getProfile().login;
+        ticketViewModel.state.login = (await Getter.getProfile()).login;
         ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
         ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
-        ticketViewModel.state.scheduleID = selectedPlaceDataset.sessionID;
+        ticketViewModel.state.scheduleID = selectedPlaceDataset.session;
 
         const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
 
         await responseTicketViewModel
             .then((response) => {
                 console.log('\n\nHALL_VIEW:ON_BUY()');
-                console.log(response);
+                console.log('OK');
                 console.log('HALL_VIEW:ON_BUY()\n\n');
             })
             .catch((err) => {
@@ -66,25 +67,33 @@ class HallView extends View {
 
         let hallContext = {};
 
+
         const hallViewModel = new HallViewModel();
         hallViewModel.state.hallID = session.hallID;
         hallViewModel.state.scheduleID = session.id;
 
         const responseHallViewModel = hallViewModel.getPlacesCommand.exec();
-        hallContext.name = await Getter.getMovie(session.movieID).name;
-        hallContext.cinema = await Getter.getCinema(session.cinemaID).name;
-        hallContext.date = session.time;
+
+        hallContext.name = (await Getter.getMovie(session.movieID)).name;
+        hallContext.cinema = (await Getter.getCinema(session.cinemaID)).name;
+        hallContext.date = session.date;
+        hallContext.time = session.time;
         hallContext.sessionID = session.id;
+
+        console.log(hallContext);
+
 
         await responseHallViewModel
             .then((res) => {
                 hallContext.hall = res;
+
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_HALL_CONTEXT() :: ERR');
                 console.log(err);
                 console.log('HALL_VIEW:GET_HALL_CONTEXT() :: ERR\n\n');
             });
+
         return hallContext;
     }
 

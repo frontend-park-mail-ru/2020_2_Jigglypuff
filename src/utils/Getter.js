@@ -3,6 +3,7 @@ import MovieViewModel from '../viewmodels/MovieViewModel';
 import SettingsViewModel from '../viewmodels/SettingsViewModel';
 import EventBus from '../services/EventBus';
 import Events from '../consts/Events';
+import ScheduleViewModel from '../viewmodels/ScheduleViewModel';
 
 export default class Getter {
     static async getCinema(id) {
@@ -41,7 +42,7 @@ export default class Getter {
                 console.log('HALL_VIEW:GET_MOVIE_NAME() :: ERR\n\n');
             });
 
-        return movie;
+            return movie;
     }
 
     static async getSession(id) {

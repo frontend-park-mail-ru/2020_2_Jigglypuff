@@ -16,7 +16,6 @@ class ProfileView extends View {
         this.template = template;
 
         this.settingsViewModel = new SettingsViewModel();
-        this.ticketListViewModel = new TicketListViewModel();
 
         EventBus.on(Events.Logout, this.onLogout.bind(this));
         EventBus.on(Events.ProfileEditFieldFill, this.onUpdateField.bind(this));
@@ -33,10 +32,6 @@ class ProfileView extends View {
 
         profileContext.profileEdit = await this.getProfileEditContext();
         profileContext.profileTickets = await this.getProfileTicketContext();
-
-        console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
-        console.log(profileContext);
-        console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
 
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
@@ -60,31 +55,39 @@ class ProfileView extends View {
 
     async getProfileTicketContext() {
 
+        let ticketListViewModel = new TicketListViewModel();
+
         let profileTicketContext = [];
-        let responseTicketList = this.ticketListViewModel.getTicketListCommand.exec();
+        let responseTicketList = ticketListViewModel.getTicketListCommand.exec();
 
         let ticketList = [];
         await responseTicketList
             .then((response) => {
                 ticketList = response;
+                console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
+                console.log(response);
+                console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
+
             })
             .catch((err) => {
-                console.log('\n\n-----PROFILE_VIEW:SHOW()-----');
+                console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
                 console.log(err);
-                console.log('-----PROFILE_VIEW:SHOW()-----\n\n');
+                console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
             });
 
         if (!ticketList) {
             return profileTicketContext;
         }
 
-        let ticket = {};
         for (const value of ticketList) {
+            let ticket = {};
+
+            value.schedule = await Getter.getSession(value.schedule.id);
             ticket.hall = value.schedule.hallID;
             ticket.row = value.placeField.row;
             ticket.place = value.placeField.place;
-            ticket.movie = await Getter.getMovie(value.schedule.movieID).name;
-            ticket.cinema = await Getter.getCinema(value.schedule.cinemaID).cinema;
+            ticket.movie = (await Getter.getMovie(value.schedule.movieID)).name;
+            ticket.cinema = (await Getter.getCinema(value.schedule.cinemaID)).name;
             ticket.date = value.schedule.date;
             ticket.time = value.schedule.time;
 
@@ -132,7 +135,6 @@ class ProfileView extends View {
         await responseProfileEdit
             .then((response) => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
-                console.log(this.settingsViewModel.state);
                 console.log('OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
             })

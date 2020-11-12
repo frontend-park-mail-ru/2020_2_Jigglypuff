@@ -2,7 +2,7 @@
     <span class="tickets__header-text">Текущие заказы</span>
 </div>
 <div class="tickets__wrapper">
-    {{#with tickets }}
+    {{#each this }}
         <div class="tickets__ticket">
             <div class="ticket__title">
                 {{ movie }}
@@ -15,8 +15,8 @@
             </div>
             <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">{{ cinema }}</a>
             <div class="ticket__info">
-                {{ hall }} зал | {{ row }} ряд | {{ place }} место
+                {{ hall }} зал <br> {{ row }} ряд | {{ place }} место
             </div>
         </div>
-    {{/with}}
+    {{/each}}
 </div>

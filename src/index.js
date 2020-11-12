@@ -18,5 +18,5 @@ router
     .register(Routes.MoviePage, new MovieView())
     .register(Routes.CinemaList, new CinemaListView())
     .register(Routes.ProfilePage, new ProfileView())
-    .register(Routes.Schedule, new HallView())
+    .register(Routes.ScheduleID, new HallView())
     .start();

@@ -34,7 +34,7 @@ export default class MovieCard extends Component {
                     schedulePrice: this.context.scheduleContext[i].cost,
                     id: this.context.scheduleContext[i].id,
                     event: Events.ChangePath,
-                    url: Routes.Schedule,
+                    url: Routes.ScheduleID.replace(':id', this.context.scheduleContext[i].id),
                 },
                 )).render(),
             );
