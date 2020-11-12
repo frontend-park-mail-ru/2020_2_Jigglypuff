@@ -5,6 +5,7 @@ import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import Router from '../../services/Router';
 import SignInViewModel from '../../viewmodels/SignInViewModel';
+import Routes from '../../consts/Routes';
 
 class LoginView extends View {
     constructor(title = 'CinemaScope', context = {}) {
@@ -46,6 +47,11 @@ class LoginView extends View {
                 console.log('OK');
                 console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 
+                let routeData = {};
+                routeData.path = '/';
+
+                EventBus.emit(Events.ChangePath, { path: Routes.Main});
+
             })
             .catch((err) => {
 
@@ -54,10 +60,9 @@ class LoginView extends View {
                 console.log('NOT OK');
                 console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 
+                EventBus.emit(Events.ChangePath, { path: Routes.Login});
             });
-        let routeData = {};
-        routeData.path = '/';
-        EventBus.emit(Events.ChangePath, routeData);
+
     }
 }
 

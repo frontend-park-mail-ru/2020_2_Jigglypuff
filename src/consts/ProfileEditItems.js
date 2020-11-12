@@ -16,15 +16,13 @@ const ProfileEditItems = {
     login: {
         inputID: 'login',
         inputName: 'Логин',
-        inputErrorMessage: 'Введи почту, дурачок',
-        inputType: 'email',
+        inputType: 'text',
         event: Events.ProfileEditFieldFill,
     },
     avatar: {
         inputID: 'avatar',
         inputName: 'Аватар',
         inputPlaceholder: 'Загрузите аватар',
-        inputErrorMessage: 'Загружай изображение, Вася...',
         pathToAvatar: '/static/NoAvatar.jpg',
         event: Events.ProfileEditFieldFill,
     },

@@ -8,6 +8,7 @@ import MovieView from './view/MovieView/MovieView';
 import CinemaListView from './view/CinemaListView/CinemaListView';
 import ProfileView from './view/ProfileView/ProfileView';
 import HallView from './view/HallLayout/HallView';
+import CinemaView from './view/CinemaView/CinemaView';
 
 const body = document.body;
 let router = new Router(body);
@@ -19,4 +20,5 @@ router
     .register(Routes.CinemaList, new CinemaListView())
     .register(Routes.ProfilePage, new ProfileView())
     .register(Routes.ScheduleID, new HallView())
+    .register(Routes.CinemaPage, new CinemaView())
     .start();

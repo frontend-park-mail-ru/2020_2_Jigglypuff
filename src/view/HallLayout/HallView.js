@@ -60,7 +60,11 @@ class HallView extends View {
                 console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
             });
 
-        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        if (await BaseViewModel.isAuthorised()) {
+            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        } else {
+            EventBus.emit(Events.ChangePath, {path: Routes.Login});
+        }
     }
 
     async getHallContext(session) {

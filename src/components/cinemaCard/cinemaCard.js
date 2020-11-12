@@ -2,6 +2,7 @@ import Component from '../component.js';
 import template from './cinemaCard.hbs';
 import ScheduleButton from '../baseComponents/buttons/scheduleButton/scheduleButton';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
+import Routes from '../../consts/Routes';
 
 /**
  * @class
@@ -15,10 +16,7 @@ export default class CinemaCard extends Component {
     constructor(context) {
         super(context);
         this.template = template;
-        this.context = {
-            address: 'м.Кропоткинская, ул. Остоженка д.5',
-            hallCount: 10,
-            name: 'Кронверк Синема',
-        };
+
+        this.context.pathToAvatar = Routes.Host + this.context.pathToAvatar;
     }
 }

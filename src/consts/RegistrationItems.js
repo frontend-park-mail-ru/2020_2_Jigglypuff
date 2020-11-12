@@ -19,8 +19,7 @@ const RegistrationItems = {
         inputID: 'login',
         inputName: 'Логин',
         inputPlaceholder: 'Введите почту',
-        inputErrorMessage: 'Введи почту, дурачок',
-        inputType: 'email',
+        inputType: 'text',
         event: Events.RegisterFieldFill,
     },
     password: {
