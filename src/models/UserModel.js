@@ -220,7 +220,7 @@ export default class UserModel {
 
     /**
      * Get user.
-     * @return {Promise<Response>}
+     * @return {Promise<boolean>}
      */
     async get() {
         const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
@@ -236,11 +236,7 @@ export default class UserModel {
             this._login = data['UserCredentials']['Login'];
         }
 
-        if (response.status === 401) {
-            response.then(null, error => console.log(error));
-        }
-
-        return response;
+        return response.ok;
     }
 
     /**

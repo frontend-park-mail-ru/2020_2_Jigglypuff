@@ -9,9 +9,7 @@ export default class BaseViewModel {
      */
     static async isAuthorised() {
         const userModel = new UserModel();
-        const response = await userModel.get();
-
-        return response.ok;
+        return await userModel.get();
     }
 
     /**
