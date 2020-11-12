@@ -50,9 +50,12 @@ class MovieView extends View {
 
         await responseMovieViewModel
             .then((response) => {
-                if (ratingMark.classList.contains('hidden')) {
-                    ratingMark.classList.remove('hidden');
+                if (!response.ok) {
+                    if (ratingMark.classList.contains('hidden')) {
+                        ratingMark.classList.remove('hidden');
+                    }
                 }
+
             })
             .catch((err) => {
                 if (!ratingMark.classList.contains('hidden')) {
