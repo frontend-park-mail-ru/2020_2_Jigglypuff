@@ -237,9 +237,6 @@ export default class UserModel {
         }
 
         if (response.status === 401) {
-            console.log("STATUS IS 401");
-            console.log("STATUS IS 401");
-            console.log("STATUS IS 401");
             response.then()
             response.catch(() => {
                 response.resolve("NOT AUTH");

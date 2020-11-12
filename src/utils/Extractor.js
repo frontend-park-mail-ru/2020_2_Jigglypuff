@@ -172,7 +172,7 @@ export default class Extractor {
     static extractTicketFromJSON(data) {
         const result = new Map();
 
-        result.set('id', data['HallID']);
+        result.set('id', data['ID']);
         result.set('login', data['Login']);
         result.set('placeField', {
             'place': data['PlaceField']['Place'],
