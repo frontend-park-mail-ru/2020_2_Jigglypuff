@@ -16,36 +16,43 @@ export default class CinemaListViewModel extends BaseViewModel {
     }
 
     /**
+     * Add cinema state to array
+     * @param {JSON} cinema
+     * @private
+     */
+    _addCinema(cinema) {
+        const cinemaModel = Extractor.extractCinemaDataFromJSON(cinema);
+        const extractedCinemaListDataMap = Extractor.extractCinemaDataFromModel(cinemaModel);
+        this.state.push({
+            'address': '',
+            'authorID': '',
+            'hallCount': '',
+            'id': '',
+            'name': '',
+            'pathToAvatar': '',
+        });
+        extractedCinemaListDataMap.forEach((value, key) => {
+            this.state[this.state.length - 1][key] = value;
+        });
+    }
+
+    /**
      * Get cinema list.
      * @return {Promise<Error>|Promise<Object>}
      */
     async getCinemaList() {
-        const response = await CinemaModel.CinemaModel.getCinemaList();
+        const response = await CinemaModel.getCinemaList();
 
         if (response.ok) {
             const cinemaList = await response.json();
             for (const cinema of cinemaList) {
-                const cinemaModel = new CinemaModel();
-                cinemaModel.address = cinema['Address'];
-                cinemaModel.authorID = cinema['AuthorID'];
-                cinemaModel.hallCount = cinema['HallCount'];
-                cinemaModel.id = cinema['ID'];
-                cinemaModel.name = cinema['Name'];
-                cinemaModel.pathToAvatar = cinema['PathToAvatar'];
-
-                const extractedCinemaDataMap = Extractor.extractCinemaData(cinemaModel);
-                this.state.push({
-                    'address': '',
-                    'authorID': '',
-                    'hallCount': '',
-                    'id': '',
-                    'name': '',
-                    'pathToAvatar': '',
-                });
-                extractedCinemaDataMap.forEach((value, key) => {
-                    this.state[this.state.length - 1][key] = value;
-                });
+                this._addCinema(cinema);
             }
+
+            if (!this.state.length) {
+                throw new Error(Errors.ListIsEmpty);
+            }
+
             return this.state;
         }
 

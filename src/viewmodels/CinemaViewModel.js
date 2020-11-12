@@ -34,7 +34,7 @@ export default class CinemaViewModel extends BaseViewModel {
         const response = await this._cinemaModel.getCinema();
 
         if (response.ok) {
-            const extractedCinemaDataMap = Extractor.extractCinemaData(this._cinemaModel);
+            const extractedCinemaDataMap = Extractor.extractCinemaDataFromModel(this._cinemaModel);
             extractedCinemaDataMap.forEach((value, key) => {
                 this.state[key] = value;
             });
