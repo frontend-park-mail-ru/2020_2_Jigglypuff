@@ -220,7 +220,7 @@ export default class UserModel {
 
     /**
      * Get user.
-     * @return {Promise<Response>}
+     * @return {Promise<boolean>}
      */
     async get() {
         const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
