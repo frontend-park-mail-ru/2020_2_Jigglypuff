@@ -17,7 +17,7 @@ const RegistrationItems = {
     },
     login: {
         inputID: 'login',
-        inputName: 'Логин',
+        inputName: 'Почта',
         inputPlaceholder: 'Введите почту',
         inputType: 'text',
         event: Events.RegisterFieldFill,

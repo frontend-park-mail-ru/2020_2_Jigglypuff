@@ -6,9 +6,15 @@
 .movie-list__content {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .movie-list__header {
     font-size: 2rem;
     font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.movie-list__line {
+    margin: 5px 0 !important;
 }

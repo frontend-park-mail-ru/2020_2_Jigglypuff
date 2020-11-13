@@ -1,6 +1,6 @@
 <div class="header__navbar">
     {{#with headerItems}}
-        <img class="header__navbar-logo" src="{{ logo }}" alt=""/>
+        <a href="#" style="display:flex; justify-content: center" data-path="{{ url }}" data-event="{{ event }}"><img class="header__navbar-logo" src="{{ logo }}" alt=""/></a>
         {{#each headerLinks }}
             <a id="{{ this.id }}" data-event="{{ this.event }}" class="header__navbar-menu"
                href="{{ this.url }}" data-path="{{this.url}}">

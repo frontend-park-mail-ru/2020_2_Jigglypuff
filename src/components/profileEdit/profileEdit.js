@@ -6,6 +6,7 @@ import StandardButton from '../baseComponents/buttons/standartButton/standardBut
 import EventBus from '../../services/EventBus';
 import ImageInput from '../baseComponents/imageInput/imageInput';
 import Events from '../../consts/Events';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
  * @class
@@ -32,6 +33,10 @@ export default class ProfileEdit extends Component {
             }
             this.context.input.push((new TextInput(input[i])).render());
         }
+
+        this.context.Validation = (new ValidationBlock({
+            message: 'Пожалуйста, загрузите верный формат аватара',
+        })).render();
 
         this.context.StandardButton = (new StandardButton({
             buttonName: 'Редактировать',

@@ -24,7 +24,6 @@
 
 .image-input__label {
     display: inline-block;
-    margin-bottom: 10px;
     font-size: 1em;
     font-weight: bold;
     width: 100%;
@@ -38,8 +37,7 @@
     border: 3px solid #880000;
     border-radius: 10px;
     object-fit: cover;
-    height: 3.9em;
-    width: 3.9em;
+    height: 65px;
 }
 
 .label__text {
@@ -48,6 +46,8 @@
 
 .avatar {
     margin-left: auto;
+    display: flex;
+    align-items: flex-end;
 }
 
 .image-input__error-disabled {

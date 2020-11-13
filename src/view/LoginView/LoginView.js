@@ -6,6 +6,7 @@ import Events from '../../consts/Events';
 import Router from '../../services/Router';
 import SignInViewModel from '../../viewmodels/SignInViewModel';
 import Routes from '../../consts/Routes';
+import BaseViewModel from '../../viewmodels/BaseViewModel';
 
 class LoginView extends View {
     constructor(title = 'CinemaScope', context = {}) {
@@ -17,7 +18,12 @@ class LoginView extends View {
         EventBus.on(Events.LoginSubmit, this.onSubmit.bind(this));
     }
 
-    show() {
+    async show() {
+
+        if (await BaseViewModel.isAuthorised()) {
+            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        }
+
         const data = {
             LoginContent: (new LoginContent()).render(),
         };
@@ -55,12 +61,15 @@ class LoginView extends View {
             })
             .catch((err) => {
 
-                console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
-                console.log(err);
-                console.log('NOT OK');
-                console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
+                // console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
+                // console.log('NOT OK');
+                // console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 
-                EventBus.emit(Events.ChangePath, { path: Routes.Login});
+                let validation = document.getElementsByClassName('validation-block')[0];
+                validation.innerHTML = err.message;
+                validation.classList.remove('validation-display-none');
+
+                // EventBus.emit(Events.ChangePath, { path: Routes.Login});
             });
 
     }

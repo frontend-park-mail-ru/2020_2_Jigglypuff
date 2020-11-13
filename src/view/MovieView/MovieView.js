@@ -26,6 +26,9 @@ class MovieView extends View {
         movieDescriptionContext.pathToAvatar = Routes.Host + movieDescriptionContext.pathToAvatar;
         movieDescriptionContext.pathToSliderAvatar = Routes.Host + movieDescriptionContext.pathToSliderAvatar;
 
+        console.log(movieDescriptionContext);
+        movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100
+
         movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
         data.MovieDescription = (new MovieDescription(movieDescriptionContext)).render();
@@ -34,13 +37,12 @@ class MovieView extends View {
     }
 
     async onMovieRate(routeDate) {
+
         let rating = document.getElementById('rating');
 
         if(!rating.value) {
             return;
         }
-
-        console.log('123');
 
         let movieViewModel = new MovieViewModel();
         movieViewModel.state.personalRating = rating.value;

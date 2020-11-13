@@ -3,10 +3,8 @@ import Events from './Events';
 const LoginItems = {
     login: {
         inputID: 'login',
-        inputName: 'Логин',
-        inputPlaceholder: 'Введите логин',
-        inputPattern: '[A-Za-z0-9]*',
-        inputErrorMessage: 'Введи логин, дядя',
+        inputName: 'Почта',
+        inputPlaceholder: 'Введите почту',
         inputType: 'text',
         event: Events.LoginFieldFill,
     },

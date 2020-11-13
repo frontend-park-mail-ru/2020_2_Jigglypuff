@@ -18,7 +18,7 @@ export default class Validator {
      * @param {string} password
      */
     static validatePassword(password) {
-        const regExp = /^[$\w]{4,20}$/;
+        const regExp = /^[$!\w]{4,20}$/;
         return regExp.test(String(password));
     }
 

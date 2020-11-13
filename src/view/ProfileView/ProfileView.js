@@ -25,6 +25,11 @@ class ProfileView extends View {
 
     async show() {
 
+        if (!(await BaseViewModel.isAuthorised())) {
+            EventBus.emit(Events.ChangePath, {path: Routes.Login});
+            return;
+        }
+
         let profileContext = {
             profileEdit: {},
             profileTickets: {},
@@ -71,8 +76,9 @@ class ProfileView extends View {
             })
             .catch((err) => {
                 console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
-                console.log(err);
+                console.log('NOT OK');
                 console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
+
             });
 
         if (!ticketList) {
@@ -140,9 +146,12 @@ class ProfileView extends View {
             })
             .catch((err) => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
-                console.log(err);
                 console.log('NOT OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
+
+                let validation = document.getElementsByClassName('validation-block')[0];
+                validation.innerHTML = err.message;
+                validation.classList.remove('validation-display-none');
             });
 
         await this.show();

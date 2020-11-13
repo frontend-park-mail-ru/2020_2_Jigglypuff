@@ -6,6 +6,7 @@ import StandardButton from '../baseComponents/buttons/standartButton/standardBut
 import EventBus from '../../services/EventBus';
 import ImageInput from '../baseComponents/imageInput/imageInput';
 import Events from '../../consts/Events';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
  * @class
@@ -28,6 +29,10 @@ export default class RegisterContent extends Component {
             }
             this.context.input.push((new TextInput(RegistrationItems[i])).render());
         }
+
+        this.context.Validation = (new ValidationBlock({
+            message: 'Неверный логин и/или пароль',
+        })).render();
 
         this.context.StandardButton = (new StandardButton({
             buttonName: 'Зарегистрироваться',

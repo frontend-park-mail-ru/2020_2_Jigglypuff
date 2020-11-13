@@ -29,7 +29,7 @@ export default class SignInViewModel extends BaseViewModel {
         userModel.password = this.state.password;
 
         if (!userModel.login || !userModel.password) {
-            throw Error(Errors.InvalidLoginOrPassword);
+            throw Error(Errors.InvalidLoginOrPassword.errorMessage);
         }
 
         const response = await userModel.signIn();
@@ -38,6 +38,6 @@ export default class SignInViewModel extends BaseViewModel {
             return response.ok & responseCSRF.ok;
         }
 
-        throw Error(Errors.InvalidLoginOrPassword);
+        throw Error(Errors.InvalidLoginOrPassword.errorMessage);
     }
 }

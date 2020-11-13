@@ -30,17 +30,17 @@ export default class SignUpViewModel extends BaseViewModel {
 
         userModel.login = this.state.login;
         if (!userModel.login) {
-            throw new Error(Errors.InvalidLogin);
+            throw new Error(Errors.InvalidLogin.errorMessage);
         }
 
         userModel.name = this.state.name;
         if (!userModel.name) {
-            throw new Error(Errors.InvalidName);
+            throw new Error(Errors.InvalidName.errorMessage);
         }
 
         userModel.surname = this.state.surname;
         if (!userModel.surname) {
-            throw new Error(Errors.InvalidSurname);
+            throw new Error(Errors.InvalidSurname.errorMessage);
         }
 
         let passwordRepeated = null;
@@ -49,18 +49,19 @@ export default class SignUpViewModel extends BaseViewModel {
             passwordRepeated = userModel.password;
             userModel.password = this.state.password;
             if (!userModel.password || userModel.password !== passwordRepeated) {
-                throw new Error(Errors.InvalidPasswordRepeated);
+                throw new Error(Errors.InvalidPasswordRepeated.errorMessage);
             }
         } else {
-            throw new Error(Errors.InvalidPassword);
+            throw new Error(Errors.InvalidPassword.errorMessage);
         }
 
         const response = await userModel.register();
+        console.log(response);
         if (response.ok) {
             const responseCSRF = await CSRF.getCSRF();
             return response.ok & responseCSRF.ok;
         }
 
-        throw new Error(Errors.AlreadyRegistered);
+        throw new Error(Errors.AlreadyRegistered.errorMessage);
     }
 }

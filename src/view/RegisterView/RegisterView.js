@@ -5,6 +5,8 @@ import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import SignUpViewModel from '../../viewmodels/SignUpViewModel';
 import Router from '../../services/Router';
+import BaseViewModel from '../../viewmodels/BaseViewModel';
+import Routes from '../../consts/Routes';
 
 class RegisterView extends View {
     constructor(title = 'CinemaScope', context = {}) {
@@ -16,7 +18,12 @@ class RegisterView extends View {
         EventBus.on(Events.RegisterSubmit, this.onSubmit.bind(this));
     }
 
-    show() {
+    async show() {
+
+        if (await BaseViewModel.isAuthorised()) {
+            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        }
+
         const data = {
             RegisterContent: (new RegisterContent()).render(),
         };
@@ -39,15 +46,18 @@ class RegisterView extends View {
                 console.log(response);
                 console.log('OK');
                 console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
+
+                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })
             .catch((err) => {
                 console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
-                console.log(err);
                 console.log('NOT OK');
                 console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
-            })
 
-        EventBus.emit(Events.ChangePath, {path: '/'});
+                let validation = document.getElementsByClassName('validation-block')[0];
+                validation.innerHTML = err.message;
+                validation.classList.remove('validation-display-none');
+            })
     }
 
 }

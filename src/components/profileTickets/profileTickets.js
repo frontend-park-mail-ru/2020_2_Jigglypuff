@@ -6,6 +6,7 @@ import StandardButton from '../baseComponents/buttons/standartButton/standardBut
 import EventBus from '../../services/EventBus';
 import ImageInput from '../baseComponents/imageInput/imageInput';
 import Events from '../../consts/Events';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
  * @class
@@ -21,6 +22,18 @@ export default class ProfileTickets extends Component {
         super(context, parent);
         this.template = template;
 
+
+        let visibility = false;
+        if (!this.context.length) {
+            visibility = true;
+        }
+
+        this.context.Validation = (new ValidationBlock({
+            message: 'На данный момент нет актуальных билетов',
+            visibility: visibility,
+        })).render();
+
+        // this.context.Validation = this.context.Validation.replace('validation-display-none', '');
     }
 
 }

@@ -20,6 +20,8 @@ class HallView extends View {
         this.context = context;
 
         EventBus.on(Events.TicketsBuy, this.onBuy.bind(this));
+        EventBus.on(Events.TicketSelect, this.onSelect.bind(this));
+
         this.template = template;
     }
 
@@ -38,7 +40,16 @@ class HallView extends View {
 
     async onBuy(data) {
 
-        let selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
+        let selectedPlaceDataset = {};
+        try {
+            selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
+        } catch (err) {
+            let validation = (document.getElementsByClassName('hall-layout')[0]).getElementsByClassName('validation-block')[0];
+            validation.classList.remove('validation-display-none');
+            return;
+        }
+
+
 
         const ticketViewModel = new TicketViewModel();
         ticketViewModel.state.login = (await Getter.getProfile()).login;
@@ -84,13 +95,9 @@ class HallView extends View {
         hallContext.time = session.time;
         hallContext.sessionID = session.id;
 
-        console.log(hallContext);
-
-
         await responseHallViewModel
             .then((res) => {
                 hallContext.hall = res;
-
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_HALL_CONTEXT() :: ERR');
@@ -101,6 +108,40 @@ class HallView extends View {
         return hallContext;
     }
 
+    onSelect(data) {
+
+        if (data.target.classList.contains('button-seat-occupied')) {
+            return;
+        }
+
+        let hallPlaces = document.getElementsByClassName('button-seat');
+
+        for (let i in hallPlaces) {
+
+            if (i === 'length') {
+                break;
+            }
+
+            let hallPlacesClassList = hallPlaces[i].classList;
+            let hallPlacesDataset = hallPlaces[i].dataset;
+
+            if (data.place === hallPlacesDataset.place && data.row === hallPlacesDataset.row) {
+
+                if (hallPlacesClassList.contains('button-seat-occupied')) {
+                    continue;
+                } else if (hallPlacesClassList.contains('button-seat-selected')) {
+                    hallPlacesClassList.remove('button-seat-selected');
+                } else {
+                    hallPlacesClassList.add('button-seat-selected');
+                }
+
+            } else {
+                if (hallPlacesClassList.contains('button-seat-selected')) {
+                    hallPlacesClassList.remove('button-seat-selected');
+                }
+            }
+        }
+    }
 }
 
 export default HallView;

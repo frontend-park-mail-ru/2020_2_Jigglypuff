@@ -6,6 +6,7 @@ import SeatButton from '../baseComponents/buttons/seatButton/seatButton';
 import Events from '../../consts/Events';
 import EventBus from '../../services/EventBus';
 import Routes from '../../consts/Routes';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
  * @class
@@ -20,11 +21,13 @@ export default class HallLayout extends Component {
         super(context);
         this.template = template;
 
-        EventBus.on(Events.TicketSelect, this.onUpdate.bind(this));
-
         this.context.hallLayout = [];
 
+        let visibility = true;
         for (let i in this.context.hall) {
+
+            visibility = false;
+
             let rowSeats = [];
             let rowNum = this.context.hall[i][0].row;
             for (let j in this.context.hall[i]) {
@@ -40,42 +43,12 @@ export default class HallLayout extends Component {
             this.context.hallLayout.push({rowNumber: rowNum, row: rowSeats});
         }
 
+        this.context.Validation = (new ValidationBlock({
+            message: 'Выберите билет для покупки',
+            visibility: visibility,
+        })).render();
+
         this.context.StandardButton = (new StandardButton({buttonName: 'Купить билет', event: Events.TicketsBuy}).render());
     }
 
-    onUpdate(data) {
-
-        if (data.target.classList.contains('button-seat-occupied')) {
-            return;
-        }
-
-        let hallPlaces = document.getElementsByClassName('button-seat');
-
-
-        for (let i in hallPlaces) {
-
-            if (hallPlaces.length - 1 === +i) {
-                break;
-            }
-
-            let hallPlacesClassList = hallPlaces[i].classList;
-            let hallPlacesDataset = hallPlaces[i].dataset;
-
-            if (!hallPlacesClassList.contains('button-seat-occupied') && hallPlacesClassList.contains('button-seat-selected')) {
-                console.log(data);
-                console.log(hallPlacesDataset);
-
-
-                hallPlacesClassList.remove('button-seat-selected');
-
-            } else if (!hallPlacesClassList.contains('button-seat-selected')) {
-                if (data.place !== hallPlacesDataset.place || data.row !== hallPlacesDataset.row) {
-                    hallPlacesClassList.remove('button-seat-selected');
-                } else {
-                    hallPlacesClassList.add('button-seat-selected');
-                }
-            }
-        }
-
-    }
 }

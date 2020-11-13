@@ -4,6 +4,7 @@ import TextInput from '../baseComponents/textInput/textInput';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
 import LoginItems from '../../consts/LoginItems';
 import Events from '../../consts/Events';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
  * @class
@@ -23,6 +24,10 @@ export default class LoginContent extends Component {
         for (let i in LoginItems) {
             this.context.input.push((new TextInput(LoginItems[i])).render());
         }
+
+        this.context.Validation = (new ValidationBlock({
+            message: 'Пожалуйста, загрузите верный формат аватара',
+        })).render();
 
         this.context.StandardButton = (new StandardButton({
             buttonName: 'Войти',
