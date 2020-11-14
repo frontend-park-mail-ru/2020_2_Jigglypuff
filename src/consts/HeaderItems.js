@@ -2,7 +2,6 @@ import Routes from './Routes';
 import Events from './Events';
 
 const headerItems = {
-    logo: '/static/img/logo.png',
     url: Routes.Main,
     event: Events.ChangePath,
     headerLinks: {
