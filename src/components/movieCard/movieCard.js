@@ -39,6 +39,6 @@ export default class MovieCard extends Component {
                 )).render(),
             );
         }
-        this.context.StandardButton = (new StandardButton({buttonName: 'О фильме', event: Events.ChangePath, path: this.context.path}).render());
+        this.context.StandardButton = (new StandardButton({buttonName: 'О фильме', event: Events.ChangePath, url: this.context.path}).render());
     }
 }
