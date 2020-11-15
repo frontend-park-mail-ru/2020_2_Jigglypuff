@@ -1,17 +1,17 @@
 import Component from '../component.js';
 import template from './movieDescription.hbs';
-import PlayButton from '../baseComponents/buttons/playButton/playButton';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import Events from '../../consts/Routes';
+import Events from '../../consts/Events';
 
 /**
+ * Movie description component
  * @class
- * Image input component
  */
 export default class MovieDescription extends Component {
     /**
-     * Create a button
-     * @param context - button context
+     * Create a movie description component
+     * @constructor
+     * @param {Object} context - movie description context
      * */
     constructor(context) {
         super(context);
@@ -19,8 +19,7 @@ export default class MovieDescription extends Component {
 
         this.context.StandardButton = (new StandardButton({
             buttonName: 'Оценить',
-            event: Events.RateMovie,
-        }).render())
-        // this.context.PlayButton = (new PlayButton()).render();
+            event: Events.MovieRate,
+        }).render());
     }
 }

@@ -2,18 +2,19 @@ import Routes from './Routes';
 import Events from './Events';
 
 const headerItems = {
-    logo: '/static/img/logo.svg',
+    url: Routes.Main,
+    event: Events.ChangePath,
     headerLinks: {
         films: {
             id: 'film_premiers',
             name: 'Фильмы',
-            url: '/',
+            url: Routes.Main,
             event: Events.ChangePath,
         },
         theatres: {
             id: 'header-theatres',
             name: 'Кинотеатры',
-            url: '/cinema/',
+            url: Routes.CinemaList,
             event: Events.ChangePath,
         },
     },

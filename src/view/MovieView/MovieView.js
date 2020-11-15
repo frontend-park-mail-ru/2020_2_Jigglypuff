@@ -3,36 +3,80 @@ import View from '../BaseView/View';
 import MovieDescription from '../../components/movieDescription/movieDescription';
 import MovieViewModel from '../../viewmodels/MovieViewModel';
 import Routes from '../../consts/Routes';
+import Getter from '../../utils/Getter';
+import BaseViewModel from '../../viewmodels/BaseViewModel';
+import EventBus from '../../services/EventBus';
+import Events from '../../consts/Events';
 
-class MovieView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
-        this.context = context;
-
+/**
+ * Class of the movie view
+ */
+export default class MovieView extends View {
+    /**
+     * Constructor of the movie view
+     * @constructor
+     * @param {string} title - title of the movie page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
         this.template = template;
-        this.movieViewModel = new MovieViewModel();
+
+        EventBus.on(Events.MovieRate, this.onMovieRate.bind(this));
     }
 
+    /**
+     * Method that shows the movie view
+     * @param {Object} routeData - data from route path of the movie page
+     */
     async show(routeData) {
-        let data = {};
+        const data = {};
 
-        const responseMovieViewModel = this.movieViewModel.getMovieCommand.exec(routeData.id);
+        const movieDescriptionContext = await Getter.getMovie(routeData.id);
+        movieDescriptionContext.pathToAvatar = Routes.Host + movieDescriptionContext.pathToAvatar;
+        movieDescriptionContext.pathToSliderAvatar = Routes.Host + movieDescriptionContext.pathToSliderAvatar;
 
-        let temp = {};
+        console.log(movieDescriptionContext);
+        movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100;
+
+        movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
+
+        data.MovieDescription = (new MovieDescription(movieDescriptionContext)).render();
+
+        await super.show(this.template(data));
+    }
+
+    /**
+     * Method that handles movie rating
+     */
+    async onMovieRate() {
+        const rating = document.getElementById('rating');
+
+        if (!rating.value) {
+            return;
+        }
+
+        const movieViewModel = new MovieViewModel();
+        movieViewModel.state.personalRating = rating.value;
+        movieViewModel.state.id = rating.dataset.movie;
+
+        const responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
+
+        const ratingMark = document.getElementsByClassName('media-block__rating')[0];
 
         await responseMovieViewModel
             .then((response) => {
-                response.pathToAvatar = Routes.Host + response.pathToAvatar;
-                response.pathToSliderAvatar = Routes.Host + response.pathToSliderAvatar;
-                temp = Object.assign(temp, response);
+                if (!response.ok) {
+                    if (ratingMark.classList.contains('hidden')) {
+                        ratingMark.classList.remove('hidden');
+                    }
+                }
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(() => {
+                if (!ratingMark.classList.contains('hidden')) {
+                    ratingMark.classList.add('hidden');
+                }
             });
-        data.MovieDescription = (new MovieDescription(temp)).render();
 
-        super.show(this.template(data));
+        EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
     }
 }
-
-export default MovieView;

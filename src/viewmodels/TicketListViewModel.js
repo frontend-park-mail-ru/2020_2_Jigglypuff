@@ -19,7 +19,6 @@ export default class TicketViewModel {
     _addTicket(ticket) {
         const extractedTicketDataMap = Extractor.extractTicketFromJSON(ticket);
         this.state.push({
-            hallID: '',
             id: '',
             login: '',
             placeField: {
@@ -29,16 +28,26 @@ export default class TicketViewModel {
             schedule: {
                 cinemaID: '',
                 cost: '',
+                date: '',
                 hallID: '',
                 id: '',
                 movieID: '',
                 premierTime: '',
+                time: '',
             },
-            scheduleID: '',
+            transactionDate: '',
         });
         extractedTicketDataMap.forEach((value, key) => {
             this.state[this.state.length - 1][key] = value;
         });
+
+        this.state[this.state.length - 1]['schedule']['time'] = this.state[this.state.length - 1]['schedule']['premierTime'].replace(/\d{4}-\d{2}-\d{2}T/, '');
+        this.state[this.state.length - 1]['schedule']['time'] = this.state[this.state.length - 1]['schedule']['time']
+            .replace(this.state[this.state.length - 1]['schedule']['time'].replace(/\d{2}:\d{2}/, ''), '');
+
+        this.state[this.state.length - 1]['schedule']['date'] = this.state[this.state.length - 1]['schedule']['premierTime'].slice(8, 10) + '.' +
+            this.state[this.state.length - 1]['schedule']['premierTime'].slice(5, 7) + '.' +
+            this.state[this.state.length - 1]['schedule']['premierTime'].slice(0, 4);
     }
 
     /**

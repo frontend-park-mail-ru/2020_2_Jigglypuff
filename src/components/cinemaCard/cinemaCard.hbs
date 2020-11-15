@@ -1,10 +1,8 @@
-<div class="cinema-card">
-    <div class="cinema-card__poster">
-        <a href="#"><img class="cinema-card__poster_img" src="/static/img/cinema.jpg" alt=""></a>
-    </div>
+<div class="cinema-card cs-border">
+    <img class="cinema-card__poster_img" src="{{ pathToAvatar }}" alt="">
 
     <div class="cinema-card__description">
-        <a href="#" class="cinema-card__description_title">
+        <a href="#" data-event="changePath" data-path="/cinema/{{ id }}/" class="cinema-card__description_title">
             {{ name }}
         </a>
         <div class="cinema-card__description_specification">

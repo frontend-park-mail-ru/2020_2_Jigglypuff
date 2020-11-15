@@ -1,7 +1,5 @@
-import Checker from '../utils/Checker';
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
-import http from 'http';
 import CSRF from '../utils/CSRF';
 
 /** Class that contains User model */
@@ -120,10 +118,8 @@ export default class UserModel {
      * @param {any} avatar
      */
     set avatar(avatar) {
-
         // if (Checker.isImage(avatar)) {
-            this._avatar = avatar;
-        // } else {
+        this._avatar = avatar;
         //     this._avatar = null;
         // }
     }
@@ -179,14 +175,17 @@ export default class UserModel {
     _createFormData() {
         const formData = new FormData();
 
-        formData.append('name', this._name);
-        formData.append('surname', this._surname);
+        if (this._name) {
+            formData.append('name', this._name);
+        }
 
-        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
-        console.log(this._avatar.name);
-        console.log('-------------------------------------USER_MODEL::AVATAR()-----------------------------------------------');
+        if (this.surname) {
+            formData.append('surname', this._surname);
+        }
 
-        formData.append('avatar', this._avatar, this._avatar.name);
+        if (this._avatar) {
+            formData.append('avatar', this._avatar, this._avatar.name);
+        }
 
         return formData;
     }
@@ -198,19 +197,21 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch(Routes.Host + Routes.ProfilePage, {
+        const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
             method: 'PUT',
             credentials: 'include',
             body: profileSettingsForm,
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.edit();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.edit();
             }
-        });
+        }
 
         return response;
     }
@@ -223,14 +224,6 @@ export default class UserModel {
         const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
             method: 'GET',
             credentials: 'include',
-        });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.get();
-            }
         });
 
         if (response.ok) {
@@ -249,9 +242,21 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async logout() {
-        return await fetch(Routes.HostAPI + Routes.Logout, {
+        const response = await fetch(Routes.HostAPI + Routes.Logout, {
             method: 'POST',
             credentials: 'include',
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
+
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.logout();
+            }
+        }
+
+        return response;
     }
 }

@@ -29,15 +29,15 @@ export default class SignInViewModel extends BaseViewModel {
         userModel.password = this.state.password;
 
         if (!userModel.login || !userModel.password) {
-            throw Error(Errors.InvalidLoginOrPassword);
+            throw Error(Errors.InvalidLoginOrPassword.errorMessage);
         }
 
         const response = await userModel.signIn();
         if (response.ok) {
             const responseCSRF = await CSRF.getCSRF();
-            return response.ok & responseCSRF;
+            return response.ok & responseCSRF.ok;
         }
 
-        throw Error(Errors.InvalidLoginOrPassword);
+        throw Error(Errors.InvalidLoginOrPassword.errorMessage);
     }
 }

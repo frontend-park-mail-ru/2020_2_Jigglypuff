@@ -1,56 +1,72 @@
 import template from './HallView.hbs';
 import View from '../BaseView/View';
-import MovieList from '../../components/movieList/movieList';
 import HallLayout from '../../components/hallLayout/hallLayout';
 import HallViewModel from '../../viewmodels/HallViewModel';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import TicketViewModel from '../../viewmodels/TicketViewModel';
-import CinemaListViewModel from '../../viewmodels/CinemaListViewModel';
-import CinemaViewModel from '../../viewmodels/CinemaViewModel';
-import MovieViewModel from '../../viewmodels/MovieViewModel';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
 import Routes from '../../consts/Routes';
-import SettingsViewModel from '../../viewmodels/SettingsViewModel';
 import Getter from '../../utils/Getter';
 
-class HallView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
-        this.context = context;
+/**
+ * Class of the hall view
+ */
+export default class HallView extends View {
+    /**
+     * Constructor of the hall view
+     * @constructor
+     * @param {string} title - title of the hall page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
 
         EventBus.on(Events.TicketsBuy, this.onBuy.bind(this));
+        EventBus.on(Events.TicketSelect, this.onSelect.bind(this));
+
         this.template = template;
     }
 
+    /**
+     * Method that shows the hall view
+     * @param {Object} routeData - data from route path of the hall page
+     */
     async show(routeData) {
+        const session = await Getter.getSession(routeData.id);
+        const hallContext = await this.getHallContext(session);
 
-        let session = await Getter.getSession(routeData.id);
-        let hallContext = await this.getHallContext(session);
-
-        let data = {
+        const data = {
             hallLayout: (new HallLayout(hallContext).render()),
         };
 
         await super.show(this.template(data));
     }
 
-    async onBuy(data) {
-
-        let selectedPlaceDataset = document.getElementsByClassName('button-seat')[0].dataset;
+    /**
+     * Method that handles submitting of the ticket buy
+     */
+    async onBuy() {
+        let selectedPlaceDataset = {};
+        try {
+            selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
+        } catch (err) {
+            const validation = (document.getElementsByClassName('hall-layout')[0]).getElementsByClassName('validation-block')[0];
+            validation.classList.remove('validation-display-none');
+            return;
+        }
 
         const ticketViewModel = new TicketViewModel();
-        ticketViewModel.state.login = Getter.getProfile().login;
+        ticketViewModel.state.login = (await Getter.getProfile()).login;
         ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
         ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
-        ticketViewModel.state.scheduleID = selectedPlaceDataset.sessionID;
+        ticketViewModel.state.scheduleID = selectedPlaceDataset.session;
 
         const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
 
         await responseTicketViewModel
-            .then((response) => {
+            .then(() => {
                 console.log('\n\nHALL_VIEW:ON_BUY()');
-                console.log(response);
+                console.log('OK');
                 console.log('HALL_VIEW:ON_BUY()\n\n');
             })
             .catch((err) => {
@@ -59,35 +75,74 @@ class HallView extends View {
                 console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
             });
 
-        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        if (await BaseViewModel.isAuthorised()) {
+            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        } else {
+            EventBus.emit(Events.ChangePath, {path: Routes.Login});
+        }
     }
 
+    /**
+     * Method that gets the hall context
+     * @param {Object} session - information about current session
+     * @return {Promise<Object>} - profile tickets context
+     */
     async getHallContext(session) {
-
-        let hallContext = {};
+        const hallContext = {};
 
         const hallViewModel = new HallViewModel();
         hallViewModel.state.hallID = session.hallID;
-        hallViewModel.state.ticketID = session.id;
+        hallViewModel.state.scheduleID = session.id;
 
         const responseHallViewModel = hallViewModel.getPlacesCommand.exec();
-        hallContext.name = await Getter.getMovie(session.movieID).name;
-        hallContext.cinema = await Getter.getCinema(session.cinemaID).name;
-        hallContext.date = session.time;
+
+        hallContext.name = (await Getter.getMovie(session.movieID)).name;
+        hallContext.cinema = (await Getter.getCinema(session.cinemaID)).name;
+        hallContext.date = session.date;
+        hallContext.time = session.time;
         hallContext.sessionID = session.id;
 
         await responseHallViewModel
-            .then((res) => {
-                hallContext.hall = res;
+            .then((response) => {
+                hallContext.hall = response;
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_HALL_CONTEXT() :: ERR');
                 console.log(err);
                 console.log('HALL_VIEW:GET_HALL_CONTEXT() :: ERR\n\n');
             });
+
         return hallContext;
     }
 
-}
+    /**
+     * Method that handles place selection in the hall
+     * @param {Object} data - information about current hall layout
+     */
+    onSelect(data) {
+        if (data.target.classList.contains('button-seat-occupied')) {
+            return;
+        }
 
-export default HallView;
+        const hallPlaces = document.getElementsByClassName('button-seat');
+
+        for (const i in hallPlaces) {
+            if (Object.prototype.hasOwnProperty.call(hallPlaces, i)) {
+                const hallPlacesClassList = hallPlaces[i].classList;
+                const hallPlacesDataset = hallPlaces[i].dataset;
+
+                if (data.place === hallPlacesDataset.place && data.row === hallPlacesDataset.row) {
+                    if (hallPlacesClassList.contains('button-seat-selected')) {
+                        hallPlacesClassList.remove('button-seat-selected');
+                    } else if (!hallPlacesClassList.contains('button-seat-occupied')) {
+                        hallPlacesClassList.add('button-seat-selected');
+                    }
+                } else {
+                    if (hallPlacesClassList.contains('button-seat-selected')) {
+                        hallPlacesClassList.remove('button-seat-selected');
+                    }
+                }
+            }
+        }
+    }
+}

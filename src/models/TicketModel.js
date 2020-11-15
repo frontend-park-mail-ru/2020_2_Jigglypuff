@@ -1,6 +1,5 @@
 import ScheduleModel from './ScheduleModel';
 import Routes from '../consts/Routes';
-import http from 'http';
 import CSRF from '../utils/CSRF';
 
 /** Class that contains Ticket model */
@@ -123,18 +122,17 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getTicketList() {
-        const response = await fetch(Routes.Host + Routes.TicketList, {
+        const response = await fetch(Routes.HostAPI + Routes.TicketList, {
             method: 'GET',
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getTicketList();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.getTicketList();
             }
-        });
+        }
 
         return response;
     }
@@ -147,15 +145,17 @@ export default class TicketModel {
         const response = await fetch(Routes.HostAPI + Routes.Ticket.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getTicket();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.getTicket();
             }
-        });
+        }
 
         if (response.ok) {
             const data = await response.json();
@@ -180,24 +180,24 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async buyTicket() {
-        const response = await fetch(Routes.Host + Routes.TicketBuy, {
+        const response = await fetch(Routes.HostAPI + Routes.TicketBuy, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
             body: JSON.stringify({'login': this._login.toString(),
                 'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
                 'scheduleID': this._scheduleID}),
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.buyTicket();
+        if (!response.ok) {
+            if (response.status === 403) {
+                await CSRF.getCSRF();
+                await this.buyTicket();
             }
-        });
+        }
 
         return response;
     }
@@ -207,19 +207,9 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async getScheduleHallTicketList() {
-        const response = await fetch(Routes.Host + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
+        return await fetch(Routes.HostAPI + Routes.TicketScheduleList.replace(/:id/, this._scheduleID), {
             method: 'GET',
             credentials: 'include',
         });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getScheduleHallTicketList();
-            }
-        });
-
-        return response;
     }
 }

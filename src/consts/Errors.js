@@ -1,28 +1,55 @@
 const Errors = {
-    AlreadyRegistered: 1,
+    AlreadyRegistered: {
+        errorNumber: 1,
+        errorMessage: 'Аккаунт с такой почтой уже существует',
+    },
 
     FailedToGetActualMovieList: 2,
     FailedToGetCinema: 3,
     FailedToGetCinemaList: 4,
-    FailedToGetMovieList: 5,
-    FailedToGetMovie: 6,
-    FailedToGetProfile: 7,
-    FailedToGetSchedule: 8,
-    FailedToGetTicket: 9,
-    FailedToGetTicketList: 10,
-    FailedToGetTicketScheduleList: 11,
-    FailedToLogout: 12,
+    FailedToGetHall: 5,
+    FailedToGetMovieList: 6,
+    FailedToGetMovie: 7,
+    FailedToGetProfile: 8,
+    FailedToGetSchedule: 9,
+    FailedToGetTicket: 10,
+    FailedToGetTicketList: 11,
+    FailedToGetTicketScheduleList: 12,
+    FailedToLogout: 13,
 
-    InvalidLoginOrPassword: 13,
-    InvalidLogin: 14,
-    InvalidPassword: 15,
-    InvalidName: 16,
-    InvalidSurname: 17,
-    InvalidPasswordRepeated: 18,
+    InvalidLoginOrPassword: {
+        errorNumber: 14,
+        errorMessage: 'Неверный логин и/или пароль',
+    },
+    InvalidLogin: {
+        errorInputID: 'login',
+        errorNumber: 15,
+        errorMessage: 'Неверный формат почты',
+    },
+    InvalidPassword: {
+        errorInputID: 'password',
+        errorNumber: 16,
+        errorMessage: 'Неверный формат пароля',
+    },
+    InvalidName: {
+        errorInputID: 'name',
+        errorNumber: 17,
+        errorMessage: 'Неверный формат имени',
+    },
+    InvalidSurname: {
+        errorInputID: 'surname',
+        errorNumber: 18,
+        errorMessage: 'Неверный формат фамилии',
+    },
+    InvalidPasswordRepeated: {
+        errorInputID: 'passwordRepeated',
+        errorNumber: 19,
+        errorMessage: 'Пароли не совпадают',
+    },
 
-    ListIsEmpty: 19,
+    ListIsEmpty: 20,
 
-    NotAuthorised: 20,
+    NotAuthorised: 21,
 };
 
 export default Errors;

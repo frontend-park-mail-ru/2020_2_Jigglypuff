@@ -3,13 +3,21 @@ import MovieViewModel from '../viewmodels/MovieViewModel';
 import SettingsViewModel from '../viewmodels/SettingsViewModel';
 import EventBus from '../services/EventBus';
 import Events from '../consts/Events';
+import ScheduleViewModel from '../viewmodels/ScheduleViewModel';
 
+/**
+ * Class that gets different essence information
+ */
 export default class Getter {
+    /**
+     * Method that gets the cinema information
+     * @param {Number} id - id of required cinema
+     * @return {Promise<Object>} - cinema information
+     */
     static async getCinema(id) {
-
         let cinema = {};
-        let cinemaViewModel = new CinemaViewModel();
-        let responseCinemaViewModel = cinemaViewModel.getCinemaCommand.exec(id);
+        const cinemaViewModel = new CinemaViewModel();
+        const responseCinemaViewModel = cinemaViewModel.getCinemaCommand.exec(id);
 
         await responseCinemaViewModel
             .then((response) => {
@@ -24,15 +32,18 @@ export default class Getter {
         return cinema;
     }
 
+    /**
+     * Method that gets the movie information
+     * @param {Number} id - id of required cinema
+     * @return {Promise<Object>} - movie information
+     */
     static async getMovie(id) {
-
         let movie = {};
-        let movieViewModel = new MovieViewModel();
-        let responseMovieViewModel = movieViewModel.getMovieCommand.exec(id);
+        const movieViewModel = new MovieViewModel();
+        const responseMovieViewModel = movieViewModel.getMovieCommand.exec(id);
 
         await responseMovieViewModel
             .then((response) => {
-
                 movie = response;
             })
             .catch((err) => {
@@ -44,8 +55,12 @@ export default class Getter {
         return movie;
     }
 
+    /**
+     * Method that gets the session information
+     * @param {Number} id - id of required cinema
+     * @return {Promise<Object>} - session information
+     */
     static async getSession(id) {
-
         let session = {};
         const scheduleViewModel = new ScheduleViewModel();
         const responseScheduleViewModel = scheduleViewModel.getSessionCommand.exec(id);
@@ -63,9 +78,13 @@ export default class Getter {
         return session;
     }
 
+    /**
+     * Method that gets the profile information
+     * @return {Promise<Object>} - profile information
+     */
     static async getProfile() {
         let profile = {};
-        let responseSettingsViewModel = new SettingsViewModel();
+        const responseSettingsViewModel = new SettingsViewModel();
 
         await responseSettingsViewModel.getProfile()
             .then((response) => {

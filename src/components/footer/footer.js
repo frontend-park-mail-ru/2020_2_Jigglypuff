@@ -1,22 +1,18 @@
 import Component from '../component.js';
 import template from './footer.hbs';
-import EventBus from '../../services/EventBus.js';
 
 /**
+ * Footer component
  * @class
- * Header component
  */
 export default class Footer extends Component {
     /**
-     * Create a header
-     * @param context - header context
-     * @param parent
+     * Create a footer
+     * @constructor
+     * @param {Object} context - footer context
      * */
-    constructor(context, parent) {
-        super(context, parent);
+    constructor(context = {}) {
+        super(context);
         this.template = template;
-    }
-
-    onUpdate(data = {}) {
     }
 }

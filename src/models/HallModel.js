@@ -1,5 +1,3 @@
-import CSRF from '../utils/CSRF';
-import http from 'http';
 import Routes from '../consts/Routes';
 
 /** Class that contains Hall model */
@@ -69,14 +67,6 @@ export default class HallModel {
         const response = await fetch(Routes.HostAPI + Routes.Hall.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
-        });
-
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getHall();
-            }
         });
 
         if (response.ok) {

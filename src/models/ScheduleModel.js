@@ -1,7 +1,5 @@
 import Validator from '../utils/Validator';
 import Routes from '../consts/Routes';
-import http from 'http';
-import CSRF from '../utils/CSRF';
 
 /** Class that contains Schedule model */
 export default class ScheduleModel {
@@ -142,18 +140,31 @@ export default class ScheduleModel {
      * @return {Promise<Response>}
      */
     async getSchedule(movieID = 0, cinemaID = 0, premierTime='2020-11-10') {
-        const response = await fetch(Routes.Host + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
+        return await fetch(Routes.HostAPI + Routes.Schedule + '?movie_id=' + movieID + '&cinema_id=' + cinemaID + '&date=' + premierTime, {
+            method: 'GET',
+            credentials: 'include',
+        });
+    }
+
+    /**
+     * Get movie schedule.
+     * @return {Promise<Response>}
+     */
+    async getScheduleByID() {
+        const response = await fetch(Routes.HostAPI + Routes.ScheduleID.replace(/:id/, this._id), {
             method: 'GET',
             credentials: 'include',
         });
 
-        response.catch((err) => {
-            if (err === http.STATUS_CODES.FORBIDDEN) {
-                CSRF.getCSRF();
-                response.resolve();
-                this.getSchedule(movieID, cinemaID, premierTime);
-            }
-        });
+        if (response.ok) {
+            const data = await response.json();
+            this._cinemaID = data['CinemaID'];
+            this._cost = data['Cost'];
+            this._hallID = data['HallID'];
+            this._id = data['ID'];
+            this._movieID = data['MovieID'];
+            this._premierTime = data['PremierTime'];
+        }
 
         return response;
     }

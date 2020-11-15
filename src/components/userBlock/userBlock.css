@@ -1,17 +1,10 @@
-.userblock__avatar {
-    border-radius: 2px;
-    width: 2.5em;
-    height: 2.5em;
-    object-fit: cover;
-    align-items: center;
-}
-
 .userblock__avatar_regular {
     border: 3px solid #880000;
     border-radius: 10px;
     object-fit: cover;
     height: 3.9em;
     width: 3.9em;
+    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
 }
 
 .userblock__avatar_premium {
@@ -26,9 +19,4 @@
     color: #FFFFFF;
     text-decoration: none;
     margin-left: 1.5rem;
-}
-.userblock__item_active {
-    background: #c80000;
-    padding: 2px;
-    border-radius: 3px;
 }

@@ -1,3 +1,4 @@
+import CinemaModel from '../models/CinemaModel';
 import MovieModel from '../models/MovieModel';
 
 /** Class that contains methods to extract data from anything */
@@ -31,6 +32,24 @@ export default class Extractor {
         result.set('pathToAvatar', data.pathToAvatar);
 
         return result;
+    }
+
+    /**
+     * Extract cinema data from json to model.
+     * @param {JSON} data
+     * @return {CinemaModel}
+     */
+    static extractCinemaDataFromJSON(data) {
+        const cinemaModel = new CinemaModel();
+
+        cinemaModel.address = data['Address'];
+        cinemaModel.authorID = data['AuthorID'];
+        cinemaModel.hallCount = data['HallCount'];
+        cinemaModel.id = data['ID'];
+        cinemaModel.name = data['Name'];
+        cinemaModel.pathToAvatar = data['PathToAvatar'];
+
+        return cinemaModel;
     }
 
     /**
@@ -91,7 +110,7 @@ export default class Extractor {
      * @param {CinemaModel} data
      * @return {Map}
      */
-    static extractCinemaData(data) {
+    static extractCinemaDataFromModel(data) {
         const result = new Map();
 
         result.set('address', data.address);
@@ -172,7 +191,7 @@ export default class Extractor {
     static extractTicketFromJSON(data) {
         const result = new Map();
 
-        result.set('id', data['HallID']);
+        result.set('id', data['ID']);
         result.set('login', data['Login']);
         result.set('placeField', {
             'place': data['PlaceField']['Place'],
@@ -201,6 +220,24 @@ export default class Extractor {
 
         result.set('place', data['Place']);
         result.set('row', data['Row']);
+
+        return result;
+    }
+
+    /**
+     * Extract schedule data from model to map.
+     * @param {ScheduleModel} data
+     * @return {Map}
+     */
+    static extractScheduleDataFromModel(data) {
+        const result = new Map();
+
+        result.set('cinemaID', data.cinemaID);
+        result.set('cost', data.cost);
+        result.set('hallID', data.hallID);
+        result.set('id', data.id);
+        result.set('movieID', data.movieID);
+        result.set('premierTime', data.premierTime);
 
         return result;
     }

@@ -18,7 +18,7 @@ export default class Validator {
      * @param {string} password
      */
     static validatePassword(password) {
-        const regExp = /^[$\w]{4,20}$/;
+        const regExp = /^[$!\w]{4,20}$/;
         return regExp.test(String(password));
     }
 
@@ -38,7 +38,7 @@ export default class Validator {
      * @param {string} movieName
      */
     static validateMovieName(movieName) {
-        const regExp = /^[А-Яа-я\w\s]{1,50}$/;
+        const regExp = /^[А-Яа-яA-Za-z\w\s.…]{1,100}$/;
         return regExp.test(String(movieName));
     }
 
@@ -112,7 +112,7 @@ export default class Validator {
      */
     static validateMovieRatingUser(movieUserRating) {
         if (Number.isInteger(movieUserRating)) {
-            if ((movieUserRating >= 0) && (movieUserRating < 10)) {
+            if ((movieUserRating >= 0) && (movieUserRating < 11)) {
                 return true;
             }
         }

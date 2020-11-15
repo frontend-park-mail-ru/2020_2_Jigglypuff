@@ -1,23 +1,52 @@
 import template from './CinemaListView.hbs';
 import View from '../BaseView/View';
-import Slider from '../../components/slider/slider';
-import MovieList from '../../components/movieList/movieList';
-import CinemaList from '../../components/CinemaList/cinemaList';
+import CinemaList from '../../components/cinemaList/cinemaList';
+import CinemaListViewModel from '../../viewmodels/CinemaListViewModel';
 
-class CinemaListView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
-        this.context = context;
+/**
+ * Class of the cinema view
+ */
+export default class CinemaListView extends View {
+    /**
+     * Constructor of the cinema list view
+     * @constructor
+     * @param {string} title - title of the cinema list page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
 
         this.template = template;
     }
 
-    show(routeData) {
-        let data = {
-            CinemaList: (new CinemaList().render()),
+    /**
+     * Method that shows cinema list view
+     */
+    async show() {
+        const cinemaListContext = await this.getCinemaListContext();
+
+        const data = {
+            CinemaList: (new CinemaList(cinemaListContext).render()),
         };
-        super.show(this.template(data));
+        await super.show(this.template(data));
+    }
+
+    /**
+     * Method that gets cinema list context
+     * @return {Promise<Object>} - cinema list context
+     */
+    async getCinemaListContext() {
+        let cinemaListContext = {};
+
+        const responseCinemaList = (new CinemaListViewModel()).getCinemaListCommand.exec();
+
+        await responseCinemaList
+            .then((response) => {
+                cinemaListContext = response;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        return cinemaListContext;
     }
 }
-
-export default CinemaListView;

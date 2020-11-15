@@ -1,33 +1,29 @@
 .cinema-card {
-    width: 44%;
-    padding: 20px;
-
-    background: #000000;
-    border-radius: 41px;
-    border: 4px solid var(--main-red-color);
-    color: white;
+    width: 480px;
+    height: 350px;
 
     font-weight: bold;
 
-    margin: 5vh auto;
-    box-shadow: 0 0 10px 5px var(--main-red-color);
     display: flex;
     flex-direction: row;
 }
 
 .cinema-card__poster {
     margin-right: 30px;
-    width: 70%;
+    width: 100%;
 }
 
 .cinema-card__poster_img {
+    margin-right: 30px;
     border-radius: 41px;
-    width: 100%;
+    width: 50%;
+    height: 100%;
 }
 
 .cinema-card__description {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .cinema-card__description_title {

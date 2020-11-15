@@ -2,13 +2,14 @@ import Component from '../../../component.js';
 import template from './scheduleButton.hbs';
 
 /**
+ * Schedule button component
  * @class
- * Button component
  */
 export default class ScheduleButton extends Component {
     /**
-     * Create a button
-     * @param context - button context
+     * Create a schedule button
+     * @constructor
+     * @param {Object} context - schedule button context
      * */
     constructor(context) {
         super(context);

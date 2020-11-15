@@ -6,6 +6,7 @@ const Events = {
     LoginFieldFill: 'loginFieldFill',
     RegisterFieldFill: 'registerFieldFill',
     RegisterSubmit: 'registerSubmit',
+    RefreshPage: 'refreshPage',
     UploadAvatar: 'uploadAvatar',
     ScrollToBlock: 'scrollToBlock',
     Logout: 'logout',
@@ -13,6 +14,7 @@ const Events = {
     ProfileEditSubmit: 'profileEditSubmit',
     TicketSelect: 'ticketSelect',
     TicketsBuy: 'ticketsBuy',
+    MovieRate: 'movieRate',
 };
 
 

@@ -1,96 +1,23 @@
 <div class="tickets__header">
     <span class="tickets__header-text">Текущие заказы</span>
 </div>
+{{{ Validation }}}
 <div class="tickets__wrapper">
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
+    {{#each this }}
+        <div class="tickets__ticket">
+            <div class="ticket__title">
+                {{ movie }}
+            </div>
+            <div class="ticket__info">
+                {{ date }}
+            </div>
+            <div class="ticket__info">
+                {{ time }}
+            </div>
+            <a class="ticket__cinema" href="#" data-event="changePath" data-path="/cinema/1/">{{ cinema }}</a>
+            <div class="ticket__info">
+                {{ hall }} зал <br> {{ row }} ряд | {{ place }} место
+            </div>
         </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
-        </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
-        </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
-        </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
-        </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-    <div class="tickets__ticket">
-        <div class="ticket__title">
-            Довод
-        </div>
-        <div class="ticket__info">
-            20 Октября 2020
-        </div>
-        <div class="ticket__info">
-            18:00
-        </div>
-        <a class="ticket__cinema" href="/cinema/" data-event="changePath" data-path="/cinema/">Формула Кино Лефортово</a>
-        <div class="ticket__info">
-            1 зал | 1 место
-        </div>
-    </div>
-
+    {{/each}}
 </div>

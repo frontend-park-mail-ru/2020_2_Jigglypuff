@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     align-self: flex-start;
+    justify-content: center;
 }
 
 .profile__header {
@@ -10,6 +11,7 @@
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .profile__header-logout {
@@ -25,34 +27,14 @@
 }
 
 .edit {
-    width: 30%;
-    height: 100%;
-    padding: 30px;
-
+    width: 350px;
     font-weight: bold;
 
-    background: #000000;
-    border-radius: 18px;
-    border: 4px solid var(--main-red-color);
-    color: white;
-
-    margin: 5vh auto;
-    box-shadow: 0 0 10px 5px var(--main-red-color);
 }
 
 .tickets {
-    width: 50%;
-    height: 70%;
-    padding: 30px;
+    width: 550px;
 
     font-weight: bold;
-
-    background: #000000;
-    border-radius: 18px;
-    border: 4px solid var(--main-red-color);
-    color: white;
-
-    margin: 5vh auto;
-    box-shadow: 0 0 10px 5px var(--main-red-color);
 }
 

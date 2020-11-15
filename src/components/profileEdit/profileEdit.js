@@ -1,37 +1,42 @@
 import Component from '../component.js';
 import template from './profileEdit.hbs';
-import RegistrationItems from '../../consts/RegistrationItems';
 import TextInput from '../baseComponents/textInput/textInput';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import EventBus from '../../services/EventBus';
 import ImageInput from '../baseComponents/imageInput/imageInput';
 import Events from '../../consts/Events';
+import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
+ * Profile edit component
  * @class
- * Header component
  */
 export default class ProfileEdit extends Component {
     /**
-     * Create a header
-     * @param context - header context
-     * @param parent
+     * Create a profile edit component
+     * @constructor
+     * @param {Object} context - profile edit context
      * */
-    constructor(context = {}, parent = {}) {
-        super(context, parent);
+    constructor(context = {}) {
+        super(context);
         this.template = template;
 
         const input = this.context;
         this.context = {};
         this.context.input = [];
 
-        for (let i in input) {
-            if (i === 'avatar') {
-                this.context.input.push((new ImageInput(input[i]).render()));
-                continue;
+        for (const i in input) {
+            if (Object.prototype.hasOwnProperty.call(input, i)) {
+                if (i === 'avatar') {
+                    this.context.input.push((new ImageInput(input[i]).render()));
+                    continue;
+                }
+                this.context.input.push((new TextInput(input[i])).render());
             }
-            this.context.input.push((new TextInput(input[i])).render());
         }
+
+        this.context.Validation = (new ValidationBlock({
+            message: 'Пожалуйста, загрузите верный формат аватара',
+        })).render();
 
         this.context.StandardButton = (new StandardButton({
             buttonName: 'Редактировать',

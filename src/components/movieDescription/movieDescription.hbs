@@ -1,35 +1,39 @@
 <div class="movie-description">
     <div class="movie-description__media-block">
         <div class="media-block__poster">
-            <div class="media-block__rating">
-                <p class="media-block__rating-p">7.8</p>
-            </div>
+            {{#if isAuthorized }}
+                <div class="media-block__rating {{#unless personalRating }}hidden{{/unless}}">
+                        <p class="media-block__rating-p">{{ personalRating }}</p>
+                    </div>
+            {{/if}}
             <img class="media-block__poster-img" src="{{ pathToAvatar }}" alt="">
         </div>
-        <div class="media-block__rate">
-            <label class="media-block__rate-title" for="rating">Ваша оценка</label>
-            <select id="rating" class="media-block__rate-field">
-                <option value=""></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-            </select>
-            {{{ StandardButton }}}
-        </div>
+        {{#if isAuthorized }}
+            <div class="media-block__rate">
+                <label class="media-block__rate-title" for="rating">Ваша оценка</label>
+                <select id="rating" data-movie="{{ id }}" class="media-block__rate-field">
+                    <option value=""></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+                {{{ StandardButton }}}
+            </div>
+        {{/if}}
     </div>
     <div class="movie-description__description-block">
             <span class="description-block__title">
                 {{ name }}
             </span>
         <span class="description-block__specification">
-                {{ releaseYear }}, {{ country }}, {{ timing }} мин, {{ ageGroup }}+
+                {{ releaseYear }}, {{ country }}, {{ duration }} мин, {{ ageGroup }}+
             </span>
         <span class="description-block__specification">
             {{ genre }}
