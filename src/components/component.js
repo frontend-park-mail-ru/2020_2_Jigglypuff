@@ -1,16 +1,21 @@
 /**
- * @class
  * Base class of components
+ * @class
  */
 export default class Component {
     /**
      * Create a component
-     * @param context - component context
+     * @constructor
+     * @param {Object} context - component context
      * */
     constructor(context) {
         this.context = context;
     }
 
+    /**
+     * Render a component
+     * @return {string}
+     * */
     render() {
         return this.template(this.context);
     }

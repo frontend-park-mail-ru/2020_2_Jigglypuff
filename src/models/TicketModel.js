@@ -1,6 +1,5 @@
 import ScheduleModel from './ScheduleModel';
 import Routes from '../consts/Routes';
-import http from 'http';
 import CSRF from '../utils/CSRF';
 
 /** Class that contains Ticket model */

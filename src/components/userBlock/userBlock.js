@@ -1,18 +1,18 @@
 import Component from '../component.js';
 import template from './userBlock.hbs';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import Routes from '../../consts/Routes';
 
 /**
- * @class
  * User block component
+ * @class
  */
 export default class UserBlock extends Component {
     /**
      * Create a user block
-     * @param context - user context
+     * @constructor
+     * @param {Object} context - user context
      * */
     constructor(context) {
         super(context);
@@ -24,9 +24,5 @@ export default class UserBlock extends Component {
             url: Routes.Login,
         });
         this.context.StandardButton = this.StandartButton.render();
-    }
-
-    onUpdate(data = {}) {
-
     }
 }

@@ -6,7 +6,7 @@
 @import "../../src/components/baseComponents/buttons/standartButton/standardButton.css";
 @import "../../src/components/baseComponents/buttons/playButton/playButton.css";
 @import "../../src/components/baseComponents/textInput/textInput.css";
-@import "../../src/components/RegisterContent/registerContent.css";
+@import "../../src/components/registerContent/registerContent.css";
 @import "../../src/components/loginContent/loginContent.css";
 @import "../../src/components/baseComponents/imageInput/imageInput.css";
 @import "../../src/components/slider/slider.css";
@@ -15,7 +15,7 @@
 @import "../../src/components/movieCard/movieCard.css";
 @import "../../src/components/movieDescription/movieDescription.css";
 @import "../../src/components/cinemaCard/cinemaCard.css";
-@import "../../src/components/CinemaList/cinemaList.css";
+@import "../../src/components/cinemaList/cinemaList.css";
 @import "../../src/components/profileContent/profileContent.css";
 @import "../../src/components/profileEdit/profileEdit.css";
 @import "../../src/components/profileTickets/profileTickets.css";

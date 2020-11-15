@@ -3,24 +3,25 @@ import template from './cinemaList.hbs';
 import CinemaCard from '../cinemaCard/cinemaCard';
 
 /**
+ * Cinema list component
  * @class
- * Image input component
  */
 export default class CinemaList extends Component {
     /**
-     * Create a button
-     * @param context - button context
+     * Create a cinema list
+     * @constructor
+     * @param {Object} context - cinema list context
      * */
     constructor(context) {
         super(context);
         this.template = template;
 
-        let Cinemas = [];
-        console.log(this.context);
-        for (let i in this.context) {
-            Cinemas.push((new CinemaCard(this.context[i])).render());
+        const Cinemas = [];
+        for (const i in this.context) {
+            if (Object.prototype.hasOwnProperty.call(this.context, i)) {
+                Cinemas.push((new CinemaCard(this.context[i])).render());
+            }
         }
         this.context.Cinemas = Cinemas;
-
     }
 }

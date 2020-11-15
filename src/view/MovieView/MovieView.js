@@ -8,49 +8,60 @@ import BaseViewModel from '../../viewmodels/BaseViewModel';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 
-class MovieView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
-        this.context = context;
-
+/**
+ * Class of the movie view
+ */
+export default class MovieView extends View {
+    /**
+     * Constructor of the movie view
+     * @constructor
+     * @param {string} title - title of the movie page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
         this.template = template;
-        this.movieViewModel = new MovieViewModel();
 
         EventBus.on(Events.MovieRate, this.onMovieRate.bind(this));
     }
 
+    /**
+     * Method that shows the movie view
+     * @param {Object} routeData - data from route path of the movie page
+     */
     async show(routeData) {
-        let data = {};
+        const data = {};
 
-        let movieDescriptionContext = await Getter.getMovie(routeData.id);
+        const movieDescriptionContext = await Getter.getMovie(routeData.id);
         movieDescriptionContext.pathToAvatar = Routes.Host + movieDescriptionContext.pathToAvatar;
         movieDescriptionContext.pathToSliderAvatar = Routes.Host + movieDescriptionContext.pathToSliderAvatar;
 
         console.log(movieDescriptionContext);
-        movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100
+        movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100;
 
         movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
         data.MovieDescription = (new MovieDescription(movieDescriptionContext)).render();
 
-        super.show(this.template(data));
+        await super.show(this.template(data));
     }
 
-    async onMovieRate(routeDate) {
+    /**
+     * Method that handles movie rating
+     */
+    async onMovieRate() {
+        const rating = document.getElementById('rating');
 
-        let rating = document.getElementById('rating');
-
-        if(!rating.value) {
+        if (!rating.value) {
             return;
         }
 
-        let movieViewModel = new MovieViewModel();
+        const movieViewModel = new MovieViewModel();
         movieViewModel.state.personalRating = rating.value;
         movieViewModel.state.id = rating.dataset.movie;
 
-        let responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
+        const responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
 
-        let ratingMark = document.getElementsByClassName('media-block__rating')[0];
+        const ratingMark = document.getElementsByClassName('media-block__rating')[0];
 
         await responseMovieViewModel
             .then((response) => {
@@ -59,16 +70,13 @@ class MovieView extends View {
                         ratingMark.classList.remove('hidden');
                     }
                 }
-
             })
-            .catch((err) => {
+            .catch(() => {
                 if (!ratingMark.classList.contains('hidden')) {
                     ratingMark.classList.add('hidden');
                 }
-            })
+            });
 
         EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
     }
 }
-
-export default MovieView;

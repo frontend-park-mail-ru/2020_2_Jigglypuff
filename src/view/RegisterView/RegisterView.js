@@ -1,16 +1,23 @@
 import template from './RegisterView.hbs';
 import View from '../BaseView/View';
-import RegisterContent from '../../components/RegisterContent/registerContent';
+import RegisterContent from '../../components/registerContent/registerContent';
 import EventBus from '../../services/EventBus';
 import Events from '../../consts/Events';
 import SignUpViewModel from '../../viewmodels/SignUpViewModel';
-import Router from '../../services/Router';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
 import Routes from '../../consts/Routes';
 
-class RegisterView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
+/**
+ * Class of the registration view
+ */
+export default class RegisterView extends View {
+    /**
+     * Constructor of the registration view
+     * @constructor
+     * @param {string} title - title of the registration page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
         this.template = template;
         this.signUpViewModel = new SignUpViewModel();
 
@@ -18,8 +25,10 @@ class RegisterView extends View {
         EventBus.on(Events.RegisterSubmit, this.onSubmit.bind(this));
     }
 
+    /**
+     * Method that shows registration view
+     */
     async show() {
-
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
@@ -27,16 +36,27 @@ class RegisterView extends View {
         const data = {
             RegisterContent: (new RegisterContent()).render(),
         };
-        super.show(this.template(data));
+        await super.show(this.template(data));
     }
+
+    /**
+     * Method that hides registration view
+     */
     hide() {
         super.hide();
     }
 
+    /**
+     * Method that handles input from registration fields
+     * @param {Object} data - contains entered data from input field
+     */
     onUpdateField(data = {}) {
         this.signUpViewModel.state[data.id] = data.value;
     }
 
+    /**
+     * Method that handles submitting of registration form
+     */
     async onSubmit() {
         const responseSignUp = this.signUpViewModel.registerCommand.exec();
 
@@ -54,12 +74,9 @@ class RegisterView extends View {
                 console.log('NOT OK');
                 console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
 
-                let validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.getElementsByClassName('validation-block')[0];
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
-            })
+            });
     }
-
 }
-
-export default RegisterView;

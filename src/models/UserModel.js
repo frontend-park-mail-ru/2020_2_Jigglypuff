@@ -1,6 +1,5 @@
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
-import http from 'http';
 import CSRF from '../utils/CSRF';
 
 /** Class that contains User model */
@@ -119,9 +118,8 @@ export default class UserModel {
      * @param {any} avatar
      */
     set avatar(avatar) {
-
         // if (Checker.isImage(avatar)) {
-            this._avatar = avatar;
+        this._avatar = avatar;
         //     this._avatar = null;
         // }
     }

@@ -10,9 +10,17 @@ import ProfileEditItems from '../../consts/ProfileEditItems';
 import TicketListViewModel from '../../viewmodels/TicketListViewModel';
 import Getter from '../../utils/Getter';
 
-class ProfileView extends View {
-    constructor(title = 'CinemaScope', context = {}) {
-        super(title, context);
+/**
+ * Class of the profile view
+ */
+export default class ProfileView extends View {
+    /**
+     * Constructor of the profile view
+     * @constructor
+     * @param {string} title - title of the profile page
+     */
+    constructor(title = 'CinemaScope') {
+        super(title);
         this.template = template;
 
         this.settingsViewModel = new SettingsViewModel();
@@ -23,14 +31,16 @@ class ProfileView extends View {
         EventBus.on(Events.ProfileEditSubmit, this.onSubmit.bind(this));
     }
 
+    /**
+     * Method that shows profile view
+     */
     async show() {
-
         if (!(await BaseViewModel.isAuthorised())) {
             EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
 
-        let profileContext = {
+        const profileContext = {
             profileEdit: {},
             profileTickets: {},
         };
@@ -41,15 +51,20 @@ class ProfileView extends View {
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
         };
-        super.show(this.template(data));
+        await super.show(this.template(data));
     }
 
+    /**
+     * Method that gets the profile editing context
+     * @return {Promise<Object>} - profile editing context
+     */
     async getProfileEditContext() {
-        let profileEdit = ProfileEditItems;
+        const profileEdit = ProfileEditItems;
 
-        let userProfile = await Getter.getProfile();
-        for (let i in profileEdit) {
-            if (userProfile.hasOwnProperty(i) && i !== 'avatar') {
+        const userProfile = await Getter.getProfile();
+
+        for (const i in profileEdit) {
+            if (Object.prototype.hasOwnProperty.call(userProfile, i) && i !== 'avatar') {
                 profileEdit[i].inputPlaceholder = userProfile[i];
             }
         }
@@ -58,12 +73,15 @@ class ProfileView extends View {
         return profileEdit;
     }
 
+    /**
+     * Method that gets the profile tickets context
+     * @return {Promise<Object>} - profile tickets context
+     */
     async getProfileTicketContext() {
+        const ticketListViewModel = new TicketListViewModel();
 
-        let ticketListViewModel = new TicketListViewModel();
-
-        let profileTicketContext = [];
-        let responseTicketList = ticketListViewModel.getTicketListCommand.exec();
+        const profileTicketContext = [];
+        const responseTicketList = ticketListViewModel.getTicketListCommand.exec();
 
         let ticketList = [];
         await responseTicketList
@@ -72,13 +90,11 @@ class ProfileView extends View {
                 console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
                 console.log(response);
                 console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
-
             })
             .catch((err) => {
                 console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
-                console.log('NOT OK');
+                console.log(err);
                 console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
-
             });
 
         if (!ticketList) {
@@ -86,7 +102,7 @@ class ProfileView extends View {
         }
 
         for (const value of ticketList) {
-            let ticket = {};
+            const ticket = {};
 
             value.schedule = await Getter.getSession(value.schedule.id);
             ticket.hall = value.schedule.hallID;
@@ -103,10 +119,12 @@ class ProfileView extends View {
         return profileTicketContext;
     }
 
+    /**
+     * Method that handles logout from the profile
+     */
     onLogout() {
         BaseViewModel.logout()
-            .then((response) => {
-
+            .then(() => {
                 console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
                 console.log('SUCCESS');
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
@@ -114,7 +132,6 @@ class ProfileView extends View {
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
-
                 console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
                 console.log(err);
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
@@ -123,10 +140,17 @@ class ProfileView extends View {
             });
     }
 
+    /**
+     * Method that hides the profile view
+     */
     hide() {
         super.hide();
     }
 
+    /**
+     * Method that handles input from the profile editing fields
+     * @param {Object} data - contains entered data from input field
+     */
     onUpdateField(data) {
         if (data.id === 'avatar') {
             this.settingsViewModel.state[data.id] = data.target.files[0];
@@ -135,11 +159,14 @@ class ProfileView extends View {
         this.settingsViewModel.state[data.id] = data.value;
     }
 
+    /**
+     * Method that handles submitting of the profile editing form
+     */
     async onSubmit() {
         const responseProfileEdit = this.settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
-            .then((response) => {
+            .then(() => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
                 console.log('OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
@@ -149,7 +176,7 @@ class ProfileView extends View {
                 console.log('NOT OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
 
-                let validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.getElementsByClassName('validation-block')[0];
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });
@@ -157,5 +184,3 @@ class ProfileView extends View {
         await this.show();
     }
 }
-
-export default ProfileView;

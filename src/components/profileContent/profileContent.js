@@ -4,21 +4,20 @@ import ProfileEdit from '../profileEdit/profileEdit';
 import ProfileTickets from '../profileTickets/profileTickets';
 
 /**
+ * Profile content component
  * @class
- * Header component
  */
 export default class ProfileContent extends Component {
     /**
-     * Create a header
-     * @param context - header context
-     * @param parent
+     * Create a profile content component
+     * @constructor
+     * @param {Object} context - profile content context
      * */
-    constructor(context = {}, parent = {}) {
-        super(context, parent);
+    constructor(context = {}) {
+        super(context);
         this.template = template;
 
         this.context.ProfileEdit = (new ProfileEdit(this.context.profileEdit)).render();
         this.context.ProfileTickets = (new ProfileTickets(this.context.profileTickets)).render();
     }
-
 }

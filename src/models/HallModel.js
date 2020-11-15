@@ -1,5 +1,3 @@
-import CSRF from '../utils/CSRF';
-import http from 'http';
 import Routes from '../consts/Routes';
 
 /** Class that contains Hall model */

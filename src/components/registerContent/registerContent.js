@@ -3,27 +3,25 @@ import template from './registerContent.hbs';
 import RegistrationItems from '../../consts/RegistrationItems';
 import TextInput from '../baseComponents/textInput/textInput';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import EventBus from '../../services/EventBus';
-import ImageInput from '../baseComponents/imageInput/imageInput';
 import Events from '../../consts/Events';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
+ * Register content component
  * @class
- * Header component
  */
 export default class RegisterContent extends Component {
     /**
-     * Create a header
-     * @param context - header context
-     * @param parent
+     * Create a register content
+     * @constructor
+     * @param {Object} context - register content context
      * */
-    constructor(context = {}, parent = {}) {
-        super(context, parent);
+    constructor(context = {}) {
+        super(context);
         this.template = template;
         this.context.input = [];
 
-        for (let i in RegistrationItems) {
+        for (const i in RegistrationItems) {
             if (i === 'avatar') {
                 continue;
             }
@@ -39,5 +37,4 @@ export default class RegisterContent extends Component {
             event: Events.RegisterSubmit,
         })).render();
     }
-
 }

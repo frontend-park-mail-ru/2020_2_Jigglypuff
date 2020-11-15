@@ -1,21 +1,19 @@
 import Component from '../component.js';
 import template from './hallLayout.hbs';
-import ScheduleButton from '../baseComponents/buttons/scheduleButton/scheduleButton';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
 import SeatButton from '../baseComponents/buttons/seatButton/seatButton';
 import Events from '../../consts/Events';
-import EventBus from '../../services/EventBus';
-import Routes from '../../consts/Routes';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
 
 /**
+ * Hall layout component
  * @class
- * Image input component
  */
 export default class HallLayout extends Component {
     /**
-     * Create a button
-     * @param context - button context
+     * Create a hall layout
+     * @constructor
+     * @param {Object} context - hall layout context
      * */
     constructor(context) {
         super(context);
@@ -24,23 +22,26 @@ export default class HallLayout extends Component {
         this.context.hallLayout = [];
 
         let visibility = true;
-        for (let i in this.context.hall) {
+        for (const i in this.context.hall) {
+            if (Object.prototype.hasOwnProperty.call(this.context.hall, i)) {
+                visibility = false;
 
-            visibility = false;
-
-            let rowSeats = [];
-            let rowNum = this.context.hall[i][0].row;
-            for (let j in this.context.hall[i]) {
-                rowSeats.push((new SeatButton({
-                    buttonName: this.context.hall[i][j].place,
-                    event: Events.TicketSelect,
-                    isOccupied: Boolean(this.context.hall[i][j].isOccupied),
-                    place: this.context.hall[i][j].place,
-                    row: this.context.hall[i][j].row,
-                    sessionID: this.context.sessionID,
-                })).render());
+                const rowSeats = [];
+                const rowNum = this.context.hall[i][0].row;
+                for (const j in this.context.hall[i]) {
+                    if (Object.prototype.hasOwnProperty.call(this.context.hall[i], j)) {
+                        rowSeats.push((new SeatButton({
+                            buttonName: this.context.hall[i][j].place,
+                            event: Events.TicketSelect,
+                            isOccupied: Boolean(this.context.hall[i][j].isOccupied),
+                            place: this.context.hall[i][j].place,
+                            row: this.context.hall[i][j].row,
+                            sessionID: this.context.sessionID,
+                        })).render());
+                    }
+                }
+                this.context.hallLayout.push({rowNumber: rowNum, row: rowSeats});
             }
-            this.context.hallLayout.push({rowNumber: rowNum, row: rowSeats});
         }
 
         this.context.Validation = (new ValidationBlock({
@@ -48,7 +49,9 @@ export default class HallLayout extends Component {
             visibility: visibility,
         })).render();
 
-        this.context.StandardButton = (new StandardButton({buttonName: 'Купить билет', event: Events.TicketsBuy}).render());
+        this.context.StandardButton = (new StandardButton({
+            buttonName: 'Купить билет',
+            event: Events.TicketsBuy,
+        }).render());
     }
-
 }

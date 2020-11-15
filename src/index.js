@@ -11,7 +11,7 @@ import HallView from './view/HallLayout/HallView';
 import CinemaView from './view/CinemaView/CinemaView';
 
 const body = document.body;
-let router = new Router(body);
+const router = new Router(body);
 router
     .register(Routes.Main, new MainView())
     .register(Routes.Register, new RegisterView())

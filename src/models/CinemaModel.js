@@ -1,5 +1,3 @@
-import CSRF from '../utils/CSRF';
-import * as http from 'http';
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
 

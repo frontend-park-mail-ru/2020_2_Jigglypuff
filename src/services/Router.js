@@ -1,6 +1,5 @@
 import EventBus from './EventBus';
 import Events from '../consts/Events';
-import Routes from '../consts/Routes';
 
 /**
  * Router
@@ -17,15 +16,14 @@ class Router {
         this.routes = [];
 
         EventBus.on(Events.ChangePath, this.onChangePath.bind(this));
-        EventBus.on(Events.ScrollToBlock, this.onScrollToBlock.bind(this));
     }
 
     /**
      * Register route path
-     * @param {String} path - route path.
-     * @param {MainView} view - view that handles path.
+     * @param {string} path - route path.
+     * @param {Object} view - view that handles path.
      *
-     * @return {Router}
+     * @return {Object}
      * */
     register(path, view) {
         this.routes.push({
@@ -52,7 +50,7 @@ class Router {
 
                 const data = Object.assign({}, clickTarget.dataset);
 
-                if (clickTarget.hasOwnProperty('id')) {
+                if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
                     data.id = clickTarget.id;
                 }
                 data.target = clickTarget;
@@ -74,7 +72,7 @@ class Router {
                 EventBus.emit(data.event, data);
             }
         });
-        window.addEventListener('popstate', (e) => {
+        window.addEventListener('popstate', () => {
             this.go(window.location.pathname, window.history.state);
         });
 
@@ -83,8 +81,8 @@ class Router {
 
     /**
      * Go to route path
-     * @param {String} path - route path.
-     * @param data
+     * @param {string} path - route path.
+     * @param {Object} data - data for the route path
      * */
     go(path, data = {}) {
         const routeData = Object.assign({}, this.getDataFromPath(path), data);
@@ -120,7 +118,7 @@ class Router {
 
     /**
      * Get data from route path
-     * @param {String} path - route path.
+     * @param {string} path - route path.
      *
      * @return {Object}
      * */
@@ -147,12 +145,6 @@ class Router {
      * */
     onChangePath(data) {
         this.go(data.path, data);
-    }
-
-    onScrollToBlock(data) {
-        let target = document.getElementById(data.id);
-        document.body.scrollTo(target);
-        document.body.animate({scrollTop: data.offset}, 1500);
     }
 }
 

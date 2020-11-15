@@ -1,6 +1,5 @@
 import Routes from '../consts/Routes';
 import Validator from '../utils/Validator';
-import http from 'http';
 import CSRF from '../utils/CSRF';
 
 /** Class that contains Movie model */
