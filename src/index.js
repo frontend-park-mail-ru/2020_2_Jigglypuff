@@ -1,14 +1,24 @@
 import '../public/css/index.css';
+import CinemaListView from './view/CinemaListView/CinemaListView';
+import CinemaView from './view/CinemaView/CinemaView';
+import HallView from './view/HallLayout/HallView';
+import LoginView from './view/LoginView/LoginView';
+import MainView from './view/MainView/MainView.js';
+import MovieView from './view/MovieView/MovieView';
 import Router from './services/Router.js';
 import Routes from './consts/Routes';
-import MainView from './view/MainView/MainView.js';
 import RegisterView from './view/RegisterView/RegisterView';
-import LoginView from './view/LoginView/LoginView';
-import MovieView from './view/MovieView/MovieView';
-import CinemaListView from './view/CinemaListView/CinemaListView';
 import ProfileView from './view/ProfileView/ProfileView';
-import HallView from './view/HallLayout/HallView';
-import CinemaView from './view/CinemaView/CinemaView';
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {scope: '/'})
+        .then((registration) => {
+            console.log('sw registration on scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
 
 const body = document.body;
 const router = new Router(body);
