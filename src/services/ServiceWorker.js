@@ -3,7 +3,6 @@ const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v1';
 const cacheUrls = [
     '/',
     '/static/index.html',
-    '/static/sw.js',
     '/static/index.js',
     '/static/css/index.css',
     '/static/css/vars.css',
