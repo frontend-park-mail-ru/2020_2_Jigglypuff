@@ -23,12 +23,11 @@ self.addEventListener('install', (event) => {
             })
             .catch((err) => {
                 console.error('failed to open caches: ', err);
-            })
+            }),
     );
 });
 
 self.addEventListener('fetch', (event) => {
-
     if (navigator.onLine) {
         return fetch(event.request);
     }
@@ -45,6 +44,6 @@ self.addEventListener('fetch', (event) => {
             })
             .catch((err) => {
                 console.error('failed to match caches: ', err);
-            })
+            }),
     );
 });
