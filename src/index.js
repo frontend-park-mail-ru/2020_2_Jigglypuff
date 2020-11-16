@@ -11,7 +11,7 @@ import RegisterView from './view/RegisterView/RegisterView';
 import ProfileView from './view/ProfileView/ProfileView';
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/static/sw.js', {scope: '/'})
+    navigator.serviceWorker.register('./sw.js', {scope: '/'})
         .then((registration) => {
             console.log('sw registration on scope:', registration.scope);
         })
