@@ -3,15 +3,11 @@ const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v1';
 const cacheUrls = [
     '/',
     '/index.html',
-    //'/static/index.js',
-    '/static/css/index.css',
-    '/static/css/vars.css',
-    /*'img/button/playButton.svg',
-    'img/icons/favicon.svg',
-    'img/favicon.svg',
-    'img/logo.png',
-    'img/NoAvatar.jpg',
-    'img/ticket.svg',*/
+    '/static/index.js',
+    '/static/img/favicon.svg',
+    '/static/img/logo.png',
+    '/static/img/NoAvatar.jpg',
+    '/static/img/ticket.svg',
 ];
 
 self.addEventListener('install', (event) => {
