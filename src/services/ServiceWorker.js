@@ -4,14 +4,14 @@ const cacheUrls = [
     '/',
     '/static/index.html',
     '/static/index.js',
-    '/static/css/index.css',
-    '/static/css/vars.css',
-    '/static/img/button/playButton.svg',
-    '/static/img/icons/favicon.svg',
-    '/static/img/favicon.svg',
-    '/static/img/logo.png',
-    '/static/img/NoAvatar.jpg',
-    '/static/img/ticket.svg',
+    'css/index.css',
+    'css/vars.css',
+    'img/button/playButton.svg',
+    'img/icons/favicon.svg',
+    'img/favicon.svg',
+    'img/logo.png',
+    'img/NoAvatar.jpg',
+    'img/ticket.svg',
 ];
 
 self.addEventListener('install', (event) => {
