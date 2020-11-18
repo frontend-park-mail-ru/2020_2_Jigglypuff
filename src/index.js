@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime.js';
 import '../public/css/index.css';
 import CinemaListView from './view/CinemaListView/CinemaListView';
 import CinemaView from './view/CinemaView/CinemaView';
