@@ -31,7 +31,7 @@ self.addEventListener('fetch', (event) => {
 
     event.respondWith(
         caches
-            .match(event.request, {cacheName:CACHE_NAME, ignoreVary:true})
+            .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
             .then((cachedResponse) => {
                 if (cachedResponse) {
                     return cachedResponse;
