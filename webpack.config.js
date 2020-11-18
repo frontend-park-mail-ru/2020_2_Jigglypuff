@@ -30,6 +30,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public/index.html'),
+            noInternet: path.resolve(__dirname, 'public/noInternet.html'),
         }),
         new CopyWebpackPlugin({
             patterns: [{

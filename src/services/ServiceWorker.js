@@ -1,8 +1,9 @@
-const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v1';
+const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v2';
 
 const cacheUrls = [
     '/',
     '/index.html',
+    '/noInternet.html',
     '/static/index.js',
     '/static/img/favicon.svg',
     '/static/img/logo.png',
@@ -37,8 +38,8 @@ self.addEventListener('fetch', (event) => {
 
                 return fetch(event.request);
             })
-            .catch((err) => {
-                console.error('failed to match caches: ', err);
+            .catch(() => {
+                return caches.match('/noInternet.html');
             }),
     );
 });
