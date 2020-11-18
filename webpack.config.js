@@ -10,8 +10,25 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.css$/, use: ['style-loader', 'css-loader']},
-            {test: /\.hbs$/, use: 'handlebars-loader'},
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-optional-chaining'],
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.hbs$/,
+                use: 'handlebars-loader',
+            },
         ],
     },
     output: {
