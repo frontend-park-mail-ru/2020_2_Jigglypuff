@@ -1,5 +1,5 @@
 const Routes = {
-    Host: 'https://cinemascope.space',
+    Host: 'https://cinemascope.space/',
     HostAPI: 'https://cinemascope.space/api',
 
     CinemaList: '/cinema/',

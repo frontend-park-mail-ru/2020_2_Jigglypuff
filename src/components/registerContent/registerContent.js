@@ -5,6 +5,7 @@ import TextInput from '../baseComponents/textInput/textInput';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
 import Events from '../../consts/Events';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
+import Routes from '../../consts/Routes';
 
 /**
  * Register content component
@@ -28,6 +29,8 @@ export default class RegisterContent extends Component {
             this.context.input.push((new TextInput(RegistrationItems[i])).render());
         }
 
+        this.context.LoginEvent = Events.ChangePath;
+        this.context.LoginPath = Routes.Login;
         this.context.Validation = (new ValidationBlock({
             message: 'Неверный логин и/или пароль',
         })).render();

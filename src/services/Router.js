@@ -87,8 +87,6 @@ class Router {
     go(path, data = {}) {
         const routeData = Object.assign({}, this.getDataFromPath(path), data);
 
-        console.log(routeData);
-
         if (this.currentView === routeData.view) {
             this.currentView.show(routeData);
             return;

@@ -18,6 +18,12 @@ export default class UserBlock extends Component {
         super(context);
         this.template = template;
 
+        this.context.ProfilePath = Routes.ProfilePage;
+        this.context.ProfileEvent = Events.ChangePath;
+
+        this.context.RegisterPath = Routes.Register;
+        this.context.RegisterEvent = Events.ChangePath;
+
         this.StandartButton = new StandardButton({
             buttonName: 'Войти',
             event: Events.ChangePath,

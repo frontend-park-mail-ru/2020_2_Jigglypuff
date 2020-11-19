@@ -5,6 +5,7 @@ import StandardButton from '../baseComponents/buttons/standartButton/standardBut
 import LoginItems from '../../consts/LoginItems';
 import Events from '../../consts/Events';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
+import Routes from '../../consts/Routes';
 
 /**
  * Login content component
@@ -26,6 +27,9 @@ export default class LoginContent extends Component {
                 this.context.input.push((new TextInput(LoginItems[i])).render());
             }
         }
+
+        this.context.RegisterPath = Routes.Register;
+        this.context.RegisterEvent = Events.ChangePath;
 
         this.context.Validation = (new ValidationBlock({
             message: 'Пожалуйста, загрузите верный формат аватара',
