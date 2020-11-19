@@ -5,7 +5,7 @@ import StandardButton from '../baseComponents/buttons/standartButton/standardBut
 import LoginItems from '../../consts/LoginItems';
 import Events from '../../consts/Events';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
-import Routes from "../../consts/Routes";
+import Routes from '../../consts/Routes';
 
 /**
  * Login content component

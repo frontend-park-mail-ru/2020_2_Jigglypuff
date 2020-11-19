@@ -5,7 +5,7 @@ import TextInput from '../baseComponents/textInput/textInput';
 import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
 import Events from '../../consts/Events';
 import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
-import Routes from "../../consts/Routes";
+import Routes from '../../consts/Routes';
 
 /**
  * Register content component

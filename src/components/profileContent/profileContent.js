@@ -2,8 +2,8 @@ import Component from '../component.js';
 import template from './profileContent.hbs';
 import ProfileEdit from '../profileEdit/profileEdit';
 import ProfileTickets from '../profileTickets/profileTickets';
-import Routes from "../../consts/Routes";
-import Events from "../../consts/Events";
+import Routes from '../../consts/Routes';
+import Events from '../../consts/Events';
 
 /**
  * Profile content component
