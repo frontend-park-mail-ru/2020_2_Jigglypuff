@@ -94,7 +94,6 @@ class Router {
 
         this.currentView = routeData.view;
 
-        console.log(path);
         if (window.location.pathname !== path) {
             window.history.pushState(null, null, path);
         }
