@@ -88,6 +88,8 @@ export default class View {
             sliderContext.pathToSliderAvatar = Routes.Host + sliderContext.pathToSliderAvatar;
         }
 
+        console.log(sliderContext.pathToAvatar);
+
         return sliderContext;
     }
 }
