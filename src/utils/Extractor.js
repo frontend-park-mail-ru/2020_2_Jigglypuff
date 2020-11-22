@@ -60,7 +60,7 @@ export default class Extractor {
     static extractMovieDataFromJSON(data) {
         const movieModel = new MovieModel();
 
-        let actorList = [];
+        const actorList = [];
         for (const actor of data['ActorList']) {
             actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
         }
@@ -71,7 +71,7 @@ export default class Extractor {
         movieModel.description = data['Description'];
         movieModel.duration = data['Duration'];
 
-        let genreList = [];
+        const genreList = [];
         for (const genre of data['GenreList']) {
             genreList.push(genre['Name'].toString());
         }
@@ -97,7 +97,7 @@ export default class Extractor {
     static extractMovieDataFromModel(data) {
         const result = new Map();
 
-        let actorList = [];
+        const actorList = [];
         for (const actor of data.actorList) {
             actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
         }
@@ -108,7 +108,7 @@ export default class Extractor {
         result.set('description', data.description);
         result.set('duration', data.duration);
 
-        let genreList = [];
+        const genreList = [];
         for (const genre of data.genreList) {
             genreList.push(genre['Name'].toString());
         }
