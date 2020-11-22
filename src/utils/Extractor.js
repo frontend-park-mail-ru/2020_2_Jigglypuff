@@ -97,12 +97,23 @@ export default class Extractor {
     static extractMovieDataFromModel(data) {
         const result = new Map();
 
-        result.set('actorList', data.actorList);
+        let actorList = [];
+        for (const actor of data.actorList) {
+            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+        }
+        result.set('actorList', actorList);
+
         result.set('ageGroup', data.ageGroup);
         result.set('country', data.country);
         result.set('description', data.description);
         result.set('duration', data.duration);
-        result.set('genre', data.genreList);
+
+        let genreList = [];
+        for (const genre of data.genreList) {
+            genreList.push(genre['Name'].toString());
+        }
+        result.set('genreList', genreList);
+
         result.set('id', data.id);
         result.set('name', data.name);
         result.set('pathToAvatar', data.pathToAvatar);
