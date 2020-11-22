@@ -60,7 +60,12 @@ export default class Extractor {
     static extractMovieDataFromJSON(data) {
         const movieModel = new MovieModel();
 
-        movieModel.actors = data['Actors'];
+        let actorList = [];
+        for (const actor of data['ActorList']) {
+            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+        }
+        movieModel.actorList = actorList;
+
         movieModel.ageGroup = data['AgeGroup'];
         movieModel.country = data['Country'];
         movieModel.description = data['Description'];
@@ -92,7 +97,7 @@ export default class Extractor {
     static extractMovieDataFromModel(data) {
         const result = new Map();
 
-        result.set('actors', data.actors);
+        result.set('actorList', data.actorList);
         result.set('ageGroup', data.ageGroup);
         result.set('country', data.country);
         result.set('description', data.description);
