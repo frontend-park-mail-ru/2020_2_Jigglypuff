@@ -65,7 +65,13 @@ export default class Extractor {
         movieModel.country = data['Country'];
         movieModel.description = data['Description'];
         movieModel.duration = data['Duration'];
-        movieModel.genre = data['Genre'];
+
+        let genreList = [];
+        for (const genre of data['GenreList']) {
+            genreList.push(genre['Name'].toString());
+        }
+        movieModel.genreList = genreList;
+
         movieModel.id = data['ID'];
         movieModel.name = data['Name'];
         movieModel.pathToAvatar = data['PathToAvatar'];
@@ -91,7 +97,7 @@ export default class Extractor {
         result.set('country', data.country);
         result.set('description', data.description);
         result.set('duration', data.duration);
-        result.set('genre', data.genre);
+        result.set('genre', data.genreList);
         result.set('id', data.id);
         result.set('name', data.name);
         result.set('pathToAvatar', data.pathToAvatar);
