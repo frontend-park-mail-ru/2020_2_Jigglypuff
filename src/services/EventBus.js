@@ -27,15 +27,9 @@ class EventBus {
      * @param {function} callback - callback function for the event
      * */
     off(event, callback) {
-        console.log('this.listeners[event]');
         this.listeners[event] = this.listeners[event].filter(function(listener) {
-            console.log(listener);
-            console.log('----------');
-            console.log(callback);
             return listener !== callback;
         });
-        console.log(this.listeners[event]);
-        console.log('this.listeners[event]');
     }
 
     /**

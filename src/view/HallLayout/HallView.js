@@ -46,7 +46,14 @@ export default class HallView extends View {
      * Method that handles submitting of the ticket buy
      */
     async onBuy() {
+
+        if (!(await BaseViewModel.isAuthorised())) {
+            await EventBus.emit(Events.ChangePath, {path: Routes.Login});
+            return;
+        }
+
         let selectedPlaceDataset = {};
+
         try {
             selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
         } catch (err) {
@@ -75,11 +82,7 @@ export default class HallView extends View {
                 console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
             });
 
-        if (await BaseViewModel.isAuthorised()) {
-            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-        } else {
-            EventBus.emit(Events.ChangePath, {path: Routes.Login});
-        }
+        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
     }
 
     /**
