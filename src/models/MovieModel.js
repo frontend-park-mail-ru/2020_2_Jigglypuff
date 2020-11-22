@@ -13,7 +13,7 @@ export default class MovieModel {
         this._country = null;
         this._description = null;
         this._duration = null;
-        this._genre = null;
+        this._genreList = null;
         this._id = null;
         this._name = null;
         this._pathToAvatar = null;
@@ -75,11 +75,11 @@ export default class MovieModel {
     }
 
     /**
-     * Get movie genre.
+     * Get movie genre list.
      * @return {null|Array}
      */
-    get genre() {
-        return this._genre;
+    get genreList() {
+        return this._genreList;
     }
 
     /**
@@ -231,15 +231,14 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie genre to "genre" variable value if valid else, null.
-     * @param {any} genre
+     * Set movie genre list to "genreList" variable value if valid else, null.
+     * @param {Array<string>} genreList
      */
-    set genre(genre) {
-        if (Validator.validateMovieGenre(genre)) {
-            if (!this._genre) {
-                this._genre = [];
-            }
-            this._genre.push(genre.toString());
+    set genreList(genreList) {
+        if (Array.isArray(genreList)) {
+            this._genreList = null;
+        } else {
+            this._genreList = genreList;
         }
     }
 
@@ -390,7 +389,7 @@ export default class MovieModel {
             this._country = data['Country'];
             this._description = data['Description'];
             this._duration = data['Duration'];
-            this._genre = data['Genre'];
+            this._genreList = data['GenreList'];
             this._id = data['ID'];
             this._name = data['Name'];
             this._pathToAvatar = data['PathToAvatar'];
