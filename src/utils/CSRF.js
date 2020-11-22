@@ -1,6 +1,6 @@
 import Routes from '../consts/Routes';
 
-/** */
+/** Class that contains methods to work with CSRF */
 export default class CSRF {
     /**
      * Get CSRF token.
