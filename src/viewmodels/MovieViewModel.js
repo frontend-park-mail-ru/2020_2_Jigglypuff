@@ -15,7 +15,7 @@ export default class MovieViewModel extends BaseViewModel {
         this._movieModel = new MovieModel();
         this._scheduleModel = new ScheduleModel();
         this.state = {
-            actors: '',
+            actorList: '',
             ageGroup: '',
             country: '',
             description: '',
