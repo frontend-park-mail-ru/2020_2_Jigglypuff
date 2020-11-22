@@ -8,7 +8,7 @@ export default class MovieModel {
      * Declare MovieModel attributes.
      */
     constructor() {
-        this._actors = null;
+        this._actorList = null;
         this._ageGroup = null;
         this._country = null;
         this._description = null;
@@ -150,8 +150,8 @@ export default class MovieModel {
      * Get movie cast.
      * @return {null|Array}
      */
-    get actors() {
-        return this._actors;
+    get actorList() {
+        return this._actorList;
     }
 
     /**
@@ -232,13 +232,13 @@ export default class MovieModel {
 
     /**
      * Set movie genre list to "genreList" variable value if valid else, null.
-     * @param {Array<string>} genreList
+     * @param {Array<Object>} genreList
      */
     set genreList(genreList) {
         if (Array.isArray(genreList)) {
-            this._genreList = null;
-        } else {
             this._genreList = genreList;
+        } else {
+            this._genreList = null;
         }
     }
 
@@ -332,18 +332,14 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie actors to "actors" variable value if valid else, null.
-     * @param {any} actors
+     * Set movie actors list to "actorList" variable value if valid else, null.
+     * @param {Array<Object>} actorList
      */
-    set actors(actors) {
-        const nameParts = actors.toString().split(' ');
-        for (const part of nameParts) {
-            if (Validator.validateName(part)) {
-                if (!this._actors) {
-                    this._actors = [];
-                }
-                this._actors.push(actors.toString());
-            }
+    set actorList(actorList) {
+        if (Array.isArray(actorList)) {
+            this._actorList = actorList;
+        } else {
+            this._actorList = null;
         }
     }
 
@@ -384,7 +380,7 @@ export default class MovieModel {
 
         if (response.ok) {
             const data = await response.json();
-            this._actors = data['Actors'];
+            this._actorList = data['ActorList'];
             this._ageGroup = data['AgeGroup'];
             this._country = data['Country'];
             this._description = data['Description'];
