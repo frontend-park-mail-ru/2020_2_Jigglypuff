@@ -20,7 +20,7 @@ export default class MovieViewModel extends BaseViewModel {
             country: '',
             description: '',
             duration: '',
-            genre: '',
+            genreList: '',
             id: '',
             name: '',
             pathToAvatar: '',
