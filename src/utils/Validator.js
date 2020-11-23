@@ -82,16 +82,6 @@ export default class Validator {
     }
 
     /**
-     * Represents movie genre validation.
-     * @return {boolean} true - if movie genre is valid
-     * @param {string} movieGenre
-     */
-    static validateMovieGenre(movieGenre) {
-        const regExp = /^[А-Яа-я\w]{1,500}$/;
-        return regExp.test(String(movieGenre));
-    }
-
-    /**
      * Represents movie rating validation.
      * @return {boolean} true - if movie rating is valid
      * @param {float} movieRating
