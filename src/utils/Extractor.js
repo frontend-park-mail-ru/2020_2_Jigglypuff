@@ -1,8 +1,49 @@
 import CinemaModel from '../models/CinemaModel';
+import ExtractedFields from '../consts/ExtractedFields';
 import MovieModel from '../models/MovieModel';
 
 /** Class that contains methods to extract data from anything */
 export default class Extractor {
+    /**
+     * Extract cinema data from json to cinema model.
+     * @param {JSON} data
+     * @return {CinemaModel}
+     */
+    static extractCinemaDataFromJSON(data) {
+        const cinemaModel = new CinemaModel();
+
+        for (const field in data) {
+            if (!ExtractedFields.CinemaData.has(field)) {
+                continue;
+            }
+            cinemaModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+
+        return cinemaModel;
+    }
+
+    /**
+     * Extract cinema data from model to Map.
+     * @param {CinemaModel} data
+     * @return {Map}
+     */
+    static extractCinemaDataFromModel(data) {
+        const result = new Map();
+
+        for (const field of ExtractedFields.CinemaData) {
+            result.set(field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                }),
+                data[field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                })]);
+        }
+
+        return result;
+    }
+
     /**
      * Extract filled fields from Settings form.
      * @param {Object} data
@@ -32,24 +73,6 @@ export default class Extractor {
         result.set('pathToAvatar', data.pathToAvatar);
 
         return result;
-    }
-
-    /**
-     * Extract cinema data from json to model.
-     * @param {JSON} data
-     * @return {CinemaModel}
-     */
-    static extractCinemaDataFromJSON(data) {
-        const cinemaModel = new CinemaModel();
-
-        cinemaModel.address = data['Address'];
-        cinemaModel.authorID = data['AuthorID'];
-        cinemaModel.hallCount = data['HallCount'];
-        cinemaModel.id = data['ID'];
-        cinemaModel.name = data['Name'];
-        cinemaModel.pathToAvatar = data['PathToAvatar'];
-
-        return cinemaModel;
     }
 
     /**
@@ -127,25 +150,7 @@ export default class Extractor {
         return result;
     }
 
-    /**
-     * Extract filled fields from cinemaData form.
-     * @param {CinemaModel} data
-     * @return {Map}
-     */
-    static extractCinemaDataFromModel(data) {
-        const result = new Map();
-
-        result.set('address', data.address);
-        result.set('authorID', data.authorID);
-        result.set('hallCount', data.hallCount);
-        result.set('id', data.id);
-        result.set('name', data.name);
-        result.set('pathToAvatar', data.pathToAvatar);
-
-        return result;
-    }
-
-    /**
+     /**
      * Extract filled fields from hallData form.
      * @param {HallModel} data
      * @return {Map}
