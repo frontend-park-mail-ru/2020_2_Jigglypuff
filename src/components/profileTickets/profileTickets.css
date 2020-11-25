@@ -22,7 +22,7 @@
 .tickets__ticket {
     padding: 20px;
     border-radius: 30px;
-    border: 3px solid #BC8110;
+    border: 3px solid var(--ticket-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,7 @@
 .ticket__cinema {
     margin-top: 20px;
     margin-bottom: 5px;
-    color: white;
+    color: var(--main-font-color);
     text-align: center;
 }
 

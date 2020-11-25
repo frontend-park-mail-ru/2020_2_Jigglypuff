@@ -1,5 +1,5 @@
 .button-seat {
-    background: var(--main-red-color);
+    background: var(--main-brend-color);
     padding: 8px 8px 11px;
     width: 30px;
     height: 35px;
@@ -13,7 +13,7 @@
 }
 
 .button-seat:hover {
-    background: #640000;
+    background: var(--main-brend-color-hover);
 }
 
 .button-seat__text {

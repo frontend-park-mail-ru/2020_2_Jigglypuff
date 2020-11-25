@@ -1,7 +1,7 @@
 .header {
     margin-top: 5px;
     font-family: inherit;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 4px 4px var(--text-shadow-color);
 }
 .header__navbar {
     display: flex;
@@ -35,7 +35,7 @@
 }
 
 .header__navbar-menu {
-    color: #FFFFFF;
+    color: var(--main-font-color);
     text-decoration: none;
     font-weight: bold;
     margin-left: 2.5rem;

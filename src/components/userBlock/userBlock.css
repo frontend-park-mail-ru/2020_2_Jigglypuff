@@ -1,14 +1,14 @@
 .userblock__avatar_regular {
-    border: 3px solid #880000;
+    border: 3px solid var(--main-brend-color);
     border-radius: 10px;
     object-fit: cover;
     height: 3.9em;
     width: 3.9em;
-    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(3px 3px 4px var(--text-shadow-color));
 }
 
 .userblock__avatar_premium {
-    border: 3px solid #880000;
+    border: 3px solid var(--main-brend-color);
     border-radius: 10px;
     object-fit: cover;
     height: 3.9em;
@@ -16,7 +16,7 @@
 }
 
 .userblock__item {
-    color: #FFFFFF;
+    color: var(--main-font-color);
     text-decoration: none;
     margin-left: 1.5rem;
 }

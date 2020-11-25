@@ -1,5 +1,5 @@
 .button-schedule {
-    background: var(--main-red-color);
+    background: var(--main-brend-color);
     padding: 0.5em 0.9rem;
 
     font-family: inherit;
@@ -10,7 +10,7 @@
 }
 
 .button-schedule:hover {
-    background: #640000;
+    background: var(--main-brend-color-hover);
 }
 
 .button__schedule {

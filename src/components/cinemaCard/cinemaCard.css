@@ -31,7 +31,7 @@
     font-size: 1.5rem;
     text-decoration: none;
     cursor: pointer;
-    color: white;
+    color: var(--main-font-color);
     margin-bottom: 7px;
 }
 
@@ -44,13 +44,13 @@
 .cinema-card__description-title {
     font-size: 1rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--main-font-color);
 }
 
 .description_specification__info {
     font-size: 1rem;
     font-weight: bold;
-    color: #9E9D9D;
+    color: var(--main-help-text-color);
 }
 
 .cinema-card__description_schedule {
