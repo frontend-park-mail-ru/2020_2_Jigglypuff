@@ -27,7 +27,7 @@ class EventBus {
      * @param {function} callback - callback function for the event
      * */
     off(event, callback) {
-        this._listeners[event] = this._listeners[event].filter(function(listener) {
+        this._listeners[event] = this._listeners[event].filter((listener) => {
             return listener !== callback;
         });
     }
@@ -38,7 +38,7 @@ class EventBus {
      * @param {Object} eventData - required data for the event
      * */
     emit(event, eventData = {}) {
-        this._listeners[event].forEach(function(listener) {
+        this._listeners[event].forEach((listener) => {
             listener(eventData);
         });
     }
