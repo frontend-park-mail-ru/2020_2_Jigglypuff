@@ -28,22 +28,24 @@ export default class ImageInput extends Component {
         const file = data.target.files[0];
 
         if (!file.type.match('image.*')) {
-            const err = document.getElementsByClassName('image-input__error-disabled')[0];
+            const err = document.querySelector('.image-input__error-disabled');
             err.className = 'image-input__error';
             return;
         } else {
-            const err = document.getElementsByClassName('image-input__error')[0];
+            const err = document.querySelector('.image-input__error');
             if (err) {
                 err.className = 'image-input__error-disabled';
             }
         }
 
         const reader = new FileReader();
-
-        reader.onload = (function() {
-            return function(e) {
-                const img = document.getElementsByClassName('avatar')[0];
-                img.innerHTML = ['<img class="avatar__preview" src="', e.target.result, '"/>'].join('');
+        reader.onload = (() => {
+            return function(file) {
+                const avatar = document.querySelector('.avatar');
+                let avatarPreview = document.createElement('img');
+                avatarPreview.className = "avatar__preview";
+                avatarPreview.src = file.target.result;
+                avatar.innerHTML = avatarPreview.outerHTML;
             };
         })(file);
 
