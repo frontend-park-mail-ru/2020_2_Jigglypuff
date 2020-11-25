@@ -60,12 +60,23 @@ export default class Extractor {
     static extractMovieDataFromJSON(data) {
         const movieModel = new MovieModel();
 
-        movieModel.actors = data['Actors'];
+        const actorList = [];
+        for (const actor of data['ActorList']) {
+            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+        }
+        movieModel.actorList = actorList;
+
         movieModel.ageGroup = data['AgeGroup'];
         movieModel.country = data['Country'];
         movieModel.description = data['Description'];
         movieModel.duration = data['Duration'];
-        movieModel.genre = data['Genre'];
+
+        const genreList = [];
+        for (const genre of data['GenreList']) {
+            genreList.push(genre['Name'].toString());
+        }
+        movieModel.genreList = genreList;
+
         movieModel.id = data['ID'];
         movieModel.name = data['Name'];
         movieModel.pathToAvatar = data['PathToAvatar'];
@@ -86,12 +97,23 @@ export default class Extractor {
     static extractMovieDataFromModel(data) {
         const result = new Map();
 
-        result.set('actors', data.actors);
+        const actorList = [];
+        for (const actor of data.actorList) {
+            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+        }
+        result.set('actorList', actorList);
+
         result.set('ageGroup', data.ageGroup);
         result.set('country', data.country);
         result.set('description', data.description);
         result.set('duration', data.duration);
-        result.set('genre', data.genre);
+
+        const genreList = [];
+        for (const genre of data.genreList) {
+            genreList.push(genre['Name'].toString());
+        }
+        result.set('genreList', genreList);
+
         result.set('id', data.id);
         result.set('name', data.name);
         result.set('pathToAvatar', data.pathToAvatar);
