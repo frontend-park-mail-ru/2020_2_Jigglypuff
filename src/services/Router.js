@@ -27,7 +27,7 @@ class Router {
      * */
     register(path, view) {
         this._routes.push({
-            regPath: new RegExp(`^${path.replace(/(:\\w+)/, '(\\\\d+)')}/?$`),
+            regPath: new RegExp(`^${path.replace(/(:\w+)/, '(\\d+)')}/?$`),
             view: view,
         });
 
