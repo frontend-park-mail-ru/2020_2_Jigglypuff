@@ -21,9 +21,9 @@ export default class ProfileView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
 
-        this.settingsViewModel = new SettingsViewModel();
+        this._settingsViewModel = new SettingsViewModel();
 
         EventBus.on(Events.Logout, this.onLogout.bind(this));
         EventBus.on(Events.ProfileEditFieldFill, this.onUpdateField.bind(this));
@@ -51,7 +51,7 @@ export default class ProfileView extends View {
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**
@@ -153,17 +153,17 @@ export default class ProfileView extends View {
      */
     onUpdateField(data) {
         if (data.id === 'avatar') {
-            this.settingsViewModel.state[data.id] = data.target.files[0];
+            this._settingsViewModel.state[data.id] = data.target.files[0];
             return;
         }
-        this.settingsViewModel.state[data.id] = data.value;
+        this._settingsViewModel.state[data.id] = data.value;
     }
 
     /**
      * Method that handles submitting of the profile editing form
      */
     async onSubmit() {
-        const responseProfileEdit = this.settingsViewModel.editCommand.exec();
+        const responseProfileEdit = this._settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
             .then(() => {

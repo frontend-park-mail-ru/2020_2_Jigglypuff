@@ -18,7 +18,7 @@ export default class LoginView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
 
         this.signInViewModel = new SignInViewModel();
         EventBus.on(Events.LoginFieldFill, this.onUpdateField.bind(this));
@@ -36,7 +36,7 @@ export default class LoginView extends View {
         const data = {
             LoginContent: (new LoginContent()).render(),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**

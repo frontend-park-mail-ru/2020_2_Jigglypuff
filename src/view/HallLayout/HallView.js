@@ -24,7 +24,7 @@ export default class HallView extends View {
         EventBus.on(Events.TicketsBuy, this.onBuy.bind(this));
         EventBus.on(Events.TicketSelect, this.onSelect.bind(this));
 
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -39,7 +39,7 @@ export default class HallView extends View {
             hallLayout: (new HallLayout(hallContext).render()),
         };
 
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**

@@ -15,9 +15,9 @@ export default class MovieDescription extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.StandardButton = (new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Оценить',
             event: Events.MovieRate,
         }).render());

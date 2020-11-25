@@ -15,7 +15,7 @@ export default class ImageInput extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
         EventBus.on(Events.UploadAvatar, this.handleFileSelect.bind(this));
     }

@@ -15,7 +15,7 @@ export default class MainView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -27,7 +27,7 @@ export default class MainView extends View {
             MovieList: (new MovieList(movieListContext).render()),
         };
 
-        await super.show(this.template(templateData), {isSlider: true});
+        await super.show(this._template(templateData), {isSlider: true});
     }
 
     /**

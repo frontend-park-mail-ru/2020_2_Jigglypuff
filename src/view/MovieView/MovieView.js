@@ -19,7 +19,7 @@ export default class MovieView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
 
         EventBus.on(Events.MovieRate, this.onMovieRate.bind(this));
     }
@@ -42,7 +42,7 @@ export default class MovieView extends View {
 
         data.MovieDescription = (new MovieDescription(movieDescriptionContext)).render();
 
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**

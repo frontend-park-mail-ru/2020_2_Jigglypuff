@@ -16,9 +16,9 @@ export default class View {
      */
     constructor(title = 'CinemaScope') {
         document.title = title;
-        this.root = document.querySelector('.application');
-        this.template = template;
-        this.context = {};
+        this._root = document.querySelector('.application');
+        this._template = template;
+        this._context = {};
     }
 
     /**
@@ -29,23 +29,23 @@ export default class View {
     async show(contentTemplate, templateDate = {}) {
         const headerContext = await this.getHeaderContext();
         let sliderContext = {};
-        this.context.Header = (new Header(headerContext)).render();
+        this._context.Header = (new Header(headerContext)).render();
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
-            this.context.isSlider = true;
+            this._context.isSlider = true;
             sliderContext = await this.getSliderContext();
-            this.context.Slider = (new Slider(sliderContext)).render();
+            this._context.Slider = (new Slider(sliderContext)).render();
         }
 
-        this.context.Content = contentTemplate;
-        this.root.innerHTML = template(this.context);
+        this._context.Content = contentTemplate;
+        this._root.innerHTML = template(this._context);
     }
 
     /**
      * Method that hides the page content
      */
     hide() {
-        this.root.innerHTML = '';
+        this._root.innerHTML = '';
     }
 
     /**

@@ -15,7 +15,7 @@ export default class CinemaListView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
 
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -27,7 +27,7 @@ export default class CinemaListView extends View {
         const data = {
             CinemaList: (new CinemaList(cinemaListContext).render()),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**

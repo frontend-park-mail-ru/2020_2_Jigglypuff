@@ -13,6 +13,6 @@ export default class PlayButton extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
     }
 }

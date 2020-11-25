@@ -14,8 +14,8 @@ export default class Cinema extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.cinema = ((new CinemaCard(this.context)).render());
+        this._context.cinema = ((new CinemaCard(this._context)).render());
     }
 }

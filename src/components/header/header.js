@@ -15,10 +15,10 @@ export default class Header extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.headerItems = headerItems;
-        this.UserBlock = new UserBlock(this.context.userBlockContext);
-        this.context.UserBlock = this.UserBlock.render();
+        this._context.headerItems = headerItems;
+        this.UserBlock = new UserBlock(this._context.userBlockContext);
+        this._context.UserBlock = this.UserBlock.render();
     }
 }

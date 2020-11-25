@@ -8,7 +8,7 @@ class EventBus {
      * @constructor
      * */
     constructor() {
-        this.listeners = {};
+        this._listeners = {};
     }
 
     /**
@@ -17,8 +17,8 @@ class EventBus {
      * @param {function} callback - callback function for the event
      * */
     on(event, callback) {
-        this.listeners[event] = this.listeners[event] ? this.listeners[event] : [];
-        this.listeners[event].push(callback);
+        this._listeners[event] = this._listeners[event] ? this._listeners[event] : [];
+        this._listeners[event].push(callback);
     }
 
     /**
@@ -27,7 +27,7 @@ class EventBus {
      * @param {function} callback - callback function for the event
      * */
     off(event, callback) {
-        this.listeners[event] = this.listeners[event].filter(function(listener) {
+        this._listeners[event] = this._listeners[event].filter(function(listener) {
             return listener !== callback;
         });
     }
@@ -38,7 +38,7 @@ class EventBus {
      * @param {Object} eventData - required data for the event
      * */
     emit(event, eventData = {}) {
-        this.listeners[event].forEach(function(listener) {
+        this._listeners[event].forEach(function(listener) {
             listener(eventData);
         });
     }

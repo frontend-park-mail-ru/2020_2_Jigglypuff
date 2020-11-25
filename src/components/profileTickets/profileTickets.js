@@ -14,14 +14,13 @@ export default class ProfileTickets extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
-
+        this._template = template;
 
         let visibility = false;
-        if (!this.context.length) {
+        if (!this._context.length) {
             visibility = true;
         }
-        this.context.Validation = (new ValidationBlock({
+        this._context.Validation = (new ValidationBlock({
             message: 'На данный момент нет актуальных билетов',
             visibility: visibility,
         })).render();

@@ -19,23 +19,23 @@ export default class LoginContent extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
-        this.context.input = [];
+        this._template = template;
+        this._context.input = [];
 
         for (const i in LoginItems) {
             if (Object.prototype.hasOwnProperty.call(LoginItems, i)) {
-                this.context.input.push((new TextInput(LoginItems[i])).render());
+                this._context.input.push((new TextInput(LoginItems[i])).render());
             }
         }
 
-        this.context.RegisterPath = Routes.Register;
-        this.context.RegisterEvent = Events.ChangePath;
+        this._context.RegisterPath = Routes.Register;
+        this._context.RegisterEvent = Events.ChangePath;
 
-        this.context.Validation = (new ValidationBlock({
+        this._context.Validation = (new ValidationBlock({
             message: 'Пожалуйста, загрузите верный формат аватара',
         })).render();
 
-        this.context.StandardButton = (new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Войти',
             event: Events.LoginSubmit,
         })).render();

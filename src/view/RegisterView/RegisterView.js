@@ -18,8 +18,8 @@ export default class RegisterView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
-        this.signUpViewModel = new SignUpViewModel();
+        this._template = template;
+        this._signUpViewModel = new SignUpViewModel();
 
         EventBus.on(Events.RegisterFieldFill, this.onUpdateField.bind(this));
         EventBus.on(Events.RegisterSubmit, this.onSubmit.bind(this));
@@ -36,7 +36,7 @@ export default class RegisterView extends View {
         const data = {
             RegisterContent: (new RegisterContent()).render(),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**
@@ -51,14 +51,14 @@ export default class RegisterView extends View {
      * @param {Object} data - contains entered data from input field
      */
     onUpdateField(data = {}) {
-        this.signUpViewModel.state[data.id] = data.value;
+        this._signUpViewModel.state[data.id] = data.value;
     }
 
     /**
      * Method that handles submitting of registration form
      */
     async onSubmit() {
-        const responseSignUp = this.signUpViewModel.registerCommand.exec();
+        const responseSignUp = this._signUpViewModel.registerCommand.exec();
 
         await responseSignUp
             .then((response) => {

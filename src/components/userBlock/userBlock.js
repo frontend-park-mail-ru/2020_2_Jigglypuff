@@ -16,19 +16,18 @@ export default class UserBlock extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.ProfilePath = Routes.ProfilePage;
-        this.context.ProfileEvent = Events.ChangePath;
+        this._context.ProfilePath = Routes.ProfilePage;
+        this._context.ProfileEvent = Events.ChangePath;
 
-        this.context.RegisterPath = Routes.Register;
-        this.context.RegisterEvent = Events.ChangePath;
+        this._context.RegisterPath = Routes.Register;
+        this._context.RegisterEvent = Events.ChangePath;
 
-        this.StandartButton = new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Войти',
             event: Events.ChangePath,
             url: Routes.Login,
-        });
-        this.context.StandardButton = this.StandartButton.render();
+        })).render();
     }
 }

@@ -14,16 +14,16 @@ export default class MovieList extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        const movies = this.context;
+        const movies = this._context;
 
-        this.context = {};
-        this.context.MovieCards = [];
+        this._context = {};
+        this._context.MovieCards = [];
 
         for (const i in movies) {
             if (Object.prototype.hasOwnProperty.call(movies, i)) {
-                this.context.MovieCards.push((new MovieCard(movies[i])).render());
+                this._context.MovieCards.push((new MovieCard(movies[i])).render());
             }
         }
     }

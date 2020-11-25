@@ -12,8 +12,8 @@ class Router {
      * @param {HTMLElement} application
      * */
     constructor(application) {
-        this.application = application;
-        this.routes = [];
+        this._application = application;
+        this._routes = [];
 
         EventBus.on(Events.ChangePath, this.onChangePath.bind(this));
     }
@@ -26,7 +26,7 @@ class Router {
      * @return {Object}
      * */
     register(path, view) {
-        this.routes.push({
+        this._routes.push({
             regPath: new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '/?$'),
             view: view,
         });
@@ -38,7 +38,7 @@ class Router {
      * Start router
      * */
     start() {
-        this.application.addEventListener('click', (e) => {
+        this._application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
             if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
@@ -58,7 +58,7 @@ class Router {
                 EventBus.emit(data.event, data);
             }
         });
-        this.application.addEventListener('change', (evt) => {
+        this._application.addEventListener('change', (evt) => {
             const changeTarget = evt.target;
 
             if (changeTarget.matches('input')) {
@@ -123,7 +123,7 @@ class Router {
     getDataFromPath(path) {
         const result = {};
 
-        this.routes.forEach(({regPath, view}) => {
+        this._routes.forEach(({regPath, view}) => {
             const match = path.match(regPath);
 
             if (match) {

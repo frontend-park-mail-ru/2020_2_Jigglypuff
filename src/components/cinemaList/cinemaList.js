@@ -14,14 +14,14 @@ export default class CinemaList extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
         const Cinemas = [];
-        for (const i in this.context) {
-            if (Object.prototype.hasOwnProperty.call(this.context, i)) {
-                Cinemas.push((new CinemaCard(this.context[i])).render());
+        for (const i in this._context) {
+            if (Object.prototype.hasOwnProperty.call(this._context, i)) {
+                Cinemas.push((new CinemaCard(this._context[i])).render());
             }
         }
-        this.context.Cinemas = Cinemas;
+        this._context.Cinemas = Cinemas;
     }
 }
