@@ -59,20 +59,14 @@ export default class MainView extends View {
                     .then((response) => {
                         movieListContext[i].scheduleContext = response;
                     })
-                    .catch(() => {
-                        // console.log('\n\nMAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR');
-                        // console.log(err);
-                        // console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
+                    .catch((err) => {
+                        console.log(err);
                     });
             }
         }
 
-        const mlc = [];
-        movieListContext.forEach((value) => {
-            if (Object.prototype.hasOwnProperty.call(value, 'scheduleContext')) {
-                mlc.push(value);
-            }
+        return movieListContext.filter(item => {
+            Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
-        return mlc;
     }
 }
