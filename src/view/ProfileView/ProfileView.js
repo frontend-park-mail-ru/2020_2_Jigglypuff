@@ -68,7 +68,7 @@ export default class ProfileView extends View {
                 profileEdit[i].inputPlaceholder = userProfile[i];
             }
         }
-        profileEdit.avatar.pathToAvatar = Routes.Host + userProfile.pathToAvatar;
+        profileEdit.avatar.pathToAvatar = `${Routes.Host}${userProfile.pathToAvatar}`;
 
         return profileEdit;
     }
@@ -176,7 +176,7 @@ export default class ProfileView extends View {
                 console.log('NOT OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
 
-                const validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.querySelector('.validation-block');
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });

@@ -20,7 +20,7 @@ export default class Slider extends Component {
 
         this._context.WatchButton = (new WatchButton({
             buttonName: 'Смотреть',
-            url: Routes.MovieList + this._context.id + '/',
+            url: `${Routes.MovieList}${this._context.id}/`,
             event: Events.ChangePath,
         })).render();
     }

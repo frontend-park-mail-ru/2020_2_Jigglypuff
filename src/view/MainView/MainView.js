@@ -49,7 +49,7 @@ export default class MainView extends View {
             });
 
         let todayDate = new Date();
-        todayDate = todayDate.getFullYear() + '-' + (+todayDate.getMonth() + 1) + '-' + todayDate.getDate();
+        todayDate = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
         for (const i in movieListContext) {
             if (Object.prototype.hasOwnProperty.call(movieListContext, i)) {
                 const movieVM = new MovieViewModel();

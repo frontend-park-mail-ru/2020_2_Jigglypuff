@@ -71,7 +71,7 @@ export default class LoginView extends View {
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
-                const validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.querySelector('.validation-block');
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });

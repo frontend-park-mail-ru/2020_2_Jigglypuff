@@ -32,8 +32,8 @@ export default class MovieView extends View {
         const data = {};
 
         const movieDescriptionContext = await Getter.getMovie(routeData.id);
-        movieDescriptionContext.pathToAvatar = Routes.Host + movieDescriptionContext.pathToAvatar;
-        movieDescriptionContext.pathToSliderAvatar = Routes.Host + movieDescriptionContext.pathToSliderAvatar;
+        movieDescriptionContext.pathToAvatar = `${Routes.Host}${movieDescriptionContext.pathToAvatar}`;
+        movieDescriptionContext.pathToSliderAvatar = `${Routes.Host}${movieDescriptionContext.pathToSliderAvatar}`;
 
         console.log(movieDescriptionContext);
         movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100;
@@ -61,7 +61,7 @@ export default class MovieView extends View {
 
         const responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
 
-        const ratingMark = document.getElementsByClassName('media-block__rating')[0];
+        const ratingMark = document.querySelector('.media-block__rating');
 
         await responseMovieViewModel
             .then((response) => {

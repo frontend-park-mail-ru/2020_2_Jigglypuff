@@ -41,9 +41,7 @@ export default class ScheduleViewModel {
             this.state.time = this.state.premierTime.replace(/\d{4}-\d{2}-\d{2}T/, '');
             this.state.time = this.state.time.replace(this.state.time.replace(/\d{2}:\d{2}/, ''), '');
 
-            this.state.date = this.state.premierTime.slice(8, 10) + '.' +
-                this.state.premierTime.slice(5, 7) + '.' +
-                this.state.premierTime.slice(0, 4);
+            this.state.date = `${this.state.premierTime.slice(8, 10)}.${this.state.premierTime.slice(5, 7)}.${this.state.premierTime.slice(0, 4)}`;
 
             return this.state;
         }

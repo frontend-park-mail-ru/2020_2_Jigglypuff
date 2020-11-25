@@ -57,7 +57,7 @@ export default class HallView extends View {
         try {
             selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
         } catch (err) {
-            const validation = (document.getElementsByClassName('hall-layout')[0]).getElementsByClassName('validation-block')[0];
+            const validation = (document.querySelector('.hall-layout')).getElementsByClassName('validation-block')[0];
             validation.classList.remove('validation-display-none');
             return;
         }

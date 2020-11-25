@@ -67,7 +67,7 @@ export default class View {
         if (headerContext.userBlockContext.isAuthorized) {
             const userInfo = await Getter.getProfile();
             if (userInfo) {
-                headerContext.userBlockContext.pathToAvatar = Routes.Host + userInfo.pathToAvatar;
+                headerContext.userBlockContext.pathToAvatar = `${Routes.Host}${userInfo.pathToAvatar}`;
                 headerContext.userBlockContext.name = userInfo.name;
                 headerContext.userBlockContext.surname = userInfo.surname;
             }
@@ -84,8 +84,8 @@ export default class View {
 
         const sliderContext = await Getter.getMovie(movieID);
         if (sliderContext) {
-            sliderContext.pathToAvatar = Routes.Host + sliderContext.pathToAvatar;
-            sliderContext.pathToSliderAvatar = Routes.Host + sliderContext.pathToSliderAvatar;
+            sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
+            sliderContext.pathToSliderAvatar = `${Routes.Host}${sliderContext.pathToSliderAvatar}`;
         }
 
         return sliderContext;

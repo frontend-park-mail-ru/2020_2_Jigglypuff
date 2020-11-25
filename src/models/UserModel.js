@@ -137,7 +137,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        return await fetch(Routes.HostAPI + Routes.Register, {
+        return await fetch(`${Routes.HostAPI}${Routes.Register}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -157,7 +157,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async signIn() {
-        return await fetch(Routes.HostAPI + Routes.Login, {
+        return await fetch(`${Routes.HostAPI}${Routes.Login}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -197,7 +197,7 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
+        const response = await fetch(`${Routes.HostAPI}${Routes.ProfilePage}`, {
             method: 'PUT',
             credentials: 'include',
             body: profileSettingsForm,
@@ -221,7 +221,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async get() {
-        const response = await fetch(Routes.HostAPI + Routes.ProfilePage, {
+        const response = await fetch(`${Routes.HostAPI}${Routes.ProfilePage}`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -242,7 +242,7 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async logout() {
-        const response = await fetch(Routes.HostAPI + Routes.Logout, {
+        const response = await fetch(`${Routes.HostAPI}${Routes.Logout}`, {
             method: 'POST',
             credentials: 'include',
             headers: {

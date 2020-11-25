@@ -62,7 +62,7 @@ export default class Extractor {
 
         const actorList = [];
         for (const actor of data['ActorList']) {
-            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+            actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
         }
         movieModel.actorList = actorList;
 
@@ -99,7 +99,7 @@ export default class Extractor {
 
         const actorList = [];
         for (const actor of data.actorList) {
-            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+            actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
         }
         result.set('actorList', actorList);
 
