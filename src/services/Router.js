@@ -48,7 +48,7 @@ class Router {
                     clickTarget = clickTarget.parentNode;
                 }
 
-                const data = { ...clickTarget.dataset };
+                const data = {...clickTarget.dataset};
 
                 if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
                     data.id = clickTarget.id;
@@ -64,7 +64,7 @@ class Router {
             if (changeTarget.matches('input')) {
                 evt.preventDefault();
 
-                const data = { ...changeTarget.dataset };
+                const data = {...changeTarget.dataset};
                 data.id = changeTarget.id;
                 data.value = changeTarget.value;
                 data.target = changeTarget;
@@ -85,7 +85,7 @@ class Router {
      * @param {Object} data - data for the route path
      * */
     go(path, data = {}) {
-        const routeData = { ...this.getDataFromPath(path), ...data};
+        const routeData = {...this.getDataFromPath(path), ...data};
         if (this.currentView === routeData.view) {
             this.currentView.show(routeData);
             return;

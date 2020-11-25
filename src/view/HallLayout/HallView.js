@@ -46,7 +46,6 @@ export default class HallView extends View {
      * Method that handles submitting of the ticket buy
      */
     async onBuy() {
-
         if (!(await BaseViewModel.isAuthorised())) {
             await EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;

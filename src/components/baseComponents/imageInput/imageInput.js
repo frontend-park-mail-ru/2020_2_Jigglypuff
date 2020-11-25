@@ -42,8 +42,8 @@ export default class ImageInput extends Component {
         reader.onload = (() => {
             return function(file) {
                 const avatar = document.querySelector('.avatar');
-                let avatarPreview = document.createElement('img');
-                avatarPreview.className = "avatar__preview";
+                const avatarPreview = document.createElement('img');
+                avatarPreview.className = 'avatar__preview';
                 avatarPreview.src = file.target.result;
                 avatar.innerHTML = avatarPreview.outerHTML;
             };

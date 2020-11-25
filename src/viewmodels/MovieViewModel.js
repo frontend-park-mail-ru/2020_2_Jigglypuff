@@ -62,8 +62,10 @@ export default class MovieViewModel extends BaseViewModel {
         this.schedule[this.schedule.length - 1]['time'] = this.schedule[this.schedule.length - 1]['time']
             .replace(this.schedule[this.schedule.length - 1]['time'].replace(/\d{2}:\d{2}/, ''), '');
 
-        this.schedule[this.schedule.length - 1]['date'] = `${this.schedule[this.schedule.length - 1]['premierTime'].slice(8, 10)}.${this.schedule[this.schedule.length - 1]['premierTime'].slice(5, 7)}.${this.schedule[this.schedule.length - 1]['premierTime'].slice(0, 4)}`;
-
+        const day = this.schedule[this.schedule.length - 1]['premierTime'].slice(8, 10);
+        const month = this.schedule[this.schedule.length - 1]['premierTime'].slice(5, 7);
+        const year = this.schedule[this.schedule.length - 1]['premierTime'].slice(0, 4);
+        this.schedule[this.schedule.length - 1]['date'] = `${day}.${month}.${year}`;
     }
 
     /**

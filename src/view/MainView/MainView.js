@@ -65,7 +65,7 @@ export default class MainView extends View {
             }
         }
 
-        return movieListContext.filter(item => {
+        return movieListContext.filter((item) => {
             Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
     }
