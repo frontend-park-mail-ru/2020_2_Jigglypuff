@@ -2,9 +2,8 @@ import Component from '../component.js';
 import template from './header.hbs';
 import UserBlock from '../userBlock/userBlock';
 import headerItems from '../../consts/HeaderItems';
-import Events from "../../consts/Events";
-import EventBus from "../../services/EventBus";
-import Routes from "../../consts/Routes";
+import Events from '../../consts/Events';
+import EventBus from '../../services/EventBus';
 
 /**
  * Header component
@@ -34,7 +33,7 @@ export default class Header extends Component {
      * @param {Object} userData - header context
      * */
     _onUpdateHeader(userData = {}) {
-        let userBlock = document.querySelector('.header__navbar-userblock');
+        const userBlock = document.querySelector('.header__navbar-userblock');
         userBlock.innerHTML = (new UserBlock(userData)).render();
     }
 }

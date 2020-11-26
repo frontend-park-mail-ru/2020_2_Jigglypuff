@@ -6,7 +6,7 @@ import Events from '../../consts/Events';
 import SignUpViewModel from '../../viewmodels/SignUpViewModel';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
 import Routes from '../../consts/Routes';
-import Getter from "../../utils/Getter";
+import Getter from '../../utils/Getter';
 
 /**
  * Class of the registration view

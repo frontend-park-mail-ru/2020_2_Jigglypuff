@@ -29,7 +29,7 @@ export default class View {
     async show(contentTemplate, templateDate = {}) {
         let sliderContext = {};
 
-        if(!document.querySelector('.header')) {
+        if (!document.querySelector('.header')) {
             const headerContext = await this.getHeaderContext();
             this._context.Header = (new Header(headerContext)).render();
         } else {

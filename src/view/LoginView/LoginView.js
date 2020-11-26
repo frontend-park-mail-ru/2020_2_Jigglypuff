@@ -6,7 +6,7 @@ import Events from '../../consts/Events';
 import SignInViewModel from '../../viewmodels/SignInViewModel';
 import Routes from '../../consts/Routes';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
-import Getter from "../../utils/Getter";
+import Getter from '../../utils/Getter';
 
 /**
  * Class of the login view
