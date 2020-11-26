@@ -1,6 +1,6 @@
-import Component from '../component.js';
-import template from './profileTickets.hbs';
-import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
+import Component from 'components/component';
+import template from 'profileTickets.hbs';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 
 /**
  * Profile tickets component

@@ -1,5 +1,5 @@
-import Component from '../../component.js';
-import template from './validationBlock.hbs';
+import Component from 'components/component';
+import template from 'validationBlock.hbs';
 
 /**
  * Validation block component

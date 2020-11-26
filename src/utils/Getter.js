@@ -1,10 +1,10 @@
-import CinemaViewModel from '../viewmodels/CinemaViewModel';
-import MovieViewModel from '../viewmodels/MovieViewModel';
-import SettingsViewModel from '../viewmodels/SettingsViewModel';
-import EventBus from '../services/EventBus';
-import Events from '../consts/Events';
-import ScheduleViewModel from '../viewmodels/ScheduleViewModel';
-import Routes from '../consts/Routes';
+import CinemaViewModel from 'viewmodels/CinemaViewModel';
+import MovieViewModel from 'viewmodels/MovieViewModel';
+import SettingsViewModel from 'viewmodels/SettingsViewModel';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
+import ScheduleViewModel from 'viewmodels/ScheduleViewModel';
+import Routes from 'consts/Routes';
 
 /**
  * Class that gets different essence information

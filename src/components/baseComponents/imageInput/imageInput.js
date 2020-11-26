@@ -1,7 +1,7 @@
-import Component from '../../component.js';
-import template from './imageInput.hbs';
-import EventBus from '../../../services/EventBus';
-import Events from '../../../consts/Events';
+import Component from 'components/component';
+import template from 'imageInput.hbs';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
 
 /**
  * Image input component

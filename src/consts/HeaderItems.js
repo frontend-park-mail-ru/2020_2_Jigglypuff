@@ -1,5 +1,5 @@
-import Routes from './Routes';
-import Events from './Events';
+import Routes from 'Routes';
+import Events from 'Events';
 
 const headerItems = {
     url: Routes.Main,

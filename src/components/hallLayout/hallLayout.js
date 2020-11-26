@@ -1,9 +1,9 @@
-import Component from '../component.js';
-import template from './hallLayout.hbs';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import SeatButton from '../baseComponents/buttons/seatButton/seatButton';
-import Events from '../../consts/Events';
-import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
+import Component from 'components/component';
+import template from 'hallLayout.hbs';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import SeatButton from 'components/baseComponents/buttons/seatButton/seatButton';
+import Events from 'consts/Events';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 
 /**
  * Hall layout component

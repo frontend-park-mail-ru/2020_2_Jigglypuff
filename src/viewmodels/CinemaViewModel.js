@@ -1,8 +1,7 @@
-import BaseViewModel from './BaseViewModel';
-import CinemaModel from '../models/CinemaModel';
-import Extractor from '../utils/Extractor';
-import Errors from '../consts/Errors';
-
+import BaseViewModel from 'BaseViewModel';
+import CinemaModel from 'models/CinemaModel';
+import Extractor from 'utils/Extractor';
+import Errors from 'consts/Errors';
 
 /** Class that contains Cinema ViewModel */
 export default class CinemaViewModel extends BaseViewModel {

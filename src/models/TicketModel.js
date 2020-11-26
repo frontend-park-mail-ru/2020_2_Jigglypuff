@@ -1,6 +1,6 @@
-import ScheduleModel from './ScheduleModel';
-import Routes from '../consts/Routes';
-import CSRF from '../utils/CSRF';
+import ScheduleModel from 'ScheduleModel';
+import Routes from 'consts/Routes';
+import CSRF from 'utils/CSRF';
 
 /** Class that contains Ticket model */
 export default class TicketModel {

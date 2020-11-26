@@ -1,5 +1,5 @@
-import Routes from '../consts/Routes';
-import Validator from '../utils/Validator';
+import Routes from 'consts/Routes';
+import Validator from 'utils/Validator';
 
 /** Class that contains Cinema model */
 export default class CinemaModel {

@@ -1,5 +1,5 @@
-import Component from '../../../component.js';
-import template from './standardButton.hbs';
+import Component from 'components/component';
+import template from 'standardButton.hbs';
 
 /**
  * Button component

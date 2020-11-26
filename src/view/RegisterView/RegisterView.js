@@ -1,12 +1,12 @@
-import template from './RegisterView.hbs';
-import View from '../BaseView/View';
-import RegisterContent from '../../components/registerContent/registerContent';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/Events';
-import SignUpViewModel from '../../viewmodels/SignUpViewModel';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import Routes from '../../consts/Routes';
-import Getter from '../../utils/Getter';
+import template from 'RegisterView.hbs';
+import View from 'components/BaseView/View';
+import RegisterContent from 'components/registerContent/registerContent';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
+import SignUpViewModel from 'viewmodels/SignUpViewModel';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import Routes from 'consts/Routes';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the registration view

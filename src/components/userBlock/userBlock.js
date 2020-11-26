@@ -1,8 +1,8 @@
-import Component from '../component.js';
-import template from './userBlock.hbs';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import Events from '../../consts/Events';
-import Routes from '../../consts/Routes';
+import Component from 'components/component';
+import template from 'userBlock.hbs';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Events from 'consts/Events';
+import Routes from 'consts/Routes';
 
 /**
  * User block component

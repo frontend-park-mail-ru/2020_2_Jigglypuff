@@ -1,6 +1,6 @@
-import Component from '../component.js';
-import template from './cinemaList.hbs';
-import CinemaCard from '../cinemaCard/cinemaCard';
+import Component from 'components/component';
+import template from 'cinemaList.hbs';
+import CinemaCard from 'components/cinemaCard/cinemaCard';
 
 /**
  * Cinema list component

@@ -1,5 +1,5 @@
-import Validator from '../utils/Validator';
-import Routes from '../consts/Routes';
+import Validator from 'utils/Validator';
+import Routes from 'consts/Routes';
 
 /** Class that contains Schedule model */
 export default class ScheduleModel {

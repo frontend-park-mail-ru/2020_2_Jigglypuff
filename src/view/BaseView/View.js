@@ -1,9 +1,9 @@
-import Header from '../../components/header/header';
-import template from './View.hbs';
-import Slider from '../../components/slider/slider';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import Routes from '../../consts/Routes';
-import Getter from '../../utils/Getter';
+import Header from 'components/header/header';
+import template from 'View.hbs';
+import Slider from 'components/slider/slider';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import Routes from 'consts/Routes';
+import Getter from 'utils/Getter';
 
 /**
  * Base class of the view

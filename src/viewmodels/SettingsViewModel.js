@@ -1,7 +1,7 @@
-import BaseViewModel from './BaseViewModel';
-import Errors from '../consts/Errors';
-import Extractor from '../utils/Extractor';
-import UserModel from '../models/UserModel';
+import BaseViewModel from 'BaseViewModel';
+import Errors from 'consts/Errors';
+import Extractor from 'utils/Extractor';
+import UserModel from 'models/UserModel';
 
 /** Class that contains SignIn ViewModel */
 export default class SettingsViewModel extends BaseViewModel {

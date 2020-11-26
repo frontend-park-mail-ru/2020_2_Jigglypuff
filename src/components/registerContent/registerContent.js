@@ -1,11 +1,11 @@
-import Component from '../component.js';
-import template from './registerContent.hbs';
-import RegistrationItems from '../../consts/RegistrationItems';
-import TextInput from '../baseComponents/textInput/textInput';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import Events from '../../consts/Events';
-import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
-import Routes from '../../consts/Routes';
+import Component from 'components/component';
+import template from 'registerContent.hbs';
+import RegistrationItems from 'consts/RegistrationItems';
+import TextInput from 'components/baseComponents/textInput/textInput';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Events from 'consts/Events';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import Routes from 'consts/Routes';
 
 /**
  * Register content component

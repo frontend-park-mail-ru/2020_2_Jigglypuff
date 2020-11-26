@@ -1,4 +1,4 @@
-import Routes from '../consts/Routes';
+import Routes from 'consts/Routes';
 
 /** Class that contains Hall model */
 export default class HallModel {

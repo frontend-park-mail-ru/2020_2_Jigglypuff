@@ -1,7 +1,7 @@
-import BaseViewModel from './BaseViewModel';
-import Errors from '../consts/Errors';
-import UserModel from '../models/UserModel';
-import CSRF from '../utils/CSRF';
+import BaseViewModel from 'BaseViewModel';
+import Errors from 'consts/Errors';
+import UserModel from 'models/UserModel';
+import CSRF from 'utils/CSRF';
 
 /** Class that contains SignIn ViewModel */
 export default class SignInViewModel extends BaseViewModel {

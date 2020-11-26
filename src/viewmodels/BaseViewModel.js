@@ -1,5 +1,5 @@
-import Errors from '../consts/Errors';
-import UserModel from '../models/UserModel';
+import Errors from 'consts/Errors';
+import UserModel from 'models/UserModel';
 
 /** Class that contains BaseViewModel ViewModel */
 export default class BaseViewModel {

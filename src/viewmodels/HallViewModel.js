@@ -1,7 +1,7 @@
-import Extractor from '../utils/Extractor';
-import Errors from '../consts/Errors';
-import HallModel from '../models/HallModel';
-import TicketModel from '../models/TicketModel';
+import Extractor from 'utils/Extractor';
+import Errors from 'consts/Errors';
+import HallModel from 'models/HallModel';
+import TicketModel from 'models/TicketModel';
 
 /** Class that contains HallList ViewModel */
 export default class HallViewModel {

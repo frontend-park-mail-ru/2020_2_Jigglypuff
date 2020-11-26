@@ -1,12 +1,12 @@
-import template from './LoginView.hbs';
-import View from '../BaseView/View';
-import LoginContent from '../../components/loginContent/loginContent';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/Events';
-import SignInViewModel from '../../viewmodels/SignInViewModel';
-import Routes from '../../consts/Routes';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import Getter from '../../utils/Getter';
+import template from 'LoginView.hbs';
+import View from 'components/BaseView/View';
+import LoginContent from 'components/loginContent/loginContent';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
+import SignInViewModel from 'viewmodels/SignInViewModel';
+import Routes from 'consts/Routes';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the login view

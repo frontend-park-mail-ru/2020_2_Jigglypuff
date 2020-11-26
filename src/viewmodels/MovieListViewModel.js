@@ -1,7 +1,7 @@
-import BaseViewModel from './BaseViewModel';
-import Errors from '../consts/Errors';
-import Extractor from '../utils/Extractor';
-import MovieModel from '../models/MovieModel';
+import BaseViewModel from 'BaseViewModel';
+import Errors from 'consts/Errors';
+import Extractor from 'utils/Extractor';
+import MovieModel from 'models/MovieModel';
 
 /** Class that contains MovieList ViewModel */
 export default class MovieListViewModel extends BaseViewModel {

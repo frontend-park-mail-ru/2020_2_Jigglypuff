@@ -1,13 +1,13 @@
-import template from './HallView.hbs';
-import View from '../BaseView/View';
-import HallLayout from '../../components/hallLayout/hallLayout';
-import HallViewModel from '../../viewmodels/HallViewModel';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/Events';
-import TicketViewModel from '../../viewmodels/TicketViewModel';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import Routes from '../../consts/Routes';
-import Getter from '../../utils/Getter';
+import template from 'HallView.hbs';
+import View from 'components/BaseView/View';
+import HallLayout from 'components/hallLayout/hallLayout';
+import HallViewModel from 'viewmodels/HallViewModel';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
+import TicketViewModel from 'viewmodels/TicketViewModel';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import Routes from 'consts/Routes';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the hall view
