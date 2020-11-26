@@ -46,6 +46,7 @@ export default class Getter {
         await responseMovieViewModel
             .then((response) => {
                 movie = response;
+                console.log(movie);
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_MOVIE_NAME() :: ERR');

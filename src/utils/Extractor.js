@@ -73,7 +73,7 @@ export default class Extractor {
 
         const genreList = [];
         for (const genre of data['GenreList']) {
-            genreList.push(genre['Name'].toString());
+            genreList.push(genre['Name']);
         }
         movieModel.genreList = genreList;
 
@@ -110,7 +110,7 @@ export default class Extractor {
 
         const genreList = [];
         for (const genre of data.genreList) {
-            genreList.push(genre['Name'].toString());
+            genreList.push(genre);
         }
         result.set('genreList', genreList);
 

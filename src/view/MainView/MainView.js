@@ -60,13 +60,16 @@ export default class MainView extends View {
                         movieListContext[i].scheduleContext = response;
                     })
                     .catch((err) => {
-                        console.log(err);
+                        // console.log(err);
                     });
             }
         }
 
+        console.log(movieListContext.filter((item) => {
+            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
+        }));
         return movieListContext.filter((item) => {
-            Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
+            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
     }
 }
