@@ -206,7 +206,7 @@ export default class Extractor {
             }
         } else {
             for (const genre of data.genreList) {
-                genreList.push(genre);
+                genreList.push(genre['Name']);
             }
         }
 
