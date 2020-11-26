@@ -6,6 +6,7 @@ import Events from '../../consts/Events';
 import SignInViewModel from '../../viewmodels/SignInViewModel';
 import Routes from '../../consts/Routes';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
+import Getter from '../../utils/Getter';
 
 /**
  * Class of the login view
@@ -18,7 +19,7 @@ export default class LoginView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
 
         this.signInViewModel = new SignInViewModel();
         EventBus.on(Events.LoginFieldFill, this.onUpdateField.bind(this));
@@ -36,7 +37,7 @@ export default class LoginView extends View {
         const data = {
             LoginContent: (new LoginContent()).render(),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**
@@ -63,15 +64,16 @@ export default class LoginView extends View {
         const responseSignIn = this.signInViewModel.signInCommand.exec();
 
         await responseSignIn
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
                 console.log('OK');
                 console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
-                const validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.querySelector('.validation-block');
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });

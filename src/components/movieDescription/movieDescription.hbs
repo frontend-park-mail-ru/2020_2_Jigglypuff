@@ -36,7 +36,9 @@
                 {{ releaseYear }}, {{ country }}, {{ duration }} мин, {{ ageGroup }}+
             </span>
         <span class="description-block__specification">
-            {{ genre }}
+            {{#each genreList}}
+                {{ this }}
+            {{/each}}
         </span>
         <span class="description-block__description">
             {{ description }}
@@ -51,7 +53,9 @@
         </div>
         <div class="description-block__information">
             <span class="description-block__information-title">В ролях</span>
-            {{ actors }}
+            {{#each actorList}}
+                {{ this }}
+            {{/each}}
         </div>
     </div>
 </div>

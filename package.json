@@ -32,7 +32,6 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server ",
-    "templatesRT": "webpack -w --config ./webpack.config.js",
     "templates": "webpack --config ./webpack.config.js",
     "lint": "eslint --debug --ext .js src/"
   },

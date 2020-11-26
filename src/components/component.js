@@ -9,7 +9,7 @@ export default class Component {
      * @param {Object} context - component context
      * */
     constructor(context) {
-        this.context = context;
+        this._context = context;
     }
 
     /**
@@ -17,6 +17,6 @@ export default class Component {
      * @return {string}
      * */
     render() {
-        return this.template(this.context);
+        return this._template(this._context);
     }
 }

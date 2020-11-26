@@ -15,7 +15,7 @@ export default class MainView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -27,7 +27,7 @@ export default class MainView extends View {
             MovieList: (new MovieList(movieListContext).render()),
         };
 
-        await super.show(this.template(templateData), {isSlider: true});
+        await super.show(this._template(templateData), {isSlider: true});
     }
 
     /**
@@ -49,7 +49,7 @@ export default class MainView extends View {
             });
 
         let todayDate = new Date();
-        todayDate = todayDate.getFullYear() + '-' + (+todayDate.getMonth() + 1) + '-' + todayDate.getDate();
+        todayDate = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
         for (const i in movieListContext) {
             if (Object.prototype.hasOwnProperty.call(movieListContext, i)) {
                 const movieVM = new MovieViewModel();
@@ -59,20 +59,17 @@ export default class MainView extends View {
                     .then((response) => {
                         movieListContext[i].scheduleContext = response;
                     })
-                    .catch(() => {
-                        // console.log('\n\nMAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR');
+                    .catch((err) => {
                         // console.log(err);
-                        // console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
                     });
             }
         }
 
-        const mlc = [];
-        movieListContext.forEach((value) => {
-            if (Object.prototype.hasOwnProperty.call(value, 'scheduleContext')) {
-                mlc.push(value);
-            }
+        console.log(movieListContext.filter((item) => {
+            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
+        }));
+        return movieListContext.filter((item) => {
+            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
-        return mlc;
     }
 }

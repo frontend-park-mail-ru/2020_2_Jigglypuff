@@ -24,12 +24,12 @@ export default class CinemaListViewModel extends BaseViewModel {
         const cinemaModel = Extractor.extractCinemaDataFromJSON(cinema);
         const extractedCinemaListDataMap = Extractor.extractCinemaDataFromModel(cinemaModel);
         this.state.push({
-            'address': '',
-            'authorID': '',
-            'hallCount': '',
-            'id': '',
-            'name': '',
-            'pathToAvatar': '',
+            address: '',
+            authorID: '',
+            hallCount: '',
+            id: '',
+            name: '',
+            pathToAvatar: '',
         });
         extractedCinemaListDataMap.forEach((value, key) => {
             this.state[this.state.length - 1][key] = value;

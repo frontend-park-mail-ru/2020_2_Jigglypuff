@@ -15,7 +15,7 @@ export default class CinemaView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
 
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -29,6 +29,6 @@ export default class CinemaView extends View {
         };
 
         console.log(data);
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 }

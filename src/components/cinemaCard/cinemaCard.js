@@ -14,9 +14,9 @@ export default class CinemaCard extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.pathToAvatar = Routes.Host + this.context.pathToAvatar;
-        this.context.cinemaPath = Routes.CinemaPage.replace(':id/', this.context.id);
+        this._context.pathToAvatar = Routes.Host + this._context.pathToAvatar;
+        this._context.cinemaPath = Routes.CinemaPage.replace(':id/', this._context.id);
     }
 }

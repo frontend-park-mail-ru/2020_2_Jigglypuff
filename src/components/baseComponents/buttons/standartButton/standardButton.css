@@ -1,9 +1,9 @@
 .button-standard {
-    background: var(--main-red-color);
+    background: var(--main-brend-color);
     padding: 0.5em 1.5rem;
 }
 .button-standard:hover {
-    background: #640000;
+    background: var(--main-brend-color-hover);
 }
 
 .button-standard__text {

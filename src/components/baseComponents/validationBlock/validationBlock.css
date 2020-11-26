@@ -1,16 +1,16 @@
 .validation-block {
-    background: var(--main-red-color);
+    background: var(--main-brend-color);
 
     border-radius: 14px;
-    border: 4px solid #FFFFFF;
+    border: 4px solid var(--main-font-color);
 
     padding: 10px 10px;
     margin: 10px 0;
 
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 4px 4px var(--text-shadow-color);
     text-align: center;
 
-    color: white;
+    color: var(--main-font-color);
 }
 
 .validation-display-none {
