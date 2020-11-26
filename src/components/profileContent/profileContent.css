@@ -23,7 +23,7 @@
 .logout__text {
     font-weight: normal;
     font-size: 1.5rem;
-    color: white;
+    color: var(--main-font-color);
 }
 
 .edit {

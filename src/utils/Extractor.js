@@ -62,7 +62,7 @@ export default class Extractor {
 
         const actorList = [];
         for (const actor of data['ActorList']) {
-            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+            actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
         }
         movieModel.actorList = actorList;
 
@@ -73,7 +73,7 @@ export default class Extractor {
 
         const genreList = [];
         for (const genre of data['GenreList']) {
-            genreList.push(genre['Name'].toString());
+            genreList.push(genre['Name']);
         }
         movieModel.genreList = genreList;
 
@@ -99,7 +99,7 @@ export default class Extractor {
 
         const actorList = [];
         for (const actor of data.actorList) {
-            actorList.push(actor['Name'] + actor['Patronymic'] + actor['Surname']);
+            actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
         }
         result.set('actorList', actorList);
 
@@ -110,7 +110,7 @@ export default class Extractor {
 
         const genreList = [];
         for (const genre of data.genreList) {
-            genreList.push(genre['Name'].toString());
+            genreList.push(genre);
         }
         result.set('genreList', genreList);
 

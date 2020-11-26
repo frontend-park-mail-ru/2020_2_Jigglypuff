@@ -16,11 +16,11 @@ export default class Slider extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.WatchButton = (new WatchButton({
+        this._context.WatchButton = (new WatchButton({
             buttonName: 'Смотреть',
-            url: Routes.MovieList + this.context.id + '/',
+            url: `${Routes.MovieList}${this._context.id}/`,
             event: Events.ChangePath,
         })).render();
     }

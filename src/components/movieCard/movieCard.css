@@ -30,7 +30,7 @@
     font-size: 1.5rem;
     text-decoration: none;
     cursor: pointer;
-    color: white;
+    color: var(--main-font-color);
     margin-bottom: 7px;
 }
 
@@ -43,7 +43,7 @@
 .description_specification__info {
     font-size: 1rem;
     font-weight: bold;
-    color: #9E9D9D;
+    color: var(--main-help-text-color);
 }
 
 .movie-card__description_schedule {
@@ -56,7 +56,7 @@
 .movie-card__description_schedule-line {
     width: 100%;
     border: none;
-    background-color: white;
+    background-color: var(--main-font-color);
     border-radius: 10px;
     height: 4px;
 }
@@ -64,7 +64,7 @@
 .movie-card__description_schedule-title {
     font-weight: bold;
     font-size: 1.5rem;
-    color: white;
+    color: var(--main-font-color);
     margin-bottom: 7px;
 }
 

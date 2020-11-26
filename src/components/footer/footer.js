@@ -13,6 +13,6 @@ export default class Footer extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
     }
 }

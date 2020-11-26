@@ -12,8 +12,8 @@ class Router {
      * @param {HTMLElement} application
      * */
     constructor(application) {
-        this.application = application;
-        this.routes = [];
+        this._application = application;
+        this._routes = [];
 
         EventBus.on(Events.ChangePath, this.onChangePath.bind(this));
     }
@@ -26,8 +26,8 @@ class Router {
      * @return {Object}
      * */
     register(path, view) {
-        this.routes.push({
-            regPath: new RegExp('^' + path.replace(/(:\w+)/, '(\\d+)') + '/?$'),
+        this._routes.push({
+            regPath: new RegExp(`^${path.replace(/(:\w+)/, '(\\d+)')}/?$`),
             view: view,
         });
 
@@ -38,7 +38,7 @@ class Router {
      * Start router
      * */
     start() {
-        this.application.addEventListener('click', (e) => {
+        this._application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
             if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
@@ -48,7 +48,7 @@ class Router {
                     clickTarget = clickTarget.parentNode;
                 }
 
-                const data = Object.assign({}, clickTarget.dataset);
+                const data = {...clickTarget.dataset};
 
                 if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
                     data.id = clickTarget.id;
@@ -58,13 +58,13 @@ class Router {
                 EventBus.emit(data.event, data);
             }
         });
-        this.application.addEventListener('change', (evt) => {
+        this._application.addEventListener('change', (evt) => {
             const changeTarget = evt.target;
 
             if (changeTarget.matches('input')) {
                 evt.preventDefault();
 
-                const data = Object.assign({}, changeTarget.dataset);
+                const data = {...changeTarget.dataset};
                 data.id = changeTarget.id;
                 data.value = changeTarget.value;
                 data.target = changeTarget;
@@ -85,8 +85,7 @@ class Router {
      * @param {Object} data - data for the route path
      * */
     go(path, data = {}) {
-        const routeData = Object.assign({}, this.getDataFromPath(path), data);
-
+        const routeData = {...this.getDataFromPath(path), ...data};
         if (this.currentView === routeData.view) {
             this.currentView.show(routeData);
             return;
@@ -123,7 +122,7 @@ class Router {
     getDataFromPath(path) {
         const result = {};
 
-        this.routes.forEach(({regPath, view}) => {
+        this._routes.forEach(({regPath, view}) => {
             const match = path.match(regPath);
 
             if (match) {

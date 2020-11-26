@@ -24,7 +24,7 @@ export default class HallView extends View {
         EventBus.on(Events.TicketsBuy, this.onBuy.bind(this));
         EventBus.on(Events.TicketSelect, this.onSelect.bind(this));
 
-        this.template = template;
+        this._template = template;
     }
 
     /**
@@ -39,18 +39,24 @@ export default class HallView extends View {
             hallLayout: (new HallLayout(hallContext).render()),
         };
 
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**
      * Method that handles submitting of the ticket buy
      */
     async onBuy() {
+        if (!(await BaseViewModel.isAuthorised())) {
+            await EventBus.emit(Events.ChangePath, {path: Routes.Login});
+            return;
+        }
+
         let selectedPlaceDataset = {};
+
         try {
             selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
         } catch (err) {
-            const validation = (document.getElementsByClassName('hall-layout')[0]).getElementsByClassName('validation-block')[0];
+            const validation = (document.querySelector('.hall-layout')).getElementsByClassName('validation-block')[0];
             validation.classList.remove('validation-display-none');
             return;
         }
@@ -75,11 +81,7 @@ export default class HallView extends View {
                 console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
             });
 
-        if (await BaseViewModel.isAuthorised()) {
-            EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-        } else {
-            EventBus.emit(Events.ChangePath, {path: Routes.Login});
-        }
+        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
     }
 
     /**

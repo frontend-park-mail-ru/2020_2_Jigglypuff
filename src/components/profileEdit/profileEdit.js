@@ -18,27 +18,27 @@ export default class ProfileEdit extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        const input = this.context;
-        this.context = {};
-        this.context.input = [];
+        const input = this._context;
+        this._context = {};
+        this._context.input = [];
 
         for (const i in input) {
             if (Object.prototype.hasOwnProperty.call(input, i)) {
                 if (i === 'avatar') {
-                    this.context.input.push((new ImageInput(input[i]).render()));
+                    this._context.input.push((new ImageInput(input[i]).render()));
                     continue;
                 }
-                this.context.input.push((new TextInput(input[i])).render());
+                this._context.input.push((new TextInput(input[i])).render());
             }
         }
 
-        this.context.Validation = (new ValidationBlock({
+        this._context.Validation = (new ValidationBlock({
             message: 'Пожалуйста, загрузите верный формат аватара',
         })).render();
 
-        this.context.StandardButton = (new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Редактировать',
             event: Events.ProfileEditSubmit,
         })).render();

@@ -17,39 +17,39 @@ export default class HallLayout extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.hallLayout = [];
+        this._context.hallLayout = [];
 
         let visibility = true;
-        for (const i in this.context.hall) {
-            if (Object.prototype.hasOwnProperty.call(this.context.hall, i)) {
+        for (const i in this._context.hall) {
+            if (Object.prototype.hasOwnProperty.call(this._context.hall, i)) {
                 visibility = false;
 
                 const rowSeats = [];
-                const rowNum = this.context.hall[i][0].row;
-                for (const j in this.context.hall[i]) {
-                    if (Object.prototype.hasOwnProperty.call(this.context.hall[i], j)) {
+                const rowNum = this._context.hall[i][0].row;
+                for (const j in this._context.hall[i]) {
+                    if (Object.prototype.hasOwnProperty.call(this._context.hall[i], j)) {
                         rowSeats.push((new SeatButton({
-                            buttonName: this.context.hall[i][j].place,
+                            buttonName: this._context.hall[i][j].place,
                             event: Events.TicketSelect,
-                            isOccupied: Boolean(this.context.hall[i][j].isOccupied),
-                            place: this.context.hall[i][j].place,
-                            row: this.context.hall[i][j].row,
-                            sessionID: this.context.sessionID,
+                            isOccupied: Boolean(this._context.hall[i][j].isOccupied),
+                            place: this._context.hall[i][j].place,
+                            row: this._context.hall[i][j].row,
+                            sessionID: this._context.sessionID,
                         })).render());
                     }
                 }
-                this.context.hallLayout.push({rowNumber: rowNum, row: rowSeats});
+                this._context.hallLayout.push({rowNumber: rowNum, row: rowSeats});
             }
         }
 
-        this.context.Validation = (new ValidationBlock({
+        this._context.Validation = (new ValidationBlock({
             message: 'Выберите билет для покупки',
             visibility: visibility,
         })).render();
 
-        this.context.StandardButton = (new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Купить билет',
             event: Events.TicketsBuy,
         }).render());

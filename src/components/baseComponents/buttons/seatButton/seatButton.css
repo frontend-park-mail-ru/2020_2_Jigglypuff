@@ -1,19 +1,19 @@
 .button-seat {
-    background: var(--main-red-color);
+    background: var(--main-brend-color);
     padding: 8px 8px 11px;
     width: 30px;
     height: 35px;
 }
 .button-seat-selected {
-    background: #BC8110 !important;
+    background: var(--selected-place) !important;
 }
 
 .button-seat-occupied{
-    background: #9e9d9d !important;
+    background: var(--occupied-place) !important;
 }
 
 .button-seat:hover {
-    background: #640000;
+    background: var(--main-brend-color-hover);
 }
 
 .button-seat__text {
@@ -21,7 +21,7 @@
     font-style: inherit;
     font-weight: bold;
     font-size: 1em;
-    color: white;
+    color: var(--main-font-color);
     align-items: center;
 }
 

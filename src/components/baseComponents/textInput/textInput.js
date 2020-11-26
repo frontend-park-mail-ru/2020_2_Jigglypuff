@@ -13,6 +13,6 @@ export default class TextInput extends Component {
      * */
     constructor(context) {
         super(context);
-        this.template = template;
+        this._template = template;
     }
 }

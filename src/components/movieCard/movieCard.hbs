@@ -11,7 +11,9 @@
                 {{ duration }} мин
             </span>
             <span class="description_specification__info">
-                {{ genre }}
+                {{#each genreList}}
+                    {{ this }}
+                {{/each}}
             </span>
         </div>
         <div class="movie-card__description_schedule">

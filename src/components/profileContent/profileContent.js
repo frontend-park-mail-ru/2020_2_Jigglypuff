@@ -17,12 +17,12 @@ export default class ProfileContent extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
+        this._template = template;
 
-        this.context.LogoutPath = Routes.Logout;
-        this.context.LogoutEvent = Events.Logout;
+        this._context.LogoutPath = Routes.Logout;
+        this._context.LogoutEvent = Events.Logout;
 
-        this.context.ProfileEdit = (new ProfileEdit(this.context.profileEdit)).render();
-        this.context.ProfileTickets = (new ProfileTickets(this.context.profileTickets)).render();
+        this._context.ProfileEdit = (new ProfileEdit(this._context.profileEdit)).render();
+        this._context.ProfileTickets = (new ProfileTickets(this._context.profileTickets)).render();
     }
 }

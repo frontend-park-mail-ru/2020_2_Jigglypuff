@@ -19,23 +19,24 @@ export default class RegisterContent extends Component {
      * */
     constructor(context = {}) {
         super(context);
-        this.template = template;
-        this.context.input = [];
+        this._template = template;
+
+        this._context.input = [];
 
         for (const i in RegistrationItems) {
             if (i === 'avatar') {
                 continue;
             }
-            this.context.input.push((new TextInput(RegistrationItems[i])).render());
+            this._context.input.push((new TextInput(RegistrationItems[i])).render());
         }
 
-        this.context.LoginEvent = Events.ChangePath;
-        this.context.LoginPath = Routes.Login;
-        this.context.Validation = (new ValidationBlock({
+        this._context.LoginEvent = Events.ChangePath;
+        this._context.LoginPath = Routes.Login;
+        this._context.Validation = (new ValidationBlock({
             message: 'Неверный логин и/или пароль',
         })).render();
 
-        this.context.StandardButton = (new StandardButton({
+        this._context.StandardButton = (new StandardButton({
             buttonName: 'Зарегистрироваться',
             event: Events.RegisterSubmit,
         })).render();

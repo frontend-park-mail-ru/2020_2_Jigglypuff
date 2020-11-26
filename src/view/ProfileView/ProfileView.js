@@ -21,9 +21,9 @@ export default class ProfileView extends View {
      */
     constructor(title = 'CinemaScope') {
         super(title);
-        this.template = template;
+        this._template = template;
 
-        this.settingsViewModel = new SettingsViewModel();
+        this._settingsViewModel = new SettingsViewModel();
 
         EventBus.on(Events.Logout, this.onLogout.bind(this));
         EventBus.on(Events.ProfileEditFieldFill, this.onUpdateField.bind(this));
@@ -51,7 +51,7 @@ export default class ProfileView extends View {
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
         };
-        await super.show(this.template(data));
+        await super.show(this._template(data));
     }
 
     /**
@@ -68,7 +68,7 @@ export default class ProfileView extends View {
                 profileEdit[i].inputPlaceholder = userProfile[i];
             }
         }
-        profileEdit.avatar.pathToAvatar = Routes.Host + userProfile.pathToAvatar;
+        profileEdit.avatar.pathToAvatar = userProfile.pathToAvatar;
 
         return profileEdit;
     }
@@ -124,11 +124,12 @@ export default class ProfileView extends View {
      */
     onLogout() {
         BaseViewModel.logout()
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
                 console.log('SUCCESS');
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
 
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
@@ -153,30 +154,32 @@ export default class ProfileView extends View {
      */
     onUpdateField(data) {
         if (data.id === 'avatar') {
-            this.settingsViewModel.state[data.id] = data.target.files[0];
+            this._settingsViewModel.state[data.id] = data.target.files[0];
             return;
         }
-        this.settingsViewModel.state[data.id] = data.value;
+        this._settingsViewModel.state[data.id] = data.value;
     }
 
     /**
      * Method that handles submitting of the profile editing form
      */
     async onSubmit() {
-        const responseProfileEdit = this.settingsViewModel.editCommand.exec();
+        const responseProfileEdit = this._settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
                 console.log('OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
+
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
             })
             .catch((err) => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
                 console.log('NOT OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
 
-                const validation = document.getElementsByClassName('validation-block')[0];
+                const validation = document.querySelector('.validation-block');
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });

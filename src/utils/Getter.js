@@ -4,6 +4,7 @@ import SettingsViewModel from '../viewmodels/SettingsViewModel';
 import EventBus from '../services/EventBus';
 import Events from '../consts/Events';
 import ScheduleViewModel from '../viewmodels/ScheduleViewModel';
+import Routes from '../consts/Routes';
 
 /**
  * Class that gets different essence information
@@ -45,6 +46,7 @@ export default class Getter {
         await responseMovieViewModel
             .then((response) => {
                 movie = response;
+                console.log(movie);
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_MOVIE_NAME() :: ERR');
@@ -89,6 +91,8 @@ export default class Getter {
         await responseSettingsViewModel.getProfile()
             .then((response) => {
                 profile = response;
+                profile.pathToAvatar = `${Routes.Host}${profile.pathToAvatar}`;
+                console.log(profile);
             })
             .catch((err) => {
                 console.log('\n\nHALL_VIEW:GET_USER_LOGIN() :: ERR');

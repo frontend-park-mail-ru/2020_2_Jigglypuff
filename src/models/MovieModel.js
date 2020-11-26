@@ -373,7 +373,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovie() {
-        const response = await fetch(Routes.HostAPI + Routes.MoviePage.replace(/:id/, this._id), {
+        const response = await fetch(`${Routes.HostAPI}${Routes.MoviePage.replace(/:id/, this._id)}`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -407,7 +407,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieList(limit = 11, page = 1) {
-        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -420,7 +420,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieActualList(limit = 11, page = 1) {
-        return await fetch(Routes.HostAPI + Routes.MovieList + '?limit=' + limit + '&page=' + page, {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}`, {
             method: 'GET',
             credentials: 'include',
         });

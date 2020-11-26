@@ -4,7 +4,6 @@
 @import "../../src/components/baseComponents/buttons/button.css";
 @import "../../src/components/baseComponents/buttons/scheduleButton/scheduleButton.css";
 @import "../../src/components/baseComponents/buttons/standartButton/standardButton.css";
-@import "../../src/components/baseComponents/buttons/playButton/playButton.css";
 @import "../../src/components/baseComponents/textInput/textInput.css";
 @import "../../src/components/registerContent/registerContent.css";
 @import "../../src/components/loginContent/loginContent.css";
@@ -26,12 +25,12 @@
 html, body {
     padding: 0;
     margin: 0;
-    font-family: Montserrat, sans-serif;
+    font-family: var(--main-font);
     font-style: normal;
     font-size: 15px;
     line-height: 24px;
-    color: white;
-    background: black;
+    color: var(--main-font-color);
+    background: var(--main-background-color);
     min-width: 1300px;
 }
 
@@ -42,13 +41,13 @@ html, body {
 
 
 .cs-border {
-    background: #000000;
+    background: var(--main-background-color);
 
     border-radius: 40px;
-    border: 4px solid var(--main-red-color);
+    border: 4px solid var(--main-brend-color);
 
     padding: 20px 30px;
     margin: 20px;
     /*box-shadow: 0 0 100px var(--main-red-color);*/
-    color: white;
+    color: var(--main-font-color);
 }

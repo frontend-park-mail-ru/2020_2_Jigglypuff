@@ -16,9 +16,9 @@ export default class View {
      */
     constructor(title = 'CinemaScope') {
         document.title = title;
-        this.root = document.querySelector('.application');
-        this.template = template;
-        this.context = {};
+        this._root = document.querySelector('.application');
+        this._template = template;
+        this._context = {};
     }
 
     /**
@@ -27,25 +27,30 @@ export default class View {
      * @param {Object} templateDate - current template data
      */
     async show(contentTemplate, templateDate = {}) {
-        const headerContext = await this.getHeaderContext();
         let sliderContext = {};
-        this.context.Header = (new Header(headerContext)).render();
 
-        if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
-            this.context.isSlider = true;
-            sliderContext = await this.getSliderContext();
-            this.context.Slider = (new Slider(sliderContext)).render();
+        if (!document.querySelector('.header')) {
+            const headerContext = await this.getHeaderContext();
+            this._context.Header = (new Header(headerContext)).render();
+        } else {
+            this._context.Header = document.querySelector('.header').innerHTML;
         }
 
-        this.context.Content = contentTemplate;
-        this.root.innerHTML = template(this.context);
+        if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
+            this._context.isSlider = true;
+            sliderContext = await this.getSliderContext();
+            this._context.Slider = (new Slider(sliderContext)).render();
+        }
+
+        this._context.Content = contentTemplate;
+        this._root.innerHTML = template(this._context);
     }
 
     /**
      * Method that hides the page content
      */
     hide() {
-        this.root.innerHTML = '';
+        this._root.innerHTML = '';
     }
 
     /**
@@ -67,7 +72,7 @@ export default class View {
         if (headerContext.userBlockContext.isAuthorized) {
             const userInfo = await Getter.getProfile();
             if (userInfo) {
-                headerContext.userBlockContext.pathToAvatar = Routes.Host + userInfo.pathToAvatar;
+                headerContext.userBlockContext.pathToAvatar = userInfo.pathToAvatar;
                 headerContext.userBlockContext.name = userInfo.name;
                 headerContext.userBlockContext.surname = userInfo.surname;
             }
@@ -84,8 +89,8 @@ export default class View {
 
         const sliderContext = await Getter.getMovie(movieID);
         if (sliderContext) {
-            sliderContext.pathToAvatar = Routes.Host + sliderContext.pathToAvatar;
-            sliderContext.pathToSliderAvatar = Routes.Host + sliderContext.pathToSliderAvatar;
+            sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
+            sliderContext.pathToSliderAvatar = `${Routes.Host}${sliderContext.pathToSliderAvatar}`;
         }
 
         return sliderContext;

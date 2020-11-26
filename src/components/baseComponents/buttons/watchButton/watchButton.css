@@ -1,9 +1,9 @@
 .button-watch {
-    background: #880000;
+    background: var(--main-brend-color);
     padding: 0.5em 1.5em;
 }
 .button-watch:hover {
-    background: #640000;
+    background: var(--main-brend-color-hover);
 }
 
 .button-watch__text {
