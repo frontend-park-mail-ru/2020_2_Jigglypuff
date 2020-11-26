@@ -118,10 +118,7 @@ export default class UserModel {
      * @param {any} avatar
      */
     set avatar(avatar) {
-        // if (Checker.isImage(avatar)) {
         this._avatar = avatar;
-        //     this._avatar = null;
-        // }
     }
 
     /**
