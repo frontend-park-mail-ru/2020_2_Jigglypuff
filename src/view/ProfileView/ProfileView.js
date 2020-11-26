@@ -1,14 +1,14 @@
-import template from './ProfileView.hbs';
-import View from '../BaseView/View';
-import ProfileContent from '../../components/profileContent/profileContent';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/Events';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import SettingsViewModel from '../../viewmodels/SettingsViewModel';
-import Routes from '../../consts/Routes';
-import ProfileEditItems from '../../consts/ProfileEditItems';
-import TicketListViewModel from '../../viewmodels/TicketListViewModel';
-import Getter from '../../utils/Getter';
+import template from 'view/ProfileView/ProfileView.hbs';
+import View from 'view/BaseView/View';
+import ProfileContent from 'components/profileContent/profileContent';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import SettingsViewModel from 'viewmodels/SettingsViewModel';
+import Routes from 'consts/Routes';
+import ProfileEditItems from 'consts/ProfileEditItems';
+import TicketListViewModel from 'viewmodels/TicketListViewModel';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the profile view

@@ -1,5 +1,5 @@
-import Component from '../component.js';
-import template from './footer.hbs';
+import Component from 'components/component';
+import template from 'components/footer/footer.hbs';
 
 /**
  * Footer component

@@ -1,6 +1,6 @@
-import Errors from '../consts/Errors';
-import TicketModel from '../models/TicketModel';
-import Extractor from '../utils/Extractor';
+import Errors from 'consts/Errors';
+import TicketModel from 'models/TicketModel';
+import Extractor from 'utils/Extractor';
 
 /** Class that contains TicketList ViewModel */
 export default class TicketViewModel {

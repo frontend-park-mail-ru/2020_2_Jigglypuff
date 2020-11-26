@@ -1,6 +1,6 @@
-import Routes from '../consts/Routes';
-import Validator from '../utils/Validator';
-import CSRF from '../utils/CSRF';
+import Routes from 'consts/Routes';
+import Validator from 'utils/Validator';
+import CSRF from 'utils/CSRF';
 
 /** Class that contains Movie model */
 export default class MovieModel {

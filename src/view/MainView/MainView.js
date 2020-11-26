@@ -1,8 +1,8 @@
-import template from './MainView.hbs';
-import View from '../BaseView/View';
-import MovieList from '../../components/movieList/movieList';
-import MovieViewModel from '../../viewmodels/MovieViewModel';
-import MovieListViewModel from '../../viewmodels/MovieListViewModel';
+import template from 'view/MainView/MainView.hbs';
+import View from 'view/BaseView/View';
+import MovieList from 'components/movieList/movieList';
+import MovieViewModel from 'viewmodels/MovieViewModel';
+import MovieListViewModel from 'viewmodels/MovieListViewModel';
 
 /**
  * Class of the main page view

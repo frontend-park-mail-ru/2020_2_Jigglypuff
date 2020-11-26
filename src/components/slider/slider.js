@@ -1,8 +1,8 @@
-import Component from '../component.js';
-import template from './slider.hbs';
-import WatchButton from '../baseComponents/buttons/watchButton/watchButton';
-import Events from '../../consts/Events';
-import Routes from '../../consts/Routes';
+import Component from 'components/component';
+import template from 'components/slider/slider.hbs';
+import WatchButton from 'components/baseComponents/buttons/watchButton/watchButton';
+import Events from 'consts/Events';
+import Routes from 'consts/Routes';
 
 /**
  * Slider component

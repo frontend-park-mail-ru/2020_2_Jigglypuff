@@ -1,5 +1,5 @@
-import Component from '../../../component.js';
-import template from './watchButton.hbs';
+import Component from 'components/component';
+import template from 'components/baseComponents/buttons/watchButton/watchButton.hbs';
 
 /**
  * Watch Button component

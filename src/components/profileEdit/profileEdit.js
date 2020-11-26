@@ -1,10 +1,10 @@
-import Component from '../component.js';
-import template from './profileEdit.hbs';
-import TextInput from '../baseComponents/textInput/textInput';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import ImageInput from '../baseComponents/imageInput/imageInput';
-import Events from '../../consts/Events';
-import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
+import Component from 'components/component';
+import template from 'components/profileEdit/profileEdit.hbs';
+import TextInput from 'components/baseComponents/textInput/textInput';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import ImageInput from 'components/baseComponents/imageInput/imageInput';
+import Events from 'consts/Events';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 
 /**
  * Profile edit component

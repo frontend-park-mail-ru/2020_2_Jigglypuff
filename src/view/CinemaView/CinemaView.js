@@ -1,7 +1,7 @@
-import template from './CinemaView.hbs';
-import View from '../BaseView/View';
-import Getter from '../../utils/Getter';
-import Cinema from '../../components/cinemaPage/cinema';
+import template from 'view/CinemaView/CinemaView.hbs';
+import View from 'view/BaseView/View';
+import Cinema from 'components/cinemaPage/cinema';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the cinema view

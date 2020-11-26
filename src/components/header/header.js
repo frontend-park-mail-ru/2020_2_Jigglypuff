@@ -1,9 +1,9 @@
-import Component from '../component.js';
-import template from './header.hbs';
-import UserBlock from '../userBlock/userBlock';
-import headerItems from '../../consts/HeaderItems';
-import Events from '../../consts/Events';
-import EventBus from '../../services/EventBus';
+import Component from 'components/component';
+import template from 'components/header/header.hbs';
+import UserBlock from 'components/userBlock/userBlock';
+import headerItems from 'consts/HeaderItems';
+import Events from 'consts/Events';
+import EventBus from 'services/EventBus';
 
 /**
  * Header component

@@ -1,5 +1,5 @@
-import EventBus from './EventBus';
-import Events from '../consts/Events';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
 
 /**
  * Router

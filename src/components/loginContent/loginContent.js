@@ -1,11 +1,11 @@
-import Component from '../component.js';
-import template from './loginContent.hbs';
-import TextInput from '../baseComponents/textInput/textInput';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import LoginItems from '../../consts/LoginItems';
-import Events from '../../consts/Events';
-import ValidationBlock from '../baseComponents/validationBlock/validationBlock';
-import Routes from '../../consts/Routes';
+import Component from 'components/component';
+import template from 'components/loginContent/loginContent.hbs';
+import TextInput from 'components/baseComponents/textInput/textInput';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import LoginItems from 'consts/LoginItems';
+import Events from 'consts/Events';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import Routes from 'consts/Routes';
 
 /**
  * Login content component

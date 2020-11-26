@@ -1,12 +1,12 @@
-import template from './MovieView.hbs';
-import View from '../BaseView/View';
-import MovieDescription from '../../components/movieDescription/movieDescription';
-import MovieViewModel from '../../viewmodels/MovieViewModel';
-import Routes from '../../consts/Routes';
-import Getter from '../../utils/Getter';
-import BaseViewModel from '../../viewmodels/BaseViewModel';
-import EventBus from '../../services/EventBus';
-import Events from '../../consts/Events';
+import template from 'view/MovieView/MovieView.hbs';
+import View from 'view/BaseView/View';
+import MovieDescription from 'components/movieDescription/movieDescription';
+import MovieViewModel from 'viewmodels/MovieViewModel';
+import Routes from 'consts/Routes';
+import Getter from 'utils/Getter';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
 
 /**
  * Class of the movie view

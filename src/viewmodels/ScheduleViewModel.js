@@ -1,6 +1,6 @@
-import Extractor from '../utils/Extractor';
-import Errors from '../consts/Errors';
-import ScheduleModel from '../models/ScheduleModel';
+import Extractor from 'utils/Extractor';
+import Errors from 'consts/Errors';
+import ScheduleModel from 'models/ScheduleModel';
 
 /** Class that contains Schedule ViewModel */
 export default class ScheduleViewModel {

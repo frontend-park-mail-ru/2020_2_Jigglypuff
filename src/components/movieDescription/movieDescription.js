@@ -1,7 +1,7 @@
-import Component from '../component.js';
-import template from './movieDescription.hbs';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import Events from '../../consts/Events';
+import Component from 'components/component';
+import template from 'components/movieDescription/movieDescription.hbs';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Events from 'consts/Events';
 
 /**
  * Movie description component

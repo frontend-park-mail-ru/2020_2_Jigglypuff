@@ -1,4 +1,4 @@
-import Routes from '../consts/Routes';
+import Routes from 'consts/Routes';
 
 /** Class that contains methods to work with CSRF */
 export default class CSRF {

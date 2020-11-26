@@ -8,6 +8,19 @@ module.exports = {
         bundle: path.resolve(__dirname, 'src/index.js'),
         sw: path.resolve(__dirname, 'src/services/ServiceWorker.js')
     },
+    resolve: {
+        alias: {
+            components: path.resolve(__dirname, 'src/components/'),
+            consts: path.resolve(__dirname, 'src/consts/'),
+            'index.css': path.resolve(__dirname, 'public/css/index.css'),
+            models: path.resolve(__dirname, 'src/models/'),
+            services: path.resolve(__dirname, 'src/services/'),
+            utils: path.resolve(__dirname, 'src/utils/'),
+            view: path.resolve(__dirname, 'src/view/'),
+            viewmodels: path.resolve(__dirname, 'src/viewmodels/'),
+        },
+        extensions: ['.js'],
+    },
     module: {
         rules: [
             {

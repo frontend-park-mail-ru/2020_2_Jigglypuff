@@ -1,6 +1,6 @@
-import CinemaModel from '../models/CinemaModel';
-import ExtractedFields from '../consts/ExtractedFields';
-import MovieModel from '../models/MovieModel';
+import CinemaModel from 'models/CinemaModel';
+import ExtractedFields from 'consts/ExtractedFields';
+import MovieModel from 'models/MovieModel';
 
 /** Class that contains methods to extract data from anything */
 export default class Extractor {

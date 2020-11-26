@@ -1,9 +1,9 @@
-import Component from '../component.js';
-import template from './movieCard.hbs';
-import ScheduleButton from '../baseComponents/buttons/scheduleButton/scheduleButton';
-import StandardButton from '../baseComponents/buttons/standartButton/standardButton';
-import Routes from '../../consts/Routes';
-import Events from '../../consts/Events';
+import Component from 'components/component';
+import template from 'components/movieCard/movieCard.hbs';
+import ScheduleButton from 'components/baseComponents/buttons/scheduleButton/scheduleButton';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Routes from 'consts/Routes';
+import Events from 'consts/Events';
 
 /**
  * Movie card component

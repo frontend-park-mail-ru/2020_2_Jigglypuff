@@ -1,4 +1,4 @@
-import Events from './Events';
+import Events from 'consts/Events';
 
 const ProfileEditItems = {
     name: {

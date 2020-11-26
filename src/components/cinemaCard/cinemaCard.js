@@ -1,6 +1,6 @@
-import Component from '../component.js';
-import template from './cinemaCard.hbs';
-import Routes from '../../consts/Routes';
+import Component from 'components/component';
+import template from 'components/cinemaCard/cinemaCard.hbs';
+import Routes from 'consts/Routes';
 
 /**
  * Cinema card component
