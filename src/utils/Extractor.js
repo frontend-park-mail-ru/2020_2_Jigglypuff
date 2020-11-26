@@ -98,7 +98,9 @@ export default class Extractor {
         const result = new Map();
 
         for (const field of ExtractedFields.TicketScheduleData) {
-            result.set(field, data[field]);
+            result.set(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }), data[field]);
         }
 
         return result;
