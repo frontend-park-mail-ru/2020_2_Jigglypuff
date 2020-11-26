@@ -43,7 +43,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {JSON} scheduleElement
      */
     _addScheduleElement(scheduleElement) {
-        const extractedScheduleMap = Extractor.extractScheduleFromJSON(scheduleElement);
+        const extractedScheduleMap = Extractor.extractScheduleDataFromJSON(scheduleElement);
         this.schedule.push({
             cinemaID: '',
             cost: '',

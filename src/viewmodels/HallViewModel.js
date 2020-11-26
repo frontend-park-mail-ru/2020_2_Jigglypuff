@@ -52,7 +52,7 @@ export default class HallViewModel {
         const response = await this._hallModel.getHall();
 
         if (response.ok) {
-            const extractedHallDataMap = Extractor.extractHallData(this._hallModel);
+            const extractedHallDataMap = Extractor.extractHallDataFromModel(this._hallModel);
             extractedHallDataMap.forEach((value, key) => {
                 this.stateHallStructure[key] = value;
             });

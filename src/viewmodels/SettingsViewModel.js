@@ -27,7 +27,7 @@ export default class SettingsViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<boolean>}
      */
     async edit() {
-        const extractedDataMap = Extractor.extractFormData(this.state);
+        const extractedDataMap = Extractor.extractSettingsFormData(this.state);
         extractedDataMap.forEach((value, key) => {
             this._userModel[key] = value;
         });
