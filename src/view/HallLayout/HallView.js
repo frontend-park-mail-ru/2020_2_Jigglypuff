@@ -1,5 +1,5 @@
-import template from 'HallView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/HallLayout/HallView.hbs';
+import View from 'view/BaseView/View';
 import HallLayout from 'components/hallLayout/hallLayout';
 import HallViewModel from 'viewmodels/HallViewModel';
 import EventBus from 'services/EventBus';

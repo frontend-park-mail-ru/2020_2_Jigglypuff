@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'slider.hbs';
+import template from 'components/slider/slider.hbs';
 import WatchButton from 'components/baseComponents/buttons/watchButton/watchButton';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';

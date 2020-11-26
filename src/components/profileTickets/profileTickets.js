@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'profileTickets.hbs';
+import template from 'components/profileTickets/profileTickets.hbs';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 
 /**

@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'cinemaCard.hbs';
+import template from 'components/cinemaCard/cinemaCard.hbs';
 import Routes from 'consts/Routes';
 
 /**

@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'userBlock.hbs';
+import template from 'components/userBlock/userBlock.hbs';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';

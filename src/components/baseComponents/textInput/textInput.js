@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'textInput.hbs';
+import template from 'components/baseComponents/textInput/textInput.hbs';
 
 /**
  * Text input component

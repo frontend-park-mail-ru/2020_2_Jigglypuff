@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'movieCard.hbs';
+import template from 'components/movieCard/movieCard.hbs';
 import ScheduleButton from 'components/baseComponents/buttons/scheduleButton/scheduleButton';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
 import Routes from 'consts/Routes';

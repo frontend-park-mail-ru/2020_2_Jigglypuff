@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'cinema.hbs';
+import template from 'components/cinemaPage/cinema.hbs';
 import CinemaCard from 'components/cinemaCard/cinemaCard';
 
 /**

@@ -1,4 +1,4 @@
-import ScheduleModel from 'ScheduleModel';
+import ScheduleModel from 'models/ScheduleModel';
 import Routes from 'consts/Routes';
 import CSRF from 'utils/CSRF';
 

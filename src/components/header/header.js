@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'header.hbs';
+import template from 'components/header/header.hbs';
 import UserBlock from 'components/userBlock/userBlock';
 import headerItems from 'consts/HeaderItems';
 import Events from 'consts/Events';

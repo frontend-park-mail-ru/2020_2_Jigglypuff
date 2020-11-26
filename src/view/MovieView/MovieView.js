@@ -1,5 +1,5 @@
-import template from 'MovieView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/MovieView/MovieView.hbs';
+import View from 'view/BaseView/View';
 import MovieDescription from 'components/movieDescription/movieDescription';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import Routes from 'consts/Routes';

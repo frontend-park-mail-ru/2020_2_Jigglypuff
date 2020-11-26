@@ -1,4 +1,4 @@
-import BaseViewModel from 'BaseViewModel';
+import BaseViewModel from 'viewmodels/BaseViewModel';
 import Errors from 'consts/Errors';
 import UserModel from 'models/UserModel';
 import CSRF from 'utils/CSRF';

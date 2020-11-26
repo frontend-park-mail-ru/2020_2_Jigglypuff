@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'loginContent.hbs';
+import template from 'components/loginContent/loginContent.hbs';
 import TextInput from 'components/baseComponents/textInput/textInput';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
 import LoginItems from 'consts/LoginItems';

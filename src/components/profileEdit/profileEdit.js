@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'profileEdit.hbs';
+import template from 'components/profileEdit/profileEdit.hbs';
 import TextInput from 'components/baseComponents/textInput/textInput';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
 import ImageInput from 'components/baseComponents/imageInput/imageInput';

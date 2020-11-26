@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'hallLayout.hbs';
+import template from 'components/hallLayout/hallLayout.hbs';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
 import SeatButton from 'components/baseComponents/buttons/seatButton/seatButton';
 import Events from 'consts/Events';

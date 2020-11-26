@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'scheduleButton.hbs';
+import template from 'components/baseComponents/buttons/scheduleButton/scheduleButton.hbs';
 
 /**
  * Schedule button component

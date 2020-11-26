@@ -1,5 +1,5 @@
-import template from 'CinemaListView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/CinemaListView/CinemaListView.hbs';
+import View from 'view/BaseView/View';
 import CinemaList from 'components/cinemaList/cinemaList';
 import CinemaListViewModel from 'viewmodels/CinemaListViewModel';
 

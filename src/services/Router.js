@@ -1,4 +1,4 @@
-import EventBus from 'EventBus';
+import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 
 /**

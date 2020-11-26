@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'registerContent.hbs';
+import template from 'components/registerContent/registerContent.hbs';
 import RegistrationItems from 'consts/RegistrationItems';
 import TextInput from 'components/baseComponents/textInput/textInput';
 import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';

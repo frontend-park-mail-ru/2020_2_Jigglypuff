@@ -1,5 +1,5 @@
-import template from 'LoginView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/LoginView/LoginView.hbs';
+import View from 'view/BaseView/View';
 import LoginContent from 'components/loginContent/loginContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';

@@ -1,5 +1,5 @@
-import template from 'MainView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/MainView/MainView.hbs';
+import View from 'view/BaseView/View';
 import MovieList from 'components/movieList/movieList';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import MovieListViewModel from 'viewmodels/MovieListViewModel';

@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'standardButton.hbs';
+import template from 'components/baseComponents/buttons/standartButton/standardButton.hbs';
 
 /**
  * Button component

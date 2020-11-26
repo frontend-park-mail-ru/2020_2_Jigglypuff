@@ -1,5 +1,5 @@
-import template from 'RegisterView.hbs';
-import View from 'components/BaseView/View';
+import template from 'view/RegisterView/RegisterView.hbs';
+import View from 'view/BaseView/View';
 import RegisterContent from 'components/registerContent/registerContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';

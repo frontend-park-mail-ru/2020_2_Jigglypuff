@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'imageInput.hbs';
+import template from 'components/baseComponents/imageInput/imageInput.hbs';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 

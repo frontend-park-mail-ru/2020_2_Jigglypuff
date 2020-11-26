@@ -1,4 +1,4 @@
-import Checker from 'Checker';
+import Checker from 'utils/Checker';
 
 /** Class that contains validation methods */
 export default class Validator {

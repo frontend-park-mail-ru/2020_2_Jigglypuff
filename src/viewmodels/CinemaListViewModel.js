@@ -1,4 +1,4 @@
-import BaseViewModel from 'BaseViewModel';
+import BaseViewModel from 'viewmodels/BaseViewModel';
 import CinemaModel from 'models/CinemaModel';
 import Errors from 'consts/Errors';
 import Extractor from 'utils/Extractor';
