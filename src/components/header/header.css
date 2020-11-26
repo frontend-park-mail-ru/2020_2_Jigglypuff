@@ -20,7 +20,7 @@
     width: 4.5rem;
 }
 
-.header-absolute {
+.header-slider {
     position: absolute;
     width: 100%;
     z-index: 2;
@@ -29,7 +29,7 @@
 .header__line {
     margin: 5px 20px;
     border: none;
-    background-color: white;
+    background-color: var(--main-font-color);
     border-radius: 10px;
     height: 4px;
 }
@@ -47,4 +47,12 @@
     align-items: center;
     font-weight: bold;
     margin-left: auto;
+}
+
+.fill {
+    fill: var(--main-brend-color);
+}
+
+.stroke {
+    stroke: var(--main-brend-color);
 }

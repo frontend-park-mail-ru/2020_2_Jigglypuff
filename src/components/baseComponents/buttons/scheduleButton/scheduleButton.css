@@ -14,7 +14,7 @@
 }
 
 .button__schedule {
-    color: white;
+    color: var(--main-font-color);
     display: flex;
     flex-direction: column;
     align-items: center;

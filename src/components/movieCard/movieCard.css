@@ -30,7 +30,7 @@
     font-size: 1.5rem;
     text-decoration: none;
     cursor: pointer;
-    color: white;
+    color: var(--main-font-color);
     margin-bottom: 7px;
 }
 

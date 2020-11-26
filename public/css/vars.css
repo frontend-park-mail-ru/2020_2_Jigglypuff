@@ -1,15 +1,23 @@
 :root {
-    --main-brend-color: #880000;
-    --main-brend-color-hover: #640000;
+    --main-brend-color: #CCC9E7;
+    --main-font-color: #FEE440;
+    --main-background-color: #202020;
+
+    --main-brend-color-hover: #CAC7E6;
+
     --slider-bottom-margin: 1rem;
     --header-margin: 6rem;
     --main-page-width: 70vw;
     --description-aside-width: 30%;
     --main-font: Montserrat, sans-serif;
-    --main-font-color: white;
-    --main-background-color: black;
+
     --main-help-text-color: rgb(118, 118, 118);
     --text-shadow-color: rgba(0, 0, 0, 0.25);
+
     --rating-color: #FFC700;
+
     --ticket-color: #BC8110;
+
+    --occupied-place: #9e9d9d;
+    --selected-place: #BC8110;
 }

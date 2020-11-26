@@ -16,7 +16,7 @@
 }
 
 .userblock__item {
-    color: var(--main-font-color);
+    color: inherit;
     text-decoration: none;
     margin-left: 1.5rem;
 }

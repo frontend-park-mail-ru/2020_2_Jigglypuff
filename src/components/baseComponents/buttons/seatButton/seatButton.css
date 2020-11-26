@@ -5,11 +5,11 @@
     height: 35px;
 }
 .button-seat-selected {
-    background: #BC8110 !important;
+    background: var(--selected-place) !important;
 }
 
 .button-seat-occupied{
-    background: #9e9d9d !important;
+    background: var(--occupied-place) !important;
 }
 
 .button-seat:hover {
@@ -21,7 +21,7 @@
     font-style: inherit;
     font-weight: bold;
     font-size: 1em;
-    color: white;
+    color: var(--main-font-color);
     align-items: center;
 }
 
