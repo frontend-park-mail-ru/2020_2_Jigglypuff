@@ -68,7 +68,7 @@ export default class ProfileView extends View {
                 profileEdit[i].inputPlaceholder = userProfile[i];
             }
         }
-        profileEdit.avatar.pathToAvatar = `${Routes.Host}${userProfile.pathToAvatar}`;
+        profileEdit.avatar.pathToAvatar = userProfile.pathToAvatar;
 
         return profileEdit;
     }
@@ -124,11 +124,12 @@ export default class ProfileView extends View {
      */
     onLogout() {
         BaseViewModel.logout()
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
                 console.log('SUCCESS');
                 console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
 
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {
@@ -166,10 +167,12 @@ export default class ProfileView extends View {
         const responseProfileEdit = this._settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
                 console.log('OK');
                 console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
+
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
             })
             .catch((err) => {
                 console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');

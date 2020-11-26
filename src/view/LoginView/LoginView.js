@@ -6,6 +6,7 @@ import Events from '../../consts/Events';
 import SignInViewModel from '../../viewmodels/SignInViewModel';
 import Routes from '../../consts/Routes';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
+import Getter from "../../utils/Getter";
 
 /**
  * Class of the login view
@@ -63,11 +64,12 @@ export default class LoginView extends View {
         const responseSignIn = this.signInViewModel.signInCommand.exec();
 
         await responseSignIn
-            .then(() => {
+            .then(async () => {
                 console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
                 console.log('OK');
                 console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
 
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
             .catch((err) => {

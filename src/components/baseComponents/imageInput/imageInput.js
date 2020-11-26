@@ -17,7 +17,10 @@ export default class ImageInput extends Component {
         super(context);
         this._template = template;
 
-        EventBus.on(Events.UploadAvatar, this.handleFileSelect.bind(this));
+        if (!this._isRendered) {
+            EventBus.on(Events.UploadAvatar, this.handleFileSelect.bind(this));
+            this._isRendered = true;
+        }
     }
 
     /**

@@ -27,9 +27,14 @@ export default class View {
      * @param {Object} templateDate - current template data
      */
     async show(contentTemplate, templateDate = {}) {
-        const headerContext = await this.getHeaderContext();
         let sliderContext = {};
-        this._context.Header = (new Header(headerContext)).render();
+
+        if(!document.querySelector('.header')) {
+            const headerContext = await this.getHeaderContext();
+            this._context.Header = (new Header(headerContext)).render();
+        } else {
+            this._context.Header = document.querySelector('.header').innerHTML;
+        }
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
@@ -67,7 +72,7 @@ export default class View {
         if (headerContext.userBlockContext.isAuthorized) {
             const userInfo = await Getter.getProfile();
             if (userInfo) {
-                headerContext.userBlockContext.pathToAvatar = `${Routes.Host}${userInfo.pathToAvatar}`;
+                headerContext.userBlockContext.pathToAvatar = userInfo.pathToAvatar;
                 headerContext.userBlockContext.name = userInfo.name;
                 headerContext.userBlockContext.surname = userInfo.surname;
             }

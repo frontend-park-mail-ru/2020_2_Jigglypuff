@@ -6,6 +6,7 @@ import Events from '../../consts/Events';
 import SignUpViewModel from '../../viewmodels/SignUpViewModel';
 import BaseViewModel from '../../viewmodels/BaseViewModel';
 import Routes from '../../consts/Routes';
+import Getter from "../../utils/Getter";
 
 /**
  * Class of the registration view
@@ -61,12 +62,13 @@ export default class RegisterView extends View {
         const responseSignUp = this._signUpViewModel.registerCommand.exec();
 
         await responseSignUp
-            .then((response) => {
+            .then(async (response) => {
                 console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
                 console.log(response);
                 console.log('OK');
                 console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
 
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })
             .catch((err) => {
