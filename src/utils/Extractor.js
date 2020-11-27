@@ -220,11 +220,11 @@ export default class Extractor {
 
         if (data.constructor === JSON.constructor) {
             for (const genre of data['GenreList']) {
-                genreList.push(genre);
+                genreList.push(genre['Name']);
             }
         } else {
             for (const genre of data.genreList) {
-                genreList.push(genre['Name']);
+                genreList.push(genre);
             }
         }
 
