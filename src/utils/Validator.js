@@ -48,7 +48,7 @@ export default class Validator {
      * @param {string} movieDescription
      */
     static validateMovieDescription(movieDescription) {
-        const regExp = /^[А-Яа-я\w\s]{1,500}$/;
+        const regExp = /^[А-Яа-я\w\s—.,!]{1,1000}$/;
         return regExp.test(String(movieDescription));
     }
 
