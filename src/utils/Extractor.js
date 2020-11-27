@@ -241,11 +241,15 @@ export default class Extractor {
 
         if (data.constructor === JSON.constructor) {
             for (const actor of data['ActorList']) {
-                actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                if (`${actor['Patronymic']}`.length !== 0) {
+                    actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                } else {
+                    actorList.push(`${actor['Name']} ${actor['Surname']}`);
+                }
             }
         } else {
             for (const actor of data.actorList) {
-                actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                actorList.push(actor);
             }
         }
 
