@@ -1,3 +1,4 @@
+import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
 import Validator from 'utils/Validator';
 
@@ -155,13 +156,7 @@ export default class CinemaModel {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            this._address = data['Address'];
-            this._authorID = data['AuthorID'];
-            this._hallCount = data['HallCount'];
-            this._id = data['ID'];
-            this._name = data['Name'];
-            this._pathToAvatar = data['PathToAvatar'];
+            Extractor.extractCinemaDataFromJSON(await response.json(), this);
         }
 
         return response;
