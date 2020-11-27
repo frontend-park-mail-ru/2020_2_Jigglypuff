@@ -1,6 +1,7 @@
+import CSRF from 'utils/CSRF';
+import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
 import Validator from 'utils/Validator';
-import CSRF from 'utils/CSRF';
 
 /** Class that contains Movie model */
 export default class MovieModel {
@@ -172,7 +173,7 @@ export default class MovieModel {
      */
     set description(description) {
         if (Validator.validateMovieDescription(description)) {
-            this._description = description.toString();
+            this._description = description;
         } else {
             this._description = null;
         }
@@ -180,17 +181,17 @@ export default class MovieModel {
 
     /**
      * Set movie producer to "producer" variable value if valid else, null.
-     * @param {any} director
+     * @param {any} producer
      */
-    set producer(director) {
-        const nameParts = director.toString().split(' ');
+    set producer(producer) {
+        const nameParts = producer.toString().split(' ');
         for (const part of nameParts) {
             if (!Validator.validateName(part)) {
                 this._producer = null;
                 return;
             }
         }
-        this._producer = director.toString();
+        this._producer = producer.toString();
     }
 
     /**
@@ -379,22 +380,7 @@ export default class MovieModel {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            this._actorList = data['ActorList'];
-            this._ageGroup = data['AgeGroup'];
-            this._country = data['Country'];
-            this._description = data['Description'];
-            this._duration = data['Duration'];
-            this._genreList = data['GenreList'];
-            this._id = data['ID'];
-            this._name = data['Name'];
-            this._pathToAvatar = data['PathToAvatar'];
-            this._pathToSliderAvatar = data['PathToSliderAvatar'];
-            this._personalRating = data['PersonalRating'];
-            this._producer = data['Producer'];
-            this._rating = data['Rating'];
-            this._ratingCount = data['RatingCount'];
-            this._releaseYear = data['ReleaseYear'];
+            Extractor.extractMovieDataFromJSON(await response.json(), this);
         }
 
         return response;
