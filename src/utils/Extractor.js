@@ -1,5 +1,6 @@
 import CinemaModel from 'models/CinemaModel';
 import ExtractedFields from 'consts/ExtractedFields';
+import HallModel from 'models/HallModel';
 import MovieModel from 'models/MovieModel';
 
 /** Class that contains methods to extract data from anything */
@@ -11,8 +12,6 @@ export default class Extractor {
      * @return {CinemaModel}
      */
     static extractCinemaDataFromJSON(data, cinemaModel = new CinemaModel()) {
-        // const cinemaModel = new CinemaModel();
-
         for (const field in data) {
             if (!ExtractedFields.CinemaData.has(field)) {
                 continue;
@@ -91,6 +90,25 @@ export default class Extractor {
     }
 
     /**
+     * Extract hall data from JSON to model.
+     * @param {JSON} data
+     * @param {HallModel} hallModel
+     * @return {HallModel}
+     */
+    static extractHallDataFromJSON(data, hallModel = new HallModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.HallData.has(field)) {
+                continue;
+            }
+            hallModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+
+        return hallModel;
+    }
+
+    /**
      * Extract ticket from json to map.
      * @param {JSON} data
      * @return {Map}
@@ -150,11 +168,10 @@ export default class Extractor {
     /**
      * Extract movie data from json to model.
      * @param {JSON} data
+     * @param {MovieModel} movieModel
      * @return {MovieModel}
      */
-    static extractMovieDataFromJSON(data) {
-        const movieModel = new MovieModel();
-
+    static extractMovieDataFromJSON(data, movieModel = new MovieModel()) {
         data['ActorList'] = this.extractActorList(data);
         data['GenreList'] = this.extractGenreList(data);
 
