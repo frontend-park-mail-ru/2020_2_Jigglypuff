@@ -7,10 +7,11 @@ export default class Extractor {
     /**
      * Extract cinema data from json to cinema model.
      * @param {JSON} data
+     * @param {CinemaModel} cinemaModel
      * @return {CinemaModel}
      */
-    static extractCinemaDataFromJSON(data) {
-        const cinemaModel = new CinemaModel();
+    static extractCinemaDataFromJSON(data, cinemaModel = new CinemaModel()) {
+        // const cinemaModel = new CinemaModel();
 
         for (const field in data) {
             if (!ExtractedFields.CinemaData.has(field)) {
