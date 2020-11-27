@@ -1,3 +1,4 @@
+import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
 
 /** Class that contains Hall model */
@@ -70,10 +71,7 @@ export default class HallModel {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            this._id = data['ID'];
-            this._placeAmount = data['PlaceAmount'];
-            this._placeConfig = data['PlaceConfig'];
+            Extractor.extractHallDataFromJSON(await response.json(), this);
         }
 
         return response;
