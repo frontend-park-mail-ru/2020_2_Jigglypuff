@@ -1,0 +1,37 @@
+.movie-schedule-content {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    color: var(--main-font-color);
+
+}
+
+.movie-schedule__date_title {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    width: 200px;
+}
+
+.movie-schedule__format{
+    display: flex;
+    align-items: center;
+    width: 70px;
+}
+
+.movie-schedule__schedule-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-block__schedule {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.schedule-block__formats {
+    display: flex;
+    flex-direction: row;
+}
+

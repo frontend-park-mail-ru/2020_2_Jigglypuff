@@ -23,6 +23,7 @@ const ExtractedFields = {
         'Name',
         'PathToAvatar',
         'PathToSliderAvatar',
+        'PersonalRating',
         'Producer',
         'Rating',
         'RatingCount',
