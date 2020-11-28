@@ -21,7 +21,7 @@
     font-style: inherit;
     font-weight: bold;
     font-size: 1em;
-    color: var(--main-font-color);
+    color: var(--main-button-font-color);
     align-items: center;
 }
 

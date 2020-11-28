@@ -40,7 +40,7 @@ export default class MovieCard extends Component {
             }
         }
         this._context.StandardButton = (new StandardButton({
-            buttonName: 'О фильме',
+            buttonName: 'Полное расписание',
             event: Events.ChangePath,
             url: this._context.path,
         }).render());

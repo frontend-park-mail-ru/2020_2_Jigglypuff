@@ -7,6 +7,8 @@ import Getter from 'utils/Getter';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
+import MovieSchedule from 'components/movieSchedule/movieSchedule';
+import Months from 'consts/Months';
 
 /**
  * Class of the movie view
@@ -29,18 +31,11 @@ export default class MovieView extends View {
      * @param {Object} routeData - data from route path of the movie page
      */
     async show(routeData) {
+        const movieContext = await this.getMovieContext(routeData.id);
+
         const data = {};
-
-        const movieDescriptionContext = await Getter.getMovie(routeData.id);
-        movieDescriptionContext.pathToAvatar = `${Routes.Host}${movieDescriptionContext.pathToAvatar}`;
-        movieDescriptionContext.pathToSliderAvatar = `${Routes.Host}${movieDescriptionContext.pathToSliderAvatar}`;
-
-        console.log(movieDescriptionContext);
-        movieDescriptionContext.rating = Math.round(movieDescriptionContext.rating * 100) / 100;
-
-        movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
-
-        data.MovieDescription = (new MovieDescription(movieDescriptionContext)).render();
+        data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
+        data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
 
         await super.show(this._template(data));
     }
@@ -61,22 +56,58 @@ export default class MovieView extends View {
 
         const responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
 
-        const ratingMark = document.querySelector('.media-block__rating');
+        const ratingMark = document.getElementsByClassName('media-block__rating')[0];
 
         await responseMovieViewModel
             .then((response) => {
-                if (!response.ok) {
+                if (response.ok) {
                     if (ratingMark.classList.contains('hidden')) {
                         ratingMark.classList.remove('hidden');
                     }
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log('NOT OK');
                 if (!ratingMark.classList.contains('hidden')) {
                     ratingMark.classList.add('hidden');
                 }
             });
 
         EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
+    }
+
+    /**
+     * Method that returns movie context
+     * @param {Number} movieID - id of the required movie
+     *
+     * @return {Object}
+     */
+    async getMovieContext(movieID) {
+        const movieContext = {};
+        movieContext.movieScheduleContext = {};
+        movieContext.movieDescriptionContext = await Getter.getMovie(movieID);
+
+        movieContext.movieDescriptionContext.pathToAvatar = `${Routes.Host}${movieContext.movieDescriptionContext.pathToAvatar}`;
+        movieContext.movieDescriptionContext.pathToSliderAvatar = `${Routes.Host}${movieContext.movieDescriptionContext.pathToSliderAvatar}`;
+        movieContext.movieDescriptionContext.rating = Math.round(movieContext.movieDescriptionContext.rating * 100) / 100;
+        movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
+
+        let todayDate = new Date();
+        const todayDay = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
+        todayDate = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
+
+        const movieVM = new MovieViewModel();
+        const responseMovieVM = movieVM.getScheduleCommand.exec(movieID, 1, todayDate);
+        await responseMovieVM
+            .then((response) => {
+                movieContext.movieScheduleContext.sessions = response;
+            })
+            .catch(() => {
+            });
+
+        movieContext.movieScheduleContext.date = todayDay;
+        console.log(todayDay);
+
+        return movieContext;
     }
 }
