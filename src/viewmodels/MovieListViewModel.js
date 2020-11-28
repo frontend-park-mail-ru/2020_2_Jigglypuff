@@ -14,6 +14,7 @@ export default class MovieListViewModel extends BaseViewModel {
         this.state = [];
         this.getMovieActualListCommand = {exec: () => this.getMovieActualList()};
         this.getMovieListCommand = {exec: () => this.getMovieList()};
+        this.getRecommendationsListCommand = {exec: () => this.getRecommendationsList()};
     }
 
     /**
@@ -72,6 +73,28 @@ export default class MovieListViewModel extends BaseViewModel {
      */
     async getMovieList() {
         const response = await MovieModel.getMovieList();
+
+        if (response.ok) {
+            const movieList = await response.json();
+            for (const movie of movieList) {
+                this._addMovie(movie);
+            }
+            if (!this.state.length) {
+                throw new Error(Errors.ListIsEmpty);
+            }
+
+            return this.state;
+        }
+
+        throw new Error(Errors.FailedToGetMovieList);
+    }
+
+    /**
+     * Get recommendations list.
+     * @return {Promise<Error>|Promise<Object>}
+     */
+    async getRecommendations() {
+        const response = await MovieModel.getRecommendationsList();
 
         if (response.ok) {
             const movieList = await response.json();
