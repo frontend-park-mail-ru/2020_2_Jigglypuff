@@ -1,6 +1,7 @@
 import CSRF from 'utils/CSRF';
 import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
+import Statuses from 'consts/Statuses';
 import Validator from 'utils/Validator';
 
 /** Class that contains User model */
@@ -205,7 +206,7 @@ export default class UserModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.edit();
             }
@@ -245,7 +246,7 @@ export default class UserModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.logout();
             }

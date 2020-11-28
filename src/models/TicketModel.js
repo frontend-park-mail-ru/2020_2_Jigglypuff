@@ -1,6 +1,7 @@
 import CSRF from 'utils/CSRF';
 import Extractor from 'utils/Extractor';
 import ScheduleModel from 'models/ScheduleModel';
+import Statuses from 'consts/Statuses';
 import Routes from 'consts/Routes';
 
 /** Class that contains Ticket model */
@@ -129,7 +130,7 @@ export default class TicketModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.getTicketList();
             }
@@ -152,7 +153,7 @@ export default class TicketModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.getTicket();
             }
@@ -183,7 +184,7 @@ export default class TicketModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.buyTicket();
             }

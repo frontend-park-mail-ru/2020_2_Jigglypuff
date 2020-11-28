@@ -1,6 +1,7 @@
 import CSRF from 'utils/CSRF';
 import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
+import Statuses from 'consts/Statuses';
 import Validator from 'utils/Validator';
 
 /** Class that contains Movie model */
@@ -360,7 +361,7 @@ export default class MovieModel {
         });
 
         if (!response.ok) {
-            if (response.status === 403) {
+            if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.rate();
             }
