@@ -1,6 +1,7 @@
+import CSRF from 'utils/CSRF';
+import Extractor from 'utils/Extractor';
 import ScheduleModel from 'models/ScheduleModel';
 import Routes from 'consts/Routes';
-import CSRF from 'utils/CSRF';
 
 /** Class that contains Ticket model */
 export default class TicketModel {
@@ -158,18 +159,7 @@ export default class TicketModel {
         }
 
         if (response.ok) {
-            const data = await response.json();
-            this._id = data['ID'];
-            this._login = data['Login'];
-            this._placeField.place = data['PlaceField']['Place'];
-            this._placeField.row = data['PlaceField']['Row'];
-            this._scheduleModel.cinemaID = data['Schedule']['CinemaID'];
-            this._scheduleModel.cinemaID = data['Schedule']['Cost'];
-            this._scheduleModel.hallID = data['Schedule']['HallID'];
-            this._scheduleModel.id = data['Schedule']['ID'];
-            this._scheduleModel.movieID = data['Schedule']['MovieID'];
-            this._scheduleModel.premierTime = data['Schedule']['PremierTime'];
-            this._transactionDate = data['TransactionDate'];
+            Extractor.extractTicketModelFromJSON(await response.json(), this);
         }
 
         return response;

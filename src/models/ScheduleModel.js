@@ -1,5 +1,6 @@
 import Validator from 'utils/Validator';
 import Routes from 'consts/Routes';
+import Extractor from 'utils/Extractor';
 
 /** Class that contains Schedule model */
 export default class ScheduleModel {
@@ -157,13 +158,7 @@ export default class ScheduleModel {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            this._cinemaID = data['CinemaID'];
-            this._cost = data['Cost'];
-            this._hallID = data['HallID'];
-            this._id = data['ID'];
-            this._movieID = data['MovieID'];
-            this._premierTime = data['PremierTime'];
+            Extractor.extractScheduleModelFromJSON(await response.json(), this);
         }
 
         return response;

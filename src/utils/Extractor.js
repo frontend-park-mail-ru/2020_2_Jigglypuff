@@ -1,17 +1,20 @@
 import CinemaModel from 'models/CinemaModel';
 import ExtractedFields from 'consts/ExtractedFields';
+import HallModel from 'models/HallModel';
 import MovieModel from 'models/MovieModel';
+import ScheduleModel from 'models/ScheduleModel';
+import TicketModel from 'models/TicketModel';
+import UserModel from 'models/UserModel';
 
 /** Class that contains methods to extract data from anything */
 export default class Extractor {
     /**
      * Extract cinema data from json to cinema model.
      * @param {JSON} data
+     * @param {CinemaModel} cinemaModel
      * @return {CinemaModel}
      */
-    static extractCinemaDataFromJSON(data) {
-        const cinemaModel = new CinemaModel();
-
+    static extractCinemaDataFromJSON(data, cinemaModel = new CinemaModel()) {
         for (const field in data) {
             if (!ExtractedFields.CinemaData.has(field)) {
                 continue;
@@ -61,6 +64,30 @@ export default class Extractor {
 
     /**
      * Extract profile data from model to map.
+     * @param {JSON} data
+     * @param {UserModel} userModel
+     * @return {UserModel}
+     */
+    static extractUserDataFromJSON(data, userModel = new UserModel()) {
+        data['PathToAvatar'] = data['AvatarPath'];
+        for (const field in data) {
+            if (!ExtractedFields.ProfileData.has(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }))) {
+                continue;
+            }
+            userModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+        userModel.login = data['UserCredentials']['Login'];
+
+        return userModel;
+    }
+
+
+    /**
+     * Extract profile data from model to map.
      * @param {UserModel} data
      * @return {Map}
      */
@@ -87,6 +114,27 @@ export default class Extractor {
         }
 
         return result;
+    }
+
+    /**
+     * Extract hall data from JSON to model.
+     * @param {JSON} data
+     * @param {HallModel} hallModel
+     * @return {HallModel}
+     */
+    static extractHallDataFromJSON(data, hallModel = new HallModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.HallData.has(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }))) {
+                continue;
+            }
+            hallModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+
+        return hallModel;
     }
 
     /**
@@ -127,6 +175,25 @@ export default class Extractor {
     }
 
     /**
+     * Extract schedule from JSON to model.
+     * @param {JSON} data
+     * @param {ScheduleModel} scheduleModel
+     * @return {ScheduleModel}
+     */
+    static extractScheduleModelFromJSON(data, scheduleModel = new ScheduleModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.ScheduleData.has(field)) {
+                continue;
+            }
+            scheduleModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+
+        return scheduleModel;
+    }
+
+    /**
      * Extract schedule data from model to map.
      * @param {ScheduleModel} data
      * @return {Map}
@@ -149,11 +216,10 @@ export default class Extractor {
     /**
      * Extract movie data from json to model.
      * @param {JSON} data
+     * @param {MovieModel} movieModel
      * @return {MovieModel}
      */
-    static extractMovieDataFromJSON(data) {
-        const movieModel = new MovieModel();
-
+    static extractMovieDataFromJSON(data, movieModel = new MovieModel()) {
         data['ActorList'] = this.extractActorList(data);
         data['GenreList'] = this.extractGenreList(data);
 
@@ -202,11 +268,11 @@ export default class Extractor {
 
         if (data.constructor === JSON.constructor) {
             for (const genre of data['GenreList']) {
-                genreList.push(genre);
+                genreList.push(genre['Name']);
             }
         } else {
             for (const genre of data.genreList) {
-                genreList.push(genre['Name']);
+                genreList.push(genre);
             }
         }
 
@@ -223,11 +289,15 @@ export default class Extractor {
 
         if (data.constructor === JSON.constructor) {
             for (const actor of data['ActorList']) {
-                actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                if (`${actor['Patronymic']}`.length !== 0) {
+                    actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                } else {
+                    actorList.push(`${actor['Name']} ${actor['Surname']}`);
+                }
             }
         } else {
             for (const actor of data.actorList) {
-                actorList.push(`${actor['Name']} ${actor['Patronymic']} ${actor['Surname']}`);
+                actorList.push(actor);
             }
         }
 
@@ -303,5 +373,39 @@ export default class Extractor {
         }
 
         return result;
+    }
+
+    /**
+     * Extract schedule from JSON to model.
+     * @param {JSON} data
+     * @param {TicketModel} ticketModel
+     * @return {TicketModel}
+     */
+    static extractTicketModelFromJSON(data, ticketModel = new TicketModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.TicketData.has(field)) {
+                continue;
+            }
+
+            if (data[field].constructor === ({}).constructor) {
+                const resultObject = {};
+
+                for (const fieldObject of Object.entries(data[field])) {
+                    resultObject[fieldObject[0].replace(/^[A-Z]+/, (c) => {
+                        return c.toLowerCase();
+                    })] = fieldObject[1];
+                }
+
+                ticketModel[field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                })] = resultObject;
+            } else {
+                ticketModel[field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                })] = data[field];
+            }
+        }
+
+        return ticketModel;
     }
 }
