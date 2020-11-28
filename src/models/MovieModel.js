@@ -412,4 +412,15 @@ export default class MovieModel {
             credentials: 'include',
         });
     }
+
+    /**
+     * Get recommendations list.
+     * @return {Promise<Response>}
+     */
+    static async getRecommendationsList() {
+        return await fetch(`${Routes.HostAPI}${Routes.RecommendationsList}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
+    }
 }
