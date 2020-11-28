@@ -12,8 +12,8 @@ export default class MovieListViewModel extends BaseViewModel {
         super();
 
         this.state = [];
-        this.getMovieActualListCommand = {exec: () => this.getMovieActualList()};
-        this.getMovieListCommand = {exec: () => this.getMovieList()};
+        this.getMovieActualListCommand = {exec: (limit, page, date) => this.getMovieActualList(limit, page, date)};
+        this.getMovieListCommand = {exec: (limit, page) => this.getMovieList(limit, page)};
         this.getRecommendationsListCommand = {exec: () => this.getRecommendationsList()};
     }
 
@@ -47,10 +47,13 @@ export default class MovieListViewModel extends BaseViewModel {
 
     /**
      * Get actual movie list.
+     * @param {int} limit
+     * @param {int} page
+     * @param {string} date
      * @return {Promise<Error>|Promise<Object>}
      */
-    async getMovieActualList() {
-        const response = await MovieModel.getMovieActualList();
+    async getMovieActualList(limit = 11, page = 1, date = '') {
+        const response = await MovieModel.getMovieActualList(limit, page, date);
 
         if (response.ok) {
             const movieList = await response.json();
@@ -69,10 +72,12 @@ export default class MovieListViewModel extends BaseViewModel {
 
     /**
      * Get movie list.
+     * @param {int} limit
+     * @param {int} page
      * @return {Promise<Error>|Promise<Object>}
      */
-    async getMovieList() {
-        const response = await MovieModel.getMovieList();
+    async getMovieList(limit = 11, page = 1) {
+        const response = await MovieModel.getMovieList(limit, page);
 
         if (response.ok) {
             const movieList = await response.json();

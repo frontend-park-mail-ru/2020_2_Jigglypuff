@@ -404,10 +404,11 @@ export default class MovieModel {
      * Get actual movie list info.
      * @param {int} limit
      * @param {int} page
+     * @param {string} date
      * @return {Promise<Response>}
      */
-    static async getMovieActualList(limit = 11, page = 1) {
-        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}`, {
+    static async getMovieActualList(limit = 11, page = 1, date= '') {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}&date=${date}`, {
             method: 'GET',
             credentials: 'include',
         });
