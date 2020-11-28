@@ -2,6 +2,7 @@ import CinemaModel from 'models/CinemaModel';
 import ExtractedFields from 'consts/ExtractedFields';
 import HallModel from 'models/HallModel';
 import MovieModel from 'models/MovieModel';
+import ScheduleModel from 'models/ScheduleModel';
 import UserModel from 'models/UserModel';
 
 /** Class that contains methods to extract data from anything */
@@ -170,6 +171,25 @@ export default class Extractor {
         }
 
         return result;
+    }
+
+    /**
+     * Extract schedule from JSON to model.
+     * @param {JSON} data
+     * @param {ScheduleModel} scheduleModel
+     * @return {ScheduleModel}
+     */
+    static extractScheduleFromJSON(data, scheduleModel = new ScheduleModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.ScheduleData.has(field)) {
+                continue;
+            }
+            scheduleModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+
+        return scheduleModel;
     }
 
     /**
