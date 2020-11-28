@@ -3,6 +3,7 @@ import ExtractedFields from 'consts/ExtractedFields';
 import HallModel from 'models/HallModel';
 import MovieModel from 'models/MovieModel';
 import ScheduleModel from 'models/ScheduleModel';
+import TicketModel from 'models/TicketModel';
 import UserModel from 'models/UserModel';
 
 /** Class that contains methods to extract data from anything */
@@ -372,5 +373,39 @@ export default class Extractor {
         }
 
         return result;
+    }
+
+    /**
+     * Extract schedule from JSON to model.
+     * @param {JSON} data
+     * @param {TicketModel} ticketModel
+     * @return {TicketModel}
+     */
+    static extractTicketModelFromJSON(data, ticketModel = new TicketModel()) {
+        for (const field in data) {
+            if (!ExtractedFields.TicketData.has(field)) {
+                continue;
+            }
+
+            if (data[field].constructor === ({}).constructor) {
+                const resultObject = {};
+
+                for (const fieldObject of Object.entries(data[field])) {
+                    resultObject[fieldObject[0].replace(/^[A-Z]+/, (c) => {
+                        return c.toLowerCase();
+                    })] = fieldObject[1];
+                }
+
+                ticketModel[field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                })] = resultObject;
+            } else {
+                ticketModel[field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                })] = data[field];
+            }
+        }
+
+        return ticketModel;
     }
 }
