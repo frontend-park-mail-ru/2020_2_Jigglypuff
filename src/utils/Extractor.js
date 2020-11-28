@@ -122,7 +122,9 @@ export default class Extractor {
      */
     static extractHallDataFromJSON(data, hallModel = new HallModel()) {
         for (const field in data) {
-            if (!ExtractedFields.HallData.has(field)) {
+            if (!ExtractedFields.HallData.has(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }))) {
                 continue;
             }
             hallModel[field.replace(/^[A-Z]+/, (c) => {
