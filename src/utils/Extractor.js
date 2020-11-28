@@ -2,6 +2,7 @@ import CinemaModel from 'models/CinemaModel';
 import ExtractedFields from 'consts/ExtractedFields';
 import HallModel from 'models/HallModel';
 import MovieModel from 'models/MovieModel';
+import UserModel from 'models/UserModel';
 
 /** Class that contains methods to extract data from anything */
 export default class Extractor {
@@ -58,6 +59,30 @@ export default class Extractor {
 
         return result;
     }
+
+    /**
+     * Extract profile data from model to map.
+     * @param {JSON} data
+     * @param {UserModel} userModel
+     * @return {UserModel}
+     */
+    static extractUserDataFromJSON(data, userModel = new UserModel()) {
+        data['PathToAvatar'] = data['AvatarPath'];
+        for (const field in data) {
+            if (!ExtractedFields.ProfileData.has(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }))) {
+                continue;
+            }
+            userModel[field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            })] = data[field];
+        }
+        userModel.login = data['UserCredentials']['Login'];
+
+        return userModel;
+    }
+
 
     /**
      * Extract profile data from model to map.
