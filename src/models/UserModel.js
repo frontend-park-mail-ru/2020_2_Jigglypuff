@@ -1,6 +1,7 @@
+import CSRF from 'utils/CSRF';
+import Extractor from 'utils/Extractor'
 import Routes from 'consts/Routes';
 import Validator from 'utils/Validator';
-import CSRF from 'utils/CSRF';
 
 /** Class that contains User model */
 export default class UserModel {
@@ -224,11 +225,7 @@ export default class UserModel {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            this._name = data['Name'];
-            this._surname = data['Surname'];
-            this._pathToAvatar = data['AvatarPath'];
-            this._login = data['UserCredentials']['Login'];
+            Extractor.extractUserDataFromJSON(await response.json(), this);
         }
 
         return response;
