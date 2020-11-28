@@ -29,18 +29,20 @@ self.addEventListener('fetch', (event) => {
         return fetch(event.request);
     }
 
-    event.respondWith(
-        caches
-            .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
-            .then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
+    if (event.request.method === 'GET') {
+        event.respondWith(
+            caches
+                .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
+                .then((cachedResponse) => {
+                    if (cachedResponse) {
+                        return cachedResponse;
+                    }
 
-                return fetch(event.request);
-            })
-            .catch(() => {
-                return caches.match('/static/noInternet.html');
-            }),
-    );
+                    return fetch(event.request);
+                })
+                .catch(() => {
+                    return caches.match('/static/noInternet.html');
+                }),
+        );
+    }
 });

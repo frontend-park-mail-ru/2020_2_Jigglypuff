@@ -12,13 +12,13 @@ import RegisterView from 'view/RegisterView/RegisterView';
 import ProfileView from 'view/ProfileView/ProfileView';
 
 if ('serviceWorker' in navigator) {
-     navigator.serviceWorker.register('/sw.js')
-         .then((registration) => {
-             console.log('sw registration on scope:', registration.scope);
-         })
-         .catch((err) => {
-             console.error(err);
-         });
+    navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+            console.log('sw registration on scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
 const body = document.body;
