@@ -1,5 +1,5 @@
 import CSRF from 'utils/CSRF';
-import Extractor from 'utils/Extractor'
+import Extractor from 'utils/Extractor';
 import Routes from 'consts/Routes';
 import Validator from 'utils/Validator';
 
