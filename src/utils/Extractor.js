@@ -179,7 +179,7 @@ export default class Extractor {
      * @param {ScheduleModel} scheduleModel
      * @return {ScheduleModel}
      */
-    static extractScheduleFromJSON(data, scheduleModel = new ScheduleModel()) {
+    static extractScheduleModelFromJSON(data, scheduleModel = new ScheduleModel()) {
         for (const field in data) {
             if (!ExtractedFields.ScheduleData.has(field)) {
                 continue;

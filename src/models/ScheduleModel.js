@@ -158,7 +158,7 @@ export default class ScheduleModel {
         });
 
         if (response.ok) {
-            Extractor.extractScheduleFromJSON(await response.json(), this);
+            Extractor.extractScheduleModelFromJSON(await response.json(), this);
         }
 
         return response;
