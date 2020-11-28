@@ -350,7 +350,6 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async rate() {
-
         const response = await fetch(`${Routes.HostAPI}${Routes.RateMovie}`, {
             method: 'POST',
             credentials: 'include',

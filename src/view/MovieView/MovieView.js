@@ -7,8 +7,8 @@ import Getter from 'utils/Getter';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
-import MovieSchedule from "components/movieSchedule/movieSchedule";
-import Months from "consts/Months";
+import MovieSchedule from 'components/movieSchedule/movieSchedule';
+import Months from 'consts/Months';
 
 /**
  * Class of the movie view
@@ -83,7 +83,7 @@ export default class MovieView extends View {
      * @return {Object}
      */
     async getMovieContext(movieID) {
-        let movieContext = {};
+        const movieContext = {};
         movieContext.movieScheduleContext = {};
         movieContext.movieDescriptionContext = await Getter.getMovie(movieID);
 
@@ -93,7 +93,7 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
         let todayDate = new Date();
-        let todayDay = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
+        const todayDay = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
         todayDate = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
 
         const movieVM = new MovieViewModel();

@@ -23,7 +23,7 @@ export default class MovieSchedule extends Component {
             return;
         }
 
-        let scheduleButtons = []
+        const scheduleButtons = [];
         for (const session of this._context.sessions) {
             scheduleButtons.push((new ScheduleButton(
                 {
@@ -33,7 +33,7 @@ export default class MovieSchedule extends Component {
                     event: Events.ChangePath,
                     url: Routes.ScheduleID.replace(':id', session.id),
                 },
-                )).render(),
+            )).render(),
             );
         }
 
