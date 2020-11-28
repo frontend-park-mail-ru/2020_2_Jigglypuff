@@ -87,11 +87,10 @@ export default class Validator {
      * @param {float} movieRating
      */
     static validateMovieRating(movieRating) {
-        if (Checker.isFloat(movieRating)) {
-            if ((movieRating >= 0) && (movieRating <= 10)) {
-                return true;
-            }
+        if ((movieRating >= 0) && (movieRating <= 10)) {
+            return true;
         }
+
         return Number(movieRating) === 0;
     }
 
