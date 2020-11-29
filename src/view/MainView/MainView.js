@@ -3,13 +3,11 @@ import View from 'view/BaseView/View';
 import MovieList from 'components/movieList/movieList';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import MovieListViewModel from 'viewmodels/MovieListViewModel';
-import Filter from "components/filter/filter";
-import CinemaListViewModel from "viewmodels/CinemaListViewModel";
-import CinemaListView from "view/CinemaListView/CinemaListView";
-import Events from "consts/Events";
-import EventBus from "services/EventBus";
-import ValidationBlock from "components/baseComponents/validationBlock/validationBlock";
-import Getter from "utils/Getter";
+import Filter from 'components/filter/filter';
+import Events from 'consts/Events';
+import EventBus from 'services/EventBus';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import Getter from 'utils/Getter';
 
 /**
  * Class of the main page view
@@ -39,7 +37,7 @@ export default class MainView extends View {
 
         const templateData = {
             MovieList: (new MovieList(movieListContext)).render(),
-            Filtration: (new Filter({ cinemaList , target: 'cinema'})).render(),
+            Filtration: (new Filter({cinemaList, target: 'cinema'})).render(),
             Validation: (new ValidationBlock({
                 message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
@@ -65,7 +63,7 @@ export default class MainView extends View {
         }
 
         if (date === '1970-01-01') {
-            let todayDate = new Date();
+            const todayDate = new Date();
             date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
         }
 
@@ -80,7 +78,6 @@ export default class MainView extends View {
                 console.log(err);
                 console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
             });
-
 
 
         for (const i in movieListContext) {
@@ -104,12 +101,14 @@ export default class MainView extends View {
         });
     }
 
+    /**
+     * Method that handles updating movie list
+     * @param {Object} data - updating movie list data
+     * */
+    async onUpdateMovieList(data) {
+        const movieList = document.querySelector('.movie-list__content');
 
-    async onUpdateMovieList(data){
-
-        let movieList = document.querySelector('.movie-list__content');
-
-        let movieListContext = await this.getMovieListContext(data.cinemaName, data.cinemaID, data.date);
+        const movieListContext = await this.getMovieListContext(data.cinemaName, data.cinemaID, data.date);
 
         const validation = document.querySelector('.validation-block');
         if (!movieListContext.length) {
@@ -120,7 +119,7 @@ export default class MainView extends View {
 
         movieList.innerHTML = (new MovieList(movieListContext)).render();
 
-        let scroll = document.getElementById('film_premiers');
+        const scroll = document.getElementById('film_premiers');
         scroll.scrollIntoView(true);
     }
 }

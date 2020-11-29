@@ -14,8 +14,5 @@ export default class SelectList extends Component {
     constructor(context) {
         super(context);
         this._template = template;
-
-
     }
-
 }

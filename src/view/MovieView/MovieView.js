@@ -8,12 +8,8 @@ import BaseViewModel from 'viewmodels/BaseViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import MovieSchedule from 'components/movieSchedule/movieSchedule';
-import Months from 'consts/Months';
-import movieSchedule from "components/movieSchedule/movieSchedule";
-import MainView from "view/MainView/MainView";
-import Filter from "components/filter/filter";
-import MovieList from "components/movieList/movieList";
-import ValidationBlock from "components/baseComponents/validationBlock/validationBlock";
+import Filter from 'components/filter/filter';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 
 /**
  * Class of the movie view
@@ -47,15 +43,15 @@ export default class MovieView extends View {
             {
                 message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
-            }
+            },
         )).render();
 
         data.Filtration = (new Filter(
             {
                 cinemaList: await Getter.getCinemaList(),
                 target: 'schedule',
-            }
-        )).render()
+            },
+        )).render();
         data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
         data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
 
@@ -100,6 +96,9 @@ export default class MovieView extends View {
 
     /**
      * Method that returns movie context
+     * @param {string} cinemaName
+     * @param {number} cinemaID
+     * @param {string} date
      *
      * @return {Object}
      */
@@ -120,7 +119,7 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.rating = Math.round(movieContext.movieDescriptionContext.rating * 100) / 100;
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
-        let todayDate = new Date();
+        const todayDate = new Date();
 
         if (date === '1970-01-01') {
             date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
@@ -139,11 +138,15 @@ export default class MovieView extends View {
         return movieContext;
     }
 
+    /**
+     * Method that handles updating schedule
+     * @param {Object} data - updating schedule data
+     * @return {Object}
+     */
     async onUpdateSchedule(data) {
+        const schedule = document.querySelector('.movie-schedule-content');
 
-        let schedule = document.querySelector('.movie-schedule-content');
-
-        let {movieScheduleContext} = await this.getMovieContext(data.cinemaName, data.cinemaID, data.date);
+        const {movieScheduleContext} = await this.getMovieContext(data.cinemaName, data.cinemaID, data.date);
 
         const validation = document.querySelector('.validation-block');
         if (!movieScheduleContext.sessions) {
@@ -155,7 +158,7 @@ export default class MovieView extends View {
         if (schedule) {
             schedule.innerHTML = (new MovieSchedule(movieScheduleContext)).render();
 
-            let scroll = document.getElementById('schedule');
+            const scroll = document.getElementById('schedule');
             scroll.scrollIntoView(true);
         }
     }

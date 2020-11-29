@@ -1,8 +1,7 @@
 import template from 'view/CinemaListView/CinemaListView.hbs';
 import View from 'view/BaseView/View';
 import CinemaList from 'components/cinemaList/cinemaList';
-import CinemaListViewModel from 'viewmodels/CinemaListViewModel';
-import Getter from "utils/Getter";
+import Getter from 'utils/Getter';
 
 /**
  * Class of the cinema view

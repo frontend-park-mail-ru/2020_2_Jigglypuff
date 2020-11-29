@@ -1,20 +1,20 @@
 import Component from 'components/component';
 import template from 'components/filter/filter.hbs';
-import SelectList from "components/baseComponents/selectList/selectList";
-import StandardButton from "components/baseComponents/buttons/standartButton/standardButton";
-import Events from "consts/Events";
-import EventBus from "services/EventBus";
-import Months from "consts/Months";
+import SelectList from 'components/baseComponents/selectList/selectList';
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Events from 'consts/Events';
+import EventBus from 'services/EventBus';
+import Months from 'consts/Months';
 
 /**
- * Image input component
+ * Filter component
  * @class
  */
 export default class Filter extends Component {
     /**
-     * Create an image input
+     * Create a filter
      * @constructor
-     * @param {Object} context - image input context
+     * @param {Object} context - filter context
      * */
     constructor(context) {
         super(context);
@@ -29,31 +29,38 @@ export default class Filter extends Component {
             {
                 values: this._context.cinemaList,
                 label: 'Кинотеатры',
-                id: 'cinemaList'
-            }
+                id: 'cinemaList',
+            },
         )).render();
 
         this._context.dates = [];
-        let todayDate = new Date();
+        const todayDate = new Date();
 
         for (let i = 0; i < 4; i++) {
-            let buttonName = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
+            const day = todayDate.getDate();
+            const month = +todayDate.getMonth() + 1;
+            const year = todayDate.getFullYear();
+
+            const buttonName = `${day} ${(Months[month-1])}`;
             this._context.dates.push((new StandardButton(
                 {
                     buttonName: buttonName,
                     event: Events.SubmitFilter,
-                    value: `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1) < 9 ? '0' : ''}${(+todayDate.getMonth() + 1)}-${(todayDate.getDate()) < 9 ? '0' : ''}${todayDate.getDate()}`,
-                }
+                    value: `${year}-${month-1 < 9 ? '0' : ''}${month}-${day < 9 ? '0' : ''}${day}`,
+                },
             )).render());
             todayDate.setDate(todayDate.getDate() + 1);
         }
     }
 
+    /**
+     * Method that handles filter submit
+     * @param {Object} data - filter data
+     * */
     _onSubmitFilter(data) {
-
-        let cinemaID = document.getElementById('cinemaList').value;
-        let cinemaName = document.getElementById('cinemaList').options[cinemaID-1].innerHTML;
-        let date = data.value;
+        const cinemaID = document.getElementById('cinemaList').value;
+        const cinemaName = document.getElementById('cinemaList').options[cinemaID-1].innerHTML;
+        const date = data.value;
 
         if (this._context.target === 'cinema') {
             EventBus.emit(Events.UpdateMovieList, {
@@ -68,5 +75,4 @@ export default class Filter extends Component {
             });
         }
     }
-
 }

@@ -1,8 +1,6 @@
 import Component from 'components/component';
 import template from 'components/movieList/movieList.hbs';
 import MovieCard from 'components/movieCard/movieCard';
-import SelectList from "components/baseComponents/selectList/selectList";
-import Filter from "components/filter/filter";
 
 /**
  * Movie list component
