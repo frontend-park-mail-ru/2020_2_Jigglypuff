@@ -85,6 +85,8 @@ export default class HallView extends View {
         await responseTicketViewModel
             .then(() => {
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+            }).catch(() => {
+
             });
     }
 

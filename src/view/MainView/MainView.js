@@ -86,6 +86,8 @@ export default class MainView extends View {
         await responseMovieListViewModel
             .then((response) => {
                 movieListContext = response;
+            }).catch(() => {
+
             });
 
 
@@ -95,6 +97,8 @@ export default class MainView extends View {
                 .then((response) => {
                     item.scheduleContext = response;
                     item.cinemaName = cinemaName;
+                }).catch(() => {
+
                 });
         }
 

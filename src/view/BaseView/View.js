@@ -66,6 +66,8 @@ export default class View {
 
         await BaseViewModel.isAuthorised().then((response) => {
             headerContext.userBlockContext.isAuthorized = response;
+        }).catch(() => {
+
         });
 
         if (headerContext.userBlockContext.isAuthorized) {

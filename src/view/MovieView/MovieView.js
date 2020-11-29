@@ -146,6 +146,8 @@ export default class MovieView extends View {
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
+            }).catch(() => {
+
             });
 
         return movieContext;

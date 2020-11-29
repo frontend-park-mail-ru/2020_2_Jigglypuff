@@ -91,6 +91,8 @@ export default class ProfileView extends View {
         await responseTicketList
             .then((response) => {
                 ticketList = response;
+            }).catch(() => {
+
             });
 
         if (!ticketList) {
