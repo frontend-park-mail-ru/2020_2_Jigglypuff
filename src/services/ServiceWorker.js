@@ -1,3 +1,5 @@
+import Routes from 'consts/Routes';
+
 const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v2';
 
 const cacheUrls = [
@@ -25,24 +27,26 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    if (navigator.onLine) {
-        return fetch(event.request);
-    }
-
     if (event.request.method === 'GET') {
-        event.respondWith(
-            caches
-                .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
-                .then((cachedResponse) => {
-                    if (cachedResponse) {
-                        return cachedResponse;
-                    }
+        if (navigator.onLine) {
+            return fetch(event.request);
+        }
 
-                    return fetch(event.request);
-                })
-                .catch(() => {
-                    return caches.match('/static/noInternet.html');
-                }),
-        );
+        if (!(event.request.url.includes(Routes.HostAPI))) {
+            event.respondWith(
+                caches
+                    .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
+                    .then((cachedResponse) => {
+                        if (cachedResponse) {
+                            return cachedResponse;
+                        }
+
+                        return fetch(event.request);
+                    })
+                    .catch(() => {
+                        return caches.match('/static/noInternet.html');
+                    }),
+            );
+        }
     }
 });
