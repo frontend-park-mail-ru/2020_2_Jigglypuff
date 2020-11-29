@@ -39,7 +39,7 @@ export default class MovieView extends View {
         this._visibility = !movieContext.movieScheduleContext.sessions;
 
         const data = {};
-        data.Validation = (new ValidationBlock(
+        movieContext.movieScheduleContext.Validation = (new ValidationBlock(
             {
                 message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
@@ -108,9 +108,15 @@ export default class MovieView extends View {
         if (!cinemaName) {
             cinemaName = (await Getter.getCinema(cinemaID)).name;
         }
+        const todayDate = new Date();
 
         movieContext.movieScheduleContext = {};
         movieContext.movieScheduleContext.cinemaName = cinemaName;
+        if (date === '1970-01-01') {
+            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
+        }
+
+        movieContext.movieScheduleContext.date = date;
 
         movieContext.movieDescriptionContext = await Getter.getMovie(this._movieID);
 
@@ -119,11 +125,6 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.rating = Math.round(movieContext.movieDescriptionContext.rating * 100) / 100;
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
-        const todayDate = new Date();
-
-        if (date === '1970-01-01') {
-            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
-        }
 
         const movieVM = new MovieViewModel();
         const responseMovieVM = movieVM.getScheduleCommand.exec(this._movieID, cinemaID, date);
@@ -151,11 +152,21 @@ export default class MovieView extends View {
         const validation = document.querySelector('.validation-block');
         if (!movieScheduleContext.sessions) {
             validation.classList.remove('validation-display-none');
+            this._visibility = true;
         } else {
             validation.classList.add('validation-display-none');
+            this._visibility = false;
         }
 
-        if (schedule) {
+        if (document.querySelector('.movie-schedule__schedule-block') &&
+            document.querySelector('.movie-schedule__schedule-block').innerHTML) {
+            movieScheduleContext.Validation = (new ValidationBlock(
+                {
+                    message: 'На данный момент нет актуальных сеансов',
+                    visibility: this._visibility,
+                },
+            )).render();
+
             schedule.innerHTML = (new MovieSchedule(movieScheduleContext)).render();
 
             const scroll = document.getElementById('schedule');
