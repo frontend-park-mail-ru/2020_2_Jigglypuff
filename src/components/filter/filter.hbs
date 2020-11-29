@@ -1,0 +1,16 @@
+<div class="filter">
+    <div class="filter__item">
+        {{{ SelectCinema }}}
+    </div>
+    <div class="filter__item">
+        {{#with calendar}}
+            <label class="filter__calendar" for="{{ id }}">
+                <div class="calendar__title">{{ label }}</div>
+                <input id="{{ id }}" class="calendar__field" type="date">
+            </label>
+        {{/with}}
+    </div>
+    <div class="filter__submit">
+        {{{ StandardButton }}}
+    </div>
+</div>

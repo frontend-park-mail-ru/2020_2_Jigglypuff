@@ -61,7 +61,7 @@ class Router {
         this._application.addEventListener('change', (evt) => {
             const changeTarget = evt.target;
 
-            if (changeTarget.matches('input')) {
+            if (changeTarget.matches('input') && changeTarget.type !== 'date') {
                 evt.preventDefault();
 
                 const data = {...changeTarget.dataset};
