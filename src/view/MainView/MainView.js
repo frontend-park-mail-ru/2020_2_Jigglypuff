@@ -31,7 +31,7 @@ export default class MainView extends View {
         EventBus.on(Events.UpdateMovieList, this._onUpdateMovieListHandler);
 
         const movieListContext = await this.getMovieListContext();
-        const movieListRecommContext = await this.getMovieListRecommContext();
+        const movieRecommendationContext = await this.getMovieRecommendationContext();
 
         const cinemaList = await Getter.getCinemaList();
         this._filter = new Filter(
@@ -45,7 +45,7 @@ export default class MainView extends View {
 
         const templateData = {
             MovieList: (new MovieList(movieListContext)).render(),
-            MovieListRecomm: (new MovieList(movieListRecommContext)).render(),
+            MovieRecommendation: (new MovieList(movieRecommendationContext)).render(),
             Filtration: this._filter.render(),
             Validation: (new ValidationBlock({
                 message: 'На данный момент нет актуальных сеансов',
@@ -53,7 +53,7 @@ export default class MainView extends View {
             })).render(),
         };
 
-        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieListRecommContext[0].id});
+        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieRecommendationContext[0].id});
     }
 
     /**
@@ -134,27 +134,23 @@ export default class MainView extends View {
         }
     }
 
-    async getMovieListRecommContext(cinemaName, cinemaID = 1, date) {
-        let movieListContext = [];
-        const todayDate = new Date();
-
-        if (!cinemaName) {
-            cinemaName = (await Getter.getCinema(cinemaID)).name;
-        }
-        if (!date) {
-            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
-        }
+    /**
+     * Method that gets movie recommendation context
+     * @return {Promise<Object>} - movie recommendation context
+     */
+    async getMovieRecommendationContext() {
+        const movieRecommendationContext = [];
 
         const responseMovieListViewModel = (new MovieListViewModel()).getRecommendationsListCommand.exec();
 
         await responseMovieListViewModel
             .then((response) => {
                 for (let i = 0; i < 6; i++) {
-                    movieListContext.push(response[i]);
+                    movieRecommendationContext.push(response[i]);
                 }
             }).catch(() => {
 
             });
-        return movieListContext;
+        return movieRecommendationContext;
     }
 }

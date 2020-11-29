@@ -88,7 +88,6 @@ export default class View {
      * @return {Promise<Object>} - slider context
      */
     async getSliderContext(movieID) {
-
         const sliderContext = await Getter.getMovie(movieID);
         if (sliderContext) {
             sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
