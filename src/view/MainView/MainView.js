@@ -8,6 +8,7 @@ import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 import Getter from 'utils/Getter';
+import MovieSchedule from "components/movieSchedule/movieSchedule";
 
 /**
  * Class of the main page view
@@ -117,9 +118,11 @@ export default class MainView extends View {
             validation.classList.add('validation-display-none');
         }
 
-        movieList.innerHTML = (new MovieList(movieListContext)).render();
+        if (movieList) {
+            movieList.innerHTML = (new MovieList(movieListContext)).render();
 
-        const scroll = document.getElementById('film_premiers');
-        scroll.scrollIntoView(true);
+            const scroll = document.getElementById('film_premiers');
+            scroll.scrollIntoView(true);
+        }
     }
 }
