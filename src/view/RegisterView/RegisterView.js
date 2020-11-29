@@ -21,9 +21,6 @@ export default class RegisterView extends View {
         super(title);
         this._template = template;
         this._signUpViewModel = new SignUpViewModel();
-
-        EventBus.on(Events.RegisterFieldFill, this.onUpdateField.bind(this));
-        EventBus.on(Events.RegisterSubmit, this.onSubmit.bind(this));
     }
 
     /**
@@ -33,6 +30,10 @@ export default class RegisterView extends View {
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
+        this._onUpdateField = this.onUpdateField.bind(this);
+        this._onSubmit = this.onSubmit.bind(this);
+        EventBus.on(Events.RegisterFieldFill, this._onUpdateField);
+        EventBus.on(Events.RegisterSubmit, this._onSubmit);
 
         const data = {
             RegisterContent: (new RegisterContent()).render(),
@@ -44,6 +45,8 @@ export default class RegisterView extends View {
      * Method that hides registration view
      */
     hide() {
+        EventBus.off(Events.RegisterFieldFill, this._onUpdateField);
+        EventBus.off(Events.RegisterSubmit, this._onSubmit);
         super.hide();
     }
 
@@ -63,19 +66,10 @@ export default class RegisterView extends View {
 
         await responseSignUp
             .then(async (response) => {
-                console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
-                console.log(response);
-                console.log('OK');
-                console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })
             .catch((err) => {
-                console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
-                console.log('NOT OK');
-                console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
-
                 const validation = document.getElementsByClassName('validation-block')[0];
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');

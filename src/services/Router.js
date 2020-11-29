@@ -90,7 +90,9 @@ class Router {
             this.currentView.show(routeData);
             return;
         }
-
+        if (this.currentView) {
+            this.currentView.hide();
+        }
         this.currentView = routeData.view;
 
         if (window.location.pathname !== path) {

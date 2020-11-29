@@ -22,8 +22,6 @@ export default class LoginView extends View {
         this._template = template;
 
         this.signInViewModel = new SignInViewModel();
-        EventBus.on(Events.LoginFieldFill, this.onUpdateField.bind(this));
-        EventBus.on(Events.LoginSubmit, this.onSubmit.bind(this));
     }
 
     /**
@@ -33,6 +31,12 @@ export default class LoginView extends View {
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
+
+        this._onLoginFieldFillHandler = this.onUpdateField.bind(this);
+        this._onLoginSubmitHandler = this.onSubmit.bind(this);
+
+        EventBus.on(Events.LoginFieldFill, this._onLoginFieldFillHandler);
+        EventBus.on(Events.LoginSubmit, this._onLoginSubmitHandler);
 
         const data = {
             LoginContent: (new LoginContent()).render(),
@@ -44,6 +48,9 @@ export default class LoginView extends View {
      * Method that hides login view
      */
     hide() {
+        EventBus.off(Events.LoginFieldFill, this._onLoginFieldFillHandler);
+        EventBus.off(Events.LoginSubmit, this._onLoginSubmitHandler);
+
         super.hide();
     }
 
@@ -65,10 +72,6 @@ export default class LoginView extends View {
 
         await responseSignIn
             .then(async () => {
-                console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
-                console.log('OK');
-                console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })

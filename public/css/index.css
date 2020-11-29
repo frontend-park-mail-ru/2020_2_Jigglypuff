@@ -52,7 +52,6 @@ html, body {
 
     padding: 20px 30px;
     margin: 20px;
-    /*box-shadow: 0 0 100px var(--main-red-color);*/
     color: var(--main-font-color);
     filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
 

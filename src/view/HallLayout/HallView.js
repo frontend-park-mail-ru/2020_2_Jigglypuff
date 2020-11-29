@@ -21,9 +21,6 @@ export default class HallView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
 
-        EventBus.on(Events.TicketsBuy, this.onBuy.bind(this));
-        EventBus.on(Events.TicketSelect, this.onSelect.bind(this));
-
         this._template = template;
     }
 
@@ -32,6 +29,12 @@ export default class HallView extends View {
      * @param {Object} routeData - data from route path of the hall page
      */
     async show(routeData) {
+        this._onTicketsBuyHandler = this.onBuy.bind(this);
+        this._onTicketSelectHandler = this.onSelect.bind(this);
+
+        EventBus.on(Events.TicketsBuy, this._onTicketsBuyHandler);
+        EventBus.on(Events.TicketSelect, this._onTicketSelectHandler);
+
         const session = await Getter.getSession(routeData.id);
         const hallContext = await this.getHallContext(session);
 
@@ -40,6 +43,16 @@ export default class HallView extends View {
         };
 
         await super.show(this._template(data));
+    }
+
+    /**
+     * Method that hides view
+     * */
+    hide() {
+        EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
+        EventBus.off(Events.TicketSelect, this._onTicketSelectHandler);
+
+        super.hide();
     }
 
     /**
@@ -71,17 +84,10 @@ export default class HallView extends View {
 
         await responseTicketViewModel
             .then(() => {
-                console.log('\n\nHALL_VIEW:ON_BUY()');
-                console.log('OK');
-                console.log('HALL_VIEW:ON_BUY()\n\n');
-            })
-            .catch((err) => {
-                console.log('\n\nHALL_VIEW:ON_BUY() :: ERR');
-                console.log(err);
-                console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
-            });
+                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+            }).catch(() => {
 
-        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+            });
     }
 
     /**

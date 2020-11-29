@@ -419,6 +419,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getRecommendationsList() {
+        console.log(`${Routes.HostAPI}${Routes.RecommendationsList}`);
         return await fetch(`${Routes.HostAPI}${Routes.RecommendationsList}`, {
             method: 'GET',
             credentials: 'include',

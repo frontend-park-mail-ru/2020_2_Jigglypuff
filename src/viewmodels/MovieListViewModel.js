@@ -14,7 +14,7 @@ export default class MovieListViewModel extends BaseViewModel {
         this.state = [];
         this.getMovieActualListCommand = {exec: (date, limit, page) => this.getMovieActualList(limit, page, date)};
         this.getMovieListCommand = {exec: (limit, page) => this.getMovieList(limit, page)};
-        this.getRecommendationsListCommand = {exec: () => this.getRecommendationsList()};
+        this.getRecommendationsListCommand = {exec: () => this.getRecommendations()};
     }
 
     /**

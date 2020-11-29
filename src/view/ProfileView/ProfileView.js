@@ -24,11 +24,6 @@ export default class ProfileView extends View {
         this._template = template;
 
         this._settingsViewModel = new SettingsViewModel();
-
-        EventBus.on(Events.Logout, this.onLogout.bind(this));
-        EventBus.on(Events.ProfileEditFieldFill, this.onUpdateField.bind(this));
-        EventBus.on(Events.UploadAvatar, this.onUpdateField.bind(this));
-        EventBus.on(Events.ProfileEditSubmit, this.onSubmit.bind(this));
     }
 
     /**
@@ -39,6 +34,15 @@ export default class ProfileView extends View {
             EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
+
+        this._onLogoutHandler = this.onLogout.bind(this);
+        this._onUpdateFieldHandler = this.onUpdateField.bind(this);
+        this._onProfileEditSubmitHandler = this.onSubmit.bind(this);
+
+        EventBus.on(Events.Logout, this._onLogoutHandler);
+        EventBus.on(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
+        EventBus.on(Events.UploadAvatar, this._onUpdateFieldHandler);
+        EventBus.on(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
 
         const profileContext = {
             profileEdit: {},
@@ -87,14 +91,8 @@ export default class ProfileView extends View {
         await responseTicketList
             .then((response) => {
                 ticketList = response;
-                console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
-                console.log(response);
-                console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
-            })
-            .catch((err) => {
-                console.log('\n\n-----PROFILE_VIEW:getProfileTicketContext()-----');
-                console.log(err);
-                console.log('-----PROFILE_VIEW:getProfileTicketContext()-----\n\n');
+            }).catch(() => {
+
             });
 
         if (!ticketList) {
@@ -125,18 +123,10 @@ export default class ProfileView extends View {
     onLogout() {
         BaseViewModel.logout()
             .then(async () => {
-                console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
-                console.log('SUCCESS');
-                console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
-            .catch((err) => {
-                console.log('\n\n-----PROFILE_VIEW:ON_LOGOUT()-----');
-                console.log(err);
-                console.log('-----PROFILE_VIEW:ON_LOGOUT()-----\n\n');
-
+            .catch(() => {
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             });
     }
@@ -145,6 +135,11 @@ export default class ProfileView extends View {
      * Method that hides the profile view
      */
     hide() {
+        EventBus.off(Events.Logout, this._onLogoutHandler);
+        EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
+        EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
+        EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
+
         super.hide();
     }
 
@@ -168,17 +163,9 @@ export default class ProfileView extends View {
 
         await responseProfileEdit
             .then(async () => {
-                console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
-                console.log('OK');
-                console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
             })
             .catch((err) => {
-                console.log('\n\n-----PROFILE_VIEW:ON_SUBMIT()-----');
-                console.log('NOT OK');
-                console.log('-----PROFILE_VIEW:ON_SUBMIT()-----\n\n');
-
                 const validation = document.querySelector('.validation-block');
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');

@@ -23,9 +23,6 @@ export default class MovieView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
         this._template = template;
-
-        EventBus.on(Events.UpdateSchedule, this.onUpdateSchedule.bind(this));
-        EventBus.on(Events.MovieRate, this.onMovieRate.bind(this));
     }
 
     /**
@@ -33,6 +30,12 @@ export default class MovieView extends View {
      * @param {Object} routeData - data from route path of the movie page
      */
     async show(routeData) {
+        this._onUpdateScheduleHandler = this.onUpdateSchedule.bind(this);
+        this._onMovieRateHandler = this.onMovieRate.bind(this);
+
+        EventBus.on(Events.UpdateSchedule, this._onUpdateScheduleHandler);
+        EventBus.on(Events.MovieRate, this._onMovieRateHandler);
+
         this._movieID = routeData.id;
         const movieContext = await this.getMovieContext();
 
@@ -46,16 +49,29 @@ export default class MovieView extends View {
             },
         )).render();
 
-        data.Filtration = (new Filter(
+        this._filter = new Filter(
             {
                 cinemaList: await Getter.getCinemaList(),
                 target: 'schedule',
             },
-        )).render();
+        );
+
+        data.Filtration = this._filter.render();
         data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
         data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
 
         await super.show(this._template(data));
+    }
+
+    /**
+     * Method that hides view
+     * */
+    hide() {
+        this._filter.hide();
+        EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
+        EventBus.off(Events.MovieRate, this._onMovieRateHandler);
+
+        super.hide();
     }
 
     /**
@@ -84,8 +100,7 @@ export default class MovieView extends View {
                     }
                 }
             })
-            .catch((err) => {
-                console.log('NOT OK');
+            .catch(() => {
                 if (!ratingMark.classList.contains('hidden')) {
                     ratingMark.classList.add('hidden');
                 }
@@ -131,9 +146,8 @@ export default class MovieView extends View {
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
-            })
-            .catch((err) => {
-                // console.log(err);
+            }).catch(() => {
+
             });
 
         return movieContext;
@@ -167,7 +181,7 @@ export default class MovieView extends View {
                 },
             )).render();
 
-            schedule.innerHTML = (new MovieSchedule(movieScheduleContext)).render();
+            schedule.innerHTML = await (new MovieSchedule(movieScheduleContext)).render();
 
             const scroll = document.getElementById('schedule');
             scroll.scrollIntoView(true);

@@ -38,7 +38,7 @@ export default class View {
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
-            sliderContext = await this.getSliderContext();
+            sliderContext = await this.getSliderContext(templateDate.sliderMovieID);
             this._context.Slider = (new Slider(sliderContext)).render();
         }
 
@@ -50,7 +50,10 @@ export default class View {
      * Method that hides the page content
      */
     hide() {
-        this._root.innerHTML = '';
+        if (this._context.isSlider) {
+            document.querySelector('.slider').innerHTML = '';
+        }
+        document.querySelector('.content').innerHTML = '';
     }
 
     /**
@@ -63,10 +66,8 @@ export default class View {
 
         await BaseViewModel.isAuthorised().then((response) => {
             headerContext.userBlockContext.isAuthorized = response;
-        }).catch((err) => {
-            console.log('\n\nHEADER:GET_HEADER_CONTEXT() :: ERR');
-            console.log(err);
-            console.log('HEADER:GET_HEADER_CONTEXT() :: ERR\n\n');
+        }).catch(() => {
+
         });
 
         if (headerContext.userBlockContext.isAuthorized) {
@@ -82,11 +83,11 @@ export default class View {
 
     /**
      * Method that gets slider context
+     * @param {number} movieID
+     *
      * @return {Promise<Object>} - slider context
      */
-    async getSliderContext() {
-        const movieID = 3;
-
+    async getSliderContext(movieID) {
         const sliderContext = await Getter.getMovie(movieID);
         if (sliderContext) {
             sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
