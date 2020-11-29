@@ -13,6 +13,7 @@ import Getter from 'utils/Getter';
  * Class of the main page view
  */
 export default class MainView extends View {
+
     /**
      * Constructor of the main page view
      * @constructor
@@ -21,23 +22,29 @@ export default class MainView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
         this._template = template;
-
-        EventBus.on(Events.UpdateMovieList, this.onUpdateMovieList.bind(this));
     }
 
     /**
      * Method that shows main page view
      */
     async show() {
-        const movieListContext = await this.getMovieListContext();
+        this._onUpdateMovieListHandler = this.onUpdateMovieList.bind(this);
+        EventBus.on(Events.UpdateMovieList, this._onUpdateMovieListHandler);
 
+        const movieListContext = await this.getMovieListContext();
         const cinemaList = await Getter.getCinemaList();
+        this._filter = new Filter(
+            {
+                cinemaList,
+                target: 'cinema'
+            }
+        );
 
         this._visibility = !movieListContext.length;
 
         const templateData = {
             MovieList: (new MovieList(movieListContext)).render(),
-            Filtration: (new Filter({cinemaList, target: 'cinema'})).render(),
+            Filtration: this._filter.render(),
             Validation: (new ValidationBlock({
                 message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
@@ -45,6 +52,12 @@ export default class MainView extends View {
         };
 
         await super.show(this._template(templateData), {isSlider: true});
+    }
+
+    hide() {
+        this._filter.hide();
+        EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
+        super.hide();
     }
 
     /**
@@ -55,48 +68,43 @@ export default class MainView extends View {
      *
      * @return {Promise<Object>} - movie list context
      */
-    async getMovieListContext(cinemaName, cinemaID = 1, date = '1970-01-01') {
+    async getMovieListContext(cinemaName, cinemaID = 1, date) {
         let movieListContext = [];
+        const todayDate = new Date();
 
         if (!cinemaName) {
             cinemaName = (await Getter.getCinema(cinemaID)).name;
         }
-
-        if (date === '1970-01-01') {
-            const todayDate = new Date();
+        if (!date) {
             date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
         }
 
         const responseMovieListViewModel = (new MovieListViewModel()).getMovieActualListCommand.exec(date);
 
         await responseMovieListViewModel
-            .then((response) => {
+            .then(response => {
                 movieListContext = response;
             })
-            .catch((err) => {
+            .catch(err => {
                 console.log('\n\nMAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR');
                 console.log(err);
                 console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
             });
 
 
-        for (const i in movieListContext) {
-            if (Object.prototype.hasOwnProperty.call(movieListContext, i)) {
-                const movieVM = new MovieViewModel();
-                const responseMovieVM = movieVM.getScheduleCommand.exec(movieListContext[i].id, cinemaID, date);
-
-                await responseMovieVM
-                    .then((response) => {
-                        movieListContext[i].scheduleContext = response;
-                        movieListContext[i].cinemaName = cinemaName;
-                    })
-                    .catch((err) => {
-                        // console.log(err);
-                    });
-            }
+        for (const item of movieListContext) {
+            const responseMovieVM = (new MovieViewModel()).getScheduleCommand.exec(item.id, cinemaID, date);
+            await responseMovieVM
+                .then((response) => {
+                    item.scheduleContext = response;
+                    item.cinemaName = cinemaName;
+                })
+                .catch((err) => {
+                    // console.log(err);
+                });
         }
 
-        return movieListContext.filter((item) => {
+        return movieListContext.filter(item => {
             return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
     }

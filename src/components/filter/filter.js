@@ -19,9 +19,10 @@ export default class Filter extends Component {
     constructor(context) {
         super(context);
         this._template = template;
+        this._onSubmitFilterHandler = this._onSubmitFilter.bind(this);
 
         if (!this._isRendered) {
-            EventBus.on(Events.SubmitFilter, this._onSubmitFilter.bind(this));
+            EventBus.on(Events.SubmitFilter, this._onSubmitFilterHandler);
             this._isRendered = true;
         }
 
@@ -51,6 +52,10 @@ export default class Filter extends Component {
             )).render());
             todayDate.setDate(todayDate.getDate() + 1);
         }
+    }
+
+    hide() {
+        EventBus.off(Events.SubmitFilter, this._onSubmitFilterHandler);
     }
 
     /**

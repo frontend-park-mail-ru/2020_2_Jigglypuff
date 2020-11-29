@@ -29,6 +29,7 @@ export default class ImageInput extends Component {
      * */
     handleFileSelect(data) {
         const file = data.target.files[0];
+        console.log(file);
 
         if (!file.type.match('image.*')) {
             const err = document.querySelector('.image-input__error-disabled');
@@ -42,15 +43,13 @@ export default class ImageInput extends Component {
         }
 
         const reader = new FileReader();
-        reader.onload = (() => {
-            return function(file) {
-                const avatar = document.querySelector('.avatar');
-                const avatarPreview = document.createElement('img');
-                avatarPreview.className = 'avatar__preview';
-                avatarPreview.src = file.target.result;
-                avatar.innerHTML = avatarPreview.outerHTML;
-            };
-        })(file);
+        reader.onload = () => {
+            const avatar = document.querySelector('.avatar');
+            const avatarPreview = document.createElement('img');
+            avatarPreview.className = 'avatar__preview';
+            avatarPreview.src = file.target.result;
+            avatar.innerHTML = avatarPreview.outerHTML;
+        };
 
         reader.readAsDataURL(file);
     }
