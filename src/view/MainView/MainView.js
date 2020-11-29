@@ -53,7 +53,7 @@ export default class MainView extends View {
             })).render(),
         };
 
-        await super.show(this._template(templateData), {isSlider: true});
+        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieListRecommContext[0].id});
     }
 
     /**
@@ -89,8 +89,6 @@ export default class MainView extends View {
         await responseMovieListViewModel
             .then((response) => {
                 movieListContext = response;
-                console.log(response);
-
             }).catch(() => {
 
             });
@@ -151,26 +149,12 @@ export default class MainView extends View {
 
         await responseMovieListViewModel
             .then((response) => {
-                movieListContext = response;
-                console.log(response);
+                for (let i = 0; i < 6; i++) {
+                    movieListContext.push(response[i]);
+                }
             }).catch(() => {
 
             });
-
-
-        for (const item of movieListContext) {
-            const responseMovieVM = (new MovieViewModel()).getScheduleCommand.exec(item.id, cinemaID, date);
-            await responseMovieVM
-                .then((response) => {
-                    item.scheduleContext = response;
-                    item.cinemaName = cinemaName;
-                }).catch(() => {
-
-                });
-        }
-
-        return movieListContext.filter((item) => {
-            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
-        });
+        return movieListContext;
     }
 }

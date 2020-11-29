@@ -38,7 +38,7 @@ export default class View {
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
-            sliderContext = await this.getSliderContext();
+            sliderContext = await this.getSliderContext(templateDate.sliderMovieID);
             this._context.Slider = (new Slider(sliderContext)).render();
         }
 
@@ -83,10 +83,11 @@ export default class View {
 
     /**
      * Method that gets slider context
+     * @param {number} movieID
+     *
      * @return {Promise<Object>} - slider context
      */
-    async getSliderContext() {
-        const movieID = 3;
+    async getSliderContext(movieID) {
 
         const sliderContext = await Getter.getMovie(movieID);
         if (sliderContext) {

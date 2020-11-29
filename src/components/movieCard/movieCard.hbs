@@ -20,13 +20,15 @@
             <span class="movie-card__description_schedule-title">
                 {{ date }}
             </span>
-            <hr class="movie-card__description_schedule-line">
-            <div class="movie-card__description_schedule-block">
-                {{#each ScheduleButtons }}
-                    {{{ this }}}
-                {{/each}}
-            </div>
-            <hr class="movie-card__description_schedule-line">
+            {{#if ScheduleButtons }}
+                <hr class="movie-card__description_schedule-line">
+                <div class="movie-card__description_schedule-block">
+                    {{#each ScheduleButtons }}
+                        {{{ this }}}
+                    {{/each}}
+                </div>
+                <hr class="movie-card__description_schedule-line">
+            {{/if}}
             <span class="movie-card__description_schedule-title">
                 {{ cinemaName }}
             </span>

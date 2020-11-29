@@ -25,7 +25,9 @@ export default class MovieCard extends Component {
 
         this._context.ScheduleButtons = [];
 
-        this._context.date = this._context.scheduleContext[0].date;
+        if (this._context.scheduleContext) {
+            this._context.date = this._context.scheduleContext[0].date;
+        }
 
         for (const i in this._context.scheduleContext) {
             if (Object.prototype.hasOwnProperty.call(this._context.scheduleContext, i)) {
