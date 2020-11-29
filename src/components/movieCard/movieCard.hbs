@@ -18,7 +18,7 @@
         </div>
         <div class="movie-card__description_schedule">
             <span class="movie-card__description_schedule-title">
-                Сегодня
+                {{ date }}
             </span>
             <hr class="movie-card__description_schedule-line">
             <div class="movie-card__description_schedule-block">
@@ -27,7 +27,9 @@
                 {{/each}}
             </div>
             <hr class="movie-card__description_schedule-line">
-
+            <span class="movie-card__description_schedule-title">
+                {{ cinemaName }}
+            </span>
             <div class="movie-card__description_schedule-button">
                 {{{ StandardButton }}}
             </div>

@@ -15,6 +15,9 @@ const Events = {
     TicketSelect: 'ticketSelect',
     TicketsBuy: 'ticketsBuy',
     MovieRate: 'movieRate',
+    SubmitFilter: 'submitFilter',
+    UpdateMovieList: 'updateMovieList',
+    UpdateSchedule: 'updateSchedule',
 };
 
 

@@ -408,7 +408,7 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     static async getMovieActualList(limit = 11, page = 1, date= '') {
-        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}&date=${date}`, {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieListActual}?limit=${limit}&page=${page}&date=${date}`, {
             method: 'GET',
             credentials: 'include',
         });

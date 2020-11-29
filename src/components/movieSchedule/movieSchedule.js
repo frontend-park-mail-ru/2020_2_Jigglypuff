@@ -17,7 +17,7 @@ export default class MovieSchedule extends Component {
     constructor(context) {
         super(context);
         this._template = template;
-        console.log(this._context);
+
 
         if (!Object.hasOwnProperty.call(this._context, 'sessions')) {
             return;

@@ -22,6 +22,8 @@
 @import "../../src/components/hallLayout/hallLayout.css";
 @import "../../src/components/baseComponents/validationBlock/validationBlock.css";
 @import "../../src/components/movieSchedule/movieSchedule.css";
+@import "../../src/components/baseComponents/selectList/selectList.css";
+@import "../../src/components/filter/filter.css";
 
 html, body {
     padding: 0;

@@ -146,7 +146,6 @@ export default class ScheduleModel {
             credentials: 'include',
         });
     }
-
     /**
      * Get movie schedule.
      * @return {Promise<Response>}
