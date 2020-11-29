@@ -13,6 +13,7 @@ const Routes = {
     MoviePage: '/movie/:id/',
     ProfilePage: '/profile/',
     RateMovie: '/movie/rate/',
+    RecommendationsList: '/recommendations/',
     Register: '/auth/register/',
     Schedule: '/schedule/',
     ScheduleID: '/schedule/:id/',
