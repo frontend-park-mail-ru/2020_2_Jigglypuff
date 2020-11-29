@@ -66,19 +66,10 @@ export default class RegisterView extends View {
 
         await responseSignUp
             .then(async (response) => {
-                console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
-                console.log(response);
-                console.log('OK');
-                console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })
             .catch((err) => {
-                console.log('\n\n-----REGISTER_VIEW:ON_SUBMIT()-----');
-                console.log('NOT OK');
-                console.log('-----REGISTER_VIEW:ON_SUBMIT()-----\n\n');
-
                 const validation = document.getElementsByClassName('validation-block')[0];
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');

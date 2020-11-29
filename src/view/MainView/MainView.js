@@ -8,13 +8,11 @@ import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 import Getter from 'utils/Getter';
-import Slider from "components/slider/slider";
 
 /**
  * Class of the main page view
  */
 export default class MainView extends View {
-
     /**
      * Constructor of the main page view
      * @constructor
@@ -37,8 +35,8 @@ export default class MainView extends View {
         this._filter = new Filter(
             {
                 cinemaList,
-                target: 'cinema'
-            }
+                target: 'cinema',
+            },
         );
 
         this._visibility = !movieListContext.length;
@@ -55,6 +53,9 @@ export default class MainView extends View {
         await super.show(this._template(templateData), {isSlider: true});
     }
 
+    /**
+     * Method that hides view
+     * */
     hide() {
         this._filter.hide();
         EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
@@ -83,13 +84,8 @@ export default class MainView extends View {
         const responseMovieListViewModel = (new MovieListViewModel()).getMovieActualListCommand.exec(date);
 
         await responseMovieListViewModel
-            .then(response => {
+            .then((response) => {
                 movieListContext = response;
-            })
-            .catch(err => {
-                console.log('\n\nMAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR');
-                console.log(err);
-                console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
             });
 
 
@@ -99,13 +95,10 @@ export default class MainView extends View {
                 .then((response) => {
                     item.scheduleContext = response;
                     item.cinemaName = cinemaName;
-                })
-                .catch((err) => {
-                    // console.log(err);
                 });
         }
 
-        return movieListContext.filter(item => {
+        return movieListContext.filter((item) => {
             return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
     }

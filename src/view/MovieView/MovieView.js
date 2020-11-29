@@ -63,6 +63,9 @@ export default class MovieView extends View {
         await super.show(this._template(data));
     }
 
+    /**
+     * Method that hides view
+     * */
     hide() {
         this._filter.hide();
         EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
@@ -97,8 +100,7 @@ export default class MovieView extends View {
                     }
                 }
             })
-            .catch((err) => {
-                console.log('NOT OK');
+            .catch(() => {
                 if (!ratingMark.classList.contains('hidden')) {
                     ratingMark.classList.add('hidden');
                 }
@@ -144,9 +146,6 @@ export default class MovieView extends View {
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
-            })
-            .catch((err) => {
-                // console.log(err);
             });
 
         return movieContext;

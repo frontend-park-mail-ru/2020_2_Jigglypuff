@@ -21,10 +21,8 @@ export default class MovieList extends Component {
         this._context = {};
         this._context.MovieCards = [];
 
-        for (const i in movies) {
-            if (Object.prototype.hasOwnProperty.call(movies, i)) {
-                this._context.MovieCards.push((new MovieCard(movies[i])).render());
-            }
+        for (const item of movies) {
+            this._context.MovieCards.push((new MovieCard(item)).render());
         }
     }
 }

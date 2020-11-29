@@ -45,6 +45,9 @@ export default class HallView extends View {
         await super.show(this._template(data));
     }
 
+    /**
+     * Method that hides view
+     * */
     hide() {
         EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
         EventBus.off(Events.TicketSelect, this._onTicketSelectHandler);
@@ -81,17 +84,8 @@ export default class HallView extends View {
 
         await responseTicketViewModel
             .then(() => {
-                console.log('\n\nHALL_VIEW:ON_BUY()');
-                console.log('OK');
-                console.log('HALL_VIEW:ON_BUY()\n\n');
-            })
-            .catch((err) => {
-                console.log('\n\nHALL_VIEW:ON_BUY() :: ERR');
-                console.log(err);
-                console.log('HALL_VIEW:ON_BUY() :: ERR\n\n');
+                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             });
-
-        EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
     }
 
     /**

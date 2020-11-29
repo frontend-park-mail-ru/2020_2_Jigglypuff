@@ -72,10 +72,6 @@ export default class LoginView extends View {
 
         await responseSignIn
             .then(async () => {
-                console.log('\n\n-----LOGIN_VIEW:ON_UPDATE_FIELD()-----');
-                console.log('OK');
-                console.log('-----LOGIN_VIEW:ON_UPDATE_FIELD()-----\n\n');
-
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.Main});
             })
