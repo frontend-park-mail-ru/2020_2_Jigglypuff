@@ -8,6 +8,7 @@ import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 import Getter from 'utils/Getter';
+import Slider from "components/slider/slider";
 
 /**
  * Class of the main page view

@@ -21,9 +21,6 @@ export default class RegisterView extends View {
         super(title);
         this._template = template;
         this._signUpViewModel = new SignUpViewModel();
-
-        EventBus.on(Events.RegisterFieldFill, this.onUpdateField.bind(this));
-        EventBus.on(Events.RegisterSubmit, this.onSubmit.bind(this));
     }
 
     /**
@@ -33,6 +30,10 @@ export default class RegisterView extends View {
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
+        this._onUpdateField = this.onUpdateField.bind(this);
+        this._onSubmit = this.onSubmit.bind(this);
+        EventBus.on(Events.RegisterFieldFill, this._onUpdateField);
+        EventBus.on(Events.RegisterSubmit, this._onSubmit);
 
         const data = {
             RegisterContent: (new RegisterContent()).render(),
@@ -44,6 +45,8 @@ export default class RegisterView extends View {
      * Method that hides registration view
      */
     hide() {
+        EventBus.off(Events.RegisterFieldFill, this._onUpdateField);
+        EventBus.off(Events.RegisterSubmit, this._onSubmit);
         super.hide();
     }
 

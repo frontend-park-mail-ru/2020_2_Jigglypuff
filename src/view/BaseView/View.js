@@ -50,7 +50,10 @@ export default class View {
      * Method that hides the page content
      */
     hide() {
-        this._root.innerHTML = '';
+        if (this._context.isSlider) {
+            document.querySelector('.slider').innerHTML = '';
+        }
+        document.querySelector('.content').innerHTML = '';
     }
 
     /**

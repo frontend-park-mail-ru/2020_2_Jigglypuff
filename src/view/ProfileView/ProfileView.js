@@ -24,11 +24,6 @@ export default class ProfileView extends View {
         this._template = template;
 
         this._settingsViewModel = new SettingsViewModel();
-
-        EventBus.on(Events.Logout, this.onLogout.bind(this));
-        EventBus.on(Events.ProfileEditFieldFill, this.onUpdateField.bind(this));
-        EventBus.on(Events.UploadAvatar, this.onUpdateField.bind(this));
-        EventBus.on(Events.ProfileEditSubmit, this.onSubmit.bind(this));
     }
 
     /**
@@ -39,6 +34,15 @@ export default class ProfileView extends View {
             EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
+
+        this._onLogoutHandler = this.onLogout.bind(this);
+        this._onUpdateFieldHandler = this.onUpdateField.bind(this);
+        this._onProfileEditSubmitHandler = this.onSubmit.bind(this);
+
+        EventBus.on(Events.Logout, this._onLogoutHandler);
+        EventBus.on(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
+        EventBus.on(Events.UploadAvatar, this._onUpdateFieldHandler);
+        EventBus.on(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
 
         const profileContext = {
             profileEdit: {},
@@ -145,6 +149,12 @@ export default class ProfileView extends View {
      * Method that hides the profile view
      */
     hide() {
+
+        EventBus.off(Events.Logout, this._onLogoutHandler);
+        EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
+        EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
+        EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
+
         super.hide();
     }
 
