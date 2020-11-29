@@ -1,3 +1,5 @@
+import Routes from 'consts/Routes';
+
 const CACHE_NAME = 'CinemaScope_serviceWorker_2020_2-v2';
 
 const cacheUrls = [
@@ -29,7 +31,8 @@ self.addEventListener('fetch', (event) => {
         return fetch(event.request);
     }
 
-    if (event.request.method === 'GET') {
+    if ((event.request.method === 'GET') &&
+        !(event.request.url.includes(Routes.HostAPI))) {
         event.respondWith(
             caches
                 .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
