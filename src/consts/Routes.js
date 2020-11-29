@@ -11,6 +11,7 @@ const Routes = {
     Main: '/',
     MovieList: '/movie/',
     MoviePage: '/movie/:id/',
+    MovieListActual: '/movie/actual/',
     ProfilePage: '/profile/',
     RateMovie: '/movie/rate/',
     RecommendationsList: '/recommendations/',

@@ -1,4 +1,6 @@
 .validation-block {
+    font-weight: bold;
+    font-size: 1.3rem;
     background: var(--main-brend-color);
 
     border-radius: 14px;

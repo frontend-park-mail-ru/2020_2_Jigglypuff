@@ -4,6 +4,7 @@ import SelectList from "components/baseComponents/selectList/selectList";
 import StandardButton from "components/baseComponents/buttons/standartButton/standardButton";
 import Events from "consts/Events";
 import EventBus from "services/EventBus";
+import Months from "consts/Months";
 
 /**
  * Image input component
@@ -31,29 +32,27 @@ export default class Filter extends Component {
                 id: 'cinemaList'
             }
         )).render();
-        this._context.SelectDate = (new SelectList(
-            {
-                values: this._context.cinemaList,
-                label: 'Даты'
-            }
-        )).render();
 
-        this._context.StandardButton = (new StandardButton(
-            {
-                buttonName: 'Принять',
-                event: Events.SubmitFilter,
-            }
-        )).render();
+        this._context.dates = [];
+        let todayDate = new Date();
 
-        this._context.calendar = {
-            label: 'Дата',
-            id: 'calendarList'
-        };
+        for (let i = 0; i < 4; i++) {
+            let buttonName = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
+            this._context.dates.push((new StandardButton(
+                {
+                    buttonName: buttonName,
+                    event: Events.SubmitFilter,
+                    value: `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1) < 9 ? '0' : ''}${(+todayDate.getMonth() + 1)}-${(todayDate.getDate()) < 9 ? '0' : ''}${todayDate.getDate()}`,
+                }
+            )).render());
+            todayDate.setDate(todayDate.getDate() + 1);
+        }
     }
 
-    _onSubmitFilter() {
+    _onSubmitFilter(data) {
         let cinemaID = document.getElementById('cinemaList').value;
-        let date = document.getElementById('calendarList').value;
+        let date = data.value;
+
 
         EventBus.emit(Events.UpdateMovieList, {
             cinemaID: cinemaID,
