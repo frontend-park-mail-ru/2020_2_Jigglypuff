@@ -1,11 +1,12 @@
 {{#if sessions}}
-    <hr class="header__line movie-list__line">
-
-    <div class="movie-list__header" style="margin-top: 30px">Расписание</div>
-
     <div class="movie-schedule-content">
-        <div class="movie-schedule__date_title">
-            {{ date }}
+        <div class="movie-schedule__title">
+            <div class="title__item">
+                {{ date }}
+            </div>
+            <div class="title__item">
+                {{ cinemaName }}
+            </div>
         </div>
         <div class="movie-schedule__schedule-block">
             <div class="schedule-block__formats">
@@ -20,5 +21,5 @@
             </div>
         </div>
     </div>
-    <hr class="movie-card__description_schedule-line">
 {{/if}}
+

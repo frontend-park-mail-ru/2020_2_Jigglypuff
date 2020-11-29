@@ -17,6 +17,7 @@ const Events = {
     MovieRate: 'movieRate',
     SubmitFilter: 'submitFilter',
     UpdateMovieList: 'updateMovieList',
+    UpdateSchedule: 'updateSchedule',
 };
 
 

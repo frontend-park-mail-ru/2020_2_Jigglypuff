@@ -50,14 +50,23 @@ export default class Filter extends Component {
     }
 
     _onSubmitFilter(data) {
+
         let cinemaID = document.getElementById('cinemaList').value;
+        let cinemaName = document.getElementById('cinemaList').options[cinemaID-1].innerHTML;
         let date = data.value;
 
-
-        EventBus.emit(Events.UpdateMovieList, {
-            cinemaID: cinemaID,
-            date: date,
-        });
+        if (this._context.target === 'cinema') {
+            EventBus.emit(Events.UpdateMovieList, {
+                cinemaID: cinemaID,
+                date: date,
+            });
+        } else if (this._context.target === 'schedule') {
+            EventBus.emit(Events.UpdateSchedule, {
+                cinemaName: cinemaName,
+                cinemaID: cinemaID,
+                date: date,
+            });
+        }
     }
 
 }

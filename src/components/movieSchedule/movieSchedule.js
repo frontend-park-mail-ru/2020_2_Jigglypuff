@@ -17,7 +17,6 @@ export default class MovieSchedule extends Component {
     constructor(context) {
         super(context);
         this._template = template;
-        console.log(this._context);
 
         if (!Object.hasOwnProperty.call(this._context, 'sessions')) {
             return;
@@ -37,6 +36,7 @@ export default class MovieSchedule extends Component {
             );
         }
 
+        this._context.date = this._context.sessions[0].date;
         this._context.ScheduleButtons = scheduleButtons;
     }
 }

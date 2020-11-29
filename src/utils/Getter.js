@@ -5,6 +5,8 @@ import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import ScheduleViewModel from 'viewmodels/ScheduleViewModel';
 import Routes from 'consts/Routes';
+import CinemaListView from "view/CinemaListView/CinemaListView";
+import CinemaListViewModel from "viewmodels/CinemaListViewModel";
 
 /**
  * Class that gets different essence information
@@ -31,6 +33,21 @@ export default class Getter {
             });
 
         return cinema;
+    }
+
+    static async getCinemaList() {
+        let cinemaList = {};
+        const responseCinemaList = (new CinemaListViewModel()).getCinemaListCommand.exec();
+
+        await responseCinemaList
+            .then((response) => {
+                cinemaList = response;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        return cinemaList;
     }
 
     /**

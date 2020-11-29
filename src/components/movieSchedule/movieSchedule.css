@@ -6,11 +6,16 @@
 
 }
 
-.movie-schedule__date_title {
+.movie-schedule__title {
     display: flex;
+    flex-direction: column;
     font-weight: bold;
     align-items: center;
     width: 200px;
+}
+
+.title__item{
+    margin: 5px;
 }
 
 .movie-schedule__format{
@@ -22,6 +27,7 @@
 .movie-schedule__schedule-block {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .schedule-block__schedule {

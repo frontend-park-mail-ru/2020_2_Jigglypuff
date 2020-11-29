@@ -9,6 +9,7 @@ import CinemaListView from "view/CinemaListView/CinemaListView";
 import Events from "consts/Events";
 import EventBus from "services/EventBus";
 import ValidationBlock from "components/baseComponents/validationBlock/validationBlock";
+import Getter from "utils/Getter";
 
 /**
  * Class of the main page view
@@ -32,16 +33,15 @@ export default class MainView extends View {
     async show() {
         const movieListContext = await this.getMovieListContext();
 
-        const cinemaList = await this.getCinemaList();
-
+        const cinemaList = await Getter.getCinemaList();
 
         this._visibility = !movieListContext.length;
 
         const templateData = {
             MovieList: (new MovieList(movieListContext)).render(),
-            Filtration: (new Filter({ cinemaList })).render(),
+            Filtration: (new Filter({ cinemaList , target: 'cinema'})).render(),
             Validation: (new ValidationBlock({
-                message: 'На данный момент нет актуальных сеансовв',
+                message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
             })).render(),
         };
@@ -51,14 +51,25 @@ export default class MainView extends View {
 
     /**
      * Method that gets movie list context
+     * @param {string} cinemaName
      * @param {Number} cinemaID
      * @param {string} date
      *
      * @return {Promise<Object>} - movie list context
      */
-    async getMovieListContext(cinemaID = 1, date = '1970-01-01') {
+    async getMovieListContext(cinemaName, cinemaID = 1, date = '1970-01-01') {
         let movieListContext = [];
-        const responseMovieListViewModel = (new MovieListViewModel()).getMovieListCommand.exec();
+
+        if (!cinemaName) {
+            cinemaName = (await Getter.getCinema(cinemaID)).name;
+        }
+
+        if (date === '1970-01-01') {
+            let todayDate = new Date();
+            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
+        }
+
+        const responseMovieListViewModel = (new MovieListViewModel()).getMovieActualListCommand.exec(date);
 
         await responseMovieListViewModel
             .then((response) => {
@@ -70,10 +81,7 @@ export default class MainView extends View {
                 console.log('MAIN_VIEW:GET_MOVIE_LIST_CONTEXT() :: ERR\n\n');
             });
 
-        if (date === '1970-01-01') {
-            let todayDate = new Date();
-            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
-        }
+
 
         for (const i in movieListContext) {
             if (Object.prototype.hasOwnProperty.call(movieListContext, i)) {
@@ -83,6 +91,7 @@ export default class MainView extends View {
                 await responseMovieVM
                     .then((response) => {
                         movieListContext[i].scheduleContext = response;
+                        movieListContext[i].cinemaName = cinemaName;
                     })
                     .catch((err) => {
                         // console.log(err);
@@ -90,23 +99,17 @@ export default class MainView extends View {
             }
         }
 
-
         return movieListContext.filter((item) => {
             return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
         });
     }
 
-    async getCinemaList() {
-        const cinemaListView = new CinemaListView();
-
-        return await cinemaListView.getCinemaListContext();
-    }
 
     async onUpdateMovieList(data){
 
         let movieList = document.querySelector('.movie-list__content');
 
-        let movieListContext = await this.getMovieListContext(data.cinemaID, data.date);
+        let movieListContext = await this.getMovieListContext(data.cinemaName, data.cinemaID, data.date);
 
         const validation = document.querySelector('.validation-block');
         if (!movieListContext.length) {

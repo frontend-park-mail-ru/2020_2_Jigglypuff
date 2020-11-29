@@ -2,6 +2,7 @@ import template from 'view/CinemaListView/CinemaListView.hbs';
 import View from 'view/BaseView/View';
 import CinemaList from 'components/cinemaList/cinemaList';
 import CinemaListViewModel from 'viewmodels/CinemaListViewModel';
+import Getter from "utils/Getter";
 
 /**
  * Class of the cinema view
@@ -35,18 +36,6 @@ export default class CinemaListView extends View {
      * @return {Promise<Object>} - cinema list context
      */
     async getCinemaListContext() {
-        let cinemaListContext = {};
-
-        const responseCinemaList = (new CinemaListViewModel()).getCinemaListCommand.exec();
-
-        await responseCinemaList
-            .then((response) => {
-                cinemaListContext = response;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        return cinemaListContext;
+        return await Getter.getCinemaList();
     }
 }

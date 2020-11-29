@@ -9,6 +9,11 @@ import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import MovieSchedule from 'components/movieSchedule/movieSchedule';
 import Months from 'consts/Months';
+import movieSchedule from "components/movieSchedule/movieSchedule";
+import MainView from "view/MainView/MainView";
+import Filter from "components/filter/filter";
+import MovieList from "components/movieList/movieList";
+import ValidationBlock from "components/baseComponents/validationBlock/validationBlock";
 
 /**
  * Class of the movie view
@@ -23,6 +28,7 @@ export default class MovieView extends View {
         super(title);
         this._template = template;
 
+        EventBus.on(Events.UpdateSchedule, this.onUpdateSchedule.bind(this));
         EventBus.on(Events.MovieRate, this.onMovieRate.bind(this));
     }
 
@@ -31,9 +37,25 @@ export default class MovieView extends View {
      * @param {Object} routeData - data from route path of the movie page
      */
     async show(routeData) {
-        const movieContext = await this.getMovieContext(routeData.id);
+        this._movieID = routeData.id;
+        const movieContext = await this.getMovieContext();
+
+        this._visibility = !movieContext.movieScheduleContext.sessions;
 
         const data = {};
+        data.Validation = (new ValidationBlock(
+            {
+                message: 'На данный момент нет актуальных сеансов',
+                visibility: this._visibility,
+            }
+        )).render();
+
+        data.Filtration = (new Filter(
+            {
+                cinemaList: await Getter.getCinemaList(),
+                target: 'schedule',
+            }
+        )).render()
         data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
         data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
 
@@ -78,14 +100,20 @@ export default class MovieView extends View {
 
     /**
      * Method that returns movie context
-     * @param {Number} movieID - id of the required movie
      *
      * @return {Object}
      */
-    async getMovieContext(movieID) {
+    async getMovieContext(cinemaName, cinemaID = 1, date = '1970-01-01') {
         const movieContext = {};
+
+        if (!cinemaName) {
+            cinemaName = (await Getter.getCinema(cinemaID)).name;
+        }
+
         movieContext.movieScheduleContext = {};
-        movieContext.movieDescriptionContext = await Getter.getMovie(movieID);
+        movieContext.movieScheduleContext.cinemaName = cinemaName;
+
+        movieContext.movieDescriptionContext = await Getter.getMovie(this._movieID);
 
         movieContext.movieDescriptionContext.pathToAvatar = `${Routes.Host}${movieContext.movieDescriptionContext.pathToAvatar}`;
         movieContext.movieDescriptionContext.pathToSliderAvatar = `${Routes.Host}${movieContext.movieDescriptionContext.pathToSliderAvatar}`;
@@ -93,21 +121,42 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
         let todayDate = new Date();
-        const todayDay = `${todayDate.getDate()} ${(Months[+todayDate.getMonth()])}`;
-        todayDate = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
+
+        if (date === '1970-01-01') {
+            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
+        }
 
         const movieVM = new MovieViewModel();
-        const responseMovieVM = movieVM.getScheduleCommand.exec(movieID, 1, todayDate);
+        const responseMovieVM = movieVM.getScheduleCommand.exec(this._movieID, cinemaID, date);
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
             })
-            .catch(() => {
+            .catch((err) => {
+                // console.log(err);
             });
 
-        movieContext.movieScheduleContext.date = todayDay;
-        console.log(todayDay);
-
         return movieContext;
+    }
+
+    async onUpdateSchedule(data) {
+
+        let schedule = document.querySelector('.movie-schedule-content');
+
+        let {movieScheduleContext} = await this.getMovieContext(data.cinemaName, data.cinemaID, data.date);
+
+        const validation = document.querySelector('.validation-block');
+        if (!movieScheduleContext.sessions) {
+            validation.classList.remove('validation-display-none');
+        } else {
+            validation.classList.add('validation-display-none');
+        }
+
+        if (schedule) {
+            schedule.innerHTML = (new MovieSchedule(movieScheduleContext)).render();
+
+            let scroll = document.getElementById('schedule');
+            scroll.scrollIntoView(true);
+        }
     }
 }
