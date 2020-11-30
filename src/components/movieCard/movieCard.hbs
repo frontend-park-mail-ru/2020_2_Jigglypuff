@@ -1,7 +1,6 @@
-<div class="movie-card cs-border">
+<div class="movie-card">
     <img data-path="{{ path }}" data-event="{{ event }}" class="movie-card__poster_img" src="{{ pathToAvatar }}"
          alt="">
-
     <div class="movie-card__description">
         <a href="{{ path }}" data-path="{{ path }}" data-event="{{ event }}" class="movie-card__description_title">
             {{ name }}
@@ -16,25 +15,8 @@
                 {{/each}}
             </span>
         </div>
-        <div class="movie-card__description_schedule">
-            <span class="movie-card__description_schedule-title">
-                {{ date }}
-            </span>
-            {{#if ScheduleButtons }}
-                <hr class="movie-card__description_schedule-line">
-                <div class="movie-card__description_schedule-block">
-                    {{#each ScheduleButtons }}
-                        {{{ this }}}
-                    {{/each}}
-                </div>
-                <hr class="movie-card__description_schedule-line">
-            {{/if}}
-            <span class="movie-card__description_schedule-title">
-                {{ cinemaName }}
-            </span>
-            <div class="movie-card__description_schedule-button">
-                {{{ StandardButton }}}
-            </div>
+        <div class="movie-card__description_schedule-button">
+            {{{ StandardButton }}}
         </div>
     </div>
 </div>
