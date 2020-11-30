@@ -1,0 +1,31 @@
+.edit__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.edit__input {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit__admission {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.edit__header-link {
+    color: var(--main-font-color);
+    font-size: 1rem;
+    font-weight: bolder;
+    margin-left: auto;
+}
+
+.edit__header-submit {
+    margin-left: auto;
+}

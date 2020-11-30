@@ -1,4 +1,8 @@
-import Validator from '../utils/Validator';
+import CSRF from 'utils/CSRF';
+import Extractor from 'utils/Extractor';
+import Routes from 'consts/Routes';
+import Statuses from 'consts/Statuses';
+import Validator from 'utils/Validator';
 
 /** Class that contains Movie model */
 export default class MovieModel {
@@ -6,25 +10,27 @@ export default class MovieModel {
      * Declare MovieModel attributes.
      */
     constructor() {
-        this._ageLimit = null;
+        this._actorList = null;
+        this._ageGroup = null;
         this._country = null;
-        this._cover = null;
         this._description = null;
-        this._director = null;
         this._duration = null;
-        this._genre = null;
+        this._genreList = null;
         this._id = null;
         this._name = null;
-        this._ratingGlobal = null;
-        this._ratingUser = null;
+        this._pathToAvatar = null;
+        this._pathToSliderAvatar = null;
+        this._personalRating = null;
+        this._producer = null;
+        this._rating = null;
+        this._ratingCount = null;
         this._reviews = null;
-        this._starring = null;
-        this._year = null;
+        this._releaseYear = null;
     }
 
     /**
      * Get movie id.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get id() {
         return this._id;
@@ -32,47 +38,55 @@ export default class MovieModel {
 
     /**
      * Get movie name.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get name() {
         return this._name;
     }
 
     /**
-     * Get movie cover.
-     * @return {null} {Image}
+     * Get movie path to avatar.
+     * @return {null|string}
      */
-    get cover() {
-        return this._cover;
+    get pathToAvatar() {
+        return this._pathToAvatar;
+    }
+
+    /**
+     * Get movie path to slider avatar.
+     * @return {null|string}
+     */
+    get pathToSliderAvatar() {
+        return this._pathToSliderAvatar;
     }
 
     /**
      * Get movie description.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get description() {
         return this._description;
     }
 
     /**
-     * Get movie director.
-     * @return {null} {string}
+     * Get movie producer.
+     * @return {null|string}
      */
-    get director() {
-        return this._director;
+    get producer() {
+        return this._producer;
     }
 
     /**
-     * Get movie genre.
-     * @return {null} {Array}
+     * Get movie genre list.
+     * @return {null|Array}
      */
-    get genre() {
-        return this._genre;
+    get genreList() {
+        return this._genreList;
     }
 
     /**
      * Get movie duration.
-     * @return {null} {int}
+     * @return {null|int}
      */
     get duration() {
         return this._duration;
@@ -80,7 +94,7 @@ export default class MovieModel {
 
     /**
      * Get movie country.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get country() {
         return this._country;
@@ -88,39 +102,47 @@ export default class MovieModel {
 
     /**
      * Get movie year.
-     * @return {null} {int}
+     * @return {null|int}
      */
-    get year() {
-        return this._year;
+    get releaseYear() {
+        return this._releaseYear;
     }
 
     /**
      * Get movie global rating.
-     * @return {null} {float}
+     * @return {null|float}
      */
-    get ratingGlobal() {
-        return this._ratingGlobal;
+    get rating() {
+        return this._rating;
     }
 
     /**
      * Get movie user rating.
-     * @return {null} {float}
+     * @return {null|float}
      */
-    get ratingUser() {
-        return this._ratingUser;
+    get personalRating() {
+        return this._personalRating;
     }
 
     /**
      * Get movie age limit.
-     * @return {null} {int}
+     * @return {null|int}
      */
-    get ageLimit() {
-        return this._ageLimit;
+    get ageGroup() {
+        return this._ageGroup;
+    }
+
+    /**
+     * Get movie rating count.
+     * @return {null|int}
+     */
+    get ratingCount() {
+        return this._ratingCount;
     }
 
     /**
      * Get movie reviews.
-     * @return {null} {Array}
+     * @return {null|Array}
      */
     get reviews() {
         return this._reviews;
@@ -128,10 +150,10 @@ export default class MovieModel {
 
     /**
      * Get movie cast.
-     * @return {null} {Array}
+     * @return {null|Array}
      */
-    get starring() {
-        return this._starring;
+    get actorList() {
+        return this._actorList;
     }
 
     /**
@@ -152,36 +174,36 @@ export default class MovieModel {
      */
     set description(description) {
         if (Validator.validateMovieDescription(description)) {
-            this._description = description.toString();
+            this._description = description;
         } else {
             this._description = null;
         }
     }
 
     /**
-     * Set movie director to "director" variable value if valid else, null.
-     * @param {any} director
+     * Set movie producer to "producer" variable value if valid else, null.
+     * @param {any} producer
      */
-    set director(director) {
-        const nameParts = director.toString().split(' ');
+    set producer(producer) {
+        const nameParts = producer.toString().split(' ');
         for (const part of nameParts) {
             if (!Validator.validateName(part)) {
-                this._director = null;
+                this._producer = null;
                 return;
             }
         }
-        this._director = director.toString();
+        this._producer = producer.toString();
     }
 
     /**
-     * Set movie age limit to "ageLimit" variable value if valid else, null.
-     * @param {any} ageLimit
+     * Set movie age limit to "ageGroup" variable value if valid else, null.
+     * @param {any} ageGroup
      */
-    set ageLimit(ageLimit) {
-        if (Validator.validateMovieAgeLimit(ageLimit)) {
-            this._ageLimit = ageLimit;
+    set ageGroup(ageGroup) {
+        if (Validator.validateMovieAgeLimit(ageGroup)) {
+            this._ageGroup = ageGroup;
         } else {
-            this._ageLimit = null;
+            this._ageGroup = null;
         }
     }
 
@@ -211,15 +233,14 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie genre to "genre" variable value if valid else, null.
-     * @param {any} genre
+     * Set movie genre list to "genreList" variable value if valid else, null.
+     * @param {Array<Object>} genreList
      */
-    set genre(genre) {
-        if (Validator.validateMovieGenre(genre)) {
-            if (!genre) {
-                this._genre = [];
-            }
-            this._genre.append(genre.toString());
+    set genreList(genreList) {
+        if (Array.isArray(genreList)) {
+            this._genreList = genreList;
+        } else {
+            this._genreList = null;
         }
     }
 
@@ -236,26 +257,38 @@ export default class MovieModel {
     }
 
     /**
-     * Set movie global rating to "ratingGlobal" variable value if valid else, null.
-     * @param {any} ratingGlobal
+     * Set movie rating count to "ratingCount" variable value if valid else, null.
+     * @param {any} ratingCount
      */
-    set ratingGlobal(ratingGlobal) {
-        if (Validator.validateMovieRatingGlobal(ratingGlobal)) {
-            this._ratingGlobal = Number(ratingGlobal);
+    set ratingCount(ratingCount) {
+        if (Validator.validateUINT(ratingCount)) {
+            this._ratingCount = Number(ratingCount);
         } else {
-            this._ratingGlobal = null;
+            this._ratingCount = null;
         }
     }
 
     /**
-     * Set movie user rating to "ratingUser" variable value if valid else, null.
-     * @param {any} ratingUser
+     * Set movie rating to "rating" variable value if valid else, null.
+     * @param {any} rating
      */
-    set ratingUser(ratingUser) {
-        if (Validator.validateMovieRatingUser(ratingUser)) {
-            this._ratingUser = Number(ratingUser);
+    set rating(rating) {
+        if (Validator.validateMovieRating(rating)) {
+            this._rating = Number(rating);
         } else {
-            this._ratingUser = null;
+            this._rating = null;
+        }
+    }
+
+    /**
+     * Set movie user rating to "personalRating" variable value if valid else, null.
+     * @param {any} personalRating
+     */
+    set personalRating(personalRating) {
+        if (Validator.validateMovieRatingUser(personalRating)) {
+            this._personalRating = Number(personalRating);
+        } else {
+            this._personalRating = null;
         }
     }
 
@@ -263,12 +296,28 @@ export default class MovieModel {
      * Set movie year to "year" variable value if valid else, null.
      * @param {any} year
      */
-    set year(year) {
+    set releaseYear(year) {
         if (Validator.validateMovieYear(year)) {
-            this._year = year;
+            this._releaseYear = year;
         } else {
-            this._year = null;
+            this._releaseYear = null;
         }
+    }
+
+    /**
+     * Set movie path to avatar to "pathToAvatar" variable
+     * @param {any} pathToAvatar
+     */
+    set pathToAvatar(pathToAvatar) {
+        this._pathToAvatar = pathToAvatar.toString();
+    }
+
+    /**
+     * Set movie path to slider avatar to "pathToSliderAvatar" variable
+     * @param {any} pathToSliderAvatar
+     */
+    set pathToSliderAvatar(pathToSliderAvatar) {
+        this._pathToSliderAvatar = pathToSliderAvatar.toString();
     }
 
     /**
@@ -277,26 +326,22 @@ export default class MovieModel {
      */
     set reviews(reviews) {
         if (Validator.validateText(reviews)) {
-            if (!reviews) {
+            if (!this._reviews) {
                 this._reviews = [];
             }
-            this._reviews.append(reviews.toString());
+            this._reviews.push(reviews.toString());
         }
     }
 
     /**
-     * Set movie starring to "starring" variable value if valid else, null.
-     * @param {any} starring
+     * Set movie actors list to "actorList" variable value if valid else, null.
+     * @param {Array<Object>} actorList
      */
-    set starring(starring) {
-        const nameParts = starring.toString().split(' ');
-        for (const part of nameParts) {
-            if (Validator.validateName(part)) {
-                if (!starring) {
-                    this._starring = [];
-                }
-                this._starring.append(starring.toString());
-            }
+    set actorList(actorList) {
+        if (Array.isArray(actorList)) {
+            this._actorList = actorList;
+        } else {
+            this._actorList = null;
         }
     }
 
@@ -305,14 +350,24 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async rate() {
-        const response = await fetch('http://cinemascope.space/movie/rate', {
+        const response = await fetch(`${Routes.HostAPI}${Routes.RateMovie}`, {
             method: 'POST',
-            body: JSON.stringify({'id': this._id, 'rating': this._ratingUser}),
+            credentials: 'include',
+            body: JSON.stringify({'id': this._id, 'rating': this._personalRating}),
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
         });
-        return await response.json();
+
+        if (!response.ok) {
+            if (response.status === Statuses.Forbidden) {
+                await CSRF.getCSRF();
+                await this.rate();
+            }
+        }
+
+        return response;
     }
 
     /**
@@ -320,10 +375,16 @@ export default class MovieModel {
      * @return {Promise<Response>}
      */
     async getMovie() {
-        const response = await fetch('http://cinemascope.space/movie/' + this._id + '/', {
+        const response = await fetch(`${Routes.HostAPI}${Routes.MoviePage.replace(/:id/, this._id)}`, {
             method: 'GET',
+            credentials: 'include',
         });
-        return await response.json();
+
+        if (response.ok) {
+            Extractor.extractMovieDataFromJSON(await response.json(), this);
+        }
+
+        return response;
     }
 
     /**
@@ -332,23 +393,36 @@ export default class MovieModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    async getMovieList(limit = 10, page = 1) {
-        const response = await fetch('http://cinemascope.space/movie/?limit=' + limit + '&page=' + page, {
+    static async getMovieList(limit = 11, page = 1) {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieList}?limit=${limit}&page=${page}`, {
             method: 'GET',
+            credentials: 'include',
         });
-        return await response.json();
     }
 
     /**
      * Get actual movie list info.
      * @param {int} limit
      * @param {int} page
+     * @param {string} date
      * @return {Promise<Response>}
      */
-    async getMovieActual(limit = 10, page = 1) {
-        const response = await fetch('http://cinemascope.space/movie/actual/?limit=' + limit + '&page=' + page, {
+    static async getMovieActualList(limit = 11, page = 1, date= '') {
+        return await fetch(`${Routes.HostAPI}${Routes.MovieListActual}?limit=${limit}&page=${page}&date=${date}`, {
             method: 'GET',
+            credentials: 'include',
         });
-        return await response.json();
+    }
+
+    /**
+     * Get recommendations list.
+     * @return {Promise<Response>}
+     */
+    static async getRecommendationsList() {
+        console.log(`${Routes.HostAPI}${Routes.RecommendationsList}`);
+        return await fetch(`${Routes.HostAPI}${Routes.RecommendationsList}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
     }
 }

@@ -1,0 +1,12 @@
+.button {
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 0.5em;
+    cursor: pointer;
+    text-shadow: 0 4px 4px var(--text-shadow-color);
+    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+}
+.button:focus {
+    outline: none;
+}
+

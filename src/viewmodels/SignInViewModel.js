@@ -1,11 +1,16 @@
-import UserModel from '../models/UserModel';
+import BaseViewModel from 'viewmodels/BaseViewModel';
+import Errors from 'consts/Errors';
+import UserModel from 'models/UserModel';
+import CSRF from 'utils/CSRF';
 
 /** Class that contains SignIn ViewModel */
-export default class SignInViewModel {
+export default class SignInViewModel extends BaseViewModel {
     /**
      * Represents SignIn ViewModel constructor
      */
     constructor() {
+        super();
+
         this.state = {
             login: '',
             password: '',
@@ -15,24 +20,24 @@ export default class SignInViewModel {
 
     /**
      * SignIn user after filling fields.
-     * @return {Promise<Response>}
+     * @return {Promise<Error>|Promise<boolean>}
      */
     async signIn() {
         const userModel = new UserModel();
-        const promise = new Promise((resolve, reject) => {
-            reject(new Error('invalid login or password'));
-        });
 
         userModel.login = this.state.login;
-        if (userModel.login === undefined) {
-            return promise;
-        }
-
         userModel.password = this.state.password;
-        if (userModel.password === undefined) {
-            return promise;
+
+        if (!userModel.login || !userModel.password) {
+            throw Error(Errors.InvalidLoginOrPassword.errorMessage);
         }
 
-        return await userModel.signIn();
+        const response = await userModel.signIn();
+        if (response.ok) {
+            const responseCSRF = await CSRF.getCSRF();
+            return response.ok & responseCSRF.ok;
+        }
+
+        throw Error(Errors.InvalidLoginOrPassword.errorMessage);
     }
 }

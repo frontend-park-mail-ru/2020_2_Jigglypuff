@@ -1,4 +1,8 @@
-import Validator from '../utils/Validator';
+import CSRF from 'utils/CSRF';
+import Extractor from 'utils/Extractor';
+import Routes from 'consts/Routes';
+import Statuses from 'consts/Statuses';
+import Validator from 'utils/Validator';
 
 /** Class that contains User model */
 export default class UserModel {
@@ -7,33 +11,25 @@ export default class UserModel {
      */
     constructor() {
         this._login = null;
-        this._email = null;
         this._password = null;
         this._name = null;
         this._surname = null;
         this._avatar = null;
+        this._pathToAvatar = null;
         this._isPremuim = null;
     }
 
     /**
      * Get user login.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get login() {
         return this._login;
     }
 
     /**
-     * Get user email.
-     * @return {null} {string}
-     */
-    get email() {
-        return this._email;
-    }
-
-    /**
      * Get user password.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get password() {
         return this._password;
@@ -41,7 +37,7 @@ export default class UserModel {
 
     /**
      * Get user name.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get name() {
         return this._name;
@@ -49,86 +45,90 @@ export default class UserModel {
 
     /**
      * Get user surname.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get surname() {
         return this._surname;
     }
 
     /**
-     * Get user avatar.
-     * @return {null} {string}
+     * Get user avatar path.
+     * @return {null|string}
      */
-    get avatar() {
-        return this._avatar;
+    get pathToAvatar() {
+        return this._pathToAvatar;
     }
 
     /**
      * Get user status info.
-     * @return {null} {string}
+     * @return {null|string}
      */
     get isPremium() {
         return this._isPremuim;
     }
 
     /**
-     * Set user login to "login" variable value if valid else, undefined.
+     * Set user login to "login" variable value if valid else, null.
      * @param {any} login
      */
     set login(login) {
         if (Validator.validateLogin(login)) {
             this._login = login.toString();
         } else {
-            this._login = undefined;
+            this._login = null;
         }
     }
 
     /**
-     * Set user email to "email" variable value if valid else, undefined.
-     * @param {any} email
-     */
-    set email(email) {
-        if (Validator.validateEmail(email)) {
-            this._email = email.toString();
-        } else {
-            this._email = undefined;
-        }
-    }
-
-    /**
-     * Set user password to "password" variable value if valid else, undefined.
+     * Set user password to "password" variable value if valid else, null.
      * @param {any} password
      */
     set password(password) {
         if (Validator.validatePassword(password)) {
             this._password = password.toString();
         } else {
-            this._password = undefined;
+            this._password = null;
         }
     }
 
     /**
-     * Set user name to "name" variable value if valid else, undefined.
+     * Set user name to "name" variable value if valid else, null.
      * @param {any} name
      */
     set name(name) {
         if (Validator.validateName(name)) {
             this._name = name.toString();
         } else {
-            this._name = undefined;
+            this._name = null;
         }
     }
 
     /**
-     * Set user surname to "surname" variable value if valid else, undefined.
+     * Set user surname to "surname" variable value if valid else, null.
      * @param {any} surname
      */
     set surname(surname) {
         if (Validator.validateName(surname)) {
             this._surname = surname.toString();
         } else {
-            this._surname = undefined;
+            this._surname = null;
         }
+    }
+
+    /**
+     * Set user avatar to "avatar" variable value
+     * @param {any} avatar
+     */
+    set avatar(avatar) {
+        this._avatar = avatar;
+    }
+
+    /**
+     * Set user path to avatar to "avatarPath" variable value if valid else.
+     * @param {any} avatarPath
+     */
+    set pathToAvatar(avatarPath) {
+        this._pathToAvatar = avatarPath.toString();
     }
 
     /**
@@ -136,34 +136,34 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async register() {
-        const response = await fetch('http://cinemascope.space/signup/', {
+        return await fetch(`${Routes.HostAPI}${Routes.Register}`, {
             method: 'POST',
-            body: '{"Login":"' + this._login + '", "Password":"' + this._password + '"}',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                'login': this._login.toString(),
+                'name': this._name.toString(),
+                'password': this._password.toString(),
+                'surname': this._surname.toString(),
+            }),
         });
-
-        return await response.json();
     }
-
 
     /**
      * Sign In user.
      * @return {Promise<Response>}
      */
     async signIn() {
-        const response = await fetch('http://cinemascope.space/signin/', {
+        return await fetch(`${Routes.HostAPI}${Routes.Login}`, {
             method: 'POST',
-            body: '{"Login":"' + this._login + '", "Password":"' + this._password + '"}',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({'login': this._login.toString(), 'password': this._password.toString()}),
         });
-
-        return await response.json();
     }
 
     /**
@@ -173,15 +173,18 @@ export default class UserModel {
      */
     _createFormData() {
         const formData = new FormData();
-        const data = {
-            'name': this._name,
-            'surname': this._surname,
-            'email': this._email,
-            'avatar': this._avatar,
-            'login': this._login,
-            'password': this._password,
-        };
-        formData.append('data', JSON.stringify(data));
+
+        if (this._name) {
+            formData.append('name', this._name);
+        }
+
+        if (this.surname) {
+            formData.append('surname', this._surname);
+        }
+
+        if (this._avatar) {
+            formData.append('avatar', this._avatar, this._avatar.name);
+        }
 
         return formData;
     }
@@ -193,13 +196,23 @@ export default class UserModel {
     async edit() {
         const profileSettingsForm = this._createFormData();
 
-        const response = await fetch('http://cinemascope.space/updateprofile/', {
-            method: 'POST',
-            body: new FormData(profileSettingsForm),
+        const response = await fetch(`${Routes.HostAPI}${Routes.ProfilePage}`, {
+            method: 'PUT',
             credentials: 'include',
+            body: profileSettingsForm,
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
         });
 
-        return await response.json();
+        if (!response.ok) {
+            if (response.status === Statuses.Forbidden) {
+                await CSRF.getCSRF();
+                await this.edit();
+            }
+        }
+
+        return response;
     }
 
     /**
@@ -207,19 +220,38 @@ export default class UserModel {
      * @return {Promise<Response>}
      */
     async get() {
-        const response = await fetch('http://cinemascope.space/getprofile/', {
+        const response = await fetch(`${Routes.HostAPI}${Routes.ProfilePage}`, {
             method: 'GET',
             credentials: 'include',
         });
 
-        return await response.json();
+        if (response.ok) {
+            Extractor.extractUserDataFromJSON(await response.json(), this);
+        }
+
+        return response;
     }
 
     /**
      * Logout user.
-     * @return {Promise<void>}
+     * @return {Promise<Response>}
      */
     async logout() {
+        const response = await fetch(`${Routes.HostAPI}${Routes.Logout}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
+        });
 
+        if (!response.ok) {
+            if (response.status === Statuses.Forbidden) {
+                await CSRF.getCSRF();
+                await this.logout();
+            }
+        }
+
+        return response;
     }
 }

@@ -1,0 +1,61 @@
+<div class="movie-description">
+    <div class="movie-description__media-block">
+        <div class="media-block__poster">
+            {{#if isAuthorized }}
+                <div class="media-block__rating {{#unless personalRating }}hidden{{/unless}}">
+                        <p class="media-block__rating-p">{{ personalRating }}</p>
+                    </div>
+            {{/if}}
+            <img class="media-block__poster-img" src="{{ pathToAvatar }}" alt="">
+        </div>
+        {{#if isAuthorized }}
+            <div class="media-block__rate">
+                <label class="media-block__rate-title" for="rating">Ваша оценка</label>
+                <select id="rating" data-movie="{{ id }}" class="media-block__rate-field">
+                    <option value=""></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+                {{{ StandardButton }}}
+            </div>
+        {{/if}}
+    </div>
+    <div class="movie-description__description-block">
+            <span class="description-block__title">
+                {{ name }}
+            </span>
+        <span class="description-block__specification">
+                {{ releaseYear }}, {{ country }}, {{ duration }} мин, {{ ageGroup }}+
+            </span>
+        <span class="description-block__specification">
+            {{#each genreList}}
+                {{ this }}
+            {{/each}}
+        </span>
+        <span class="description-block__description">
+            {{ description }}
+        </span>
+        <div class="description-block__information">
+            <span class="description-block__information-title">Рейтинг</span>
+            {{ rating }}/10 ({{ratingCount}})
+        </div>
+        <div class="description-block__information">
+            <span class="description-block__information-title">Режиссер</span>
+            {{ producer }}
+        </div>
+        <div class="description-block__information">
+            <span class="description-block__information-title">В ролях</span>
+            {{#each actorList}}
+                {{ this }}
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="movie-schedule-content">
+    <div class="movie-schedule__title">
+        <div class="title__item">
+            {{ date }}
+        </div>
+        <div class="title__item">
+            {{ cinemaName }}
+        </div>
+    </div>
+    <div class="movie-schedule__schedule-block">
+        {{#if sessions}}
+            <div class="schedule-block__formats">
+                <div class="movie-schedule__format">
+                    <span style="margin: 0 auto">2D</span>
+                </div>
+                <div class="schedule-block__schedule">
+                    {{#each ScheduleButtons }}
+                        {{{ this }}}
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    {{{ Validation }}}
+</div>
+
+
+

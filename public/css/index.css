@@ -1,0 +1,58 @@
+@import "vars.css";
+@import "../../src/components/header/header.css";
+@import "../../src/components/userBlock/userBlock.css";
+@import "../../src/components/baseComponents/buttons/button.css";
+@import "../../src/components/baseComponents/buttons/scheduleButton/scheduleButton.css";
+@import "../../src/components/baseComponents/buttons/standartButton/standardButton.css";
+@import "../../src/components/baseComponents/textInput/textInput.css";
+@import "../../src/components/registerContent/registerContent.css";
+@import "../../src/components/loginContent/loginContent.css";
+@import "../../src/components/baseComponents/imageInput/imageInput.css";
+@import "../../src/components/slider/slider.css";
+@import "../../src/components/baseComponents/buttons/watchButton/watchButton.css";
+@import "../../src/components/movieList/movieList.css";
+@import "../../src/components/movieCard/movieCard.css";
+@import "../../src/components/movieDescription/movieDescription.css";
+@import "../../src/components/cinemaCard/cinemaCard.css";
+@import "../../src/components/cinemaList/cinemaList.css";
+@import "../../src/components/profileContent/profileContent.css";
+@import "../../src/components/profileEdit/profileEdit.css";
+@import "../../src/components/profileTickets/profileTickets.css";
+@import "../../src/components/baseComponents/buttons/seatButton/seatButton.css";
+@import "../../src/components/hallLayout/hallLayout.css";
+@import "../../src/components/baseComponents/validationBlock/validationBlock.css";
+@import "../../src/components/movieSchedule/movieSchedule.css";
+@import "../../src/components/baseComponents/selectList/selectList.css";
+@import "../../src/components/filter/filter.css";
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-font);
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--main-font-color);
+    background: var(--main-background-color);
+    text-shadow: 0 4px 4px var(--text-shadow-color);
+
+}
+
+.content {
+    width: var(--main-page-width);
+    margin: 0 auto;
+}
+
+
+.cs-border {
+    background: var(--main-background-color);
+
+    border-radius: 40px;
+    border: 4px solid var(--main-brend-color);
+
+    padding: 20px 30px;
+    margin: 20px;
+    color: var(--main-font-color);
+    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+
+}

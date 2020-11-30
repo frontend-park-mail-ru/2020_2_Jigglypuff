@@ -1,4 +1,4 @@
-import Checker from './Checker';
+import Checker from 'utils/Checker';
 
 /** Class that contains validation methods */
 export default class Validator {
@@ -8,8 +8,8 @@ export default class Validator {
      * @param {string} login
      */
     static validateLogin(login) {
-        const regExp = /^[a-zA-Z][\w]{4, 18}$/;
-        return regExp.test(String(login));
+        const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regExp.test(String(login).toLowerCase());
     }
 
     /**
@@ -18,18 +18,8 @@ export default class Validator {
      * @param {string} password
      */
     static validatePassword(password) {
-        const regExp = /^[$\w]{4, 20}$/;
+        const regExp = /^[$!\w]{4,20}$/;
         return regExp.test(String(password));
-    }
-
-    /**
-     * Represents email validation.
-     * @return {boolean} true - if email is valid
-     * @param {string} email
-     */
-    static validateEmail(email) {
-        const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regExp.test(String(email).toLowerCase());
     }
 
     /**
@@ -38,7 +28,7 @@ export default class Validator {
      * @param {string} name
      */
     static validateName(name) {
-        const regExp = /^[A-Za-zА-Яа-я]$/;
+        const regExp = /^[A-Za-zА-Яа-я]{3,57}$/;
         return regExp.test(String(name));
     }
 
@@ -48,7 +38,7 @@ export default class Validator {
      * @param {string} movieName
      */
     static validateMovieName(movieName) {
-        const regExp = /^[А-Яа-я\w]{1, 50}$/;
+        const regExp = /^[А-Яа-яA-Za-z\w\s.…]{1,100}$/;
         return regExp.test(String(movieName));
     }
 
@@ -58,7 +48,7 @@ export default class Validator {
      * @param {string} movieDescription
      */
     static validateMovieDescription(movieDescription) {
-        const regExp = /^[А-Яа-я\w]{1, 500}$/;
+        const regExp = /^[А-Яа-я\w\s—.,!]{1,1000}$/;
         return regExp.test(String(movieDescription));
     }
 
@@ -92,27 +82,16 @@ export default class Validator {
     }
 
     /**
-     * Represents movie genre validation.
-     * @return {boolean} true - if movie genre is valid
-     * @param {string} movieGenre
+     * Represents movie rating validation.
+     * @return {boolean} true - if movie rating is valid
+     * @param {float} movieRating
      */
-    static validateMovieGenre(movieGenre) {
-        const regExp = /^[А-Яа-я\w]{1, 500}$/;
-        return regExp.test(String(movieGenre));
-    }
-
-    /**
-     * Represents movie global rating validation.
-     * @return {boolean} true - if movie global rating is valid
-     * @param {float} movieGlobalRating
-     */
-    static validateMovieRatingGlobal(movieGlobalRating) {
-        if (Checker.isFloat(movieGlobalRating)) {
-            if ((movieGlobalRating > 0) && (movieGlobalRating < 1000)) {
-                return true;
-            }
+    static validateMovieRating(movieRating) {
+        if ((movieRating >= 0) && (movieRating <= 10)) {
+            return true;
         }
-        return false;
+
+        return Number(movieRating) === 0;
     }
 
     /**
@@ -122,7 +101,7 @@ export default class Validator {
      */
     static validateMovieRatingUser(movieUserRating) {
         if (Number.isInteger(movieUserRating)) {
-            if ((movieUserRating >= 0) && (movieUserRating < 10)) {
+            if ((movieUserRating >= 0) && (movieUserRating < 11)) {
                 return true;
             }
         }
@@ -149,7 +128,7 @@ export default class Validator {
      * @param {string} text
      */
     static validateText(text) {
-        const regExp = /^[А-Яа-я\w\s]{10, 5000}$/;
+        const regExp = /^[А-Яа-я\w\s]{10,5000}$/;
         return regExp.test(String(text));
     }
 
@@ -160,5 +139,25 @@ export default class Validator {
      */
     static validateUINT(number) {
         return Checker.isUINT(number);
+    }
+
+    /**
+     * Represents cinema name validation.
+     * @return {boolean} true - if cinema name is valid
+     * @param {string} cinemaName
+     */
+    static validateCinemaName(cinemaName) {
+        const regExp = /^[А-Яа-я\w]{1,50}$/;
+        return regExp.test(String(cinemaName));
+    }
+
+    /**
+     * Represents address validation.
+     * @return {boolean} true - if address is valid
+     * @param {string} address
+     */
+    static validateAddress(address) {
+        const regExp = /^[А-Яа-я\w\s.,]{1,50}$/;
+        return regExp.test(String(address));
     }
 }

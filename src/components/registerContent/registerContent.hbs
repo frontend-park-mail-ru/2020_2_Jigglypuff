@@ -1,0 +1,19 @@
+<div class="login__header">
+    <div class="login__header-header">
+        Регистрация
+    </div>
+    <div class="login__header-register">
+        <a href="{{ LoginPath }}" data-path="{{ LoginPath }}" data-event="{{ LoginEvent }}" class="login__header-link">Вход</a>
+    </div>
+</div>
+{{{ Validation }}}
+<form class="login__input">
+    {{#each input }}
+        {{{ this }}}
+    {{/each}}
+</form>
+<div class="login__admission">
+    <div class="login__header-enter">
+        {{{ StandardButton }}}
+    </div>
+</div>
