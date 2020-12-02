@@ -37,7 +37,7 @@ self.addEventListener('fetch', (event) => {
                 caches
                     .match(event.request, {cacheName: CACHE_NAME, ignoreVary: true})
                     .then((cachedResponse) => {
-                        if (cachedResponse) {
+                        if (cachedResponse && event.request.url !== 'https://cinemascope.space/') {
                             return cachedResponse;
                         }
 

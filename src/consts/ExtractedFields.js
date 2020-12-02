@@ -56,8 +56,8 @@ const ExtractedFields = {
         'TransactionDate',
     ]),
     TicketScheduleData: new Set([
-        'Place',
-        'Row',
+        'place',
+        'row',
     ]),
 };
 
