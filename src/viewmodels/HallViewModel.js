@@ -92,15 +92,15 @@ export default class HallViewModel {
         const hallStructure = await this.getHallStructure(this.state.hallID);
 
         let currentRow = 0;
-        (hallStructure.placeConfig['Levels']).forEach((place) => {
-            if (currentRow !== place.Row) {
-                currentRow = place.Row;
+        (hallStructure.placeConfig['levels']).forEach((place) => {
+            if (currentRow !== place.row) {
+                currentRow = place.row;
                 this.statePlaces.push([]);
             }
-            this.statePlaces[place.Row - 1].push({
+            this.statePlaces[place.row - 1].push({
                 isOccupied: false,
-                place: place.Place,
-                row: place.Row,
+                place: place.place,
+                row: place.row,
             });
         });
 
