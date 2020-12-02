@@ -179,7 +179,7 @@ export default class TicketModel {
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
             body: JSON.stringify({'login': this._login.toString(),
-                'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
+                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
                 'scheduleID': this._scheduleID}),
         });
 
