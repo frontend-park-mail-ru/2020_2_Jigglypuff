@@ -1,11 +1,11 @@
 import Component from 'components/component';
-import template from 'components/baseComponents/buttons/watchButton/watchButton.hbs';
+import template from 'components/baseComponents/buttons/bigButton/bIgButton.hbs';
 
 /**
  * Watch Button component
  * @class
  */
-export default class WatchButton extends Component {
+export default class BigButton extends Component {
     /**
      * Create the watch button
      * @constructor

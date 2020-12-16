@@ -1,8 +1,8 @@
 .button-seat {
-  background: $main-brend-color;
-  padding: 8px 8px 11px;
-  width: 30px;
-  height: 35px;
+  background: $main__brand_color;
+  width: $button-seat__size;
+  height: $button-seat__size;
+  padding: 0;
 }
 .button-seat-selected {
   background: $selected-place !important;
@@ -13,7 +13,7 @@
 }
 
 .button-seat:hover {
-  background: $main-brend-color-hover;
+  background: $main__brand_color-hover;
 }
 
 .button-seat__text {
@@ -21,7 +21,7 @@
   font-style: inherit;
   font-weight: bold;
   font-size: 1em;
-  color: $main-button-font-color;
+  color: $button__font_color;
   align-items: center;
 }
 

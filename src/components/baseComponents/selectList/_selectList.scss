@@ -13,11 +13,11 @@
   font-family: inherit;
   font-size: 1rem;
   font-weight: bold;
-  background-color: $main-background-color;
-  border: 2px solid $main-help-text-color;
+  background-color: $main__background_color;
+  border: 2px solid $main__text_help-color;
 
   border-radius: 8px;
-  color: $main-font-color;
+  color: $main__font_color;
   padding: 5px;
   width: 200px;
   height: 40px;

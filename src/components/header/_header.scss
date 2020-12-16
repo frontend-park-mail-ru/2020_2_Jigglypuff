@@ -1,7 +1,7 @@
 .header {
   margin-top: 5px;
   font-family: inherit;
-  text-shadow: 0 4px 4px $text-shadow-color;
+  text-shadow: 0 4px 4px $main__text_shadow-color;
 }
 .header__navbar {
   display: flex;
@@ -29,13 +29,13 @@
 .header__line {
   margin: 5px 20px;
   border: none;
-  background-color: $main-font-color;
+  background-color: $main__font_color;
   border-radius: 10px;
   height: 4px;
 }
 
 .header__navbar-menu {
-  color: $main-font-color;
+  color: $main__font_color;
   text-decoration: none;
   font-weight: bold;
   margin-left: 2.5rem;
@@ -50,9 +50,9 @@
 }
 
 .fill {
-  fill: $main-brend-color;
+  fill: $main__brand_color;
 }
 
 .stroke {
-  stroke: $main-brend-color;
+  stroke: $main__brand_color;
 }

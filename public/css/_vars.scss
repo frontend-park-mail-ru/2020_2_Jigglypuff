@@ -1,18 +1,24 @@
-$main-brend-color: #0d929c;
-$main-font-color: #FFFFFF;
-$main-background-color: #353535;
+$main__brand_color: #7d0bd0;
+$main__brand_color-hover: #6109a1;
 
-$main-brend-color-hover: #056e76;
-$main-button-font-color: #FFFFFF;
+$main__background_color: #353535;
 
-$slider-bottom-margin: 1rem;
-$header-margin: 6rem;
-$main-page-width: 70vw;
-$description-aside-width: 30%;
-$main-font: Montserrat, sans-serif;
 
-$main-help-text-color: rgb(118, 118, 118);
-$text-shadow-color: rgba(0, 0, 0, 0.25);
+$main__page_width: 70vw;
+
+$main__border_radius: 40px;
+$main__border_thickness: 4px;
+$main__border_padding: 25px;
+$main__border_margin: 20px;
+
+$main__font: Montserrat, sans-serif;
+$main__font_color: #FFFFFF;
+$main__font_size: 15px;
+
+$main__text_help-color: rgb(118, 118, 118);
+$main__text_shadow-color: rgba(0, 0, 0, 0.25);
+
+
 
 $rating-color: #FFC700;
 
@@ -21,3 +27,13 @@ $ticket-color: #BC8110;
 $occupied-place: #9e9d9d;
 $selected-place: #BC8110;
 
+$slider__margin_bottom: 1rem;
+
+$button__font_color: #FFFFFF;
+$button__border_radius: 0.4em;
+$button__padding_x: 1.5em;
+$button__padding_y: 0.5em;
+
+$button-seat__size: 2rem;
+
+$movie-description__media-block_width: 30%;

@@ -1,6 +1,6 @@
 import Component from 'components/component';
 import template from 'components/slider/slider.hbs';
-import WatchButton from 'components/baseComponents/buttons/watchButton/watchButton';
+import BigButton from 'components/baseComponents/buttons/bigButton/bigButton';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';
 
@@ -18,7 +18,7 @@ export default class Slider extends Component {
         super(context);
         this._template = template;
 
-        this._context.WatchButton = (new WatchButton({
+        this._context.BigButton = (new BigButton({
             buttonName: 'Смотреть',
             url: `${Routes.MovieList}${this._context.id}/`,
             event: Events.ChangePath,
