@@ -1,0 +1,85 @@
+.cinema-card {
+  width: 480px;
+  height: 350px;
+
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.cinema-card__poster {
+  margin-right: 30px;
+  width: 100%;
+}
+
+.cinema-card__poster_img {
+  margin-right: 30px;
+  border-radius: 41px;
+  width: 50%;
+  height: 100%;
+}
+
+.cinema-card__description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cinema-card__description_title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: $main-font-color;
+  margin-bottom: 7px;
+}
+
+.cinema-card__description_specification {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.cinema-card__description-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $main-font-color;
+}
+
+.description_specification__info {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $main-help-text-color;
+}
+
+.cinema-card__description_schedule {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cinema-card__description_schedule-line {
+  width: 100%;
+  border: none;
+  background-color: $main-font-color;
+  border-radius: 10px;
+  height: 4px;
+}
+
+.cinema-card__description_schedule-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: $main-font-color;
+  margin-bottom: 7px;
+}
+
+.cinema-card__description_schedule-block {
+  text-align: center;
+  justify-content: center;
+}
+
+.cinema-card__description_schedule-button {
+  margin-top: auto;
+  text-align: center;
+}

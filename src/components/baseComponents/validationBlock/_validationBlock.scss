@@ -1,0 +1,20 @@
+.validation-block {
+  font-weight: bold;
+  font-size: 1.3rem;
+  background: $main-brend-color;
+
+  border-radius: 14px;
+  border: 4px solid $main-font-color;
+
+  padding: 10px 10px;
+  margin: 10px 0;
+
+  text-shadow: 0 4px 4px $text-shadow-color;
+  text-align: center;
+
+  color: $main-font-color;
+}
+
+.validation-display-none {
+  display: none;
+}

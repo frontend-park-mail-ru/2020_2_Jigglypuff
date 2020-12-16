@@ -1,0 +1,15 @@
+.button-watch {
+  background: $main-brend-color;
+  padding: 0.5em 1.5em;
+}
+.button-watch:hover {
+  background: $main-brend-color-hover;
+}
+
+.button-watch__text {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: $main-button-font-color;
+  line-height: 1.3em;
+}

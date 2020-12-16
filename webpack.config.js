@@ -12,7 +12,7 @@ module.exports = {
         alias: {
             components: path.resolve(__dirname, 'src/components/'),
             consts: path.resolve(__dirname, 'src/consts/'),
-            'index.css': path.resolve(__dirname, 'public/css/index.css'),
+            'index.scss': path.resolve(__dirname, 'public/css/index.scss'),
             models: path.resolve(__dirname, 'src/models/'),
             services: path.resolve(__dirname, 'src/services/'),
             utils: path.resolve(__dirname, 'src/utils/'),
@@ -35,8 +35,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                test: /\.s[ac]ss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.hbs$/,
