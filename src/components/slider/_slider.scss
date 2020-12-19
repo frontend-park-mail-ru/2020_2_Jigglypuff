@@ -15,6 +15,13 @@
   max-width: 100%;
   height: 100vh;
   text-align: center;
+  background-size: 100%;
+}
+
+.slider__background {
+  background: radial-gradient(circle, rgba(243, 239, 245, 0) 0%, $main__background_color 100%);
+  background-size: 100%;
+  height: 100%;
 }
 
 .slider__control {
@@ -98,10 +105,12 @@
   font-family: inherit;
   font-size: 1rem;
 }
+
 .layout__main_roles > div:last-child {
   display: flex;
   flex-direction: row;
 }
+
 .layout__main_roles > div:last-child > p {
   margin-right: 20px;
 }
@@ -111,9 +120,11 @@
   font-family: inherit;
   font-weight: bold;
 }
+
 .layout__main_headline::first-letter {
   color: $main__brand_color;
 }
+
 .main__button {
   margin-top: 3rem;
 }
@@ -123,6 +134,7 @@
   text-align: right;
   display: flex;
 }
+
 .trailer {
   margin: auto 0 $slider__margin_bottom auto;
   filter: brightness(0.7);
@@ -139,6 +151,7 @@
   border-radius: 22px;
   width: 15vw;
 }
+
 .icons {
   cursor: pointer;
   margin-bottom: $slider__margin_bottom;

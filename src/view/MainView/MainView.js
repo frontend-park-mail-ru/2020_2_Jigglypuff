@@ -53,7 +53,7 @@ export default class MainView extends View {
             })).render(),
         };
 
-        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieRecommendationContext[0].id});
+        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieRecommendationContext[1].id});
     }
 
     /**

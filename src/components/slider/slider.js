@@ -18,10 +18,20 @@ export default class Slider extends Component {
         super(context);
         this._template = template;
 
+
         this._context.BigButton = (new BigButton({
             buttonName: 'Смотреть',
             url: `${Routes.MovieList}${this._context.id}/`,
             event: Events.ChangePath,
         })).render();
+    }
+
+    render() {
+        let renderedTemplate = super.render();
+
+        let div = document.createElement('div');
+        div.innerHTML = renderedTemplate;
+        div.querySelector('.slider__item').setAttribute("style", `background-image: url("${this._context.pathToSliderAvatar}");`);
+        return div.innerHTML;
     }
 }
