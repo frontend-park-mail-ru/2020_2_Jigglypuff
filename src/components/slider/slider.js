@@ -26,12 +26,16 @@ export default class Slider extends Component {
         })).render();
     }
 
+    /**
+     * Render slider
+     * @return {string}
+    */
     render() {
-        let renderedTemplate = super.render();
+        const renderedTemplate = super.render();
 
-        let div = document.createElement('div');
+        const div = document.createElement('div');
         div.innerHTML = renderedTemplate;
-        div.querySelector('.slider__item').setAttribute("style", `background-image: url("${this._context.pathToSliderAvatar}");`);
+        div.querySelector('.slider__item').setAttribute('style', `background-image: url("${this._context.pathToSliderAvatar}");`);
         return div.innerHTML;
     }
 }
