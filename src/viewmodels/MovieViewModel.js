@@ -36,6 +36,7 @@ export default class MovieViewModel extends BaseViewModel {
         this.replies = [];
         this.schedule = [];
 
+        this.createReplyCommand = {exec: (text) => this.createReply(text)};
         this.getMovieCommand = {exec: (id) => this.getMovie(id)};
         this.getRepliesCommand = {exec: (movieID, limit, page) => this.getReplies(movieID, limit, page)};
         this.getScheduleCommand = {exec: (movieID, cinemaID, premierTime) => this.getSchedule(movieID, cinemaID, premierTime)};
