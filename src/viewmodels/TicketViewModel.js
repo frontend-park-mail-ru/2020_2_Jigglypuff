@@ -40,6 +40,7 @@ export default class TicketViewModel {
 
     /**
      * Buy ticket.
+     * @param {string} transactionHash
      * @return {Promise<JSON>}
      */
     async buyTicket(transactionHash = '') {
@@ -57,9 +58,9 @@ export default class TicketViewModel {
         }
 
         return ticketModel.buyTicket(this.stateTransaction.transactionHash,
-                                     this.stateTransaction.senderAddress,
-                                     this.stateTransaction.signedTransaction,
-                                    );
+            this.stateTransaction.senderAddress,
+            this.stateTransaction.signedTransaction,
+        );
     }
 
     /**
@@ -91,7 +92,7 @@ export default class TicketViewModel {
     async buyTicketByCrypto() {
         const cryptoManager = new ETHManager();
         const response = await cryptoManager.transferSignedTransaction(this.stateTransaction.senderAddress,
-                                                                       this.stateTransaction.signedTransaction);
+            this.stateTransaction.signedTransaction);
         switch (response) {
             case Errors.TransactionNonceIsAlreadyUsed:
                 return Errors.TransactionNonceIsAlreadyUsed;
