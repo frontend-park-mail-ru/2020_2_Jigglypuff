@@ -18,18 +18,18 @@ export default class ETHManager {
      * Transfer signed transaction.
      * @param {string} senderAddress
      * @param {Array<string>} signedTransaction
-     * @return {bool|null}
+     * @return {int|string}
      */
     async transferSignedTransaction(senderAddress, signedTransaction) {
         const transaction = new Transaction.Transaction(signedTransaction, {chain: chainID});
 
         if (!transaction.verifySignature()) {
-            return Errors.TransactionVerificationIsFailed;
+            return +Errors.TransactionVerificationIsFailed;
         }
 
         const balance = await web3Obj.eth.getBalance(senderAddress);
         if (balance / decimalPrecision < amountToSend) {
-            return Errors.TransactionNotEnoughMoney;
+            return +Errors.TransactionNotEnoughMoney;
         }
 
         const serializedTransaction = transaction.serialize();
@@ -37,10 +37,10 @@ export default class ETHManager {
         const response = this._transfer(serializedTransaction);
 
         if (response.ok) {
-            return null;
+            return transaction.hash();
         }
 
-        return Errors.TransactionNonceIsAlreadyUsed;
+        return +Errors.TransactionNonceIsAlreadyUsed;
     }
 
     /**
