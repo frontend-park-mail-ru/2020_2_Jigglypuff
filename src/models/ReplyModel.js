@@ -1,6 +1,6 @@
 import Routes from 'consts/Routes';
-import Statuses from "consts/Statuses";
-import CSRF from "utils/CSRF";
+import Statuses from 'consts/Statuses';
+import CSRF from 'utils/CSRF';
 
 /** Class that contains Reply model */
 export default class ReplyModel {
