@@ -1,0 +1,33 @@
+<div class="payment">
+    <div class="payment__variation">
+        <div>Выберите способ оплаты</div>
+        <div class="payment__options">
+            {{{ OnlineOptionButton }}}
+            {{{ EthereumOptionButton }}}
+        </div>
+    </div>
+    <div class="payment__platform">
+        <div>Способ оплаты Ethereum</div>
+        <div class="payment__options">
+            {{{ OnSiteOptionButton }}}
+            {{{ SelfOptionButton }}}
+        </div>
+    </div>
+    <div class="payment__on-site">
+        <div>Оплата на сайте</div>
+        <div class="payment__options">
+            {{ PublicKeyInput }}
+            {{ TransactionInput }}
+        </div>
+    </div>
+    <div class="payment__self">
+        <div>Самостоятельная оплата</div>
+        <div class="payment__options">
+            <span>Переведите {{ TicketPrice }} Ethereum по адресу {{ PayAddress }}</span>
+            {{ PublicKeyInput }}
+        </div>
+    </div>
+    <div class="payment__submit">
+        {{{ Submit }}}
+    </div>
+</div>

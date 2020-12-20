@@ -63,31 +63,32 @@ export default class HallView extends View {
             await EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
+        EventBus.emit(Events.ChangePath, {path: Routes.Payment});
 
-        let selectedPlaceDataset = {};
-
-        try {
-            selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
-        } catch (err) {
-            const validation = (document.querySelector('.hall-layout')).getElementsByClassName('validation-block')[0];
-            validation.classList.remove('validation-display-none');
-            return;
-        }
-
-        const ticketViewModel = new TicketViewModel();
-        ticketViewModel.state.login = (await Getter.getProfile()).login;
-        ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
-        ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
-        ticketViewModel.state.scheduleID = selectedPlaceDataset.session;
-
-        const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
-
-        await responseTicketViewModel
-            .then(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-            }).catch(() => {
-
-            });
+        // let selectedPlaceDataset = {};
+        //
+        // try {
+        //     selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
+        // } catch (err) {
+        //     const validation = (document.querySelector('.hall-layout')).getElementsByClassName('validation-block')[0];
+        //     validation.classList.remove('validation-display-none');
+        //     return;
+        // }
+        //
+        // const ticketViewModel = new TicketViewModel();
+        // ticketViewModel.state.login = (await Getter.getProfile()).login;
+        // ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
+        // ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
+        // ticketViewModel.state.scheduleID = selectedPlaceDataset.session;
+        //
+        // const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
+        //
+        // await responseTicketViewModel
+        //     .then(() => {
+        //         EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+        //     }).catch(() => {
+        //
+        //     });
     }
 
     /**

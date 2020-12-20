@@ -10,6 +10,7 @@ import Router from 'services/Router';
 import Routes from 'consts/Routes';
 import RegisterView from 'view/RegisterView/RegisterView';
 import ProfileView from 'view/ProfileView/ProfileView';
+import PaymentView from "view/PaymentView/PaymentView";
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
@@ -32,4 +33,5 @@ router
     .register(Routes.ProfilePage, new ProfileView())
     .register(Routes.ScheduleID, new HallView())
     .register(Routes.CinemaPage, new CinemaView())
+    .register(Routes.Payment, new PaymentView())
     .start();
