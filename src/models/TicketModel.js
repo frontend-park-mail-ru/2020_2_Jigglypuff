@@ -189,15 +189,19 @@ export default class TicketModel {
 
     /**
      * Buy ticket.
+     * @param {string} transactionHash - 0x123..567
+     * @param {string} senderAddress - 0x123..567
      * @return {Promise<Response>}
      */
-    async buyTicket() {
+    async buyTicket(transactionHash = '', senderAddress = '') {
         const response = await fetch(`${Routes.HostAPI}${Routes.TicketBuy}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+                'X-Transaction-Hash': transactionHash,
+                'X-Sender-Address': senderAddress,
             },
             body: JSON.stringify({'login': this._login.toString(),
                 'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
