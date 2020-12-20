@@ -1,5 +1,4 @@
 import Routes from 'consts/Routes';
-import Extractor from 'utils/Extractor';
 
 /** Class that contains Reply model */
 export default class ReplyModel {
@@ -56,7 +55,7 @@ export default class ReplyModel {
 
     /**
      * Set reply movie ID to "movieID" variable value
-     * @param movieID
+     * @param {int} movieID
      */
     set movieID(movieID) {
         this._movieID = Number(movieID);
@@ -64,7 +63,7 @@ export default class ReplyModel {
 
     /**
      * Set reply text to "text" variable value
-     * @param text
+     * @param {string} text
      */
     set text(text) {
         this._text = text;
@@ -72,7 +71,7 @@ export default class ReplyModel {
 
     /**
      * Set reply userName to "userName" variable value
-     * @param userName
+     * @param {string} userName
      */
     set userName(userName) {
         this._userName = userName;
@@ -80,7 +79,7 @@ export default class ReplyModel {
 
     /**
      * Set reply user rating to "userRating" variable value
-     * @param userRating
+     * @param {int|null} userRating
      */
     set userRating(userRating) {
         this._userRating = Number(userRating);
@@ -88,7 +87,7 @@ export default class ReplyModel {
 
     /**
      * Set reply userSurname to "userSurname" variable value
-     * @param userSurname
+     * @param {string} userSurname
      */
     set userSurname(userSurname) {
         this._userSurname = userSurname;
