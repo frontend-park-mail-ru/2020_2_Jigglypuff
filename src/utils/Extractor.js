@@ -175,6 +175,26 @@ export default class Extractor {
     }
 
     /**
+     * Extract replies from json to map.
+     * @param {JSON} data
+     * @return {Map}
+     */
+    static extractRepliesFromJSON(data) {
+        const result = new Map();
+
+        for (const field in data) {
+            if (!ExtractedFields.ReplyData.has(field)) {
+                continue;
+            }
+            result.set(field.replace(/^[A-Z]+/, (c) => {
+                return c.toLowerCase();
+            }), data[field]);
+        }
+
+        return result;
+    }
+
+    /**
      * Extract schedule from JSON to model.
      * @param {JSON} data
      * @param {ScheduleModel} scheduleModel
