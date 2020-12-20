@@ -17,6 +17,7 @@ export default class TicketModel {
             'place': null,
             'row': null,
         };
+        this._placeFields = null;
         this._scheduleModel = new ScheduleModel();
         this._scheduleID = null;
         this._transactionDate = null;
@@ -52,6 +53,14 @@ export default class TicketModel {
      */
     get placeField() {
         return this._placeField;
+    }
+
+    /**
+     * Get ticket place fields for purchase.
+     * @return {Array<Object>}
+     */
+    get placeFields() {
+        return this._placeFields;
     }
 
     /**
@@ -101,6 +110,18 @@ export default class TicketModel {
     set placeField(placeField) {
         this._placeField.place = placeField.place;
         this._placeField.row = placeField.row;
+    }
+
+    /**
+     * Set ticket place fields for purchase to "placeFields" variable value if valid else, null.
+     * @param {Array<Object>} placeFields
+     */
+    set placeFields(placeFields) {
+        if (Array.isArray(placeFields)) {
+            this._placeFields = placeFields;
+        } else {
+            this._placeFields = null;
+        }
     }
 
     /**
