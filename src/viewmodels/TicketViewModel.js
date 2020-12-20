@@ -38,17 +38,15 @@ export default class TicketViewModel {
     async buyTicket() {
         const ticketModel = new TicketModel();
 
+        ticketModel.login = this.state.login;
+        ticketModel.placeFields = this.state.placeFields;
         this.state.placeFields.forEach((value) => {
-            ticketModel.login = this.state.login;
             ticketModel.placeField.place = Number(value.place);
             ticketModel.placeField.row = Number(value.row);
-            ticketModel.scheduleID = Number(this.state.scheduleID);
-
-            const response = ticketModel.buyTicket();
-            if (!response.ok) {
-                return response;
-            }
         });
+        ticketModel.scheduleID = Number(this.state.scheduleID);
+
+        return ticketModel.buyTicket();
     }
 
     /**
