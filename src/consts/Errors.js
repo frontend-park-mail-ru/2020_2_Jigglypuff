@@ -50,6 +50,21 @@ const Errors = {
     ListIsEmpty: 20,
 
     NotAuthorised: 21,
+
+    TransactionNonceIsAlreadyUsed: {
+        errorNumber: 22,
+        errorMessage: 'Nonce уже была использована',
+    },
+
+    TransactionNotEnoughMoney: {
+        errorNumber: 23,
+        errorMessage: 'Недостаточно денег',
+    },
+
+    TransactionVerificationIsFailed: {
+        errorNumber: 24,
+        errorMessage: 'Подпись транзакции невалидна',
+    },
 };
 
 export default Errors;
