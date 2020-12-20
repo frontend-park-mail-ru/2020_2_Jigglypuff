@@ -1,4 +1,6 @@
 import Routes from 'consts/Routes';
+import Statuses from "consts/Statuses";
+import CSRF from "utils/CSRF";
 
 /** Class that contains Reply model */
 export default class ReplyModel {
@@ -105,5 +107,30 @@ export default class ReplyModel {
             method: 'GET',
             credentials: 'include',
         });
+    }
+
+    /**
+     * Create reply.
+     * @return {Promise<Response>}
+     */
+    async createReply() {
+        const response = await fetch(`${Routes.HostAPI}${Routes.Reply}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
+            body: JSON.stringify({'MovieID': this._movieID, 'Text': this._text}),
+        });
+
+        if (!response.ok) {
+            if (response.status === Statuses.Forbidden) {
+                await CSRF.getCSRF();
+                await this.createReply();
+            }
+        }
+
+        return response;
     }
 }
