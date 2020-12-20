@@ -11,58 +11,59 @@ const Errors = {
     FailedToGetMovieList: 6,
     FailedToGetMovie: 7,
     FailedToGetProfile: 8,
-    FailedToGetSchedule: 9,
-    FailedToGetTicket: 10,
-    FailedToGetTicketList: 11,
-    FailedToGetTicketScheduleList: 12,
-    FailedToLogout: 13,
+    FailedToGetReplies: 9,
+    FailedToGetSchedule: 10,
+    FailedToGetTicket: 11,
+    FailedToGetTicketList: 12,
+    FailedToGetTicketScheduleList: 13,
+    FailedToLogout: 14,
 
     InvalidLoginOrPassword: {
-        errorNumber: 14,
+        errorNumber: 15,
         errorMessage: 'Неверный логин и/или пароль',
     },
     InvalidLogin: {
         errorInputID: 'login',
-        errorNumber: 15,
+        errorNumber: 16,
         errorMessage: 'Неверный формат почты',
     },
     InvalidPassword: {
         errorInputID: 'password',
-        errorNumber: 16,
+        errorNumber: 17,
         errorMessage: 'Неверный формат пароля',
     },
     InvalidName: {
         errorInputID: 'name',
-        errorNumber: 17,
+        errorNumber: 18,
         errorMessage: 'Неверный формат имени',
     },
     InvalidSurname: {
         errorInputID: 'surname',
-        errorNumber: 18,
+        errorNumber: 19,
         errorMessage: 'Неверный формат фамилии',
     },
     InvalidPasswordRepeated: {
         errorInputID: 'passwordRepeated',
-        errorNumber: 19,
+        errorNumber: 20,
         errorMessage: 'Пароли не совпадают',
     },
 
-    ListIsEmpty: 20,
+    ListIsEmpty: 21,
 
-    NotAuthorised: 21,
+    NotAuthorised: 22,
 
     TransactionNonceIsAlreadyUsed: {
-        errorNumber: 22,
+        errorNumber: 23,
         errorMessage: 'Nonce уже была использована',
     },
 
     TransactionNotEnoughMoney: {
-        errorNumber: 23,
+        errorNumber: 24,
         errorMessage: 'Недостаточно денег',
     },
 
     TransactionVerificationIsFailed: {
-        errorNumber: 24,
+        errorNumber: 25,
         errorMessage: 'Подпись транзакции невалидна',
     },
 };
