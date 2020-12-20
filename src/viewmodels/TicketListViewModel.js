@@ -51,9 +51,10 @@ export default class TicketViewModel {
         const year = this.state[this.state.length - 1]['schedule']['premierTime'].slice(0, 4);
         this.state[this.state.length - 1]['schedule']['date'] = `${day}.${month}.${year}`;
 
-        const hours = this.state[this.state.length - 1].premierTime.replace(/:\d{2}/, '');
-        const minutes = this.state[this.state.length - 1].premierTime.replace(/\d{2}:/, '');
+        const hours = this.state[this.state.length - 1]['schedule']['time'].replace(/:\d{2}/, '');
+        const minutes = this.state[this.state.length - 1]['schedule']['time'].replace(/\d{2}:/, '');
         const currentDate = new Date();
+
         if (!(year < currentDate.getFullYear()) &&
             !(month < currentDate.getMonth()) &&
             !(day < currentDate.getDate()) &&
@@ -62,6 +63,7 @@ export default class TicketViewModel {
         ) {
             this.stateActualTicketList.push(this.state[this.state.length - 1]);
         }
+
     }
 
     /**
@@ -74,7 +76,10 @@ export default class TicketViewModel {
 
         if (response.ok) {
             const ticketList = await response.json();
+            console.log(ticketList);
             for (const ticket of ticketList) {
+                console.log(ticket);
+
                 this._addTicket(ticket);
             }
             if (!this.state.length) {

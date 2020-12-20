@@ -90,7 +90,7 @@ export default class ProfileView extends View {
         let ticketList = [];
         await responseTicketList
             .then((response) => {
-                ticketList = response;
+                ticketList = ticketListViewModel.stateActualTicketList;
             }).catch(() => {
 
             });

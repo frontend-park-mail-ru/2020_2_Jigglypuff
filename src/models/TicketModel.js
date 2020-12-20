@@ -192,6 +192,11 @@ export default class TicketModel {
      * @return {Promise<Response>}
      */
     async buyTicket() {
+        console.log(JSON.stringify({
+            'login': this._login.toString(),
+            'placeField': this._placeFields,
+            'scheduleID': this._scheduleID
+        }));
         const response = await fetch(`${Routes.HostAPI}${Routes.TicketBuy}`, {
             method: 'POST',
             credentials: 'include',
@@ -199,9 +204,11 @@ export default class TicketModel {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
-            body: JSON.stringify({'login': this._login.toString(),
-                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
-                'scheduleID': this._scheduleID}),
+            body: JSON.stringify({
+                'login': this._login.toString(),
+                'placeField': this._placeFields,
+                'scheduleID': this._scheduleID
+            }),
         });
 
         if (!response.ok) {

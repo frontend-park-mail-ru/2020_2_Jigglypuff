@@ -61,21 +61,21 @@ export default class HallView extends View {
             return;
         }
 
-        let selectedPlaceDataset = {};
+        let selectedPlacesDataset = [];
 
-        try {
-            selectedPlaceDataset = document.getElementsByClassName('button-seat-selected')[0].dataset;
-        } catch (err) {
-            const validation = (document.querySelector('.hall-layout')).getElementsByClassName('validation-block')[0];
-            validation.classList.remove('validation-display-none');
-            return;
-        }
+        selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
+            return place.dataset;
+        });
 
         const ticketViewModel = new TicketViewModel();
+        for (const selectedPlace of selectedPlacesDataset) {
+            const item = {};
+            item.place = Number(selectedPlace.place);
+            item.row = Number(selectedPlace.row);
+            ticketViewModel.state.placeFields.push(item);
+        }
         ticketViewModel.state.login = (await Getter.getProfile()).login;
-        ticketViewModel.state.placeField.place = selectedPlaceDataset.place;
-        ticketViewModel.state.placeField.row = selectedPlaceDataset.row;
-        ticketViewModel.state.scheduleID = selectedPlaceDataset.session;
+        ticketViewModel.state.scheduleID = selectedPlacesDataset[0].session;
 
         const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
 
