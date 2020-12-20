@@ -27,9 +27,9 @@ export default class Slider extends Component {
     }
 
     /**
-     * Prerender function
-     * @return {string} template
-     * */
+     * Render slider
+     * @return {string}
+    */
     render() {
         const renderedTemplate = super.render();
 
