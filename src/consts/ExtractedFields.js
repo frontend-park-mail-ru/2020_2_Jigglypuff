@@ -35,6 +35,13 @@ const ExtractedFields = {
         'surname',
         'pathToAvatar',
     ]),
+    ReplyData: new Set([
+        'movieID',
+        'text',
+        'userName',
+        'userRating',
+        'userName',
+    ]),
     ScheduleData: new Set([
         'CinemaID',
         'Cost',
