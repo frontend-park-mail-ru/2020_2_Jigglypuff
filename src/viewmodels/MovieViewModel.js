@@ -2,6 +2,7 @@ import BaseViewModel from 'viewmodels/BaseViewModel';
 import Errors from 'consts/Errors';
 import Extractor from 'utils/Extractor';
 import MovieModel from 'models/MovieModel';
+import ReplyModel from 'models/ReplyModel';
 import ScheduleModel from 'models/ScheduleModel';
 
 /** Class that contains Movie ViewModel*/
@@ -13,6 +14,7 @@ export default class MovieViewModel extends BaseViewModel {
         super();
 
         this._movieModel = new MovieModel();
+        this._replyModel = new ReplyModel();
         this._scheduleModel = new ScheduleModel();
         this.state = {
             actorList: '',
@@ -31,9 +33,11 @@ export default class MovieViewModel extends BaseViewModel {
             ratingCount: 0,
             releaseYear: '',
         };
+        this.replies = [];
         this.schedule = [];
 
         this.getMovieCommand = {exec: (id) => this.getMovie(id)};
+        this.getRepliesCommand = {exec: (movieID, limit, page) => this.getReplies(movieID, limit, page)};
         this.getScheduleCommand = {exec: (movieID, cinemaID, premierTime) => this.getSchedule(movieID, cinemaID, premierTime)};
         this.rateMovieCommand = {exec: () => this.rateMovie()};
     }
@@ -129,5 +133,50 @@ export default class MovieViewModel extends BaseViewModel {
         }
 
         throw new Error(Errors.FailedToGetSchedule);
+    }
+
+    /**
+     * Add reply to replies state.
+     * @param {JSON} reply
+     */
+    _addReply(reply) {
+        const extractedRepliesMap = Extractor.extractRepliesFromJSON(reply);
+        this.replies.push({
+            movieID: '',
+            text: '',
+            userName: '',
+            userRating: '',
+            userSurname: ''
+        });
+        extractedRepliesMap.forEach((value, key) => {
+            this.replies[this.replies.length - 1][key] = value;
+        });
+    }
+
+    /**
+     * Get movie replies.
+     * @param {int} movieID
+     * @param {int} limit
+     * @param {int} page
+     * @return {Promise<Error>|Promise<Object>}
+     */
+    async getReplies(movieID, limit = 10, page = 0) {
+        this._replyModel.movieID = this.state.id;
+
+        const response = await this._replyModel.getReplies(movieID, limit, page);
+
+        if (response.ok) {
+            const replies = await response.json();
+            for (const reply of replies) {
+                this._addReply(reply);
+            }
+            if (!this.replies.length) {
+                throw new Error(Errors.ListIsEmpty);
+            }
+
+            return this.replies;
+        }
+
+        throw new Error(Errors.FailedToGetReplies);
     }
 }
