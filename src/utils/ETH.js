@@ -8,6 +8,7 @@ const web3Obj = new Web3(new Web3.providers.HttpProvider(ethNetwork));
 
 const amountToSend = 0.1;
 const chainID = 4;
+const decimalPrecision = 1000000000000000000;
 
 /**
  * Manager to work with ETH BC
@@ -27,7 +28,7 @@ export default class ETHManager {
         }
 
         const balance = await web3Obj.eth.getBalance(senderAddress);
-        if (balance / 1000000000000000000 < amountToSend) {
+        if (balance / decimalPrecision < amountToSend) {
             return Errors.TransactionNotEnoughMoney;
         }
 
