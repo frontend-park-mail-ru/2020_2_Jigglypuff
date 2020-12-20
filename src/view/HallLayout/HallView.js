@@ -30,16 +30,14 @@ export default class HallView extends View {
      */
     async show(routeData) {
         this._onTicketsBuyHandler = this.onBuy.bind(this);
-        this._onTicketSelectHandler = this.onSelect.bind(this);
-
         EventBus.on(Events.TicketsBuy, this._onTicketsBuyHandler);
-        EventBus.on(Events.TicketSelect, this._onTicketSelectHandler);
 
         const session = await Getter.getSession(routeData.id);
         const hallContext = await this.getHallContext(session);
+        this._hallLayout = new HallLayout(hallContext);
 
         const data = {
-            hallLayout: (new HallLayout(hallContext).render()),
+            hallLayout: (this._hallLayout.render()),
         };
 
         await super.show(this._template(data));
@@ -50,8 +48,7 @@ export default class HallView extends View {
      * */
     hide() {
         EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
-        EventBus.off(Events.TicketSelect, this._onTicketSelectHandler);
-
+        this._hallLayout.hide();
         super.hide();
     }
 
@@ -123,34 +120,5 @@ export default class HallView extends View {
         return hallContext;
     }
 
-    /**
-     * Method that handles place selection in the hall
-     * @param {Object} data - information about current hall layout
-     */
-    onSelect(data) {
-        if (data.target.classList.contains('button-seat-occupied')) {
-            return;
-        }
 
-        const hallPlaces = document.getElementsByClassName('button-seat');
-
-        for (const i in hallPlaces) {
-            if (Object.prototype.hasOwnProperty.call(hallPlaces, i)) {
-                const hallPlacesClassList = hallPlaces[i].classList;
-                const hallPlacesDataset = hallPlaces[i].dataset;
-
-                if (data.place === hallPlacesDataset.place && data.row === hallPlacesDataset.row) {
-                    if (hallPlacesClassList.contains('button-seat-selected')) {
-                        hallPlacesClassList.remove('button-seat-selected');
-                    } else if (!hallPlacesClassList.contains('button-seat-occupied')) {
-                        hallPlacesClassList.add('button-seat-selected');
-                    }
-                } else {
-                    if (hallPlacesClassList.contains('button-seat-selected')) {
-                        hallPlacesClassList.remove('button-seat-selected');
-                    }
-                }
-            }
-        }
-    }
 }
