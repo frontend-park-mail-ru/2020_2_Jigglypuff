@@ -16,6 +16,7 @@ export default class TicketViewModel {
                 place: '',
                 row: '',
             },
+            placeFields: [],
             schedule: {
                 cinemaID: '',
                 cost: '',
@@ -38,8 +39,7 @@ export default class TicketViewModel {
         const ticketModel = new TicketModel();
 
         ticketModel.login = this.state.login;
-        ticketModel.placeField.place = Number(this.state.placeField.place);
-        ticketModel.placeField.row = Number(this.state.placeField.row);
+        ticketModel.placeFields = this.state.placeFields;
         ticketModel.scheduleID = Number(this.state.scheduleID);
 
         return ticketModel.buyTicket();
