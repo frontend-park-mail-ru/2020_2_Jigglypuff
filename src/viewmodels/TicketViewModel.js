@@ -16,6 +16,7 @@ export default class TicketViewModel {
                 place: '',
                 row: '',
             },
+            placeFields: [],
             schedule: {
                 cinemaID: '',
                 cost: '',
@@ -37,12 +38,17 @@ export default class TicketViewModel {
     async buyTicket() {
         const ticketModel = new TicketModel();
 
-        ticketModel.login = this.state.login;
-        ticketModel.placeField.place = Number(this.state.placeField.place);
-        ticketModel.placeField.row = Number(this.state.placeField.row);
-        ticketModel.scheduleID = Number(this.state.scheduleID);
+        this.state.placeFields.forEach((value) => {
+            ticketModel.login = this.state.login;
+            ticketModel.placeField.place = Number(value.place);
+            ticketModel.placeField.row = Number(value.row);
+            ticketModel.scheduleID = Number(this.state.scheduleID);
 
-        return ticketModel.buyTicket();
+            const response = ticketModel.buyTicket();
+            if (!response.ok) {
+                return response;
+            }
+        });
     }
 
     /**
