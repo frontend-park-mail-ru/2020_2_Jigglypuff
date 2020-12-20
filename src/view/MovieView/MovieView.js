@@ -106,7 +106,6 @@ export default class MovieView extends View {
                 }
             });
 
-        EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
     }
 
     /**
