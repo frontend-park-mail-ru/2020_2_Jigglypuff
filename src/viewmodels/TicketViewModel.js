@@ -40,10 +40,6 @@ export default class TicketViewModel {
 
         ticketModel.login = this.state.login;
         ticketModel.placeFields = this.state.placeFields;
-        this.state.placeFields.forEach((value) => {
-            ticketModel.placeField.place = Number(value.place);
-            ticketModel.placeField.row = Number(value.row);
-        });
         ticketModel.scheduleID = Number(this.state.scheduleID);
 
         return ticketModel.buyTicket();
