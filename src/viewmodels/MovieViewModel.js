@@ -179,4 +179,21 @@ export default class MovieViewModel extends BaseViewModel {
 
         throw new Error(Errors.FailedToGetReplies);
     }
+
+    /**
+     * Create reply
+     * @param {string} text
+     * @return {Promise<int>}
+     */
+    async createReply(text) {
+        this._replyModel.movieID = this.state.id;
+
+        const response = this._replyModel.createReply();
+
+        if (response.ok) {
+            return response.ok;
+        }
+
+        return Errors.FailedToCreateReply;
+    }
 }

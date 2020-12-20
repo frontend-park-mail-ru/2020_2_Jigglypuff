@@ -4,66 +4,67 @@ const Errors = {
         errorMessage: 'Аккаунт с такой почтой уже существует',
     },
 
-    FailedToGetActualMovieList: 2,
-    FailedToGetCinema: 3,
-    FailedToGetCinemaList: 4,
-    FailedToGetHall: 5,
-    FailedToGetMovieList: 6,
-    FailedToGetMovie: 7,
-    FailedToGetProfile: 8,
-    FailedToGetReplies: 9,
-    FailedToGetSchedule: 10,
-    FailedToGetTicket: 11,
-    FailedToGetTicketList: 12,
-    FailedToGetTicketScheduleList: 13,
-    FailedToLogout: 14,
+    FailedToCreateReply: 2,
+    FailedToGetActualMovieList: 3,
+    FailedToGetCinema: 4,
+    FailedToGetCinemaList: 5,
+    FailedToGetHall: 6,
+    FailedToGetMovieList: 7,
+    FailedToGetMovie: 8,
+    FailedToGetProfile: 9,
+    FailedToGetReplies: 10,
+    FailedToGetSchedule: 11,
+    FailedToGetTicket: 12,
+    FailedToGetTicketList: 13,
+    FailedToGetTicketScheduleList: 14,
+    FailedToLogout: 15,
 
     InvalidLoginOrPassword: {
-        errorNumber: 15,
+        errorNumber: 16,
         errorMessage: 'Неверный логин и/или пароль',
     },
     InvalidLogin: {
         errorInputID: 'login',
-        errorNumber: 16,
+        errorNumber: 17,
         errorMessage: 'Неверный формат почты',
     },
     InvalidPassword: {
         errorInputID: 'password',
-        errorNumber: 17,
+        errorNumber: 18,
         errorMessage: 'Неверный формат пароля',
     },
     InvalidName: {
         errorInputID: 'name',
-        errorNumber: 18,
+        errorNumber: 19,
         errorMessage: 'Неверный формат имени',
     },
     InvalidSurname: {
         errorInputID: 'surname',
-        errorNumber: 19,
+        errorNumber: 20,
         errorMessage: 'Неверный формат фамилии',
     },
     InvalidPasswordRepeated: {
         errorInputID: 'passwordRepeated',
-        errorNumber: 20,
+        errorNumber: 21,
         errorMessage: 'Пароли не совпадают',
     },
 
-    ListIsEmpty: 21,
+    ListIsEmpty: 22,
 
-    NotAuthorised: 22,
+    NotAuthorised: 23,
 
     TransactionNonceIsAlreadyUsed: {
-        errorNumber: 23,
+        errorNumber: 24,
         errorMessage: 'Nonce уже была использована',
     },
 
     TransactionNotEnoughMoney: {
-        errorNumber: 24,
+        errorNumber: 25,
         errorMessage: 'Недостаточно денег',
     },
 
     TransactionVerificationIsFailed: {
-        errorNumber: 25,
+        errorNumber: 26,
         errorMessage: 'Подпись транзакции невалидна',
     },
 };
