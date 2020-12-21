@@ -3,27 +3,22 @@
         <div class="media-block__poster">
             {{#if isAuthorized }}
                 <div class="media-block__rating {{#unless personalRating }}hidden{{/unless}}">
-                        <p class="media-block__rating-p">{{ personalRating }}</p>
-                    </div>
+                    <p class="media-block__rating-p">{{ personalRating }}</p>
+                </div>
             {{/if}}
             <img class="media-block__poster-img" src="{{ pathToAvatar }}" alt="">
         </div>
         {{#if isAuthorized }}
             <div class="media-block__rate">
-                <label class="media-block__rate-title" for="rating">Ваша оценка</label>
-                <select id="rating" data-movie="{{ id }}" class="media-block__rate-field">
-                    <option value=""></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                </select>
+                <div class="media-block__rate-title">Оценить</div>
+                {{#each maxRating }}
+                    <button class="media-block__rate-field">
+                        <svg class="media-block__rate_star" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                        </svg>
+                    </button>
+                {{/each}}
                 {{{ StandardButton }}}
             </div>
         {{/if}}

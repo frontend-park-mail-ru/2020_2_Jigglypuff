@@ -35,17 +35,14 @@
 }
 
 .media-block__rate-field {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: bold;
-  background: $main__background_color;
-  border: 2px solid $main__text_help-color;
-  box-sizing: border-box;
-
-  border-radius: 8px;
-  color: $main__font_color;
-  padding: 5px;
-  margin-right: 10px;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  /* отображаем курсор в виде руки при наведении; некоторые
+  считают, что необходимо оставлять стрелочный вид для кнопок */
+  cursor: pointer;
 }
 .media-block__rate-field:active, .media-block__rate-field:focus {
   outline: none;
@@ -157,4 +154,13 @@
 
 .hidden {
   visibility: hidden;
+}
+
+
+.media-block__rate_star {
+  fill: $main__font_color;
+}
+
+.media-block__rate_star:hover{
+  fill: $rating-color;
 }
