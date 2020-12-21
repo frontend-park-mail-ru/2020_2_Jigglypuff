@@ -102,7 +102,7 @@ export default class ReplyModel {
      * @param {int} page
      * @return {Promise<Response>}
      */
-    async getReplies(movieID = 0, limit = 10, page = 0) {
+    async getReplies(movieID = 0, limit = 10, page = 1) {
         return await fetch(`${Routes.HostAPI}${Routes.Reply}?movie_id=${movieID}&limit=${limit}&page=${page}`, {
             method: 'GET',
             credentials: 'include',

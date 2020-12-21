@@ -161,7 +161,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {int} page
      * @return {Promise<Error>|Promise<Object>}
      */
-    async getReplies(movieID, limit = 10, page = 0) {
+    async getReplies(movieID, limit = 10, page = 1) {
         this._replyModel.movieID = this.state.id;
 
         const response = await this._replyModel.getReplies(movieID, limit, page);
