@@ -1,0 +1,25 @@
+<div class="replies">
+    <div class="replies__title">
+        Отзывы
+    </div>
+    <hr class="main__line">
+    {{#each replies}}
+        <div class="replies__reply">
+            <div class="reply__reviewer">{{ this.userName }} {{ this.userSurname }}</div>
+            <div class="reply__review">{{ this.text }}</div>
+        </div>
+    <hr class="reply__line">
+    {{/each}}
+    {{#if profile}}
+        <div class="replies__reply-creation">
+            <div class="reply__reviewer">{{ profile.name }} {{ profile.surname }}</div>
+            <label class="reply__creation">
+                <textarea class="reply__input" data-event="updateReply" maxlength="5000"></textarea>
+            </label>
+            <div class="reply__submit">
+                {{{ SubmitReply }}}
+            </div>
+        </div>
+    {{/if}}
+    {{{ Validation }}}
+</div>

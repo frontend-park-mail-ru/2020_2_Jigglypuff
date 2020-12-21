@@ -36,7 +36,7 @@ export default class MovieViewModel extends BaseViewModel {
         this.replies = [];
         this.schedule = [];
 
-        this.createReplyCommand = {exec: (text) => this.createReply(text)};
+        this.createReplyCommand = {exec: (movieID, text) => this.createReply(movieID, text)};
         this.getMovieCommand = {exec: (id) => this.getMovie(id)};
         this.getRepliesCommand = {exec: (movieID, limit, page) => this.getReplies(movieID, limit, page)};
         this.getScheduleCommand = {exec: (movieID, cinemaID, premierTime) => this.getSchedule(movieID, cinemaID, premierTime)};
@@ -161,7 +161,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {int} page
      * @return {Promise<Error>|Promise<Object>}
      */
-    async getReplies(movieID, limit = 10, page = 0) {
+    async getReplies(movieID, limit = 10, page = 1) {
         this._replyModel.movieID = this.state.id;
 
         const response = await this._replyModel.getReplies(movieID, limit, page);
@@ -183,11 +183,13 @@ export default class MovieViewModel extends BaseViewModel {
 
     /**
      * Create reply
+     * @param {int} movieID
      * @param {string} text
      * @return {Promise<int>}
      */
-    async createReply(text) {
-        this._replyModel.movieID = this.state.id;
+    async createReply(movieID, text) {
+        this._replyModel.movieID = movieID;
+        this._replyModel.text = text;
 
         const response = this._replyModel.createReply();
 

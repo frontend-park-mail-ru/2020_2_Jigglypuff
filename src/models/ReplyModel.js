@@ -114,6 +114,7 @@ export default class ReplyModel {
      * @return {Promise<Response>}
      */
     async createReply() {
+        console.log(JSON.stringify({'movieID': this._movieID, 'text': this._text}));
         const response = await fetch(`${Routes.HostAPI}${Routes.Reply}`, {
             method: 'POST',
             credentials: 'include',
@@ -121,7 +122,7 @@ export default class ReplyModel {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
             },
-            body: JSON.stringify({'MovieID': this._movieID, 'Text': this._text}),
+            body: JSON.stringify({'movieID': this._movieID, 'text': this._text}),
         });
 
         if (!response.ok) {
