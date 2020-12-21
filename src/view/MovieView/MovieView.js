@@ -10,7 +10,7 @@ import Events from 'consts/Events';
 import MovieSchedule from 'components/movieSchedule/movieSchedule';
 import Filter from 'components/filter/filter';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
-import ReplyBlock from "components/replyBlock/replyBlock";
+import ReplyBlock from 'components/replyBlock/replyBlock';
 
 /**
  * Class of the movie view
@@ -47,7 +47,6 @@ export default class MovieView extends View {
 
         this._movieID = routeData.id;
         const movieContext = await this.getMovieContext();
-
 
 
         this._visibility = !movieContext.movieScheduleContext.sessions;
@@ -121,20 +120,28 @@ export default class MovieView extends View {
         EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
     }
 
+    /**
+     * Method that handles change of the reply text
+     * @param {Object} data
+     */
     async onUpdateReply(data) {
         this._replyText = data.value;
-        console.log(data.value);
     }
 
-    async onSubmitReply(data) {
+    /**
+     * Method that handles submit of the reply text
+     */
+    async onSubmitReply() {
         const responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
 
+        const validation = document.querySelector('.replies').querySelector('.validation-block');
         await responseMovieViewModel
-            .then(response => {
+            .then(() => {
+                validation.classList.add('validation-display-none');
                 EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', this._movieID)});
-            }).catch(err => {
-                console.log(err);
-            })
+            }).catch(() => {
+                validation.classList.remove('validation-display-none');
+            });
     }
 
     /**
@@ -177,7 +184,7 @@ export default class MovieView extends View {
 
             });
 
-        movieContext.movieReplyContext = {}
+        movieContext.movieReplyContext = {};
         responseMovieVM = this.movieViewModel.getRepliesCommand.exec(this._movieID);
         await responseMovieVM
             .then((response) => {
@@ -188,7 +195,7 @@ export default class MovieView extends View {
 
         if (movieContext.movieDescriptionContext.isAuthorized) {
             const currentProfile = await Getter.getProfile();
-            if(currentProfile) {
+            if (currentProfile) {
                 movieContext.movieReplyContext.profile = {};
                 movieContext.movieReplyContext.profile.name = currentProfile.name;
                 movieContext.movieReplyContext.profile.surname = currentProfile.surname;

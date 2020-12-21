@@ -1,12 +1,12 @@
+import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import Events from 'consts/Events';
+import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
 import Component from 'components/component';
-import template from './replyBlock.hbs'
+import template from './replyBlock.hbs';
 
 /**
  * @class
  */
-import StandardButton from "components/baseComponents/buttons/standartButton/standardButton";
-import Events from "consts/Events";
-
 export default class ReplyBlock extends Component {
     /**
      * @constructor
@@ -19,8 +19,11 @@ export default class ReplyBlock extends Component {
         console.log(this._context);
 
         this._context.SubmitReply = (new StandardButton({
-                buttonName: 'Отправить',
-                event: Events.SubmitReply,
-            })).render();
+            buttonName: 'Отправить',
+            event: Events.SubmitReply,
+        })).render();
+        this._context.Validation = (new ValidationBlock({
+            message: 'Вы уже прокомментировали данный фильм',
+        })).render();
     }
 }
