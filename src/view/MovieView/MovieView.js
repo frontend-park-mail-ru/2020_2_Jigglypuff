@@ -109,6 +109,7 @@ export default class MovieView extends View {
                     if (ratingMark.classList.contains('hidden')) {
                         ratingMark.classList.remove('hidden');
                     }
+                    EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', this._movieID)});
                 }
             })
             .catch(() => {

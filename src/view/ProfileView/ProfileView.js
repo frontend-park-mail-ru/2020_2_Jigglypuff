@@ -105,7 +105,7 @@ export default class ProfileView extends View {
         for (const value of profileHistoryTickets) {
             const ticket = {};
 
-            let schedule = await Getter.getSession(value.schedule.id);
+            const schedule = await Getter.getSession(value.schedule.id);
             ticket.hall = schedule.hallID;
             ticket.row = value.placeField.row;
             ticket.place = value.placeField.place;
@@ -118,7 +118,7 @@ export default class ProfileView extends View {
         }
         for (const value of profileActualTickets) {
             const ticket = {};
-            let schedule = await Getter.getSession(value.schedule.id);
+            const schedule = await Getter.getSession(value.schedule.id);
 
             value.schedule = await Getter.getSession(value.schedule.id);
             ticket.hall = schedule.hallID;
