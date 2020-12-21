@@ -141,6 +141,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {JSON} reply
      */
     _addReply(reply) {
+        console.log(reply);
         const extractedRepliesMap = Extractor.extractRepliesFromJSON(reply);
         this.replies.push({
             movieID: '',
@@ -185,18 +186,18 @@ export default class MovieViewModel extends BaseViewModel {
      * Create reply
      * @param {int} movieID
      * @param {string} text
-     * @return {Promise<int>}
+     * @return {Promise<Error>|Promise<bool>}
      */
     async createReply(movieID, text) {
         this._replyModel.movieID = movieID;
         this._replyModel.text = text;
 
-        const response = this._replyModel.createReply();
+        const response = await this._replyModel.createReply();
 
         if (response.ok) {
             return response.ok;
         }
 
-        return Errors.FailedToCreateReply;
+        throw new Error(Errors.FailedToCreateReply);
     }
 }

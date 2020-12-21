@@ -131,8 +131,7 @@ export default class MovieView extends View {
 
         await responseMovieViewModel
             .then(response => {
-
-                console.log('SUCCESS!');
+                EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', this._movieID)});
             }).catch(err => {
                 console.log(err);
             })
