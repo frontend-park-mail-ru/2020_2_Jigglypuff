@@ -10,6 +10,7 @@ export default class TicketViewModel {
     constructor() {
         this.state = [];
         this.stateActualTicketList = [];
+        this.stateHistoryTicketList = [];
         this.getTicketListCommand = {exec: () => this.getTicketList()};
     }
 
@@ -61,6 +62,8 @@ export default class TicketViewModel {
             !(minutes < currentDate.getMinutes())
         ) {
             this.stateActualTicketList.push(this.state[this.state.length - 1]);
+        } else {
+            this.stateHistoryTicketList.push(this.state[this.state.length - 1])
         }
     }
 

@@ -22,7 +22,12 @@ export default class ProfileContent extends Component {
         this._context.LogoutPath = Routes.Logout;
         this._context.LogoutEvent = Events.Logout;
 
+        console.log(this._context);
+
         this._context.ProfileEdit = (new ProfileEdit(this._context.profileEdit)).render();
-        this._context.ProfileTickets = (new ProfileTickets(this._context.profileTickets)).render();
+        this._context.profileTickets.profileActualTickets.name = 'Актуальные заказы';
+        this._context.ProfileActualTickets = (new ProfileTickets(this._context.profileTickets.profileActualTickets)).render();
+        this._context.profileTickets.profileHistoryTickets.name = 'История заказов';
+        this._context.ProfileHistoryTickets = (new ProfileTickets(this._context.profileTickets.profileHistoryTickets)).render();
     }
 }
