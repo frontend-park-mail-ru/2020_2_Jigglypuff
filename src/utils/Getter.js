@@ -112,9 +112,6 @@ export default class Getter {
                 profile.pathToAvatar = `${Routes.Host}${profile.pathToAvatar}`;
             })
             .catch((err) => {
-                console.log('\n\nHALL_VIEW:GET_USER_LOGIN() :: ERR');
-                console.log(err);
-                console.log('HALL_VIEW:GET_USER_LOGIN() :: ERR\n\n');
                 EventBus.emit(Events.ChangePath, {path: '/auth/login/'});
             });
 

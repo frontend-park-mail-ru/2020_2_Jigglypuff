@@ -105,7 +105,6 @@ export default class MovieView extends View {
                     ratingMark.classList.add('hidden');
                 }
             });
-
     }
 
     /**

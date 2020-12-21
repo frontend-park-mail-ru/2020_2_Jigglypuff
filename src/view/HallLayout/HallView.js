@@ -119,6 +119,4 @@ export default class HallView extends View {
 
         return hallContext;
     }
-
-
 }

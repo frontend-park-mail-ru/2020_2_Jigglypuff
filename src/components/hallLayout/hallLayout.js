@@ -4,7 +4,7 @@ import StandardButton from 'components/baseComponents/buttons/standartButton/sta
 import SeatButton from 'components/baseComponents/buttons/seatButton/seatButton';
 import Events from 'consts/Events';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
-import EventBus from "services/EventBus";
+import EventBus from 'services/EventBus';
 
 /**
  * Hall layout component
@@ -96,7 +96,9 @@ export default class HallLayout extends Component {
             }
         }
     }
-
+    /**
+     * Method that handles hide of the component
+     */
     hide() {
         EventBus.off(Events.TicketSelect, this._onTicketSelectHandler);
     }

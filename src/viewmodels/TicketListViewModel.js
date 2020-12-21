@@ -64,9 +64,8 @@ export default class TicketViewModel {
         ) {
             this.stateActualTicketList.push(this.state[this.state.length - 1]);
         } else {
-            this.stateHistoryTicketList.push(this.state[this.state.length - 1])
+            this.stateHistoryTicketList.push(this.state[this.state.length - 1]);
         }
-
     }
 
     /**
@@ -79,10 +78,7 @@ export default class TicketViewModel {
 
         if (response.ok) {
             const ticketList = await response.json();
-            console.log(ticketList);
             for (const ticket of ticketList) {
-                console.log(ticket);
-
                 this._addTicket(ticket);
             }
             if (!this.state.length) {

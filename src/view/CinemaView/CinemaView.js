@@ -28,7 +28,6 @@ export default class CinemaView extends View {
             Cinema: (new Cinema(cinemaContext).render()),
         };
 
-        console.log(data);
         await super.show(this._template(data));
     }
 }

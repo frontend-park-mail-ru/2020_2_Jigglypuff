@@ -201,12 +201,12 @@ export default class TicketModel {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
-                'X-Transaction-Hash': transactionHash,
-                'X-Sender-Address': senderAddress,
-                'X-Signed-Transaction': signedTransaction,
+                // 'X-Transaction-Hash': transactionHash,
+                // 'X-Sender-Address': senderAddress,
+                // 'X-Signed-Transaction': signedTransaction,
             },
             body: JSON.stringify({'login': this._login.toString(),
-                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
+                'placeField': this._placeFields,
                 'scheduleID': this._scheduleID}),
         });
 
