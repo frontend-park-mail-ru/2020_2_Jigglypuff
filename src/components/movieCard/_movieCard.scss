@@ -1,0 +1,81 @@
+.movie-card {
+  width: 490px;
+  height: 350px;
+
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.movie-card__poster {
+  margin-right: 30px;
+  width: 100%;
+}
+
+.movie-card__poster_img {
+  margin-right: 30px;
+  border-radius: 41px;
+  height: 100%;
+}
+
+.movie-card__description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.movie-card__description_title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: $main__font_color;
+  margin-bottom: 7px;
+}
+
+.movie-card__description_specification {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.description_specification__info {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $main__text_help-color;
+}
+
+.movie-card__description_schedule {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+}
+
+.movie-card__description_schedule-line {
+  width: 100%;
+  border: none;
+  background-color: $main__font_color;
+  border-radius: 10px;
+  height: 4px;
+}
+
+.movie-card__description_schedule-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: $main__font_color;
+  margin-bottom: 7px;
+}
+
+.movie-card__description_schedule-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card__description_schedule-button {
+  margin-top: auto;
+  text-align: center;
+}
+

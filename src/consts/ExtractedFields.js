@@ -35,6 +35,13 @@ const ExtractedFields = {
         'surname',
         'pathToAvatar',
     ]),
+    ReplyData: new Set([
+        'MovieID',
+        'Text',
+        'UserName',
+        'UserRating',
+        'UserSurname',
+    ]),
     ScheduleData: new Set([
         'CinemaID',
         'Cost',
@@ -56,8 +63,8 @@ const ExtractedFields = {
         'TransactionDate',
     ]),
     TicketScheduleData: new Set([
-        'Place',
-        'Row',
+        'place',
+        'row',
     ]),
 };
 

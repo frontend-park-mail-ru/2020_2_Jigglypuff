@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime.js';
-import 'index.css';
+import 'index.scss';
 import CinemaListView from 'view/CinemaListView/CinemaListView';
 import CinemaView from 'view/CinemaView/CinemaView';
 import HallView from 'view/HallLayout/HallView';

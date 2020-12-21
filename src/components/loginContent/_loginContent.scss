@@ -1,0 +1,46 @@
+.login {
+  width: 400px;
+
+  font-weight: bold;
+
+  margin: 30px auto !important;
+}
+
+.login__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.login__input {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login__admission {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login__header-link {
+  color: $main__font_color;
+  font-size: 1rem;
+  font-weight: bolder;
+  margin-left: auto;
+}
+
+.login__header-header {
+  font-size: 30px;
+}
+
+.login__header-register {
+  margin-left: auto;
+}
+
+.login__header-enter {
+  margin-left: auto;
+}

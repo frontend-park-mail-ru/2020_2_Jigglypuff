@@ -9,6 +9,8 @@ export default class TicketViewModel {
      */
     constructor() {
         this.state = [];
+        this.stateActualTicketList = [];
+        this.stateHistoryTicketList = [];
         this.getTicketListCommand = {exec: () => this.getTicketList()};
     }
 
@@ -49,6 +51,23 @@ export default class TicketViewModel {
         const month = this.state[this.state.length - 1]['schedule']['premierTime'].slice(5, 7);
         const year = this.state[this.state.length - 1]['schedule']['premierTime'].slice(0, 4);
         this.state[this.state.length - 1]['schedule']['date'] = `${day}.${month}.${year}`;
+
+        const hours = this.state[this.state.length - 1]['schedule']['time'].replace(/:\d{2}/, '');
+        const minutes = +this.state[this.state.length - 1]['schedule']['time'].replace(/\d{2}:/, '') +
+            hours * 60;
+
+        const currentDate = new Date();
+        const currentMinutes = currentDate.getHours() * 60 + currentDate.getMinutes();
+
+        if (!(year < currentDate.getFullYear()) &&
+            !(month < currentDate.getMonth()) &&
+            !(day < currentDate.getDate()) &&
+            !(minutes < currentMinutes)
+        ) {
+            this.stateActualTicketList.push(this.state[this.state.length - 1]);
+        } else {
+            this.stateHistoryTicketList.push(this.state[this.state.length - 1]);
+        }
     }
 
     /**

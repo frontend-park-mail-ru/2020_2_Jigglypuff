@@ -18,6 +18,8 @@ const Events = {
     SubmitFilter: 'submitFilter',
     UpdateMovieList: 'updateMovieList',
     UpdateSchedule: 'updateSchedule',
+    SubmitReply: 'submitReply',
+    UpdateReply: 'updateReply',
 };
 
 

@@ -17,6 +17,7 @@ export default class TicketModel {
             'place': null,
             'row': null,
         };
+        this._placeFields = null;
         this._scheduleModel = new ScheduleModel();
         this._scheduleID = null;
         this._transactionDate = null;
@@ -52,6 +53,14 @@ export default class TicketModel {
      */
     get placeField() {
         return this._placeField;
+    }
+
+    /**
+     * Get ticket place fields for purchase.
+     * @return {Array<Object>}
+     */
+    get placeFields() {
+        return this._placeFields;
     }
 
     /**
@@ -101,6 +110,18 @@ export default class TicketModel {
     set placeField(placeField) {
         this._placeField.place = placeField.place;
         this._placeField.row = placeField.row;
+    }
+
+    /**
+     * Set ticket place fields for purchase to "placeFields" variable value if valid else, null.
+     * @param {Array<Object>} placeFields
+     */
+    set placeFields(placeFields) {
+        if (Array.isArray(placeFields)) {
+            this._placeFields = placeFields;
+        } else {
+            this._placeFields = null;
+        }
     }
 
     /**
@@ -168,18 +189,24 @@ export default class TicketModel {
 
     /**
      * Buy ticket.
+     * @param {string} transactionHash - 0x123..567
+     * @param {string} senderAddress - 0x123..567
+     * @param {string} signedTransaction
      * @return {Promise<Response>}
      */
-    async buyTicket() {
+    async buyTicket(transactionHash = '', senderAddress = '', signedTransaction = '') {
         const response = await fetch(`${Routes.HostAPI}${Routes.TicketBuy}`, {
             method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+                // 'X-Transaction-Hash': transactionHash,
+                // 'X-Sender-Address': senderAddress,
+                // 'X-Signed-Transaction': signedTransaction,
             },
             body: JSON.stringify({'login': this._login.toString(),
-                'placeField': {'Place': this._placeField.place, 'Row': this._placeField.row},
+                'placeField': this._placeFields,
                 'scheduleID': this._scheduleID}),
         });
 

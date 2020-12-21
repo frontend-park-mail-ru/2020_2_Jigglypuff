@@ -1,0 +1,57 @@
+@import "vars";
+@import "../../src/components/header/header";
+@import "../../src/components/userBlock/userBlock";
+@import "../../src/components/baseComponents/buttons/button";
+@import "../../src/components/baseComponents/buttons/scheduleButton/scheduleButton";
+@import "../../src/components/baseComponents/buttons/standartButton/standardButton";
+@import "../../src/components/baseComponents/textInput/textInput";
+@import "../../src/components/registerContent/registerContent";
+@import "../../src/components/loginContent/loginContent";
+@import "../../src/components/baseComponents/imageInput/imageInput";
+@import "../../src/components/slider/slider";
+@import "../../src/components/baseComponents/buttons/bigButton/bigButton";
+@import "../../src/components/movieList/movieList";
+@import "../../src/components/movieCard/movieCard";
+@import "../../src/components/movieDescription/movieDescription";
+@import "../../src/components/cinemaCard/cinemaCard";
+@import "../../src/components/cinemaList/cinemaList";
+@import "../../src/components/profileContent/profileContent";
+@import "../../src/components/profileEdit/profileEdit";
+@import "../../src/components/profileTickets/profileTickets";
+@import "../../src/components/baseComponents/buttons/seatButton/seatButton";
+@import "../../src/components/hallLayout/hallLayout";
+@import "../../src/components/baseComponents/validationBlock/validationBlock";
+@import "../../src/components/movieSchedule/movieSchedule";
+@import "../../src/components/baseComponents/selectList/selectList";
+@import "../../src/components/filter/filter";
+@import "../../src/components/replyBlock/replyBlock";
+
+html, body {
+  padding: 0;
+  margin: 0;
+
+  background: $main__background_color;
+
+  color: $main__font_color;
+  text-shadow: 0 4px 4px $main__text_shadow-color;
+  font: {
+    family: $main__font;
+    size: $main__font_size;
+  }
+}
+
+.content {
+  width: $main__page_width;
+  margin: 0 auto;
+}
+
+.cs-border {
+  padding: $main__border_padding;
+  margin: $main__border_margin;
+
+  border: $main__border_thickness solid $main__brand_color {
+    radius: $main__border_radius;
+  };
+
+  filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+}

@@ -16,6 +16,7 @@ const Routes = {
     RateMovie: '/movie/rate/',
     RecommendationsList: '/recommendations/',
     Register: '/auth/register/',
+    Reply: '/reply/',
     Schedule: '/schedule/',
     ScheduleID: '/schedule/:id/',
     Ticket: '/ticket/:id/',

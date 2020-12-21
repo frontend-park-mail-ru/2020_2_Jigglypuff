@@ -1,0 +1,13 @@
+.button-watch {
+  background: $main__brand_color;
+}
+.button-watch:hover {
+  background: $main__brand_color-hover;
+}
+
+.button-watch__text {
+  font:inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: $button__font_color;
+}

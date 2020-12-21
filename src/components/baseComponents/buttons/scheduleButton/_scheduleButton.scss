@@ -1,0 +1,22 @@
+.button-schedule {
+  background: $main__brand_color;
+  padding: 0.5em 0.9rem;
+
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin: 5px 5px;
+}
+
+.button-schedule:hover {
+  background: $main__brand_color-hover;
+}
+
+.button-schedule__schedule {
+  color: $button__font_color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
