@@ -19,6 +19,7 @@ export default class TicketViewModel {
      * @param {JSON} ticket
      */
     _addTicket(ticket) {
+        console.log(ticket);
         const extractedTicketDataMap = Extractor.extractTicketDataFromJSON(ticket);
         this.state.push({
             id: '',
@@ -53,14 +54,16 @@ export default class TicketViewModel {
         this.state[this.state.length - 1]['schedule']['date'] = `${day}.${month}.${year}`;
 
         const hours = this.state[this.state.length - 1]['schedule']['time'].replace(/:\d{2}/, '');
-        const minutes = this.state[this.state.length - 1]['schedule']['time'].replace(/\d{2}:/, '');
+        const minutes = +this.state[this.state.length - 1]['schedule']['time'].replace(/\d{2}:/, '') +
+            hours * 60;
+
         const currentDate = new Date();
+        const currentMinutes = currentDate.getHours() * 60 + currentDate.getMinutes();
 
         if (!(year < currentDate.getFullYear()) &&
             !(month < currentDate.getMonth()) &&
             !(day < currentDate.getDate()) &&
-            !(hours < currentDate.getHours()) &&
-            !(minutes < currentDate.getMinutes())
+            !(minutes < currentMinutes)
         ) {
             this.stateActualTicketList.push(this.state[this.state.length - 1]);
         } else {
