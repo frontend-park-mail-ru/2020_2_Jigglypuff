@@ -1,8 +1,7 @@
 import Errors from 'consts/Errors';
 import Transaction from 'ethereumjs-tx';
-import web3 from 'web3';
+import Web3 from 'web3';
 
-const Web3 = web3.Web3;
 const ethNetwork = 'https://rinkeby.infura.io/v3/921e50592f50453fac36299bb7cb0603';
 const web3Obj = new Web3(new Web3.providers.HttpProvider(ethNetwork));
 
