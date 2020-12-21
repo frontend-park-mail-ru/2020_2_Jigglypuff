@@ -206,7 +206,7 @@ export default class TicketModel {
                 // 'X-Signed-Transaction': signedTransaction,
             },
             body: JSON.stringify({'login': this._login.toString(),
-                'placeField': {'place': this._placeField.place, 'row': this._placeField.row},
+                'placeField': this._placeFields,
                 'scheduleID': this._scheduleID}),
         });
 

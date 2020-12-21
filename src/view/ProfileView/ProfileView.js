@@ -84,26 +84,29 @@ export default class ProfileView extends View {
     async getProfileTicketContext() {
         const ticketListViewModel = new TicketListViewModel();
 
-        const profileTicketContext = [];
+        const profileTicketContext = {};
         const responseTicketList = ticketListViewModel.getTicketListCommand.exec();
-
-        let ticketList = [];
+        let profileHistoryTickets = [];
+        let profileActualTickets = [];
+        profileTicketContext.profileHistoryTickets = [];
+        profileTicketContext.profileActualTickets = [];
         await responseTicketList
-            .then((response) => {
-                ticketList = response;
+            .then(() => {
+                profileHistoryTickets = ticketListViewModel.stateHistoryTicketList;
+                profileActualTickets = ticketListViewModel.stateActualTicketList;
             }).catch(() => {
 
             });
 
-        if (!ticketList) {
+        if (!profileHistoryTickets && !profileActualTickets) {
             return profileTicketContext;
         }
 
-        for (const value of ticketList) {
+        for (const value of profileHistoryTickets) {
             const ticket = {};
 
-            value.schedule = await Getter.getSession(value.schedule.id);
-            ticket.hall = value.schedule.hallID;
+            let schedule = await Getter.getSession(value.schedule.id);
+            ticket.hall = schedule.hallID;
             ticket.row = value.placeField.row;
             ticket.place = value.placeField.place;
             ticket.movie = (await Getter.getMovie(value.schedule.movieID)).name;
@@ -111,7 +114,22 @@ export default class ProfileView extends View {
             ticket.date = value.schedule.date;
             ticket.time = value.schedule.time;
 
-            profileTicketContext.push(ticket);
+            profileTicketContext.profileHistoryTickets.push(ticket);
+        }
+        for (const value of profileActualTickets) {
+            const ticket = {};
+            let schedule = await Getter.getSession(value.schedule.id);
+
+            value.schedule = await Getter.getSession(value.schedule.id);
+            ticket.hall = schedule.hallID;
+            ticket.row = value.placeField.row;
+            ticket.place = value.placeField.place;
+            ticket.movie = (await Getter.getMovie(value.schedule.movieID)).name;
+            ticket.cinema = (await Getter.getCinema(value.schedule.cinemaID)).name;
+            ticket.date = value.schedule.date;
+            ticket.time = value.schedule.time;
+
+            profileTicketContext.profileActualTickets.push(ticket);
         }
 
         return profileTicketContext;
