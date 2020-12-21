@@ -10,6 +10,7 @@ import Events from 'consts/Events';
 import MovieSchedule from 'components/movieSchedule/movieSchedule';
 import Filter from 'components/filter/filter';
 import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import ReplyBlock from 'components/replyBlock/replyBlock';
 
 /**
  * Class of the movie view
@@ -30,14 +31,23 @@ export default class MovieView extends View {
      * @param {Object} routeData - data from route path of the movie page
      */
     async show(routeData) {
+        this.movieViewModel = new MovieViewModel();
+
         this._onUpdateScheduleHandler = this.onUpdateSchedule.bind(this);
         this._onMovieRateHandler = this.onMovieRate.bind(this);
+        this._onSubmitReplyHandler = this.onSubmitReply.bind(this);
+        this._onUpdateReplyHadler = this.onUpdateReply.bind(this);
 
         EventBus.on(Events.UpdateSchedule, this._onUpdateScheduleHandler);
         EventBus.on(Events.MovieRate, this._onMovieRateHandler);
+        EventBus.on(Events.SubmitReply, this._onSubmitReplyHandler);
+        EventBus.on(Events.UpdateReply, this._onUpdateReplyHadler);
+
+        this._replyText = null;
 
         this._movieID = routeData.id;
         const movieContext = await this.getMovieContext();
+
 
         this._visibility = !movieContext.movieScheduleContext.sessions;
 
@@ -59,7 +69,7 @@ export default class MovieView extends View {
         data.Filtration = this._filter.render();
         data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
         data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
-
+        data.MovieReviews = (new ReplyBlock(movieContext.movieReplyContext).render());
         await super.show(this._template(data));
     }
 
@@ -70,6 +80,8 @@ export default class MovieView extends View {
         this._filter.hide();
         EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
         EventBus.off(Events.MovieRate, this._onMovieRateHandler);
+        EventBus.off(Events.SubmitReply, this._onSubmitReplyHandler);
+        EventBus.off(Events.UpdateReply, this._onUpdateReplyHadler);
 
         super.hide();
     }
@@ -84,11 +96,10 @@ export default class MovieView extends View {
             return;
         }
 
-        const movieViewModel = new MovieViewModel();
-        movieViewModel.state.personalRating = rating.value;
-        movieViewModel.state.id = rating.dataset.movie;
+        this.movieViewModel.state.personalRating = rating.value;
+        this.movieViewModel.state.id = rating.dataset.movie;
 
-        const responseMovieViewModel = movieViewModel.rateMovieCommand.exec();
+        const responseMovieViewModel = this.movieViewModel.rateMovieCommand.exec();
 
         const ratingMark = document.getElementsByClassName('media-block__rating')[0];
 
@@ -107,6 +118,30 @@ export default class MovieView extends View {
             });
 
         EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', rating.dataset.movie)});
+    }
+
+    /**
+     * Method that handles change of the reply text
+     * @param {Object} data
+     */
+    async onUpdateReply(data) {
+        this._replyText = data.value;
+    }
+
+    /**
+     * Method that handles submit of the reply text
+     */
+    async onSubmitReply() {
+        const responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
+
+        const validation = document.querySelector('.replies').querySelector('.validation-block');
+        await responseMovieViewModel
+            .then(() => {
+                validation.classList.add('validation-display-none');
+                EventBus.emit(Events.ChangePath, {path: Routes.MoviePage.replace(':id', this._movieID)});
+            }).catch(() => {
+                validation.classList.remove('validation-display-none');
+            });
     }
 
     /**
@@ -141,8 +176,7 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
 
-        const movieVM = new MovieViewModel();
-        const responseMovieVM = movieVM.getScheduleCommand.exec(this._movieID, cinemaID, date);
+        let responseMovieVM = this.movieViewModel.getScheduleCommand.exec(this._movieID, cinemaID, date);
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
@@ -150,6 +184,23 @@ export default class MovieView extends View {
 
             });
 
+        movieContext.movieReplyContext = {};
+        responseMovieVM = this.movieViewModel.getRepliesCommand.exec(this._movieID);
+        await responseMovieVM
+            .then((response) => {
+                movieContext.movieReplyContext.replies = response;
+            }).catch(() => {
+
+            });
+
+        if (movieContext.movieDescriptionContext.isAuthorized) {
+            const currentProfile = await Getter.getProfile();
+            if (currentProfile) {
+                movieContext.movieReplyContext.profile = {};
+                movieContext.movieReplyContext.profile.name = currentProfile.name;
+                movieContext.movieReplyContext.profile.surname = currentProfile.surname;
+            }
+        }
         return movieContext;
     }
 

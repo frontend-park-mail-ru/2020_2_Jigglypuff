@@ -61,7 +61,7 @@ class Router {
         this._application.addEventListener('change', (evt) => {
             const changeTarget = evt.target;
 
-            if (changeTarget.matches('input') && changeTarget.type !== 'date') {
+            if (changeTarget.matches('textarea') || changeTarget.matches('input') && changeTarget.type !== 'date') {
                 evt.preventDefault();
 
                 const data = {...changeTarget.dataset};
@@ -87,6 +87,7 @@ class Router {
     go(path, data = {}) {
         const routeData = {...this.getDataFromPath(path), ...data};
         if (this.currentView === routeData.view) {
+            this.currentView.hide();
             this.currentView.show(routeData);
             return;
         }

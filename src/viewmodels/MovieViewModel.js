@@ -36,7 +36,7 @@ export default class MovieViewModel extends BaseViewModel {
         this.replies = [];
         this.schedule = [];
 
-        this.createReplyCommand = {exec: (text) => this.createReply(text)};
+        this.createReplyCommand = {exec: (movieID, text) => this.createReply(movieID, text)};
         this.getMovieCommand = {exec: (id) => this.getMovie(id)};
         this.getRepliesCommand = {exec: (movieID, limit, page) => this.getReplies(movieID, limit, page)};
         this.getScheduleCommand = {exec: (movieID, cinemaID, premierTime) => this.getSchedule(movieID, cinemaID, premierTime)};
@@ -141,6 +141,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {JSON} reply
      */
     _addReply(reply) {
+        console.log(reply);
         const extractedRepliesMap = Extractor.extractRepliesFromJSON(reply);
         this.replies.push({
             movieID: '',
@@ -183,18 +184,20 @@ export default class MovieViewModel extends BaseViewModel {
 
     /**
      * Create reply
+     * @param {int} movieID
      * @param {string} text
-     * @return {Promise<int>}
+     * @return {Promise<Error>|Promise<bool>}
      */
-    async createReply(text) {
-        this._replyModel.movieID = this.state.id;
+    async createReply(movieID, text) {
+        this._replyModel.movieID = movieID;
+        this._replyModel.text = text;
 
-        const response = this._replyModel.createReply();
+        const response = await this._replyModel.createReply();
 
         if (response.ok) {
             return response.ok;
         }
 
-        return Errors.FailedToCreateReply;
+        throw new Error(Errors.FailedToCreateReply);
     }
 }
