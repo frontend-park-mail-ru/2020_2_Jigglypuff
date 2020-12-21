@@ -31,7 +31,7 @@ const Errors = {
     InvalidPassword: {
         errorInputID: 'password',
         errorNumber: 18,
-        errorMessage: 'Неверный формат пароля',
+        errorMessage: 'Формат пароля от 4 до 20 символов латинских букв, чисел и $, !',
     },
     InvalidName: {
         errorInputID: 'name',
