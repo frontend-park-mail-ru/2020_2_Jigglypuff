@@ -141,7 +141,6 @@ export default class MovieViewModel extends BaseViewModel {
      * @param {JSON} reply
      */
     _addReply(reply) {
-        console.log(reply);
         const extractedRepliesMap = Extractor.extractRepliesFromJSON(reply);
         this.replies.push({
             movieID: '',

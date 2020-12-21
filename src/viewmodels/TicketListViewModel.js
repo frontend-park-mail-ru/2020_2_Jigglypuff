@@ -19,7 +19,6 @@ export default class TicketViewModel {
      * @param {JSON} ticket
      */
     _addTicket(ticket) {
-        console.log(ticket);
         const extractedTicketDataMap = Extractor.extractTicketDataFromJSON(ticket);
         this.state.push({
             id: '',
