@@ -59,6 +59,7 @@ const ExtractedFields = {
         'ID',
         'Login',
         'PlaceField',
+        'QRPath',
         'Schedule',
         'TransactionDate',
     ]),
