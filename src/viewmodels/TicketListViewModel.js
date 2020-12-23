@@ -27,7 +27,7 @@ export default class TicketViewModel {
                 place: '',
                 row: '',
             },
-            qrPath: '',
+            qrpath: '',
             schedule: {
                 cinemaID: '',
                 cost: '',
