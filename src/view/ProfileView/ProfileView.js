@@ -128,6 +128,7 @@ export default class ProfileView extends View {
             ticket.cinema = (await Getter.getCinema(value.schedule.cinemaID)).name;
             ticket.date = value.schedule.date;
             ticket.time = value.schedule.time;
+            ticket.qrpath = `${Routes.Host}${value.qrpath}.png`;
 
             profileTicketContext.profileActualTickets.push(ticket);
         }
