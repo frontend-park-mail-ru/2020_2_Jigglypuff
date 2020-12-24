@@ -16,6 +16,8 @@ export default class ProfileTickets extends Component {
         super(context);
         this._template = template;
 
+        console.log(this._context);
+
         let visibility = false;
         if (!this._context.length) {
             visibility = true;
