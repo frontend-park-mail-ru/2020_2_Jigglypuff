@@ -1,6 +1,6 @@
 import template from 'view/RegisterView/RegisterView.hbs';
 import View from 'view/BaseView/View';
-import RegisterContent from 'components/registerContent/registerContent';
+import RegisterContent from 'components/Profile/registerContent/registerContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import SignUpViewModel from 'viewmodels/SignUpViewModel';

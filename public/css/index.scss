@@ -1,30 +1,32 @@
 @import "vars";
-@import "../../src/components/header/header";
-@import "../../src/components/userBlock/userBlock";
-@import "../../src/components/baseComponents/buttons/button";
-@import "../../src/components/baseComponents/buttons/scheduleButton/scheduleButton";
-@import "../../src/components/baseComponents/buttons/standartButton/standardButton";
-@import "../../src/components/baseComponents/textInput/textInput";
-@import "../../src/components/registerContent/registerContent";
-@import "../../src/components/loginContent/loginContent";
-@import "../../src/components/baseComponents/imageInput/imageInput";
-@import "../../src/components/slider/slider";
-@import "../../src/components/baseComponents/buttons/bigButton/bigButton";
-@import "../../src/components/movieList/movieList";
-@import "../../src/components/movieCard/movieCard";
-@import "../../src/components/movieDescription/movieDescription";
-@import "../../src/components/cinemaCard/cinemaCard";
-@import "../../src/components/cinemaList/cinemaList";
-@import "../../src/components/profileContent/profileContent";
-@import "../../src/components/profileEdit/profileEdit";
-@import "../../src/components/profileTickets/profileTickets";
-@import "../../src/components/baseComponents/buttons/seatButton/seatButton";
-@import "../../src/components/hallLayout/hallLayout";
-@import "../../src/components/baseComponents/validationBlock/validationBlock";
-@import "../../src/components/movieSchedule/movieSchedule";
-@import "../../src/components/baseComponents/selectList/selectList";
-@import "../../src/components/filter/filter";
-@import "../../src/components/replyBlock/replyBlock";
+@import "../../src/components/BaseComponents/buttons/button";
+@import "../../src/components/BaseComponents/buttons/scheduleButton/scheduleButton";
+@import "../../src/components/BaseComponents/buttons/standartButton/standardButton";
+@import "../../src/components/BaseComponents/buttons/bigButton/bigButton";
+@import "../../src/components/BaseComponents/buttons/seatButton/seatButton";
+@import "../../src/components/BaseComponents/buttons/transparentButton/transparentButton";
+@import "../../src/components/BaseComponents/textInput/textInput";
+@import "../../src/components/BaseComponents/imageInput/imageInput";
+@import "../../src/components/BaseComponents/validationBlock/validationBlock";
+@import "../../src/components/BaseComponents/selectList/selectList";
+@import "../../src/components/BaseComponents/filter/filter";
+@import "../../src/components/BaseComponents/avatar/avatar";
+@import "../../src/components/Main/header/header";
+@import "../../src/components/Main/userBlock/userBlock";
+@import "../../src/components/Main/slider/slider";
+@import "../../src/components/Movie/movieList/movieList";
+@import "../../src/components/Movie/movieCard/movieCard";
+@import "../../src/components/Movie/movieDescription/movieDescription";
+@import "../../src/components/Movie/hallLayout/hallLayout";
+@import "../../src/components/Movie/movieSchedule/movieSchedule";
+@import "../../src/components/Cinema/cinemaCard/cinemaCard";
+@import "../../src/components/Cinema/cinemaList/cinemaList";
+@import "../../src/components/Profile/registerContent/registerContent";
+@import "../../src/components/Profile/loginContent/loginContent";
+@import "../../src/components/Profile/profileContent/profileContent";
+@import "../../src/components/Profile/profileEdit/profileEdit";
+@import "../../src/components/Profile/profileTickets/profileTickets";
+@import "../../src/components/Profile/replyBlock/replyBlock";
 
 html, body {
   padding: 0;
@@ -53,5 +55,6 @@ html, body {
     radius: $main__border_radius;
   };
 
+  background: $main__background_color;
   filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
 }

@@ -1,0 +1,57 @@
+.header {
+  margin-top: 5px;
+  font-family: inherit;
+  text-shadow: 0 4px 4px $main__text_shadow-color;
+
+  &__navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 80%;
+    height: 5rem;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__navbar-logo {
+    width: 4.5rem;
+  }
+
+  &__navbar-userblock {
+    margin-left: auto;
+  }
+
+
+  &-slider {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &__line {
+    margin: 5px 20px;
+    border: none;
+    background-color: $main__font_color;
+    border-radius: 10px;
+    height: 4px;
+  }
+
+  &__navbar-menu {
+    color: $main__font_color;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 2.5rem;
+  }
+}
+
+
+.fill {
+  fill: $main__brand_color;
+}
+
+.stroke {
+  stroke: $main__brand_color;
+}

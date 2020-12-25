@@ -1,0 +1,12 @@
+<div class="image-input__wrapper">
+    <label class="image-input__label" for="{{ inputID }}">
+        <div class="label__text">{{ inputName }}</div>
+        <div class="image-input image-input__text">
+            {{ inputPlaceholder }}
+        </div>
+        <span class="image-input__error-disabled">{{ inputErrorMessage }}</span>
+    </label>
+    <input id="{{ inputID }}" class="default-input" data-event="uploadAvatar" type="file"/>
+    <div class="image-input__wrapper_avatar">{{{ Avatar }}}</div>
+</div>
+

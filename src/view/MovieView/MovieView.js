@@ -1,16 +1,16 @@
 import template from 'view/MovieView/MovieView.hbs';
 import View from 'view/BaseView/View';
-import MovieDescription from 'components/movieDescription/movieDescription';
+import MovieDescription from 'components/Movie/movieDescription/movieDescription';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
-import MovieSchedule from 'components/movieSchedule/movieSchedule';
-import Filter from 'components/filter/filter';
-import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
-import ReplyBlock from 'components/replyBlock/replyBlock';
+import MovieSchedule from 'components/Movie/movieSchedule/movieSchedule';
+import Filter from 'components/BaseComponents/filter/filter';
+import ValidationBlock from 'components/BaseComponents/validationBlock/validationBlock';
+import ReplyBlock from 'components/Profile/replyBlock/replyBlock';
 
 /**
  * Class of the movie view

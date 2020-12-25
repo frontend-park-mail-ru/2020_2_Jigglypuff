@@ -1,0 +1,17 @@
+.button-standard {
+  background: $main__brand_color;
+
+  font: {
+    family: inherit;
+    style: inherit;
+    weight: bold;
+    size: 1em;
+  };
+
+  color: $button__font_color;
+
+  &:hover {
+    background: $main__brand_color-hover;
+  }
+}
+

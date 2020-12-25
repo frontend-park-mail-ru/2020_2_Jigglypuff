@@ -1,6 +1,6 @@
 import template from 'view/CinemaView/CinemaView.hbs';
 import View from 'view/BaseView/View';
-import Cinema from 'components/cinemaPage/cinema';
+import Cinema from 'components/Cinema/cinemaPage/cinema';
 import Getter from 'utils/Getter';
 
 /**

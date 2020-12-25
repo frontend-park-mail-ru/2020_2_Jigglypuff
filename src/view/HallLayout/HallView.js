@@ -1,6 +1,6 @@
 import template from 'view/HallLayout/HallView.hbs';
 import View from 'view/BaseView/View';
-import HallLayout from 'components/hallLayout/hallLayout';
+import HallLayout from 'components/Movie/hallLayout/hallLayout';
 import HallViewModel from 'viewmodels/HallViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';

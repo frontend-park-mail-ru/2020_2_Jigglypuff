@@ -1,6 +1,6 @@
 import template from 'view/ProfileView/ProfileView.hbs';
 import View from 'view/BaseView/View';
-import ProfileContent from 'components/profileContent/profileContent';
+import ProfileContent from 'components/Profile/profileContent/profileContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import BaseViewModel from 'viewmodels/BaseViewModel';

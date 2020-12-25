@@ -1,12 +1,12 @@
 import template from 'view/MainView/MainView.hbs';
 import View from 'view/BaseView/View';
-import MovieList from 'components/movieList/movieList';
+import MovieList from 'components/Movie/movieList/movieList';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import MovieListViewModel from 'viewmodels/MovieListViewModel';
-import Filter from 'components/filter/filter';
+import Filter from 'components/BaseComponents/filter/filter';
 import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
-import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import ValidationBlock from 'components/BaseComponents/validationBlock/validationBlock';
 import Getter from 'utils/Getter';
 
 /**
