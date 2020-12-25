@@ -21,6 +21,7 @@ const Events = {
     SubmitReply: 'submitReply',
     UpdateReply: 'updateReply',
     DropProfileNavigation: 'dropProfileNavigation',
+    ScrollSlider: 'slideMovie',
 };
 
 

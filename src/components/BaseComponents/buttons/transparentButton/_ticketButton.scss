@@ -9,15 +9,11 @@
     };
 
     fill: #F80000;
+    transition: 0.5s;
   }
 
   &__border {
     stroke-width: 2px;
-  }
-
-  &:hover &__border {
-    stroke-width: 5px;
-    transition: stroke-width 0.5s ease-out;
   }
 
   &:hover &__text {

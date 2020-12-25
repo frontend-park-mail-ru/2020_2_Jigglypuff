@@ -5,6 +5,9 @@ import BaseViewModel from 'viewmodels/BaseViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
 import Footer from "components/Main/footer/footer";
+import EventBus from "services/EventBus";
+import Events from "consts/Events";
+import slider from "components/Main/slider/slider";
 
 /**
  * Base class of the view
@@ -38,10 +41,15 @@ export default class View {
         }
         this._context.Footer = (new Footer()).render();
 
+        console.log(templateDate);
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
-            sliderContext = await this.getSliderContext(templateDate.sliderMovieID);
+            sliderContext = await this.getSliderContext(templateDate.sliderMovies);
             this._context.Slider = (new Slider(sliderContext)).render();
+
+            this._sliderTimer = setInterval(() => {
+                EventBus.emit(Events.ScrollSlider, {target: document.querySelector('.slider__control_right')});
+            }, 5000);
         }
 
         this._context.Content = contentTemplate;
@@ -56,6 +64,9 @@ export default class View {
             document.querySelector('.slider').innerHTML = '';
         }
         document.querySelector('.content').innerHTML = '';
+        if (this._sliderTimer) {
+            clearInterval(this._sliderTimer);
+        }
     }
 
     /**
@@ -85,17 +96,17 @@ export default class View {
 
     /**
      * Method that gets slider context
-     * @param {number} movieID
+     * @param {Object} movies
      *
      * @return {Promise<Object>} - slider context
      */
-    async getSliderContext(movieID) {
-        const sliderContext = await Getter.getMovie(movieID);
-        if (sliderContext) {
-            sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
-            sliderContext.pathToSliderAvatar = `${Routes.Host}${sliderContext.pathToSliderAvatar}`;
+    async getSliderContext(movies) {
+        const sliderContext = {};
+        sliderContext.movies = movies;
+        for (const item of sliderContext.movies) {
+            item.pathToAvatar = `${Routes.Host}${item.pathToAvatar}`;
+            item.pathToSliderAvatar = `${Routes.Host}${item.pathToSliderAvatar}`;
         }
-
         return sliderContext;
     }
 }
