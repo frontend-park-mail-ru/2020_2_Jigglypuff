@@ -6,7 +6,8 @@
 .movie-list__content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .movie-list__header {

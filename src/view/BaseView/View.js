@@ -4,6 +4,7 @@ import Slider from 'components/Main/slider/slider';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
+import Footer from "components/Main/footer/footer";
 
 /**
  * Base class of the view
@@ -35,6 +36,7 @@ export default class View {
         } else {
             this._context.Header = document.querySelector('.header').innerHTML;
         }
+        this._context.Footer = (new Footer()).render();
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;

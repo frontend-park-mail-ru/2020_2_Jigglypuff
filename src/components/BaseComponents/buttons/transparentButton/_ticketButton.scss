@@ -11,8 +11,25 @@
     fill: #F80000;
   }
 
-  &:hover {
+  &__border {
+    stroke-width: 2px;
+  }
+
+  &:hover &__border {
+    stroke-width: 5px;
+    transition: stroke-width 0.5s ease-out;
+  }
+
+  &:hover &__text {
+    font: {
+      family: inherit;
+      style: inherit;
+      weight: bold;
+      size: 1.5em;
+    };
     filter: brightness(0.7);
+
+    transition: 0.5s;
   }
 }
 

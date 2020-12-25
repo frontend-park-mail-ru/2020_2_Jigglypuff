@@ -30,7 +30,6 @@ export default class MainView extends View {
         this._onUpdateMovieListHandler = this.onUpdateMovieList.bind(this);
         EventBus.on(Events.UpdateMovieList, this._onUpdateMovieListHandler);
 
-        const movieListContext = await this.getMovieListContext();
         const movieRecommendationContext = await this.getMovieRecommendationContext();
 
         const cinemaList = await Getter.getCinemaList();
@@ -41,10 +40,7 @@ export default class MainView extends View {
             },
         );
 
-        this._visibility = !movieListContext.length;
-
         const templateData = {
-            MovieList: (new MovieList(movieListContext)).render(),
             MovieRecommendation: (new MovieList(movieRecommendationContext)).render(),
             Filtration: this._filter.render(),
             Validation: (new ValidationBlock({
@@ -63,51 +59,6 @@ export default class MainView extends View {
         this._filter.hide();
         EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
         super.hide();
-    }
-
-    /**
-     * Method that gets movie list context
-     * @param {string} cinemaName
-     * @param {Number} cinemaID
-     * @param {string} date
-     *
-     * @return {Promise<Object>} - movie list context
-     */
-    async getMovieListContext(cinemaName, cinemaID = 1, date) {
-        let movieListContext = [];
-        const todayDate = new Date();
-
-        if (!cinemaName) {
-            cinemaName = (await Getter.getCinema(cinemaID)).name;
-        }
-        if (!date) {
-            date = `${todayDate.getFullYear()}-${(+todayDate.getMonth() + 1)}-${todayDate.getDate()}`;
-        }
-
-        const responseMovieListViewModel = (new MovieListViewModel()).getMovieActualListCommand.exec(date);
-
-        await responseMovieListViewModel
-            .then((response) => {
-                movieListContext = response;
-            }).catch(() => {
-
-            });
-
-
-        for (const item of movieListContext) {
-            const responseMovieVM = (new MovieViewModel()).getScheduleCommand.exec(item.id, cinemaID, date);
-            await responseMovieVM
-                .then((response) => {
-                    item.scheduleContext = response;
-                    item.cinemaName = cinemaName;
-                }).catch(() => {
-
-                });
-        }
-
-        return movieListContext.filter((item) => {
-            return Object.prototype.hasOwnProperty.call(item, 'scheduleContext');
-        });
     }
 
     /**
