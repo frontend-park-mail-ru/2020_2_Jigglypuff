@@ -4,7 +4,7 @@
 @import "../../src/components/BaseComponents/buttons/standartButton/standardButton";
 @import "../../src/components/BaseComponents/buttons/bigButton/bigButton";
 @import "../../src/components/BaseComponents/buttons/seatButton/seatButton";
-@import "../../src/components/BaseComponents/buttons/transparentButton/transparentButton";
+@import "../../src/components/BaseComponents/buttons/transparentButton/ticketButton";
 @import "../../src/components/BaseComponents/textInput/textInput";
 @import "../../src/components/BaseComponents/imageInput/imageInput";
 @import "../../src/components/BaseComponents/validationBlock/validationBlock";
@@ -56,5 +56,4 @@ html, body {
   };
 
   background: $main__background_color;
-  filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
 }

@@ -19,13 +19,12 @@ export default class Header extends Component {
         super(context);
         this._template = template;
 
-        if (!this._isRendered) {
-            EventBus.on(Events.UpdateHeader, this._onUpdateHeader.bind(this));
-            this._isRendered = true;
-        }
+        EventBus.on(Events.UpdateHeader, this._onUpdateHeader.bind(this));
 
         this._context.headerItems = headerItems;
-        this._context.UserBlock = (new UserBlock(this._context.userBlockContext)).render();
+
+        this._UserBlock = new UserBlock(this._context.userBlockContext);
+        this._context.UserBlock = this._UserBlock.render();
     }
 
     /**
@@ -34,6 +33,8 @@ export default class Header extends Component {
      * */
     _onUpdateHeader(userData = {}) {
         const userBlock = document.querySelector('.header__navbar-userblock');
-        userBlock.innerHTML = (new UserBlock(userData)).render();
+        this._UserBlock.hide();
+        this._UserBlock = new UserBlock(userData);
+        userBlock.innerHTML = this._UserBlock.render();
     }
 }

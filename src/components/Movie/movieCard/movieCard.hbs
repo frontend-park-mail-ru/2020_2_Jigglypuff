@@ -16,25 +16,8 @@
                 {{/each}}
             </span>
         </div>
-        <div class="movie-card__description_schedule">
-            <span class="movie-card__description_schedule-title">
-                {{ date }}
-            </span>
-            {{#if ScheduleButtons }}
-                <hr class="movie-card__description_schedule-line">
-                <div class="movie-card__description_schedule-block">
-                    {{#each ScheduleButtons }}
-                        {{{ this }}}
-                    {{/each}}
-                </div>
-                <hr class="movie-card__description_schedule-line">
-            {{/if}}
-            <span class="movie-card__description_schedule-title">
-                {{ cinemaName }}
-            </span>
-            <div class="movie-card__description_schedule-button">
-                {{{ StandardButton }}}
-            </div>
+        <div style="width: 100%; margin-top: 17px">
+            {{{ TicketButton }}}
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import Component from 'components/component';
-import template from 'components/BaseComponents/buttons/transparentButton/transparentButton.hbs';
+import template from 'components/BaseComponents/buttons/transparentButton/ticketButton.hbs';
 
 /**
  * Button component

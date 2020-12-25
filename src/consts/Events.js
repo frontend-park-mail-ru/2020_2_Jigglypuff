@@ -20,6 +20,7 @@ const Events = {
     UpdateSchedule: 'updateSchedule',
     SubmitReply: 'submitReply',
     UpdateReply: 'updateReply',
+    DropProfileNavigation: 'dropProfileNavigation',
 };
 
 

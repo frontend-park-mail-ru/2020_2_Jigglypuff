@@ -1,28 +1,22 @@
 .movie-card {
-  width: 490px;
-  height: 350px;
+  width: 220px;
+  height: 100%;
 
   font-weight: bold;
 
   display: flex;
-  flex-direction: row;
-}
-
-.movie-card__poster {
-  margin-right: 30px;
-  width: 100%;
+  flex-direction: column;
 }
 
 .movie-card__poster_img {
   margin-right: 30px;
-  border-radius: 41px;
-  height: 100%;
+  border-radius: 15px;
+  width: 100%;
 }
 
 .movie-card__description {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .movie-card__description_title {
@@ -31,19 +25,25 @@
   text-decoration: none;
   cursor: pointer;
   color: $main__font_color;
-  margin-bottom: 7px;
+  margin: {
+    top: 7px;
+    bottom: 7px;
+  };
 }
 
 .movie-card__description_specification {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 }
 
 .description_specification__info {
-  font-size: 1rem;
-  font-weight: bold;
-  color: $main__text_help-color;
+  font: {
+    size: 1rem;
+    weight: bold;
+  };
+
+  color: $main__font_color;
+  margin-bottom: 7px;
 }
 
 .movie-card__description_schedule {

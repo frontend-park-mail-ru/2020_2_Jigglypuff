@@ -4,6 +4,7 @@ import ScheduleButton from 'components/BaseComponents/buttons/scheduleButton/sch
 import StandardButton from 'components/BaseComponents/buttons/standartButton/standardButton';
 import Routes from 'consts/Routes';
 import Events from 'consts/Events';
+import TicketButton from "components/BaseComponents/buttons/transparentButton/ticketButton";
 
 /**
  * Movie card component
@@ -39,12 +40,18 @@ export default class MovieCard extends Component {
                         event: Events.ChangePath,
                         url: Routes.ScheduleID.replace(':id', this._context.scheduleContext[i].id),
                     },
-                )).render(),
+                    )).render(),
                 );
             }
         }
         this._context.StandardButton = (new StandardButton({
             buttonName: 'Полное расписание',
+            event: Events.ChangePath,
+            url: this._context.path,
+        }).render());
+
+        this._context.TicketButton = (new TicketButton({
+            buttonName: 'Купить билет',
             event: Events.ChangePath,
             url: this._context.path,
         }).render());

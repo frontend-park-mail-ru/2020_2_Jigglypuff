@@ -1,0 +1,20 @@
+.button-ticket {
+
+  &__text {
+    font: {
+      family: inherit;
+      style: inherit;
+      weight: bold;
+      size: 1em;
+    };
+
+    fill: #F80000;
+  }
+
+  &:hover {
+    filter: brightness(0.7);
+  }
+}
+
+
+
