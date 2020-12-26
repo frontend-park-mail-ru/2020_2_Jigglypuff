@@ -52,10 +52,8 @@ export default class Slider extends Component {
 
         const div = document.createElement('div');
         div.innerHTML = renderedTemplate;
-        console.log(div);
 
         const items = div.getElementsByClassName('slider__item');
-        console.log(items);
         let c = 0;
         for (const i of items) {
             i.setAttribute('style', `background-image: url("${this._context.movies[c++].pathToSliderAvatar}");`);
