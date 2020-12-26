@@ -186,9 +186,28 @@ export default class Extractor {
             if (!ExtractedFields.ReplyData.has(field)) {
                 continue;
             }
-            result.set(field.replace(/^[A-Z]+/, (c) => {
-                return c.toLowerCase();
-            }), data[field]);
+            try {
+                data[field].constructor;
+            }
+            catch (err) {
+                data[field] = 0;
+            }
+            if (data[field].constructor === ({}).constructor) {
+                const resultObject = {};
+
+                for (const fieldObject of Object.entries(data[field])) {
+                    resultObject[fieldObject[0].replace(/^[A-Z]+/, (c) => {
+                        return c.toLowerCase();
+                    })] = fieldObject[1];
+                }
+                result.set(field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                }), resultObject);
+            } else {
+                result.set(field.replace(/^[A-Z]+/, (c) => {
+                    return c.toLowerCase();
+                }), data[field]);
+            }
         }
 
         return result;

@@ -145,9 +145,13 @@ export default class MovieViewModel extends BaseViewModel {
         this.replies.push({
             movieID: '',
             text: '',
-            userName: '',
+            user: {
+                avatarPath: '',
+                name: '',
+                surname: '',
+                userID: '',
+            },
             userRating: '',
-            userSurname: '',
         });
         extractedRepliesMap.forEach((value, key) => {
             this.replies[this.replies.length - 1][key] = value;
