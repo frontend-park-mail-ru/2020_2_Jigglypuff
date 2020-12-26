@@ -1,10 +1,10 @@
 import Component from 'components/component';
 import template from 'components/paymentContent/paymentContent.hbs';
-import TextInput from 'components/baseComponents/textInput/textInput';
-import StandardButton from 'components/baseComponents/buttons/standartButton/standardButton';
+import TextInput from 'components/BaseComponents/textInput/textInput';
+import StandardButton from 'components/BaseComponents/buttons/standartButton/standardButton';
 import PaymentItems from 'consts/PaymentItems';
 import Events from 'consts/Events';
-import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import ValidationBlock from 'components/BaseComponents/validationBlock/validationBlock';
 
 /**
  * Login content component

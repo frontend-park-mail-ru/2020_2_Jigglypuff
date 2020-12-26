@@ -1,5 +1,5 @@
 import Events from 'consts/Events';
-import Routes from "consts/Routes";
+import Routes from 'consts/Routes';
 
 const ProfileNavigationItems = {
     fields: [

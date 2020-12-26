@@ -2,7 +2,7 @@ import Component from 'components/component';
 import template from 'components/BaseComponents/imageInput/imageInput.hbs';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
-import Avatar from "components/BaseComponents/avatar/avatar";
+import Avatar from 'components/BaseComponents/avatar/avatar';
 
 /**
  * Image input component

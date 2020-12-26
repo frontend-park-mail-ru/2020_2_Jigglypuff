@@ -22,7 +22,10 @@ const Events = {
     UpdateReply: 'updateReply',
     DropProfileNavigation: 'dropProfileNavigation',
     ScrollSlider: 'slideMovie',
+    PaymentFieldFill: 'paymentFieldFill',
+    PaymentSubmit: 'paymentSubmit',
+    PaymentCrypto: 'paymentCrypto',
+    PaymentOnline: 'paymentOnline',
 };
-
 
 export default Events;

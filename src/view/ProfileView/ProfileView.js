@@ -135,7 +135,6 @@ export default class ProfileView extends View {
     }
 
 
-
     /**
      * Method that hides the profile view
      */

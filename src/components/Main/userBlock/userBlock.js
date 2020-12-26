@@ -2,10 +2,9 @@ import Component from 'components/component';
 import template from 'components/Main/userBlock/userBlock.hbs';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';
-import TransparentButton from "components/BaseComponents/buttons/transparentButton/transparentButton";
-import Avatar from "components/BaseComponents/avatar/avatar";
-import EventBus from "services/EventBus";
-import DropProfileNavigation from "components/Main/dropProfileNavigation/dropProfileNavigation";
+import TransparentButton from 'components/BaseComponents/buttons/transparentButton/transparentButton';
+import Avatar from 'components/BaseComponents/avatar/avatar';
+import DropProfileNavigation from 'components/Main/dropProfileNavigation/dropProfileNavigation';
 
 /**
  * User block component
@@ -37,5 +36,4 @@ export default class UserBlock extends Component {
             url: Routes.Login,
         })).render();
     }
-
 }

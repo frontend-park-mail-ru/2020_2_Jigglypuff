@@ -1,7 +1,6 @@
 import template from 'view/MainView/MainView.hbs';
 import View from 'view/BaseView/View';
 import MovieList from 'components/Movie/movieList/movieList';
-import MovieViewModel from 'viewmodels/MovieViewModel';
 import MovieListViewModel from 'viewmodels/MovieListViewModel';
 import Filter from 'components/BaseComponents/filter/filter';
 import Events from 'consts/Events';

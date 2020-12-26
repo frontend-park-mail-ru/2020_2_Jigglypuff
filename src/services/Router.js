@@ -47,8 +47,6 @@ class Router {
                 clickTarget.parentNode.matches('button') ||
                 clickTarget.parentNode.matches('a') ||
                 clickTarget.matches('div')) {
-
-
                 if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
                     clickTarget = clickTarget.parentNode;
                 }

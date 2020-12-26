@@ -4,10 +4,9 @@ import Slider from 'components/Main/slider/slider';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
-import Footer from "components/Main/footer/footer";
-import EventBus from "services/EventBus";
-import Events from "consts/Events";
-import slider from "components/Main/slider/slider";
+import Footer from 'components/Main/footer/footer';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
 
 /**
  * Base class of the view

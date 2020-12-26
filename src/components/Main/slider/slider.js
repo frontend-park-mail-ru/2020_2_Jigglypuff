@@ -3,7 +3,7 @@ import template from 'components/Main/slider/slider.hbs';
 import BigButton from 'components/BaseComponents/buttons/bigButton/bigButton';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';
-import EventBus from "services/EventBus";
+import EventBus from 'services/EventBus';
 
 /**
  * Slider component
@@ -25,17 +25,20 @@ export default class Slider extends Component {
         EventBus.on(Events.ScrollSlider, this._slideHandler);
 
         this._context.SliderEvent = Events.ScrollSlider;
-        let c = 0;
-        for (const i of this._context.movies) {
-            this._context.movies[c++].BigButton = (new BigButton({
-                buttonName: 'Смотреть',
-                url: `${Routes.MovieList}${this._context.movies[c-1].id}/`,
-                event: Events.ChangePath,
-            })).render();
+        for (const i in this._context.movies) {
+            if (Object.prototype.hasOwnProperty.call(this._context.movies, i)) {
+                this._context.movies[i].BigButton = (new BigButton({
+                    buttonName: 'Смотреть',
+                    url: `${Routes.MovieList}${this._context.movies[i].id}/`,
+                    event: Events.ChangePath,
+                })).render();
+            }
         }
-
     }
 
+    /**
+     * hide
+     */
     hide() {
         Events.off(Events.ScrollSlider, this._slideHandler);
     }
@@ -51,7 +54,7 @@ export default class Slider extends Component {
         div.innerHTML = renderedTemplate;
         console.log(div);
 
-        let items = div.getElementsByClassName('slider__item');
+        const items = div.getElementsByClassName('slider__item');
         console.log(items);
         let c = 0;
         for (const i of items) {
@@ -60,23 +63,28 @@ export default class Slider extends Component {
         return div.innerHTML;
     }
 
+    /**
+     * scroll Slider
+     * @param {Object} data
+     *
+     */
     _scrollSlider(data) {
-        let
-            _mainElement = document.querySelector('.slider'), // основный элемент блока
-            _sliderWrapper = _mainElement.querySelector('.slider__wrapper'), // обертка для .slider-item
-            _sliderItems = _mainElement.querySelectorAll('.slider__item'), // элементы (.slider-item)
-            _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width), // ширина обёртки
-            _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width), // ширина одного элемента
-            _step = _itemWidth / _wrapperWidth * 100; // величина шага (для трансформации)
+        const
+            _mainElement = document.querySelector('.slider'); // основный элемент блока
+        const _sliderWrapper = _mainElement.querySelector('.slider__wrapper'); // обертка для .slider-item
+        const _sliderItems = _mainElement.querySelectorAll('.slider__item'); // элементы (.slider-item)
+        const _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width); // ширина обёртки
+        const _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width); // ширина одного элемента
+        const _step = _itemWidth / _wrapperWidth * 100; // величина шага (для трансформации)
 
-        if(!this._items) {
+        if (!this._items) {
             this._items = [];
-            _sliderItems.forEach( (item, index) => {
+            _sliderItems.forEach((item, index) => {
                 this._items.push({item: item, position: index, transform: 0});
             });
         }
 
-        let position = {
+        const position = {
             getItemMin: () => {
                 let indexItem = 0;
                 this._items.forEach((item, index) => {
@@ -86,7 +94,7 @@ export default class Slider extends Component {
                 });
                 return indexItem;
             },
-            getItemMax:  () => {
+            getItemMax: () => {
                 let indexItem = 0;
                 this._items.forEach((item, index) => {
                     if (item.position > this._items[indexItem].position) {
@@ -95,16 +103,16 @@ export default class Slider extends Component {
                 });
                 return indexItem;
             },
-            getMin:  () => {
+            getMin: () => {
                 return this._items[position.getItemMin()].position;
             },
             getMax: () => {
                 return this._items[position.getItemMax()].position;
-            }
-        }
+            },
+        };
 
 
-        let _transformItem = (direction) => {
+        const _transformItem = (direction) => {
             let nextItem;
             if (direction === 'right') {
                 this._positionLeftItem++;
@@ -127,20 +135,10 @@ export default class Slider extends Component {
                 this._transform += _step;
             }
             _sliderWrapper.style.transform = 'translateX(' + this._transform + '%)';
-        }
+        };
 
 
-        let direction = data.target.classList.contains('slider__control_right') ? 'right' : 'left';
+        const direction = data.target.classList.contains('slider__control_right') ? 'right' : 'left';
         _transformItem(direction);
-
-        return {
-            right: function () { // метод right
-                _transformItem('right');
-            },
-            left: function () { // метод left
-                _transformItem('left');
-            }
-        }
-
     }
 }

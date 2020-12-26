@@ -15,5 +15,4 @@ export default class Avatar extends Component {
         super(context);
         this._template = template;
     }
-
 }

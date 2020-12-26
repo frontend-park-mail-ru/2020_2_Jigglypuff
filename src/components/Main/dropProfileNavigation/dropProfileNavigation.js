@@ -1,8 +1,7 @@
 import Component from 'components/component';
 import template from 'components/Main/dropProfileNavigation/dropProfileNavigation.hbs';
-import Avatar from "components/BaseComponents/avatar/avatar";
-import ProfileNavigationItems from "consts/ProfileNavigationItems";
-import EventBus from "services/EventBus";
+import Avatar from 'components/BaseComponents/avatar/avatar';
+import ProfileNavigationItems from 'consts/ProfileNavigationItems';
 
 /**
  * User block component
