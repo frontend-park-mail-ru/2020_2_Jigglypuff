@@ -92,19 +92,22 @@ export default class TicketViewModel {
      */
     async buyTicketByCrypto() {
         const cryptoManager = new ETHManager();
-        const response = await cryptoManager.transferSignedTransaction(this.stateTransaction.senderAddress,
-            this.stateTransaction.signedTransaction);
-        switch (response) {
-            case Errors.TransactionNonceIsAlreadyUsed:
-                return Errors.TransactionNonceIsAlreadyUsed;
-            case Errors.TransactionNotEnoughMoney:
-                return Errors.TransactionNotEnoughMoney;
-
-            case Errors.TransactionVerificationIsFailed:
-                return Errors.TransactionVerificationIsFailed;
-            default:
-                break;
-        }
+        const response = await cryptoManager.transferSignedTransaction(
+            this.stateTransaction.senderAddress,
+            this.stateTransaction.signedTransaction,
+        )
+            .catch((err) => {
+                switch (err) {
+                    case Errors.TransactionNonceIsAlreadyUsed.errorNumber:
+                        throw new Error(Errors.TransactionNonceIsAlreadyUsed.errorMessage);
+                    case Errors.TransactionNotEnoughMoney.errorNumber:
+                        throw new Error(Errors.TransactionNotEnoughMoney.errorMessage);
+                    case Errors.TransactionVerificationIsFailed.errorNumber:
+                        throw new Error(Errors.TransactionVerificationIsFailed.errorMessage);
+                    default:
+                        throw err;
+                }
+            });
 
         return this.buyTicket(response);
     }

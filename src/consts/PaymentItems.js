@@ -1,12 +1,12 @@
 import Events from 'consts/Events';
 
 const PaymentItems = {
-    paymentInfo: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet
-    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate
-    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident`,
+    paymentInfo: `Введите ключ и подписанную транзакцию в формате JSON. Тело транзакции должно быть сформировано по 
+    следующим параметрам:
+    1) Получатель: 0x2D00D90471195AFAa49bf53cA55D0406DC4d635d
+    2) chainID: 4 (Rinkeby).
+     
+    АКЦИЯ! До 31.12.2020 покупка билета эфиром возможна за любую цену.`,
     fields: [
         {
             inputID: 'senderAddress',

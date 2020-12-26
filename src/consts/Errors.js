@@ -55,7 +55,7 @@ const Errors = {
 
     TransactionNonceIsAlreadyUsed: {
         errorNumber: 24,
-        errorMessage: 'Nonce уже была использована',
+        errorMessage: 'Транзакция уже была использована',
     },
 
     TransactionNotEnoughMoney: {
