@@ -4,7 +4,8 @@
 @import "../../src/components/BaseComponents/buttons/standartButton/standardButton";
 @import "../../src/components/BaseComponents/buttons/bigButton/bigButton";
 @import "../../src/components/BaseComponents/buttons/seatButton/seatButton";
-@import "../../src/components/BaseComponents/buttons/transparentButton/ticketButton";
+@import "../../src/components/BaseComponents/buttons/ticketButton/ticketButton";
+@import "../../src/components/BaseComponents/buttons/transparentButton/transparentButton";
 @import "../../src/components/BaseComponents/textInput/textInput";
 @import "../../src/components/BaseComponents/imageInput/imageInput";
 @import "../../src/components/BaseComponents/validationBlock/validationBlock";
@@ -28,7 +29,7 @@
 @import "../../src/components/Profile/profileTickets/profileTickets";
 @import "../../src/components/Profile/replyBlock/replyBlock";
 @import "../../src/components/Main/footer/footer";
-
+@import "../../src/components/Main/dropProfileNavigation/dropProfileNavigation";
 html, body {
   padding: 0;
   margin: 0;

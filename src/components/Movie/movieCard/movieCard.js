@@ -4,7 +4,7 @@ import ScheduleButton from 'components/BaseComponents/buttons/scheduleButton/sch
 import StandardButton from 'components/BaseComponents/buttons/standartButton/standardButton';
 import Routes from 'consts/Routes';
 import Events from 'consts/Events';
-import TicketButton from "components/BaseComponents/buttons/transparentButton/ticketButton";
+import TicketButton from "components/BaseComponents/buttons/ticketButton/ticketButton";
 
 /**
  * Movie card component

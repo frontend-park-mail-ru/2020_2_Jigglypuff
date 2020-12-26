@@ -2,9 +2,10 @@ import Component from 'components/component';
 import template from 'components/Main/userBlock/userBlock.hbs';
 import Events from 'consts/Events';
 import Routes from 'consts/Routes';
-import TransparentButton from "components/BaseComponents/buttons/transparentButton/ticketButton";
+import TransparentButton from "components/BaseComponents/buttons/transparentButton/transparentButton";
 import Avatar from "components/BaseComponents/avatar/avatar";
 import EventBus from "services/EventBus";
+import DropProfileNavigation from "components/Main/dropProfileNavigation/dropProfileNavigation";
 
 /**
  * User block component
@@ -19,8 +20,8 @@ export default class UserBlock extends Component {
     constructor(context) {
         super(context);
         this._template = template;
-        this._dropProfileNavigationHandler = this.dropProfileNavigation.bind(this);
-        EventBus.on(Events.DropProfileNavigation, this._dropProfileNavigationHandler);
+
+        this._context.DropProfileNavigation = (new DropProfileNavigation(this._context)).render();
 
         this._context.ProfilePath = Routes.ProfilePage;
         this._context.ProfileEvent = Events.ChangePath;
@@ -29,6 +30,7 @@ export default class UserBlock extends Component {
         this._context.RegisterEvent = Events.ChangePath;
         this._context.Avatar = (new Avatar({pathToAvatar: this._context.pathToAvatar})).render();
 
+
         this._context.StandardButton = (new TransparentButton({
             buttonName: 'Войти',
             event: Events.ChangePath,
@@ -36,7 +38,4 @@ export default class UserBlock extends Component {
         })).render();
     }
 
-    dropProfileNavigation() {
-
-    }
 }

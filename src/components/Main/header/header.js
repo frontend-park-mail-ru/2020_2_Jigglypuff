@@ -33,8 +33,8 @@ export default class Header extends Component {
      * */
     _onUpdateHeader(userData = {}) {
         const userBlock = document.querySelector('.header__navbar-userblock');
-        this._UserBlock.hide();
-        this._UserBlock = new UserBlock(userData);
+        this._context.userBlockContext = {...this._context.userBlockContext, ...userData};
+        this._UserBlock = new UserBlock(this._context.userBlockContext);
         userBlock.innerHTML = this._UserBlock.render();
     }
 }

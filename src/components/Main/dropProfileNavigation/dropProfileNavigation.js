@@ -1,9 +1,7 @@
 import Component from 'components/component';
-import template from 'components/Main/userBlock/userBlock.hbs';
-import Events from 'consts/Events';
-import Routes from 'consts/Routes';
-import TransparentButton from "components/BaseComponents/buttons/transparentButton/ticketButton";
+import template from 'components/Main/dropProfileNavigation/dropProfileNavigation.hbs';
 import Avatar from "components/BaseComponents/avatar/avatar";
+import ProfileNavigationItems from "consts/ProfileNavigationItems";
 import EventBus from "services/EventBus";
 
 /**
@@ -20,5 +18,8 @@ export default class DropProfileNavigation extends Component {
         super(context);
         this._template = template;
 
+        this._context.Avatar = (new Avatar({pathToAvatar: this._context.pathToAvatar})).render();
+
+        this._context = {...this._context, ...ProfileNavigationItems};
     }
 }

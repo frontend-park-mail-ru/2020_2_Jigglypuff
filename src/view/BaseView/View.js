@@ -33,6 +33,9 @@ export default class View {
     async show(contentTemplate, templateDate = {}) {
         let sliderContext = {};
 
+        this._onLogoutHandler = this.onLogout.bind(this);
+        EventBus.on(Events.Logout, this._onLogoutHandler);
+
         if (!document.querySelector('.header')) {
             const headerContext = await this.getHeaderContext();
             this._context.Header = (new Header(headerContext)).render();
@@ -41,7 +44,6 @@ export default class View {
         }
         this._context.Footer = (new Footer()).render();
 
-        console.log(templateDate);
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
             sliderContext = await this.getSliderContext(templateDate.sliderMovies);
@@ -64,9 +66,11 @@ export default class View {
             document.querySelector('.slider').innerHTML = '';
         }
         document.querySelector('.content').innerHTML = '';
+        document.querySelector('.footer').innerHTML = '';
         if (this._sliderTimer) {
             clearInterval(this._sliderTimer);
         }
+        EventBus.off(Events.Logout, this._onLogoutHandler);
     }
 
     /**
@@ -86,9 +90,8 @@ export default class View {
         if (headerContext.userBlockContext.isAuthorized) {
             const userInfo = await Getter.getProfile();
             if (userInfo) {
-                headerContext.userBlockContext.pathToAvatar = userInfo.pathToAvatar;
-                headerContext.userBlockContext.name = userInfo.name;
-                headerContext.userBlockContext.surname = userInfo.surname;
+                userInfo.isAuthorized = true;
+                headerContext.userBlockContext = userInfo;
             }
         }
         return headerContext;
@@ -108,5 +111,19 @@ export default class View {
             item.pathToSliderAvatar = `${Routes.Host}${item.pathToSliderAvatar}`;
         }
         return sliderContext;
+    }
+
+    /**
+     * Method that handles logout from the profile
+     */
+    onLogout() {
+        BaseViewModel.logout()
+            .then(async () => {
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
+            })
+            .catch(() => {
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
+            });
     }
 }

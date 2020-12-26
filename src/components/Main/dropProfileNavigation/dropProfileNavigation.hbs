@@ -1,22 +1,23 @@
-<div class="userblock" data-event="dropProfileNavigation">
-    {{#if isAuthorized }}
-        <a href="{{ ProfilePath }}" class="userblock__item" data-event="{{ ProfileEvent }}" href="#"
-           data-path="{{ ProfilePath }}">{{ name }}</a>
+<div class="profile-dropdown">
 
-        <div class="userblock__item">
-            <a href="{{ ProfilePath }}" data-event="{{ ProfileEvent }}" data-path="{{ ProfilePath }}">
-                {{{ Avatar }}}
-            </a>
+    <div class="profile-dropdown__header">
+        {{{Avatar}}}
+        <div class="profile-dropdown__header_info">
+            <div class="profile-dropdown__header_info_name">{{ name }} {{ surname }}</div>
+            <div class="profile-dropdown__header_info_login">{{ login }}</div>
         </div>
-        <div class="userblock__item">
-            <svg width="26" height="12" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 2L13 10L24 2" stroke="white" stroke-width="4" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    {{else}}
-        <div class="userblock__item">
-            {{{ StandardButton }}}
-        </div>
-    {{/if}}
+    </div>
+
+    <hr class="profile-dropdown__line">
+
+    {{#each fields}}
+        <button data-event="{{ event }}" data-path="{{ url }}" class="profile-dropdown__item">{{title}}</button>
+    {{/each}}
+
+    <hr class="profile-dropdown__line">
+
+    {{#with exit}}
+        <button data-event="{{ this.event }}" data-path="{{ this.url }}" class="profile-dropdown__item">{{ this.title }}</button>
+    {{/with}}
+
 </div>
-<div class="userblock"></div>
