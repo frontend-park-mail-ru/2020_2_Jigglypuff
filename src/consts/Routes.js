@@ -24,6 +24,8 @@ const Routes = {
     TicketList: '/ticket/',
     TicketScheduleList: '/ticket/schedule/:id/',
     TicketPay: '/ticket/pay/',
+
+    WSSchedule: 'ws://95.163.249.116:8080/api/ticket/ws/:id/',
 };
 
 export default Routes;
