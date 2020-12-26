@@ -94,7 +94,7 @@ export default class TicketViewModel {
         const cryptoManager = new ETHManager();
         const response = await cryptoManager.transferSignedTransaction(
             this.stateTransaction.senderAddress,
-            this.stateTransaction.signedTransaction
+            this.stateTransaction.signedTransaction,
         )
             .catch((err) => {
                 switch (err) {

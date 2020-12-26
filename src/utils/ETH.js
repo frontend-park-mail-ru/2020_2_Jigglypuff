@@ -68,9 +68,8 @@ export default class ETHManager {
         let wasQuote = false;
         let substr = String();
 
-        for (let char of signedTransactionString) {
-
-            if (char === "'") {
+        for (const char of signedTransactionString) {
+            if (char === '\'') {
                 if (wasQuote) {
                     result.push(substr);
                     wasQuote = false;
