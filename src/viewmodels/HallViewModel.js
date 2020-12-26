@@ -1,6 +1,7 @@
 import Extractor from 'utils/Extractor';
 import Errors from 'consts/Errors';
 import HallModel from 'models/HallModel';
+import Routes from 'consts/Routes';
 import TicketModel from 'models/TicketModel';
 
 /** Class that contains HallList ViewModel */
@@ -110,5 +111,40 @@ export default class HallViewModel {
         });
 
         return this.statePlaces;
+    }
+
+    /**
+     * Create and open Websocket
+     * @return {WebSocket}
+     */
+    async createAndOpenWS() {
+        this.state.scheduleID = 1;
+        const socket = new WebSocket(Routes.WSSchedule.replace(/:id/, this.state.scheduleID));
+
+        await socket.addEventListener('open', () => {
+            socket.addEventListener('message', function(event) {
+                console.log('CONNECTED', event.data);
+            });
+        });
+
+        return socket;
+    }
+
+    /**
+     * Update occupied places.
+     * @param {JSON} data
+     */
+    async updateOccupiedPlaces(data) {
+        this.stateOccupiedPlaces[data['PlaceConfig']['Row']] = data['PlaceConfig']['Place'];
+
+        return this.stateOccupiedPlaces;
+    }
+
+    /**
+     * Close socket
+     * @param {WebSocket} socket
+     */
+    async closeSocket(socket) {
+        await socket.close();
     }
 }
