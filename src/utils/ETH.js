@@ -1,6 +1,6 @@
 import Errors from 'consts/Errors';
-import Transaction from 'ethereumjs-tx';
 import Web3 from 'web3';
+import * as tx from 'ethereumjs-tx';
 
 const ethNetwork = 'https://rinkeby.infura.io/v3/921e50592f50453fac36299bb7cb0603';
 const web3Obj = new Web3(new Web3.providers.HttpProvider(ethNetwork));
@@ -16,35 +16,36 @@ export default class ETHManager {
     /**
      * Transfer signed transaction.
      * @param {string} senderAddress
-     * @param {Array<string>} signedTransaction
-     * @return {int|string}
+     * @param {string} signedTransactionString
+     * @return {Promise<int>|Promise<Buffer>}
      */
-    async transferSignedTransaction(senderAddress, signedTransaction) {
-        const transaction = new Transaction.Transaction(signedTransaction, {chain: chainID});
+    async transferSignedTransaction(senderAddress, signedTransactionString) {
+        const signedTransaction = this._getObjectForTransaction(signedTransactionString);
+        const transaction = new tx.Transaction(signedTransaction, {chain: chainID});
 
         if (!transaction.verifySignature()) {
-            return +Errors.TransactionVerificationIsFailed;
+            throw Errors.TransactionVerificationIsFailed.errorNumber;
         }
 
         const balance = await web3Obj.eth.getBalance(senderAddress);
         if (balance / decimalPrecision < amountToSend) {
-            return +Errors.TransactionNotEnoughMoney;
+            throw Errors.TransactionNotEnoughMoney.errorNumber;
         }
 
         const serializedTransaction = transaction.serialize();
 
-        const response = this._transfer(serializedTransaction);
-
-        if (response.ok) {
-            return transaction.hash();
-        }
-
-        return +Errors.TransactionNonceIsAlreadyUsed;
+        await this._transfer(serializedTransaction.toString('hex'))
+            .then(() => {
+                return transaction.hash().toString('hex');
+            })
+            .catch(() => {
+                throw Errors.TransactionNonceIsAlreadyUsed.errorNumber;
+            });
     }
 
     /**
      * Transfer ETH.
-     * @param {Buffer} serializedTransaction
+     * @param {string} serializedTransaction
      * @return {Promise<PromiEvent<TransactionReceipt>>}
      * @private
      */
@@ -54,5 +55,38 @@ export default class ETHManager {
                 console.log(err);
             }
         });
+    }
+
+    /**
+     * @param {string} signedTransactionString
+     * @return {Array<string>}
+     * @private
+     */
+    _getObjectForTransaction(signedTransactionString) {
+        const result = [];
+
+        let wasQuote = false;
+        let substr = String();
+
+        for (let char of signedTransactionString) {
+
+            if (char === "'") {
+                if (wasQuote) {
+                    result.push(substr);
+                    wasQuote = false;
+                    substr = String();
+                    continue;
+                }
+
+                wasQuote = true;
+                continue;
+            }
+
+            if (wasQuote) {
+                substr += char;
+            }
+        }
+
+        return result;
     }
 }
