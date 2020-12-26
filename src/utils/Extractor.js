@@ -188,8 +188,7 @@ export default class Extractor {
             }
             try {
                 data[field].constructor;
-            }
-            catch (err) {
+            } catch (err) {
                 data[field] = 0;
             }
             if (data[field].constructor === ({}).constructor) {
