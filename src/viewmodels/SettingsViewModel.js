@@ -18,6 +18,7 @@ export default class SettingsViewModel extends BaseViewModel {
             surname: '',
             avatar: '',
             pathToAvatar: '',
+            id: '',
         };
         this.editCommand = {exec: () => this.edit()};
     }

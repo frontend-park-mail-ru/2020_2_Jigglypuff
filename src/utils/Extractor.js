@@ -81,6 +81,7 @@ export default class Extractor {
             })] = data[field];
         }
         userModel.login = data['UserCredentials']['Login'];
+        userModel.id = data['UserCredentials']['userID'];
 
         return userModel;
     }

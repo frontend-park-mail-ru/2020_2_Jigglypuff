@@ -20,6 +20,7 @@ export default class ProfileTickets extends Component {
         if (!this._context.length) {
             visibility = true;
         }
+
         this._context.Validation = (new ValidationBlock({
             message: 'На данный момент нет актуальных билетов',
             visibility: visibility,

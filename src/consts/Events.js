@@ -26,6 +26,7 @@ const Events = {
     PaymentSubmit: 'paymentSubmit',
     PaymentCrypto: 'paymentCrypto',
     PaymentOnline: 'paymentOnline',
+    EditReply: 'editReply',
 };
 
 export default Events;

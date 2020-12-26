@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -56,6 +57,10 @@ module.exports = {
         port: 3001,
         historyApiFallback: true,
         contentBase: [path.join(__dirname, 'dist')],
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new UglifyJsPlugin()]
     },
     plugins: [
         new HtmlWebpackPlugin({

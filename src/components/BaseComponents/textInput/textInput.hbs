@@ -2,5 +2,5 @@
     {{ inputName }}
 </label>
 <input id="{{ inputID }}" data-event="{{ event }}" class="text-input text-input__text" placeholder="{{ inputPlaceholder }}"
-     type="{{ inputType }}"/>
+     type="{{ inputType }}" {{#if readonly }}readonly{{/if}}/>
 <span class="text-input__error">{{ inputErrorMessage }}</span>

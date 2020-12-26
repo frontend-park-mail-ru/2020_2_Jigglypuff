@@ -29,7 +29,6 @@ export default class UserBlock extends Component {
         this._context.RegisterEvent = Events.ChangePath;
         this._context.Avatar = (new Avatar({pathToAvatar: this._context.pathToAvatar})).render();
 
-
         this._context.StandardButton = (new TransparentButton({
             buttonName: 'Войти',
             event: Events.ChangePath,

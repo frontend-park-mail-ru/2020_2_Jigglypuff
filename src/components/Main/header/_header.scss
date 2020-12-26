@@ -42,6 +42,7 @@
   &__navbar-menu {
     color: $main__font_color;
     text-decoration: none;
+    font: inherit;
     font-weight: bold;
     margin-left: 2.5rem;
   }
