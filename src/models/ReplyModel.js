@@ -8,11 +8,20 @@ export default class ReplyModel {
      * Declare ReplyModel attributes.
      */
     constructor() {
+        this._id = null;
         this._movieID = null;
         this._text = null;
         this._userName = null;
         this._userRating = null;
         this._userSurname = null;
+    }
+
+    /**
+     * Get reply id.
+     * @return {int}
+     */
+    get id() {
+        return this._id;
     }
 
     /**
@@ -53,6 +62,14 @@ export default class ReplyModel {
      */
     get userSurname() {
         return this._userSurname;
+    }
+
+    /**
+     * Set reply ID to "id" variable value
+     * @param {int} id
+     */
+    set id(id) {
+        this._id = Number(id);
     }
 
     /**
@@ -114,7 +131,6 @@ export default class ReplyModel {
      * @return {Promise<Response>}
      */
     async createReply() {
-        console.log(JSON.stringify({'movieID': this._movieID, 'text': this._text}));
         const response = await fetch(`${Routes.HostAPI}${Routes.Reply}`, {
             method: 'POST',
             credentials: 'include',
@@ -129,6 +145,31 @@ export default class ReplyModel {
             if (response.status === Statuses.Forbidden) {
                 await CSRF.getCSRF();
                 await this.createReply();
+            }
+        }
+
+        return response;
+    }
+
+    /**
+     * Update reply.
+     * @return {Promise<Response>}
+     */
+    async updateReply() {
+        const response = await fetch(`${Routes.HostAPI}${Routes.Reply}`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': localStorage['X-CSRF-Token'],
+            },
+            body: JSON.stringify({'newText': this._text, 'replyID': this._id}),
+        });
+
+        if (!response.ok) {
+            if (response.status === Statuses.Forbidden) {
+                await CSRF.getCSRF();
+                await this.updateReply();
             }
         }
 
