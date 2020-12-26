@@ -134,8 +134,8 @@ export default class MovieView extends View {
     async onSubmitReply(data) {
         console.log(data);
         let responseMovieViewModel;
-        if (!data.reply) {
-            responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._movieID, this._replyText);
+        if (data.reply) {
+            responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._replyText, data.reply);
         } else {
             responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
         }
