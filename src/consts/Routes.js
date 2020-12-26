@@ -23,6 +23,7 @@ const Routes = {
     TicketBuy: '/ticket/buy/',
     TicketList: '/ticket/',
     TicketScheduleList: '/ticket/schedule/:id/',
+    TicketPay: '/ticket/pay/',
 };
 
 export default Routes;

@@ -20,6 +20,11 @@ const Events = {
     UpdateSchedule: 'updateSchedule',
     SubmitReply: 'submitReply',
     UpdateReply: 'updateReply',
+    PaymentFieldFill: 'paymentFieldFill',
+    PaymentSubmit: 'paymentSubmit',
+    PaymentCrypto: 'paymentCrypto',
+    PaymentOnline: 'paymentOnline',
+
 };
 
 

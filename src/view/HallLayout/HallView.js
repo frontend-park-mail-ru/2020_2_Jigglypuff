@@ -61,6 +61,7 @@ export default class HallView extends View {
             return;
         }
 
+
         let selectedPlacesDataset = [];
 
         selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
@@ -77,14 +78,7 @@ export default class HallView extends View {
         ticketViewModel.state.login = (await Getter.getProfile()).login;
         ticketViewModel.state.scheduleID = selectedPlacesDataset[0].session;
 
-        const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
-
-        await responseTicketViewModel
-            .then(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-            }).catch(() => {
-
-            });
+        EventBus.emit(Events.ChangePath, {path: Routes.TicketPay, ticketViewModel});
     }
 
     /**
