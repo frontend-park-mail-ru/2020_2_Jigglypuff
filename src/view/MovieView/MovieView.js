@@ -129,9 +129,16 @@ export default class MovieView extends View {
 
     /**
      * Method that handles submit of the reply text
+     * @param {Object} data
      */
-    async onSubmitReply() {
-        const responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
+    async onSubmitReply(data) {
+        console.log(data);
+        let responseMovieViewModel;
+        if (!data.reply) {
+            responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._movieID, this._replyText);
+        } else {
+            responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
+        }
 
         const validation = document.querySelector('.replies').querySelector('.validation-block');
         await responseMovieViewModel
@@ -175,7 +182,7 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
 
-        let responseMovieVM = this.movieViewModel.getScheduleCommand.exec(this._movieID, cinemaID, date);
+        let responseMovieVM = (new MovieViewModel()).getScheduleCommand.exec(this._movieID, cinemaID, date);
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
@@ -195,9 +202,7 @@ export default class MovieView extends View {
         if (movieContext.movieDescriptionContext.isAuthorized) {
             const currentProfile = await Getter.getProfile();
             if (currentProfile) {
-                movieContext.movieReplyContext.profile = {};
-                movieContext.movieReplyContext.profile.name = currentProfile.name;
-                movieContext.movieReplyContext.profile.surname = currentProfile.surname;
+                movieContext.movieReplyContext.profile = currentProfile;
             }
         }
         return movieContext;
@@ -230,7 +235,7 @@ export default class MovieView extends View {
                     visibility: this._visibility,
                 },
             )).render();
-
+            console.log(schedule.innerHTML);
             schedule.innerHTML = await (new MovieSchedule(movieScheduleContext)).render();
 
             const scroll = document.getElementById('schedule');

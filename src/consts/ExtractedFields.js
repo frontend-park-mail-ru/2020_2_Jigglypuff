@@ -30,6 +30,7 @@ const ExtractedFields = {
         'ReleaseYear',
     ]),
     ProfileData: new Set([
+        'id',
         'login',
         'name',
         'surname',

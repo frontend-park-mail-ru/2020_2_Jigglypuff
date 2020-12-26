@@ -52,7 +52,6 @@ class Router {
                 }
 
                 const data = {...clickTarget.dataset};
-                console.log(data);
                 if (!Object.prototype.hasOwnProperty.call(data, 'event')) {
                     return;
                 }

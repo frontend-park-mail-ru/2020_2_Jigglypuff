@@ -70,24 +70,23 @@ export default class PaymentView extends View {
 
         await responseTicketViewModel
             .then(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-            }).catch(() => {
-
+                document.querySelector('.payment__crypto').style.display = 'none';
+                document.querySelector('.payment__options').style.display = 'none';
+                document.querySelector('.payment__success').style.display = 'block';
+                setTimeout(() => {
+                    EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+                }, 2000);
+            }).catch((err) => {
+                const validation = document.querySelector('.validation-block');
+                validation.innerHTML = err.message;
+                validation.classList.remove('validation-display-none');
             });
     }
     /**
      * Method that shows login view
      */
     async _onCryptoPayment() {
-
-        // const responseTicketViewModel = this._ticketViewModel.buyTicketCommand.exec();
-        //
-        // await responseTicketViewModel
-        //     .then(() => {
-        //         EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-        //     }).catch(() => {
-        //
-        //     });
+        document.querySelector('.payment__crypto').style.display = 'block';
     }
 
     /**
@@ -108,7 +107,12 @@ export default class PaymentView extends View {
 
         await responseCryptoPayment
             .then(async () => {
-                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+                document.querySelector('.payment__crypto').style.display = 'none';
+                document.querySelector('.payment__options').style.display = 'none';
+                document.querySelector('.payment__success').style.display = 'block';
+                setTimeout(() => {
+                    EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
+                }, 1000);
             })
             .catch((err) => {
                 const validation = document.querySelector('.validation-block');

@@ -17,6 +17,16 @@ export default class UserModel {
         this._avatar = null;
         this._pathToAvatar = null;
         this._isPremuim = null;
+        this._id = null;
+    }
+
+
+    /**
+     * Get user login.
+     * @return {null|string}
+     */
+    get id() {
+        return this._id;
     }
 
     /**
@@ -65,6 +75,14 @@ export default class UserModel {
      */
     get isPremium() {
         return this._isPremuim;
+    }
+
+    /**
+     * Set user login to "login" variable value if valid else, null.
+     * @param {any} id
+     */
+    set id(id) {
+        this._id = +id;
     }
 
     /**
