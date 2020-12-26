@@ -1,6 +1,7 @@
 .validation-block {
+  display: flex;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1rem;
   background: $main__brand_color;
 
   border-radius: 14px;
@@ -12,6 +13,8 @@
   text-shadow: 0 4px 4px $main__text_shadow-color;
   text-align: center;
 
+  justify-content: center;
+  align-items: center;
   color: $main__font_color;
 }
 
