@@ -1,6 +1,6 @@
 import template from 'view/LoginView/LoginView.hbs';
 import View from 'view/BaseView/View';
-import LoginContent from 'components/loginContent/loginContent';
+import LoginContent from 'components/Profile/loginContent/loginContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import SignInViewModel from 'viewmodels/SignInViewModel';

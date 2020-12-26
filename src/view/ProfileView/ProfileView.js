@@ -1,6 +1,6 @@
 import template from 'view/ProfileView/ProfileView.hbs';
 import View from 'view/BaseView/View';
-import ProfileContent from 'components/profileContent/profileContent';
+import ProfileContent from 'components/Profile/profileContent/profileContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import BaseViewModel from 'viewmodels/BaseViewModel';
@@ -35,11 +35,9 @@ export default class ProfileView extends View {
             return;
         }
 
-        this._onLogoutHandler = this.onLogout.bind(this);
         this._onUpdateFieldHandler = this.onUpdateField.bind(this);
         this._onProfileEditSubmitHandler = this.onSubmit.bind(this);
 
-        EventBus.on(Events.Logout, this._onLogoutHandler);
         EventBus.on(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.on(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.on(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
@@ -136,25 +134,12 @@ export default class ProfileView extends View {
         return profileTicketContext;
     }
 
-    /**
-     * Method that handles logout from the profile
-     */
-    onLogout() {
-        BaseViewModel.logout()
-            .then(async () => {
-                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
-                EventBus.emit(Events.ChangePath, {path: Routes.Main});
-            })
-            .catch(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.Main});
-            });
-    }
+
 
     /**
      * Method that hides the profile view
      */
     hide() {
-        EventBus.off(Events.Logout, this._onLogoutHandler);
         EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);

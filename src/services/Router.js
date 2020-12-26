@@ -41,14 +41,25 @@ class Router {
         this._application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
-            if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
-                e.preventDefault();
+
+            if (clickTarget.matches('a') ||
+                clickTarget.matches('button') ||
+                clickTarget.parentNode.matches('button') ||
+                clickTarget.parentNode.matches('a') ||
+                clickTarget.matches('div')) {
+
 
                 if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
                     clickTarget = clickTarget.parentNode;
                 }
 
                 const data = {...clickTarget.dataset};
+                console.log(data);
+                if (!Object.prototype.hasOwnProperty.call(data, 'event')) {
+                    return;
+                }
+
+                e.preventDefault();
 
                 if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
                     data.id = clickTarget.id;

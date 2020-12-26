@@ -1,0 +1,41 @@
+.userblock {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  font: inherit {
+    weight: bold;
+  };
+
+  &__img {
+    border: 3px solid $main__brand_color;
+    border-radius: 100px;
+    object-fit: cover;
+    width: 60px;
+  }
+
+  &__item {
+    color: inherit;
+    text-decoration: none;
+    margin-left: 1.5rem;
+  }
+
+  &:hover &__drop {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__drop {
+    position: absolute;
+    display: none;
+    right: 0;
+    top: 0;
+    padding-top: 5.5rem;
+    width: 100%;
+  }
+
+}
+

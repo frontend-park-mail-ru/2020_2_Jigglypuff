@@ -1,6 +1,6 @@
 import template from 'view/CinemaListView/CinemaListView.hbs';
 import View from 'view/BaseView/View';
-import CinemaList from 'components/cinemaList/cinemaList';
+import CinemaList from 'components/Cinema/cinemaList/cinemaList';
 import Getter from 'utils/Getter';
 
 /**
