@@ -118,16 +118,14 @@ export default class HallViewModel {
      * @return {WebSocket}
      */
     async createAndOpenWS() {
-        this.state.scheduleID = 1;
-        const socket = new WebSocket(Routes.WSSchedule.replace(/:id/, this.state.scheduleID));
-
+        /*
         await socket.addEventListener('open', () => {
             socket.addEventListener('message', function(event) {
                 console.log('CONNECTED', event.data);
             });
         });
-
-        return socket;
+        */
+        return new WebSocket(Routes.WSSchedule.replace(/:id/, this.state.scheduleID));
     }
 
     /**
