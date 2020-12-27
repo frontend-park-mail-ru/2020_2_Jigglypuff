@@ -117,11 +117,7 @@ export default class CinemaModel {
      * @param {any} name
      */
     set name(name) {
-        if (Validator.validateCinemaName(name)) {
-            this._name = name.toString();
-        } else {
-            this._name = null;
-        }
+        this._name = name.toString();
     }
 
     /**
