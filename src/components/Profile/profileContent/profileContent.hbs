@@ -1,16 +1,18 @@
 <div class="profile__header">
     Личный кабинет
 </div>
-<hr class="header__line">
 <div class="profile">
-    <div class="edit cs-border">
-        {{{ ProfileEdit }}}
+    <div class="profile-navigation">
+        {{{ ProfileNavigation }}}
     </div>
     <div class="tickets__info">
-        <div class="tickets cs-border">
+        <div id="settings" class="edit cs-border">
+            {{{ ProfileEdit }}}
+        </div>
+        <div id="current" style="display: none" class="tickets">
             {{{ ProfileActualTickets }}}
         </div>
-        <div class="tickets cs-border">
+        <div id="history" style="display: none" class="tickets">
             {{{ ProfileHistoryTickets }}}
         </div>
     </div>

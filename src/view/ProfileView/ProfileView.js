@@ -23,13 +23,13 @@ export default class ProfileView extends View {
         super(title);
         this._template = template;
 
-        this._settingsViewModel = new SettingsViewModel();
     }
 
     /**
      * Method that shows profile view
      */
-    async show() {
+    async show(routeData) {
+        this._settingsViewModel = new SettingsViewModel();
         if (!(await BaseViewModel.isAuthorised())) {
             EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
@@ -50,11 +50,19 @@ export default class ProfileView extends View {
         profileContext.profileEdit = await this.getProfileEditContext();
         profileContext.profileTickets = await this.getProfileTicketContext();
 
+        if(routeData.blockID) {
+            profileContext.blockID = routeData.blockID;
+        } else {
+            profileContext.blockID = 'settings';
+        }
+
         const data = {
             ProfileContent: (new ProfileContent(profileContext)).render(),
         };
         await super.show(this._template(data));
     }
+
+
 
     /**
      * Method that gets the profile editing context
@@ -67,7 +75,7 @@ export default class ProfileView extends View {
 
         for (const i in profileEdit) {
             if (Object.prototype.hasOwnProperty.call(userProfile, i) && i !== 'avatar') {
-                profileEdit[i].inputPlaceholder = userProfile[i];
+                profileEdit[i].inputValue = userProfile[i];
             }
         }
         profileEdit.avatar.pathToAvatar = userProfile.pathToAvatar;
@@ -156,6 +164,12 @@ export default class ProfileView extends View {
      */
     onUpdateField(data) {
         if (data.id === 'avatar') {
+            if (!data.target.files[0].type.match('image.*')) {
+                const validation = document.querySelector('.validation-block');
+                validation.innerHTML = 'Формат аватара поддерживает только картинки';
+                validation.classList.remove('validation-display-none');
+                return;
+            }
             this._settingsViewModel.state[data.id] = data.target.files[0];
             return;
         }
@@ -169,7 +183,8 @@ export default class ProfileView extends View {
         const responseProfileEdit = this._settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
-            .then(async () => {
+            .then(async (res) => {
+                console.log(res);
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
             })
             .catch((err) => {
@@ -177,7 +192,5 @@ export default class ProfileView extends View {
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });
-
-        await this.show();
     }
 }

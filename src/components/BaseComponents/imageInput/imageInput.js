@@ -24,7 +24,6 @@ export default class ImageInput extends Component {
         }
 
         this._context.Avatar = (new Avatar({pathToAvatar: this._context.pathToAvatar})).render();
-        console.log(this._context);
     }
 
     /**
@@ -35,14 +34,7 @@ export default class ImageInput extends Component {
         const file = data.target.files[0];
 
         if (!file.type.match('image.*')) {
-            const err = document.querySelector('.image-input__error-disabled');
-            err.className = 'image-input__error';
             return;
-        } else {
-            const err = document.querySelector('.image-input__error');
-            if (err) {
-                err.className = 'image-input__error-disabled';
-            }
         }
 
         const reader = new FileReader();

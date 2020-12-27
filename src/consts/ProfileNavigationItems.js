@@ -4,19 +4,19 @@ import Routes from 'consts/Routes';
 const ProfileNavigationItems = {
     fields: [
         {
+            id: 'settings',
             title: 'Настройки',
-            event: Events.ChangePath,
-            url: Routes.ProfilePage,
+            event: Events.GoToProfileBlock,
         },
         {
+            id: 'history',
             title: 'История покупок',
-            event: Events.ChangePath,
-            url: Routes.ProfilePage,
+            event: Events.GoToProfileBlock,
         },
         {
-            title: 'Текущие заказ',
-            event: Events.ChangePath,
-            url: Routes.ProfilePage,
+            id: 'current',
+            title: 'Текущие заказы',
+            event: Events.GoToProfileBlock,
         },
     ],
     exit: {
