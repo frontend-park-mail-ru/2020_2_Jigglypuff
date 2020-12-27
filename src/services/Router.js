@@ -41,13 +41,15 @@ class Router {
         this._application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
-
             if (clickTarget.matches('a') ||
                 clickTarget.matches('button') ||
                 clickTarget.parentNode.matches('button') ||
                 clickTarget.parentNode.matches('a') ||
-                clickTarget.matches('div')) {
-                if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
+                clickTarget.matches('div') ||
+                clickTarget.matches('svg') ||
+                clickTarget.parentNode.matches('svg')) {
+
+                if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a') || clickTarget.parentNode.matches('svg')) {
                     clickTarget = clickTarget.parentNode;
                 }
 
@@ -55,7 +57,6 @@ class Router {
                 if (!Object.prototype.hasOwnProperty.call(data, 'event')) {
                     return;
                 }
-
                 e.preventDefault();
 
                 if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
