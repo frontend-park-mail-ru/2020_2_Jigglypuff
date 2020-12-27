@@ -19,11 +19,11 @@
                 {{ hall }} зал <br> {{ row }} ряд | {{ place }} место
             </div>
             <div class="ticket__info">
-                <img width="100px" src="{{qrpath}}" alt="">
+                <img width="100px" src="{{ qrpath }}" alt="">
             </div>
         </div>
     {{/each}}
 </div>
-{{#if this }}
+{{#if this.qrpath }}
     *Предъявите данный QR-код на входе в кинотеатр
 {{/if}}
