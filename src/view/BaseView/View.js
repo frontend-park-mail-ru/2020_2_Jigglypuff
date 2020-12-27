@@ -48,6 +48,9 @@ export default class View {
             sliderContext = await this.getSliderContext(templateDate.sliderMovies);
             this._context.Slider = (new Slider(sliderContext)).render();
 
+            if (this._sliderTimer) {
+                clearInterval(this._sliderTimer);
+            }
             this._sliderTimer = setInterval(() => {
                 EventBus.emit(Events.ScrollSlider, {target: document.querySelector('.slider__control_right')});
             }, 5000);
@@ -66,9 +69,6 @@ export default class View {
         }
         document.querySelector('.content').innerHTML = '';
         document.querySelector('.footer').innerHTML = '';
-        if (this._sliderTimer) {
-            clearInterval(this._sliderTimer);
-        }
         EventBus.off(Events.Logout, this._onLogoutHandler);
     }
 
