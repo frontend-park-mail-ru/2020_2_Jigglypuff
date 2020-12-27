@@ -58,6 +58,7 @@ export default class View {
 
         this._context.Content = contentTemplate;
         this._root.innerHTML = template(this._context);
+
     }
 
     /**
@@ -69,6 +70,13 @@ export default class View {
         }
         document.querySelector('.content').innerHTML = '';
         document.querySelector('.footer').innerHTML = '';
+        this.off();
+    }
+
+    off() {
+        if (this._sliderTimer) {
+            clearInterval(this._sliderTimer);
+        }
         EventBus.off(Events.Logout, this._onLogoutHandler);
     }
 

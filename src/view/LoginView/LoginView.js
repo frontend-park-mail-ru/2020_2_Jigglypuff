@@ -48,10 +48,13 @@ export default class LoginView extends View {
      * Method that hides login view
      */
     hide() {
+        super.hide();
+    }
+
+    off() {
         EventBus.off(Events.LoginFieldFill, this._onLoginFieldFillHandler);
         EventBus.off(Events.LoginSubmit, this._onLoginSubmitHandler);
-
-        super.hide();
+        super.off();
     }
 
     /**

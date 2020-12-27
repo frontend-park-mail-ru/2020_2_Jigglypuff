@@ -77,15 +77,18 @@ export default class MovieView extends View {
      * Method that hides view
      * */
     hide() {
-        this._filter.hide();
+        this.off();
+        super.hide();
+    }
+
+    off() {
+        this._filter.off();
         EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
         EventBus.off(Events.MovieRate, this._onMovieRateHandler);
         EventBus.off(Events.SubmitReply, this._onSubmitReplyHandler);
         EventBus.off(Events.UpdateReply, this._onUpdateReplyHadler);
-
-        super.hide();
+        super.off();
     }
-
     /**
      * Method that handles movie rating
      */
@@ -134,6 +137,7 @@ export default class MovieView extends View {
     async onSubmitReply(data) {
         console.log(data);
         let responseMovieViewModel;
+        console.log(data.reply);
         if (data.reply) {
             responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._replyText, data.reply);
         } else {

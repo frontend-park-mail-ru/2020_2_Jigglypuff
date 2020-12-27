@@ -139,11 +139,15 @@ export default class ProfileView extends View {
      * Method that hides the profile view
      */
     hide() {
+        this.off();
+        super.hide();
+    }
+
+    off() {
         EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
-
-        super.hide();
+        super.off()
     }
 
     /**

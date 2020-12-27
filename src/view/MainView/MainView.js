@@ -60,9 +60,14 @@ export default class MainView extends View {
      * Method that hides view
      * */
     hide() {
-        this._filter.hide();
         EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
         super.hide();
+    }
+
+    off() {
+        this._filter.off();
+        EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
+        super.off();
     }
 
     /**

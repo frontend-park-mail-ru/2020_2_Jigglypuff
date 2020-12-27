@@ -47,9 +47,13 @@ export default class HallView extends View {
      * Method that hides view
      * */
     hide() {
-        EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
-        this._hallLayout.hide();
         super.hide();
+    }
+
+    off() {
+        EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
+        this._hallLayout.off();
+        super.off();
     }
 
     /**
@@ -61,10 +65,7 @@ export default class HallView extends View {
             return;
         }
 
-
-        let selectedPlacesDataset = [];
-
-        selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
+        let selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
             return place.dataset;
         });
 

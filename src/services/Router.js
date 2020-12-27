@@ -95,7 +95,7 @@ class Router {
     go(path, data = {}) {
         const routeData = {...this.getDataFromPath(path), ...data};
         if (this.currentView === routeData.view) {
-            this.currentView.hide();
+            this.currentView.off();
             this.currentView.show(routeData);
             return;
         }
@@ -103,7 +103,6 @@ class Router {
             this.currentView.hide();
         }
         this.currentView = routeData.view;
-
         if (window.location.pathname !== path) {
             window.history.pushState(null, null, path);
         }

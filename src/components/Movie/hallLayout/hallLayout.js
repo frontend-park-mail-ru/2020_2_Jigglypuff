@@ -99,7 +99,7 @@ export default class HallLayout extends Component {
     /**
      * Method that handles hide of the component
      */
-    hide() {
+    off() {
         EventBus.off(Events.TicketSelect, this._onTicketSelectHandler);
     }
 }

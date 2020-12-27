@@ -55,13 +55,17 @@ export default class PaymentView extends View {
      * Method that hides login view
      */
     hide() {
+        super.hide();
+    }
+
+    off() {
         EventBus.off(Events.PaymentFieldFill, this._onPaymentFieldFillHandler);
         EventBus.off(Events.PaymentSubmit, this._onPaymentSubmitHandler);
         EventBus.off(Events.PaymentCrypto, this._onCryptoPaymentHandler);
         EventBus.off(Events.PaymentOnline, this._onOnlinePaymentHandler);
-
-        super.hide();
+        super.off()
     }
+
     /**
      * Method that shows login view
      */

@@ -57,7 +57,7 @@ export default class Filter extends Component {
     /**
      * Method that handles hiding of the parent element
      * */
-    hide() {
+    off() {
         EventBus.off(Events.SubmitFilter, this._onSubmitFilterHandler);
     }
 

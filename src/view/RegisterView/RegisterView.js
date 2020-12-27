@@ -45,9 +45,14 @@ export default class RegisterView extends View {
      * Method that hides registration view
      */
     hide() {
+        this.off()
+        super.hide();
+    }
+
+    off() {
         EventBus.off(Events.RegisterFieldFill, this._onUpdateField);
         EventBus.off(Events.RegisterSubmit, this._onSubmit);
-        super.hide();
+        super.off();
     }
 
     /**
@@ -65,7 +70,7 @@ export default class RegisterView extends View {
         const responseSignUp = this._signUpViewModel.registerCommand.exec();
 
         await responseSignUp
-            .then(async (response) => {
+            .then(async () => {
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })
