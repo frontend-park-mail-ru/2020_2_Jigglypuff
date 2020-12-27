@@ -32,6 +32,7 @@ export default class ProfileNavigation extends Component {
         for (const i of block.getElementsByClassName('profile-navigation__item')) {
             if (i.dataset.id === this._blockID) {
                 i.classList.add('profile-navigation__item_enabled');
+                break;
             }
         }
         return block.innerHTML;

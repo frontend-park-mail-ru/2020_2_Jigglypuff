@@ -56,8 +56,10 @@ export default class ProfileView extends View {
             profileContext.blockID = 'settings';
         }
 
+        this._ProfileContent = new ProfileContent(profileContext);
+
         const data = {
-            ProfileContent: (new ProfileContent(profileContext)).render(),
+            ProfileContent: this._ProfileContent.render(),
         };
         await super.show(this._template(data));
     }
@@ -155,6 +157,7 @@ export default class ProfileView extends View {
         EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
+        this._ProfileContent.off();
         super.off()
     }
 

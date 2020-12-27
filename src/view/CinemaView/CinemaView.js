@@ -24,10 +24,21 @@ export default class CinemaView extends View {
      */
     async show(routeData) {
         const cinemaContext = await Getter.getCinema(routeData.id);
+
+        this._Cinema = new Cinema(cinemaContext);
         const data = {
-            Cinema: (new Cinema(cinemaContext).render()),
+            Cinema: this._Cinema.render(),
         };
 
         await super.show(this._template(data));
+    }
+
+    hide() {
+        this.off();
+        super.hide();
+    }
+
+    off() {
+        this._Cinema.off();
     }
 }

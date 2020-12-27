@@ -48,10 +48,9 @@ export default class MovieView extends View {
         this._movieID = routeData.id;
         const movieContext = await this.getMovieContext();
 
-
         this._visibility = !movieContext.movieScheduleContext.sessions;
 
-        const data = {};
+
         movieContext.movieScheduleContext.Validation = (new ValidationBlock(
             {
                 message: 'На данный момент нет актуальных сеансов',
@@ -66,10 +65,17 @@ export default class MovieView extends View {
             },
         );
 
-        data.Filtration = this._filter.render();
-        data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
-        data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
-        data.MovieReviews = (new ReplyBlock(movieContext.movieReplyContext).render());
+        this._MovieDescription = new MovieDescription(movieContext.movieDescriptionContext);
+        this._MovieSchedule = new MovieSchedule(movieContext.movieScheduleContext);
+        this._ReplyBlock = new ReplyBlock(movieContext.movieReplyContext);
+
+        const data = {
+            Filtration: this._filter.render(),
+            MovieDescription: this._MovieDescription.render(),
+            MovieSchedule: this._MovieSchedule.render(),
+            MovieReviews: this._ReplyBlock.render(),
+        };
+
         await super.show(this._template(data));
     }
 
@@ -83,12 +89,17 @@ export default class MovieView extends View {
 
     off() {
         this._filter.off();
+        this._MovieDescription.off();
+        this._MovieSchedule.off();
+        this._ReplyBlock.off();
+
         EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
         EventBus.off(Events.MovieRate, this._onMovieRateHandler);
         EventBus.off(Events.SubmitReply, this._onSubmitReplyHandler);
         EventBus.off(Events.UpdateReply, this._onUpdateReplyHadler);
         super.off();
     }
+
     /**
      * Method that handles movie rating
      */

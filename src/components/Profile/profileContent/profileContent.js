@@ -41,10 +41,32 @@ export default class ProfileContent extends Component {
         }
         data.target.classList.add('profile-navigation__item_enabled');
 
-        document.getElementById('settings').style.display = 'none';
-        document.getElementById('current').style.display = 'none';
-        document.getElementById('history').style.display = 'none';
+        let blockID = data.target.dataset.id;
 
-        document.getElementById(data.id).style.display = 'block';
+        for (const i of document.querySelectorAll('.navigation-item')) {
+            i.style.display = 'none';
+            if (i.dataset.id === blockID) {
+                i.style.display = 'block';
+            }
+        }
+    }
+
+    render() {
+        let block = document.createElement('div');
+        block.innerHTML = this._template(this._context);
+        let blockID = block.querySelector('.profile-navigation__item_enabled').dataset.id;
+
+        for (const i of block.querySelectorAll('.navigation-item')) {
+            i.style.display = 'none';
+            if (i.dataset.id === blockID) {
+                i.style.display = 'block';
+            }
+        }
+
+        return block.innerHTML;
+    }
+
+    off() {
+        EventBus.off(Events.ChangeProfileBlock, this._onChangeBlockHandler);
     }
 }

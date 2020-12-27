@@ -56,6 +56,11 @@ export default class Header extends Component {
             }
             EventBus.emit(Events.ChangeProfileBlock, data);
         }
+    }
 
+    off() {
+        EventBus.off(Events.UpdateHeader, this._onUpdateHeaderHandler);
+        EventBus.off(Events.GoToProfileBlock, this._onGoToProfileBlockHandler);
+        this._UserBlock.off();
     }
 }

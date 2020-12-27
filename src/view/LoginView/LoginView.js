@@ -38,8 +38,9 @@ export default class LoginView extends View {
         EventBus.on(Events.LoginFieldFill, this._onLoginFieldFillHandler);
         EventBus.on(Events.LoginSubmit, this._onLoginSubmitHandler);
 
+        this._LoginContent = new LoginContent();
         const data = {
-            LoginContent: (new LoginContent()).render(),
+            LoginContent: this._LoginContent.render(),
         };
         await super.show(this._template(data));
     }
@@ -48,10 +49,13 @@ export default class LoginView extends View {
      * Method that hides login view
      */
     hide() {
+        this.off();
         super.hide();
     }
 
     off() {
+        this._LoginContent.off();
+
         EventBus.off(Events.LoginFieldFill, this._onLoginFieldFillHandler);
         EventBus.off(Events.LoginSubmit, this._onLoginSubmitHandler);
         super.off();

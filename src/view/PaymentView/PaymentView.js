@@ -42,11 +42,10 @@ export default class PaymentView extends View {
         EventBus.on(Events.PaymentCrypto, this._onCryptoPaymentHandler);
         EventBus.on(Events.PaymentOnline, this._onOnlinePaymentHandler);
 
+        this._PaymentContent = new PaymentContent();
         const data = {
-            PaymentContent: (new PaymentContent()).render(),
+            PaymentContent: this._PaymentContent.render(),
         };
-
-        console.log(data);
 
         await super.show(this._template(data));
     }
@@ -55,6 +54,7 @@ export default class PaymentView extends View {
      * Method that hides login view
      */
     hide() {
+        this.off();
         super.hide();
     }
 
@@ -63,6 +63,7 @@ export default class PaymentView extends View {
         EventBus.off(Events.PaymentSubmit, this._onPaymentSubmitHandler);
         EventBus.off(Events.PaymentCrypto, this._onCryptoPaymentHandler);
         EventBus.off(Events.PaymentOnline, this._onOnlinePaymentHandler);
+        this._PaymentContent.off();
         super.off()
     }
 

@@ -18,8 +18,10 @@ export default class ImageInput extends Component {
         super(context);
         this._template = template;
 
+        this._handleFileSelectHandler = this._handleFileSelect.bind(this)
+
         if (!this._isRendered) {
-            EventBus.on(Events.UploadAvatar, this.handleFileSelect.bind(this));
+            EventBus.on(Events.UploadAvatar, this._handleFileSelectHandler);
             this._isRendered = true;
         }
 
@@ -30,7 +32,7 @@ export default class ImageInput extends Component {
      * Method that shows the image preview
      * @param {Object} data - image input content
      * */
-    handleFileSelect(data) {
+    _handleFileSelect(data) {
         const file = data.target.files[0];
 
         if (!file.type.match('image.*')) {
@@ -49,5 +51,9 @@ export default class ImageInput extends Component {
         })(file);
 
         reader.readAsDataURL(file);
+    }
+
+    off() {
+        EventBus.on(Events.UploadAvatar, this._handleFileSelectHandler);
     }
 }

@@ -43,9 +43,12 @@ export default class MainView extends View {
 
         this._visibility = !movieListContext.length;
 
-        const templateData = {
-            MovieList: (new MovieList(movieListContext)).render(),
-            MovieRecommendation: (new MovieList(movieRecommendationContext)).render(),
+        this._MovieList = new MovieList(movieListContext);
+        this._MovieRecommendation = new MovieList(movieRecommendationContext);
+
+        const data = {
+            MovieList: this._MovieList.render(),
+            MovieRecommendation: this._MovieRecommendation.render(),
             Filtration: this._filter.render(),
             Validation: (new ValidationBlock({
                 message: 'На данный момент нет актуальных сеансов',
@@ -53,19 +56,22 @@ export default class MainView extends View {
             })).render(),
         };
 
-        await super.show(this._template(templateData), {isSlider: true, sliderMovies: movieRecommendationContext});
+        await super.show(this._template(data), {isSlider: true, sliderMovies: movieRecommendationContext});
     }
 
     /**
      * Method that hides view
      * */
     hide() {
-        EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
+        this.off();
         super.hide();
     }
 
     off() {
         this._filter.off();
+        this._MovieList.off();
+        this._MovieRecommendation.off();
+
         EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
         super.off();
     }

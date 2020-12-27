@@ -30,13 +30,16 @@ export default class RegisterView extends View {
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
+
         this._onUpdateField = this.onUpdateField.bind(this);
         this._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.RegisterFieldFill, this._onUpdateField);
         EventBus.on(Events.RegisterSubmit, this._onSubmit);
 
+        this._RegisterContent = new RegisterContent();
+
         const data = {
-            RegisterContent: (new RegisterContent()).render(),
+            RegisterContent: this._RegisterContent.render(),
         };
         await super.show(this._template(data));
     }
@@ -50,6 +53,7 @@ export default class RegisterView extends View {
     }
 
     off() {
+        this._RegisterContent.off();
         EventBus.off(Events.RegisterFieldFill, this._onUpdateField);
         EventBus.off(Events.RegisterSubmit, this._onSubmit);
         super.off();
