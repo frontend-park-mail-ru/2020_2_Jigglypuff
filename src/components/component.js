@@ -20,6 +20,9 @@ export default class Component {
         return this._template(this._context);
     }
 
+    /**
+     *
+     * */
     off() {
 
     }

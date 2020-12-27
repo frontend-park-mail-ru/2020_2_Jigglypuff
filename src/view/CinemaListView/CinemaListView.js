@@ -39,11 +39,17 @@ export default class CinemaListView extends View {
         return await Getter.getCinemaList();
     }
 
+    /**
+     *
+     * */
     hide() {
         this.off();
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._CinemaList.off();
     }

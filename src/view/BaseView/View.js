@@ -58,7 +58,6 @@ export default class View {
 
         this._context.Content = contentTemplate;
         this._root.innerHTML = template(this._context);
-
     }
 
     /**
@@ -73,6 +72,9 @@ export default class View {
         this.off();
     }
 
+    /**
+     *
+     * */
     off() {
         if (this._sliderTimer) {
             clearInterval(this._sliderTimer);

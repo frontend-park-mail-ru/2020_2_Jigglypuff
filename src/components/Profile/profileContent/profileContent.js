@@ -4,8 +4,8 @@ import ProfileEdit from 'components/Profile/profileEdit/profileEdit';
 import ProfileTickets from 'components/Profile/profileTickets/profileTickets';
 import Routes from 'consts/Routes';
 import Events from 'consts/Events';
-import ProfileNavigation from "components/Profile/profileNavigation/profileNavigation";
-import EventBus from "services/EventBus";
+import ProfileNavigation from 'components/Profile/profileNavigation/profileNavigation';
+import EventBus from 'services/EventBus';
 
 /**
  * Profile content component
@@ -35,13 +35,16 @@ export default class ProfileContent extends Component {
         this._context.ProfileHistoryTickets = (new ProfileTickets(this._context.profileTickets.profileHistoryTickets)).render();
     }
 
+    /**
+     * @param {Object} data
+     * */
     _onChangeBlock(data) {
         for (const i of document.getElementsByClassName('profile-navigation__item')) {
             i.classList.remove('profile-navigation__item_enabled');
         }
         data.target.classList.add('profile-navigation__item_enabled');
 
-        let blockID = data.target.dataset.id;
+        const blockID = data.target.dataset.id;
 
         for (const i of document.querySelectorAll('.navigation-item')) {
             i.style.display = 'none';
@@ -51,10 +54,13 @@ export default class ProfileContent extends Component {
         }
     }
 
+    /**
+     * @return {string}
+     * */
     render() {
-        let block = document.createElement('div');
+        const block = document.createElement('div');
         block.innerHTML = this._template(this._context);
-        let blockID = block.querySelector('.profile-navigation__item_enabled').dataset.id;
+        const blockID = block.querySelector('.profile-navigation__item_enabled').dataset.id;
 
         for (const i of block.querySelectorAll('.navigation-item')) {
             i.style.display = 'none';
@@ -66,6 +72,9 @@ export default class ProfileContent extends Component {
         return block.innerHTML;
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.ChangeProfileBlock, this._onChangeBlockHandler);
     }

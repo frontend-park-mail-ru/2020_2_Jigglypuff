@@ -87,6 +87,9 @@ export default class MovieView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._filter.off();
         this._MovieDescription.off();

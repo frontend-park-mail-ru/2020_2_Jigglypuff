@@ -63,6 +63,9 @@ export default class ReplyBlock extends Component {
         document.querySelector('.reply__submit').firstElementChild.setAttribute('data-reply', this._profileReplyID);
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.EditReply, this._onEditReplyHandler);
     }

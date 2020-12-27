@@ -67,6 +67,9 @@ export default class MainView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._filter.off();
         this._MovieList.off();

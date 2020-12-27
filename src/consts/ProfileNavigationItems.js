@@ -10,7 +10,7 @@ const ProfileNavigationItems = {
         },
         {
             id: 'history',
-            title: 'История заказы',
+            title: 'История заказов',
             event: Events.GoToProfileBlock,
         },
         {

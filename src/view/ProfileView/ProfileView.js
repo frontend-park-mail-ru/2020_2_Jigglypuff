@@ -22,11 +22,11 @@ export default class ProfileView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
         this._template = template;
-
     }
 
     /**
      * Method that shows profile view
+     * @param {Object} routeData
      */
     async show(routeData) {
         this._settingsViewModel = new SettingsViewModel();
@@ -50,7 +50,7 @@ export default class ProfileView extends View {
         profileContext.profileEdit = await this.getProfileEditContext();
         profileContext.profileTickets = await this.getProfileTicketContext();
 
-        if(routeData.blockID) {
+        if (routeData.blockID) {
             profileContext.blockID = routeData.blockID;
         } else {
             profileContext.blockID = 'settings';
@@ -63,7 +63,6 @@ export default class ProfileView extends View {
         };
         await super.show(this._template(data));
     }
-
 
 
     /**
@@ -153,12 +152,15 @@ export default class ProfileView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
         this._ProfileContent.off();
-        super.off()
+        super.off();
     }
 
     /**

@@ -19,7 +19,7 @@
                 {{ hall }} зал <br> {{ row }} ряд | {{ place }} место
             </div>
             <div class="ticket__info">
-                <img width="100px" src="{{ qrpath }}" alt="">
+                {{#if qrpath}}<img width="100px" src="{{ qrpath }}" alt="">{{/if}}
             </div>
         </div>
     {{/each}}

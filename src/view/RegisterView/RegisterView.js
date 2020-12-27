@@ -48,10 +48,13 @@ export default class RegisterView extends View {
      * Method that hides registration view
      */
     hide() {
-        this.off()
+        this.off();
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._RegisterContent.off();
         EventBus.off(Events.RegisterFieldFill, this._onUpdateField);

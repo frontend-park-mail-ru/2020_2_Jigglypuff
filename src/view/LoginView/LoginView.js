@@ -53,6 +53,9 @@ export default class LoginView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._LoginContent.off();
 

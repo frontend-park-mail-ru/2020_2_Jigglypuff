@@ -48,7 +48,6 @@ class Router {
                 clickTarget.matches('div') ||
                 clickTarget.matches('svg') ||
                 clickTarget.parentNode.matches('svg')) {
-
                 if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a') || clickTarget.parentNode.matches('svg')) {
                     clickTarget = clickTarget.parentNode;
                 }

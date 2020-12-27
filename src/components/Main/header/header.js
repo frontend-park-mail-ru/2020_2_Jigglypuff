@@ -4,7 +4,7 @@ import UserBlock from 'components/Main/userBlock/userBlock';
 import headerItems from 'consts/HeaderItems';
 import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
-import Routes from "consts/Routes";
+import Routes from 'consts/Routes';
 
 /**
  * Header component
@@ -43,9 +43,11 @@ export default class Header extends Component {
         userBlock.innerHTML = this._UserBlock.render();
     }
 
+    /**
+     * @param {Object} data
+     * */
     _onGoToProfileBlock(data) {
-        console.log(document.getElementsByClassName('profile-navigation__item'));
-        if(window.location.pathname !== Routes.ProfilePage) {
+        if (window.location.pathname !== Routes.ProfilePage) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage, blockID: data.id});
         } else {
             for (const i of document.getElementsByClassName('profile-navigation__item')) {
@@ -58,6 +60,9 @@ export default class Header extends Component {
         }
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.UpdateHeader, this._onUpdateHeaderHandler);
         EventBus.off(Events.GoToProfileBlock, this._onGoToProfileBlockHandler);

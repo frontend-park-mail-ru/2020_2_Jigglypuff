@@ -1,7 +1,7 @@
 import Component from 'components/component';
 import template from 'components/Profile/profileNavigation/profileNavigation.hbs';
-import ProfileNavigationItems from "consts/ProfileNavigationItems";
-import Events from "consts/Events";
+import ProfileNavigationItems from 'consts/ProfileNavigationItems';
+import Events from 'consts/Events';
 
 /**
  * Profile content component
@@ -25,8 +25,11 @@ export default class ProfileNavigation extends Component {
         }
     }
 
+    /**
+     * @return {string}
+     * */
     render() {
-        let block = document.createElement('div');
+        const block = document.createElement('div');
         block.innerHTML = this._template(this._context);
 
         for (const i of block.getElementsByClassName('profile-navigation__item')) {

@@ -49,7 +49,7 @@ export default class SettingsViewModel extends BaseViewModel {
 
 
         const responseEdit = await this._userModel.edit();
-        if(responseEdit.ok) {
+        if (responseEdit.ok) {
             return responseEdit.ok;
         }
 

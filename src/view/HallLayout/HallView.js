@@ -50,6 +50,9 @@ export default class HallView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
         this._hallLayout.off();
@@ -65,7 +68,7 @@ export default class HallView extends View {
             return;
         }
 
-        let selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
+        const selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
             return place.dataset;
         });
 

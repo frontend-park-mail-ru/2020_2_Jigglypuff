@@ -18,7 +18,7 @@ export default class ImageInput extends Component {
         super(context);
         this._template = template;
 
-        this._handleFileSelectHandler = this._handleFileSelect.bind(this)
+        this._handleFileSelectHandler = this._handleFileSelect.bind(this);
 
         if (!this._isRendered) {
             EventBus.on(Events.UploadAvatar, this._handleFileSelectHandler);
@@ -53,6 +53,9 @@ export default class ImageInput extends Component {
         reader.readAsDataURL(file);
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.on(Events.UploadAvatar, this._handleFileSelectHandler);
     }

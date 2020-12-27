@@ -58,13 +58,16 @@ export default class PaymentView extends View {
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         EventBus.off(Events.PaymentFieldFill, this._onPaymentFieldFillHandler);
         EventBus.off(Events.PaymentSubmit, this._onPaymentSubmitHandler);
         EventBus.off(Events.PaymentCrypto, this._onCryptoPaymentHandler);
         EventBus.off(Events.PaymentOnline, this._onOnlinePaymentHandler);
         this._PaymentContent.off();
-        super.off()
+        super.off();
     }
 
     /**

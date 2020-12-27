@@ -33,11 +33,17 @@ export default class CinemaView extends View {
         await super.show(this._template(data));
     }
 
+    /**
+     *
+     * */
     hide() {
         this.off();
         super.hide();
     }
 
+    /**
+     *
+     * */
     off() {
         this._Cinema.off();
     }
