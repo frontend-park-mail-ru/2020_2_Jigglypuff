@@ -1,0 +1,41 @@
+<div class="replies">
+    <div class="replies__title">
+        Отзывы
+    </div>
+    {{#each replies}}
+        <hr class="reply__line">
+
+        <div class="replies__reply">
+            <div style="display: flex; justify-content: center; margin-right: 7px">
+                {{{ this.user.Avatar }}}
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center">
+                <div class="reply__reviewer">{{ this.user.name }} {{ this.user.surname }}</div>
+                <div class="reply__review">{{ this.text }}</div>
+            </div>
+            {{#if this.user.EditButton }}
+                <div style="display:flex; margin-left: auto; align-items: center">
+                    {{{ this.user.EditButton }}}
+                </div>
+            {{/if}}
+        </div>
+    {{/each}}
+    {{{ Validation }}}
+    {{#if profile}}
+        <div class="reply__edit" {{#if isEdition }}style="display: none"{{/if}}>
+            <hr class="reply__line">
+            <div class="replies__reply-creation">
+                <div style="display: flex; justify-content: center; margin-right: 7px">
+                    {{{ profile.Avatar }}}
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; width: 100%">
+                    <div class="reply__reviewer">{{ profile.name }} {{ profile.surname }}</div>
+                    <textarea class="reply__input" data-event="updateReply" maxlength="5000"></textarea>
+                    <div class="reply__submit">
+                        {{{ SubmitReply }}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</div>

@@ -20,7 +20,15 @@ const Events = {
     UpdateSchedule: 'updateSchedule',
     SubmitReply: 'submitReply',
     UpdateReply: 'updateReply',
+    DropProfileNavigation: 'dropProfileNavigation',
+    ScrollSlider: 'slideMovie',
+    PaymentFieldFill: 'paymentFieldFill',
+    PaymentSubmit: 'paymentSubmit',
+    PaymentCrypto: 'paymentCrypto',
+    PaymentOnline: 'paymentOnline',
+    EditReply: 'editReply',
+    ChangeProfileBlock: 'changeProfileBlock',
+    GoToProfileBlock: 'goToProfileBlock',
 };
-
 
 export default Events;

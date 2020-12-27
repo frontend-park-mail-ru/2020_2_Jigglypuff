@@ -30,17 +30,18 @@ const ExtractedFields = {
         'ReleaseYear',
     ]),
     ProfileData: new Set([
+        'id',
         'login',
         'name',
         'surname',
         'pathToAvatar',
     ]),
     ReplyData: new Set([
+        'ID',
         'MovieID',
         'Text',
-        'UserName',
+        'User',
         'UserRating',
-        'UserSurname',
     ]),
     ScheduleData: new Set([
         'CinemaID',
@@ -59,6 +60,7 @@ const ExtractedFields = {
         'ID',
         'Login',
         'PlaceField',
+        'QRPath',
         'Schedule',
         'TransactionDate',
     ]),

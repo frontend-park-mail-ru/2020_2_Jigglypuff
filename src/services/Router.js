@@ -41,14 +41,22 @@ class Router {
         this._application.addEventListener('click', (e) => {
             let clickTarget = e.target;
 
-            if (clickTarget.matches('a') || clickTarget.matches('button') || clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
-                e.preventDefault();
-
-                if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a')) {
+            if (clickTarget.matches('a') ||
+                clickTarget.matches('button') ||
+                clickTarget.parentNode.matches('button') ||
+                clickTarget.parentNode.matches('a') ||
+                clickTarget.matches('div') ||
+                clickTarget.matches('svg') ||
+                clickTarget.parentNode.matches('svg')) {
+                if (clickTarget.parentNode.matches('button') || clickTarget.parentNode.matches('a') || clickTarget.parentNode.matches('svg')) {
                     clickTarget = clickTarget.parentNode;
                 }
 
                 const data = {...clickTarget.dataset};
+                if (!Object.prototype.hasOwnProperty.call(data, 'event')) {
+                    return;
+                }
+                e.preventDefault();
 
                 if (Object.prototype.hasOwnProperty.call(clickTarget, 'id')) {
                     data.id = clickTarget.id;
@@ -87,7 +95,7 @@ class Router {
     go(path, data = {}) {
         const routeData = {...this.getDataFromPath(path), ...data};
         if (this.currentView === routeData.view) {
-            this.currentView.hide();
+            this.currentView.off();
             this.currentView.show(routeData);
             return;
         }
@@ -95,7 +103,6 @@ class Router {
             this.currentView.hide();
         }
         this.currentView = routeData.view;
-
         if (window.location.pathname !== path) {
             window.history.pushState(null, null, path);
         }

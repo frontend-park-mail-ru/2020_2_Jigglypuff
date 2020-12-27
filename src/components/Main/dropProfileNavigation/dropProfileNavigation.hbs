@@ -1,0 +1,23 @@
+<div class="profile-dropdown">
+
+    <div class="profile-dropdown__header">
+        {{{Avatar}}}
+        <div class="profile-dropdown__header_info">
+            <div class="profile-dropdown__header_info_name">{{ name }} {{ surname }}</div>
+            <div class="profile-dropdown__header_info_login">{{ login }}</div>
+        </div>
+    </div>
+
+    <hr class="profile-dropdown__line">
+
+    {{#each fields}}
+        <button data-id={{ id }} data-event="{{ event }}" class="profile-dropdown__item">{{title}}</button>
+    {{/each}}
+
+    <hr class="profile-dropdown__line">
+
+    {{#with exit}}
+        <button data-event="{{ this.event }}" data-path="{{ this.url }}" class="profile-dropdown__item">{{ this.title }}</button>
+    {{/with}}
+
+</div>

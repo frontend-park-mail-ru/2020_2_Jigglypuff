@@ -1,16 +1,16 @@
 import template from 'view/MovieView/MovieView.hbs';
 import View from 'view/BaseView/View';
-import MovieDescription from 'components/movieDescription/movieDescription';
+import MovieDescription from 'components/Movie/movieDescription/movieDescription';
 import MovieViewModel from 'viewmodels/MovieViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
-import MovieSchedule from 'components/movieSchedule/movieSchedule';
-import Filter from 'components/filter/filter';
-import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
-import ReplyBlock from 'components/replyBlock/replyBlock';
+import MovieSchedule from 'components/Movie/movieSchedule/movieSchedule';
+import Filter from 'components/BaseComponents/filter/filter';
+import ValidationBlock from 'components/BaseComponents/validationBlock/validationBlock';
+import ReplyBlock from 'components/Profile/replyBlock/replyBlock';
 
 /**
  * Class of the movie view
@@ -48,10 +48,9 @@ export default class MovieView extends View {
         this._movieID = routeData.id;
         const movieContext = await this.getMovieContext();
 
-
         this._visibility = !movieContext.movieScheduleContext.sessions;
 
-        const data = {};
+
         movieContext.movieScheduleContext.Validation = (new ValidationBlock(
             {
                 message: 'На данный момент нет актуальных сеансов',
@@ -66,10 +65,17 @@ export default class MovieView extends View {
             },
         );
 
-        data.Filtration = this._filter.render();
-        data.MovieDescription = (new MovieDescription(movieContext.movieDescriptionContext)).render();
-        data.MovieSchedule = (new MovieSchedule(movieContext.movieScheduleContext)).render();
-        data.MovieReviews = (new ReplyBlock(movieContext.movieReplyContext).render());
+        this._MovieDescription = new MovieDescription(movieContext.movieDescriptionContext);
+        this._MovieSchedule = new MovieSchedule(movieContext.movieScheduleContext);
+        this._ReplyBlock = new ReplyBlock(movieContext.movieReplyContext);
+
+        const data = {
+            Filtration: this._filter.render(),
+            MovieDescription: this._MovieDescription.render(),
+            MovieSchedule: this._MovieSchedule.render(),
+            MovieReviews: this._ReplyBlock.render(),
+        };
+
         await super.show(this._template(data));
     }
 
@@ -77,13 +83,24 @@ export default class MovieView extends View {
      * Method that hides view
      * */
     hide() {
-        this._filter.hide();
+        this.off();
+        super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        this._filter.off();
+        this._MovieDescription.off();
+        this._MovieSchedule.off();
+        this._ReplyBlock.off();
+
         EventBus.off(Events.UpdateSchedule, this._onUpdateScheduleHandler);
         EventBus.off(Events.MovieRate, this._onMovieRateHandler);
         EventBus.off(Events.SubmitReply, this._onSubmitReplyHandler);
         EventBus.off(Events.UpdateReply, this._onUpdateReplyHadler);
-
-        super.hide();
+        super.off();
     }
 
     /**
@@ -129,9 +146,17 @@ export default class MovieView extends View {
 
     /**
      * Method that handles submit of the reply text
+     * @param {Object} data
      */
-    async onSubmitReply() {
-        const responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
+    async onSubmitReply(data) {
+        console.log(data);
+        let responseMovieViewModel;
+        console.log(data.reply);
+        if (data.reply) {
+            responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._replyText, data.reply);
+        } else {
+            responseMovieViewModel = this.movieViewModel.createReplyCommand.exec(this._movieID, this._replyText);
+        }
 
         const validation = document.querySelector('.replies').querySelector('.validation-block');
         await responseMovieViewModel
@@ -175,7 +200,7 @@ export default class MovieView extends View {
         movieContext.movieDescriptionContext.isAuthorized = await BaseViewModel.isAuthorised();
 
 
-        let responseMovieVM = this.movieViewModel.getScheduleCommand.exec(this._movieID, cinemaID, date);
+        let responseMovieVM = (new MovieViewModel()).getScheduleCommand.exec(this._movieID, cinemaID, date);
         await responseMovieVM
             .then((response) => {
                 movieContext.movieScheduleContext.sessions = response;
@@ -195,9 +220,7 @@ export default class MovieView extends View {
         if (movieContext.movieDescriptionContext.isAuthorized) {
             const currentProfile = await Getter.getProfile();
             if (currentProfile) {
-                movieContext.movieReplyContext.profile = {};
-                movieContext.movieReplyContext.profile.name = currentProfile.name;
-                movieContext.movieReplyContext.profile.surname = currentProfile.surname;
+                movieContext.movieReplyContext.profile = currentProfile;
             }
         }
         return movieContext;
@@ -230,7 +253,7 @@ export default class MovieView extends View {
                     visibility: this._visibility,
                 },
             )).render();
-
+            console.log(schedule.innerHTML);
             schedule.innerHTML = await (new MovieSchedule(movieScheduleContext)).render();
 
             const scroll = document.getElementById('schedule');

@@ -1,0 +1,29 @@
+<div class="tickets__header">
+    <span class="tickets__header-text">{{ name }}</span>
+</div>
+{{{ Validation }}}
+<div class="tickets__wrapper">
+    {{#each this }}
+        <div class="tickets__ticket">
+            <div class="ticket__title">
+                {{ movie }}
+            </div>
+            <div class="ticket__info">
+                {{ date }}
+            </div>
+            <div class="ticket__info">
+                {{ time }}
+            </div>
+            <a class="ticket__cinema" href="#" data-event="changePath" data-path="/cinema/1/">{{ cinema }}</a>
+            <div class="ticket__info">
+                {{ hall }} зал <br> {{ row }} ряд | {{ place }} место
+            </div>
+            <div class="ticket__info">
+                {{#if qrpath}}<img width="100px" src="{{ qrpath }}" alt="">{{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+{{#if this.qrpath }}
+    *Предъявите данный QR-код на входе в кинотеатр
+{{/if}}

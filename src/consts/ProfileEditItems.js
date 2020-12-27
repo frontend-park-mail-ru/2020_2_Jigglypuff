@@ -13,12 +13,13 @@ const ProfileEditItems = {
         inputType: 'text',
         event: Events.ProfileEditFieldFill,
     },
-    // login: {
-    //     inputID: 'login',
-    //     inputName: 'Почта',
-    //     inputType: 'text',
-    //     event: Events.ProfileEditFieldFill,
-    // },
+    login: {
+        inputID: 'login',
+        inputName: 'Почта',
+        inputType: 'text',
+        event: Events.ProfileEditFieldFill,
+        readonly: true,
+    },
     avatar: {
         inputID: 'avatar',
         inputName: 'Аватар',

@@ -1,6 +1,6 @@
 import template from 'view/HallLayout/HallView.hbs';
 import View from 'view/BaseView/View';
-import HallLayout from 'components/hallLayout/hallLayout';
+import HallLayout from 'components/Movie/hallLayout/hallLayout';
 import HallViewModel from 'viewmodels/HallViewModel';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
@@ -47,9 +47,16 @@ export default class HallView extends View {
      * Method that hides view
      * */
     hide() {
-        EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
-        this._hallLayout.hide();
         super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        EventBus.off(Events.TicketsBuy, this._onTicketsBuyHandler);
+        this._hallLayout.off();
+        super.off();
     }
 
     /**
@@ -61,9 +68,7 @@ export default class HallView extends View {
             return;
         }
 
-        let selectedPlacesDataset = [];
-
-        selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
+        const selectedPlacesDataset = Array.from(document.getElementsByClassName('button-seat-selected')).map((place) => {
             return place.dataset;
         });
 
@@ -77,14 +82,7 @@ export default class HallView extends View {
         ticketViewModel.state.login = (await Getter.getProfile()).login;
         ticketViewModel.state.scheduleID = selectedPlacesDataset[0].session;
 
-        const responseTicketViewModel = ticketViewModel.buyTicketCommand.exec();
-
-        await responseTicketViewModel
-            .then(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-            }).catch(() => {
-
-            });
+        EventBus.emit(Events.ChangePath, {path: Routes.TicketPay, ticketViewModel});
     }
 
     /**

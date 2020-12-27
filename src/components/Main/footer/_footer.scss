@@ -1,0 +1,18 @@
+.footer {
+  margin: {
+    top: 20px;
+    bottom: 20px;
+  }
+
+  text-align: center;
+  &__link {
+    text-decoration: none;
+    color: $main__font_color;
+  }
+
+  &__text {
+    margin-bottom: 10px;
+  }
+}
+
+

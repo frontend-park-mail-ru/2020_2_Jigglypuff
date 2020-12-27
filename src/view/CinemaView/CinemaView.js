@@ -1,6 +1,6 @@
 import template from 'view/CinemaView/CinemaView.hbs';
 import View from 'view/BaseView/View';
-import Cinema from 'components/cinemaPage/cinema';
+import Cinema from 'components/Cinema/cinemaPage/cinema';
 import Getter from 'utils/Getter';
 
 /**
@@ -24,10 +24,27 @@ export default class CinemaView extends View {
      */
     async show(routeData) {
         const cinemaContext = await Getter.getCinema(routeData.id);
+
+        this._Cinema = new Cinema(cinemaContext);
         const data = {
-            Cinema: (new Cinema(cinemaContext).render()),
+            Cinema: this._Cinema.render(),
         };
 
         await super.show(this._template(data));
+    }
+
+    /**
+     *
+     * */
+    hide() {
+        this.off();
+        super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        this._Cinema.off();
     }
 }

@@ -1,0 +1,29 @@
+<div class="cinema-card cs-border">
+    <div class="cinema-card__poster">
+        <img class="cinema-card__poster_img" src="{{ pathToAvatar }}" alt="">
+    </div>
+
+    <div class="cinema-card__description">
+        <a href="#" data-event="changePath" data-path="{{ cinemaPath }}/" class="cinema-card__description_title">
+            {{ name }}
+        </a>
+        <div class="cinema-card__description_specification">
+            <div>
+                <span class="description_specification__title">
+                    Адрес:
+                </span>
+                <span class="description_specification__info">
+                    {{ address }}
+                </span>
+            </div>
+            <div>
+                <span class="description_specification__title">
+                    Количество залов:
+                </span>
+                <span class="description_specification__info">
+                    {{  hallCount }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

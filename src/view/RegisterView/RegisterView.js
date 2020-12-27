@@ -1,6 +1,6 @@
 import template from 'view/RegisterView/RegisterView.hbs';
 import View from 'view/BaseView/View';
-import RegisterContent from 'components/registerContent/registerContent';
+import RegisterContent from 'components/Profile/registerContent/registerContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import SignUpViewModel from 'viewmodels/SignUpViewModel';
@@ -30,13 +30,16 @@ export default class RegisterView extends View {
         if (await BaseViewModel.isAuthorised()) {
             EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
         }
+
         this._onUpdateField = this.onUpdateField.bind(this);
         this._onSubmit = this.onSubmit.bind(this);
         EventBus.on(Events.RegisterFieldFill, this._onUpdateField);
         EventBus.on(Events.RegisterSubmit, this._onSubmit);
 
+        this._RegisterContent = new RegisterContent();
+
         const data = {
-            RegisterContent: (new RegisterContent()).render(),
+            RegisterContent: this._RegisterContent.render(),
         };
         await super.show(this._template(data));
     }
@@ -45,9 +48,18 @@ export default class RegisterView extends View {
      * Method that hides registration view
      */
     hide() {
+        this.off();
+        super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        this._RegisterContent.off();
         EventBus.off(Events.RegisterFieldFill, this._onUpdateField);
         EventBus.off(Events.RegisterSubmit, this._onSubmit);
-        super.hide();
+        super.off();
     }
 
     /**
@@ -65,7 +77,7 @@ export default class RegisterView extends View {
         const responseSignUp = this._signUpViewModel.registerCommand.exec();
 
         await responseSignUp
-            .then(async (response) => {
+            .then(async () => {
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
                 EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
             })

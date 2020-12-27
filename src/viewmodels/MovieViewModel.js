@@ -41,6 +41,7 @@ export default class MovieViewModel extends BaseViewModel {
         this.getRepliesCommand = {exec: (movieID, limit, page) => this.getReplies(movieID, limit, page)};
         this.getScheduleCommand = {exec: (movieID, cinemaID, premierTime) => this.getSchedule(movieID, cinemaID, premierTime)};
         this.rateMovieCommand = {exec: () => this.rateMovie()};
+        this.updateReplyCommand = {exec: (text, replyID) => this.updateReply(text, replyID)};
     }
 
     /**
@@ -102,9 +103,7 @@ export default class MovieViewModel extends BaseViewModel {
         this._movieModel.id = Number(this.state.id);
         this._movieModel.personalRating = Number(this.state.personalRating);
 
-        const response = await this._movieModel.rate();
-
-        return response;
+        return await this._movieModel.rate();
     }
 
     /**
@@ -145,9 +144,13 @@ export default class MovieViewModel extends BaseViewModel {
         this.replies.push({
             movieID: '',
             text: '',
-            userName: '',
+            user: {
+                avatarPath: '',
+                name: '',
+                surname: '',
+                userID: '',
+            },
             userRating: '',
-            userSurname: '',
         });
         extractedRepliesMap.forEach((value, key) => {
             this.replies[this.replies.length - 1][key] = value;
@@ -162,6 +165,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<Object>}
      */
     async getReplies(movieID, limit = 10, page = 1) {
+        this.replies = [];
         this._replyModel.movieID = this.state.id;
 
         const response = await this._replyModel.getReplies(movieID, limit, page);
@@ -192,6 +196,25 @@ export default class MovieViewModel extends BaseViewModel {
         this._replyModel.text = text;
 
         const response = await this._replyModel.createReply();
+
+        if (response.ok) {
+            return response.ok;
+        }
+
+        throw new Error(Errors.FailedToCreateReply);
+    }
+
+    /**
+     * Update reply
+     * @param {string} text
+     * @param {int} replyID
+     * @return {Promise<Error>|Promise<bool>}
+     */
+    async updateReply(text, replyID) {
+        this._replyModel.id = replyID;
+        this._replyModel.text = text;
+
+        const response = await this._replyModel.updateReply();
 
         if (response.ok) {
             return response.ok;

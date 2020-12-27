@@ -1,6 +1,6 @@
 import template from 'view/ProfileView/ProfileView.hbs';
 import View from 'view/BaseView/View';
-import ProfileContent from 'components/profileContent/profileContent';
+import ProfileContent from 'components/Profile/profileContent/profileContent';
 import EventBus from 'services/EventBus';
 import Events from 'consts/Events';
 import BaseViewModel from 'viewmodels/BaseViewModel';
@@ -22,24 +22,22 @@ export default class ProfileView extends View {
     constructor(title = 'CinemaScope') {
         super(title);
         this._template = template;
-
-        this._settingsViewModel = new SettingsViewModel();
     }
 
     /**
      * Method that shows profile view
+     * @param {Object} routeData
      */
-    async show() {
+    async show(routeData) {
+        this._settingsViewModel = new SettingsViewModel();
         if (!(await BaseViewModel.isAuthorised())) {
             EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
 
-        this._onLogoutHandler = this.onLogout.bind(this);
         this._onUpdateFieldHandler = this.onUpdateField.bind(this);
         this._onProfileEditSubmitHandler = this.onSubmit.bind(this);
 
-        EventBus.on(Events.Logout, this._onLogoutHandler);
         EventBus.on(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.on(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.on(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
@@ -52,11 +50,20 @@ export default class ProfileView extends View {
         profileContext.profileEdit = await this.getProfileEditContext();
         profileContext.profileTickets = await this.getProfileTicketContext();
 
+        if (routeData.blockID) {
+            profileContext.blockID = routeData.blockID;
+        } else {
+            profileContext.blockID = 'settings';
+        }
+
+        this._ProfileContent = new ProfileContent(profileContext);
+
         const data = {
-            ProfileContent: (new ProfileContent(profileContext)).render(),
+            ProfileContent: this._ProfileContent.render(),
         };
         await super.show(this._template(data));
     }
+
 
     /**
      * Method that gets the profile editing context
@@ -69,7 +76,7 @@ export default class ProfileView extends View {
 
         for (const i in profileEdit) {
             if (Object.prototype.hasOwnProperty.call(userProfile, i) && i !== 'avatar') {
-                profileEdit[i].inputPlaceholder = userProfile[i];
+                profileEdit[i].inputValue = userProfile[i];
             }
         }
         profileEdit.avatar.pathToAvatar = userProfile.pathToAvatar;
@@ -128,6 +135,7 @@ export default class ProfileView extends View {
             ticket.cinema = (await Getter.getCinema(value.schedule.cinemaID)).name;
             ticket.date = value.schedule.date;
             ticket.time = value.schedule.time;
+            ticket.qrpath = `${Routes.Host}${value.qrpath}.png`;
 
             profileTicketContext.profileActualTickets.push(ticket);
         }
@@ -135,30 +143,24 @@ export default class ProfileView extends View {
         return profileTicketContext;
     }
 
-    /**
-     * Method that handles logout from the profile
-     */
-    onLogout() {
-        BaseViewModel.logout()
-            .then(async () => {
-                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
-                EventBus.emit(Events.ChangePath, {path: Routes.Main});
-            })
-            .catch(() => {
-                EventBus.emit(Events.ChangePath, {path: Routes.Main});
-            });
-    }
 
     /**
      * Method that hides the profile view
      */
     hide() {
-        EventBus.off(Events.Logout, this._onLogoutHandler);
+        this.off();
+        super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
         EventBus.off(Events.ProfileEditFieldFill, this._onUpdateFieldHandler);
         EventBus.off(Events.UploadAvatar, this._onUpdateFieldHandler);
         EventBus.off(Events.ProfileEditSubmit, this._onProfileEditSubmitHandler);
-
-        super.hide();
+        this._ProfileContent.off();
+        super.off();
     }
 
     /**
@@ -167,6 +169,12 @@ export default class ProfileView extends View {
      */
     onUpdateField(data) {
         if (data.id === 'avatar') {
+            if (!data.target.files[0].type.match('image.*')) {
+                const validation = document.querySelector('.validation-block');
+                validation.innerHTML = 'Формат аватара поддерживает только картинки';
+                validation.classList.remove('validation-display-none');
+                return;
+            }
             this._settingsViewModel.state[data.id] = data.target.files[0];
             return;
         }
@@ -180,7 +188,8 @@ export default class ProfileView extends View {
         const responseProfileEdit = this._settingsViewModel.editCommand.exec();
 
         await responseProfileEdit
-            .then(async () => {
+            .then(async (res) => {
+                console.log(res);
                 EventBus.emit(Events.UpdateHeader, {isAuthorized: true, ...(await Getter.getProfile())});
             })
             .catch((err) => {
@@ -188,7 +197,5 @@ export default class ProfileView extends View {
                 validation.innerHTML = err.message;
                 validation.classList.remove('validation-display-none');
             });
-
-        await this.show();
     }
 }

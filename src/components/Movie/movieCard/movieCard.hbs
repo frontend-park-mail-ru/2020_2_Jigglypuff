@@ -1,0 +1,23 @@
+<div class="movie-card cs-border">
+    <img data-path="{{ path }}" data-event="{{ event }}" class="movie-card__poster_img" src="{{ pathToAvatar }}"
+         alt="">
+
+    <div class="movie-card__description">
+        <a href="{{ path }}" data-path="{{ path }}" data-event="{{ event }}" class="movie-card__description_title">
+            {{ name }}
+        </a>
+        <div class="movie-card__description_specification">
+            <span class="description_specification__info">
+                {{ duration }} мин
+            </span>
+            <span class="description_specification__info">
+                {{#each genreList}}
+                    {{ this }}
+                {{/each}}
+            </span>
+        </div>
+        <div style="width: 100%; margin-top: 17px">
+            {{{ TicketButton }}}
+        </div>
+    </div>
+</div>

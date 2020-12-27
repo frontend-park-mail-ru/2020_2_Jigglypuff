@@ -1,0 +1,34 @@
+.button-ticket {
+  cursor: pointer;
+
+  &__text {
+    font: {
+      family: inherit;
+      style: inherit;
+      weight: bold;
+      size: 1em;
+    };
+
+    fill: #F80000;
+    transition: 0.5s;
+  }
+
+  &__border {
+    stroke-width: 2px;
+  }
+
+  &:hover &__text {
+    font: {
+      family: inherit;
+      style: inherit;
+      weight: bold;
+      size: 1.5em;
+    };
+    filter: brightness(0.7);
+
+    transition: 0.5s;
+  }
+}
+
+
+

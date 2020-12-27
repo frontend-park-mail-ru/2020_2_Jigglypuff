@@ -1,0 +1,95 @@
+.replies {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font: {
+      size: 2rem;
+      weight: bold;
+    }
+
+    margin: {
+      top: 30px;
+      bottom: 20px;
+    };
+  }
+
+  &__reply {
+    display: flex;
+    flex-direction: row;
+    margin: {
+      bottom: 10px;
+    };
+    margin: {
+      right: 30px;
+      left: 30px;
+    };
+  }
+
+  &__reply-creation {
+    margin: {
+      right: 30px;
+      left: 30px;
+    };
+    display: flex;
+    flex-direction: row;
+
+  }
+}
+
+.reply {
+
+  font-size: 1rem;
+
+  &__reviewer {
+    font: {
+      weight: bold;
+      size: 1.2rem;
+    }
+    margin-bottom: 7px;
+  }
+
+  &__review {
+
+  }
+
+  &__creation {
+    width: 100%;
+  }
+
+  &__input {
+      height: 5em;
+      width: 100%;
+      background: $main__background_color;
+      border: 2px $main__text_help-color solid;
+      font-weight: inherit;
+      border-radius: .4em;
+      margin-bottom: 15px;
+      padding: 5px;
+
+      color: $main__font_color;
+      font-family: inherit;
+      font-size: 1em;
+  }
+  &__input:focus {
+    outline: none;
+  }
+
+  &__submit {
+    text-align: right;
+  }
+  &__line {
+    margin: 5px 20px 10px;
+    background-color: $main__font_color;
+    border-radius: 10px;
+    height: 1px;
+  }
+}
+
+.main__line {
+  margin: 5px 0 10px;
+  border: none;
+  background-color: $main__font_color;
+  border-radius: 10px;
+  height: 4px;
+}

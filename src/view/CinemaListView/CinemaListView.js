@@ -1,6 +1,6 @@
 import template from 'view/CinemaListView/CinemaListView.hbs';
 import View from 'view/BaseView/View';
-import CinemaList from 'components/cinemaList/cinemaList';
+import CinemaList from 'components/Cinema/cinemaList/cinemaList';
 import Getter from 'utils/Getter';
 
 /**
@@ -24,8 +24,9 @@ export default class CinemaListView extends View {
     async show() {
         const cinemaListContext = await this.getCinemaListContext();
 
+        this._CinemaList = new CinemaList(cinemaListContext);
         const data = {
-            CinemaList: (new CinemaList(cinemaListContext).render()),
+            CinemaList: this._CinemaList.render(),
         };
         await super.show(this._template(data));
     }
@@ -36,5 +37,20 @@ export default class CinemaListView extends View {
      */
     async getCinemaListContext() {
         return await Getter.getCinemaList();
+    }
+
+    /**
+     *
+     * */
+    hide() {
+        this.off();
+        super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        this._CinemaList.off();
     }
 }

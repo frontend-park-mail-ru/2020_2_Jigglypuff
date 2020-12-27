@@ -1,13 +1,13 @@
 import template from 'view/MainView/MainView.hbs';
 import View from 'view/BaseView/View';
-import MovieList from 'components/movieList/movieList';
-import MovieViewModel from 'viewmodels/MovieViewModel';
+import MovieList from 'components/Movie/movieList/movieList';
 import MovieListViewModel from 'viewmodels/MovieListViewModel';
-import Filter from 'components/filter/filter';
+import Filter from 'components/BaseComponents/filter/filter';
 import Events from 'consts/Events';
 import EventBus from 'services/EventBus';
-import ValidationBlock from 'components/baseComponents/validationBlock/validationBlock';
+import ValidationBlock from 'components/BaseComponents/validationBlock/validationBlock';
 import Getter from 'utils/Getter';
+import MovieViewModel from 'viewmodels/MovieViewModel';
 
 /**
  * Class of the main page view
@@ -43,9 +43,12 @@ export default class MainView extends View {
 
         this._visibility = !movieListContext.length;
 
-        const templateData = {
-            MovieList: (new MovieList(movieListContext)).render(),
-            MovieRecommendation: (new MovieList(movieRecommendationContext)).render(),
+        this._MovieList = new MovieList(movieListContext);
+        this._MovieRecommendation = new MovieList(movieRecommendationContext);
+
+        const data = {
+            MovieList: this._MovieList.render(),
+            MovieRecommendation: this._MovieRecommendation.render(),
             Filtration: this._filter.render(),
             Validation: (new ValidationBlock({
                 message: 'На данный момент нет актуальных сеансов',
@@ -53,16 +56,27 @@ export default class MainView extends View {
             })).render(),
         };
 
-        await super.show(this._template(templateData), {isSlider: true, sliderMovieID: movieRecommendationContext[1].id});
+        await super.show(this._template(data), {isSlider: true, sliderMovies: movieRecommendationContext});
     }
 
     /**
      * Method that hides view
      * */
     hide() {
-        this._filter.hide();
-        EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
+        this.off();
         super.hide();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        this._filter.off();
+        this._MovieList.off();
+        this._MovieRecommendation.off();
+
+        EventBus.off(Events.UpdateMovieList, this._onUpdateMovieListHandler);
+        super.off();
     }
 
     /**
@@ -145,7 +159,7 @@ export default class MainView extends View {
 
         await responseMovieListViewModel
             .then((response) => {
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < response.length; i++) {
                     movieRecommendationContext.push(response[i]);
                 }
             }).catch(() => {

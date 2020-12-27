@@ -36,12 +36,12 @@ const Errors = {
     InvalidName: {
         errorInputID: 'name',
         errorNumber: 19,
-        errorMessage: 'Неверный формат имени',
+        errorMessage: 'Формат имени: 2-57 символов A-z и А-я',
     },
     InvalidSurname: {
         errorInputID: 'surname',
         errorNumber: 20,
-        errorMessage: 'Неверный формат фамилии',
+        errorMessage: 'Формат фамилии: 2-57 символов A-z и А-я',
     },
     InvalidPasswordRepeated: {
         errorInputID: 'passwordRepeated',
@@ -55,7 +55,7 @@ const Errors = {
 
     TransactionNonceIsAlreadyUsed: {
         errorNumber: 24,
-        errorMessage: 'Nonce уже была использована',
+        errorMessage: 'Транзакция уже была использована',
     },
 
     TransactionNotEnoughMoney: {

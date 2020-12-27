@@ -28,7 +28,7 @@ export default class Validator {
      * @param {string} name
      */
     static validateName(name) {
-        const regExp = /^[A-Za-zА-Яа-я]{3,57}$/;
+        const regExp = /^[A-Za-zА-Яа-я]{2,57}$/;
         return regExp.test(String(name));
     }
 

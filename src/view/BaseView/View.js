@@ -1,9 +1,12 @@
-import Header from 'components/header/header';
+import Header from 'components/Main/header/header';
 import template from 'view/BaseView/View.hbs';
-import Slider from 'components/slider/slider';
+import Slider from 'components/Main/slider/slider';
 import BaseViewModel from 'viewmodels/BaseViewModel';
 import Routes from 'consts/Routes';
 import Getter from 'utils/Getter';
+import Footer from 'components/Main/footer/footer';
+import EventBus from 'services/EventBus';
+import Events from 'consts/Events';
 
 /**
  * Base class of the view
@@ -29,17 +32,28 @@ export default class View {
     async show(contentTemplate, templateDate = {}) {
         let sliderContext = {};
 
+        this._onLogoutHandler = this.onLogout.bind(this);
+        EventBus.on(Events.Logout, this._onLogoutHandler);
+
         if (!document.querySelector('.header')) {
             const headerContext = await this.getHeaderContext();
             this._context.Header = (new Header(headerContext)).render();
         } else {
             this._context.Header = document.querySelector('.header').innerHTML;
         }
+        this._context.Footer = (new Footer()).render();
 
         if (Object.prototype.hasOwnProperty.call(templateDate, 'isSlider')) {
             this._context.isSlider = true;
-            sliderContext = await this.getSliderContext(templateDate.sliderMovieID);
+            sliderContext = await this.getSliderContext(templateDate.sliderMovies);
             this._context.Slider = (new Slider(sliderContext)).render();
+
+            if (this._sliderTimer) {
+                clearInterval(this._sliderTimer);
+            }
+            this._sliderTimer = setInterval(() => {
+                EventBus.emit(Events.ScrollSlider, {target: document.querySelector('.slider__control_right')});
+            }, 5000);
         }
 
         this._context.Content = contentTemplate;
@@ -54,6 +68,18 @@ export default class View {
             document.querySelector('.slider').innerHTML = '';
         }
         document.querySelector('.content').innerHTML = '';
+        document.querySelector('.footer').innerHTML = '';
+        this.off();
+    }
+
+    /**
+     *
+     * */
+    off() {
+        if (this._sliderTimer) {
+            clearInterval(this._sliderTimer);
+        }
+        EventBus.off(Events.Logout, this._onLogoutHandler);
     }
 
     /**
@@ -73,9 +99,8 @@ export default class View {
         if (headerContext.userBlockContext.isAuthorized) {
             const userInfo = await Getter.getProfile();
             if (userInfo) {
-                headerContext.userBlockContext.pathToAvatar = userInfo.pathToAvatar;
-                headerContext.userBlockContext.name = userInfo.name;
-                headerContext.userBlockContext.surname = userInfo.surname;
+                userInfo.isAuthorized = true;
+                headerContext.userBlockContext = userInfo;
             }
         }
         return headerContext;
@@ -83,17 +108,31 @@ export default class View {
 
     /**
      * Method that gets slider context
-     * @param {number} movieID
+     * @param {Object} movies
      *
      * @return {Promise<Object>} - slider context
      */
-    async getSliderContext(movieID) {
-        const sliderContext = await Getter.getMovie(movieID);
-        if (sliderContext) {
-            sliderContext.pathToAvatar = `${Routes.Host}${sliderContext.pathToAvatar}`;
-            sliderContext.pathToSliderAvatar = `${Routes.Host}${sliderContext.pathToSliderAvatar}`;
+    async getSliderContext(movies) {
+        const sliderContext = {};
+        sliderContext.movies = movies;
+        for (const item of sliderContext.movies) {
+            item.pathToAvatar = `${Routes.Host}${item.pathToAvatar}`;
+            item.pathToSliderAvatar = `${Routes.Host}${item.pathToSliderAvatar}`;
         }
-
         return sliderContext;
+    }
+
+    /**
+     * Method that handles logout from the profile
+     */
+    onLogout() {
+        BaseViewModel.logout()
+            .then(async () => {
+                EventBus.emit(Events.UpdateHeader, {isAuthorized: false});
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
+            })
+            .catch(() => {
+                EventBus.emit(Events.ChangePath, {path: Routes.Main});
+            });
     }
 }

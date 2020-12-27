@@ -1,0 +1,51 @@
+<div class="payment__options">
+    <div class="payment__header">
+        Выберете вариант оплаты
+    </div>
+    <div class="payment__options_options">
+        <div style="margin: 0 10px 10px 0">
+            {{{OnlinePay}}}
+        </div>
+        <div style="margin: 0 0 10px 10px">
+            {{{Ethereum}}}
+        </div>
+    </div>
+</div>
+{{{ Validation }}}
+
+<div style="display: none" class="payment__crypto">
+    <div class="payment__header">
+        <div class="payment__header-title">
+            Оплата на сайте
+        </div>
+    </div>
+    <div class="payment__info">
+        <div>
+            Введите ключ и подписанную транзакцию в формате JSON. Тело транзакции должно быть сформировано по
+            следующим параметрам:
+        </div>
+        <br>
+        <div>
+            1) Получатель: 0x2D00D90471195AFAa49bf53cA55D0406DC4d635d
+        </div>
+        <div>
+            2) chainID: 4 (Rinkeby).
+        </div>
+        <br>
+        <div>
+            АКЦИЯ! До 31.12.2020 покупка билета эфиром возможна за любую цену.
+        </div>
+    </div>
+    <form class="payment__input">
+        {{#each input }}
+            {{{ this }}}
+        {{/each}}
+    </form>
+    <div class="payment__admission">
+        {{{ SubmitPayment }}}
+    </div>
+</div>
+
+<div style="display: none" class="payment__success">
+    <div class="payment__header">Оплата прошла успешно!</div>
+</div>

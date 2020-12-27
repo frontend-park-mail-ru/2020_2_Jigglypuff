@@ -18,6 +18,7 @@ export default class SettingsViewModel extends BaseViewModel {
             surname: '',
             avatar: '',
             pathToAvatar: '',
+            id: '',
         };
         this.editCommand = {exec: () => this.edit()};
     }
@@ -27,14 +28,32 @@ export default class SettingsViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<boolean>}
      */
     async edit() {
+        if (!this.state.name && !this.state.surname && !this.state.avatar) {
+            throw new Error('Введите новые данные');
+        }
         const extractedDataMap = Extractor.extractSettingsFormData(this.state);
         extractedDataMap.forEach((value, key) => {
             this._userModel[key] = value;
         });
 
-        const responseEdit = await this._userModel.edit();
+        if (!this._userModel.name) {
+            if (!this.state.surname && !this.state.avatar) {
+                throw new Error(Errors.InvalidName.errorMessage);
+            }
+        }
+        if (!this._userModel.surname) {
+            if (!this.state.name && !this.state.avatar) {
+                throw new Error(Errors.InvalidSurname.errorMessage);
+            }
+        }
 
-        return responseEdit.ok;
+
+        const responseEdit = await this._userModel.edit();
+        if (responseEdit.ok) {
+            return responseEdit.ok;
+        }
+
+        throw new Error('Произошло что-то очень плохое');
     }
 
     /**
