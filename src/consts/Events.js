@@ -27,6 +27,8 @@ const Events = {
     PaymentCrypto: 'paymentCrypto',
     PaymentOnline: 'paymentOnline',
     EditReply: 'editReply',
+    ChangeProfileBlock: 'changeProfileBlock',
+    GoToProfileBlock: 'goToProfileBlock',
 };
 
 export default Events;

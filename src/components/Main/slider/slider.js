@@ -21,10 +21,12 @@ export default class Slider extends Component {
         this._transform = 0; // значение транфсофрмации .slider_wrapper
         this._positionLeftItem = 0; // позиция левого активного элемента
         this._items = null;
+
+
         this._slideHandler = this._scrollSlider.bind(this);
         EventBus.on(Events.ScrollSlider, this._slideHandler);
-
         this._context.SliderEvent = Events.ScrollSlider;
+
         for (const i in this._context.movies) {
             if (Object.prototype.hasOwnProperty.call(this._context.movies, i)) {
                 this._context.movies[i].BigButton = (new BigButton({
@@ -37,9 +39,9 @@ export default class Slider extends Component {
     }
 
     /**
-     * hide
+     * off
      */
-    hide() {
+    off() {
         Events.off(Events.ScrollSlider, this._slideHandler);
     }
 

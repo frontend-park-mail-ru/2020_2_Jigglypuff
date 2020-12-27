@@ -19,4 +19,11 @@ export default class Component {
     render() {
         return this._template(this._context);
     }
+
+    /**
+     *
+     * */
+    off() {
+
+    }
 }

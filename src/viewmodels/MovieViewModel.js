@@ -103,9 +103,7 @@ export default class MovieViewModel extends BaseViewModel {
         this._movieModel.id = Number(this.state.id);
         this._movieModel.personalRating = Number(this.state.personalRating);
 
-        const response = await this._movieModel.rate();
-
-        return response;
+        return await this._movieModel.rate();
     }
 
     /**
@@ -167,6 +165,7 @@ export default class MovieViewModel extends BaseViewModel {
      * @return {Promise<Error>|Promise<Object>}
      */
     async getReplies(movieID, limit = 10, page = 1) {
+        this.replies = [];
         this._replyModel.movieID = this.state.id;
 
         const response = await this._replyModel.getReplies(movieID, limit, page);

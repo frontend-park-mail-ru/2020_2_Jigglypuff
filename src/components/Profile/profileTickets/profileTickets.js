@@ -22,7 +22,7 @@ export default class ProfileTickets extends Component {
         }
 
         this._context.Validation = (new ValidationBlock({
-            message: 'На данный момент нет актуальных билетов',
+            message: 'В данном разделе билетов не найдено',
             visibility: visibility,
         })).render();
     }
