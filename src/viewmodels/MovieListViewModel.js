@@ -12,6 +12,7 @@ export default class MovieListViewModel extends BaseViewModel {
         super();
 
         this.state = [];
+        this.ratingMovieName = '';
         this.getMovieActualListCommand = {exec: (date, limit, page) => this.getMovieActualList(limit, page, date)};
         this.getMovieListCommand = {exec: (limit, page) => this.getMovieList(limit, page)};
         this.getRecommendationsListCommand = {exec: () => this.getRecommendations()};
@@ -102,7 +103,9 @@ export default class MovieListViewModel extends BaseViewModel {
         const response = await MovieModel.getRecommendationsList();
 
         if (response.ok) {
-            const movieList = await response.json();
+            const list = await response.json();
+            const movieList = list.Movie;
+            this.ratingMovieName = list.RatingMovieName;
             for (const movie of movieList) {
                 this._addMovie(movie);
             }
