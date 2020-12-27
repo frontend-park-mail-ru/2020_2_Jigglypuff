@@ -159,7 +159,7 @@ export default class MainView extends View {
 
         await responseMovieListViewModel
             .then((response) => {
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < response.length; i++) {
                     movieRecommendationContext.push(response[i]);
                 }
             }).catch(() => {
