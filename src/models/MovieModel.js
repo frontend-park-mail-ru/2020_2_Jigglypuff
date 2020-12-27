@@ -161,11 +161,7 @@ export default class MovieModel {
      * @param {any} name
      */
     set name(name) {
-        if (Validator.validateMovieName(name)) {
-            this._name = name.toString();
-        } else {
-            this._name = null;
-        }
+        this._name = name.toString();
     }
 
     /**
@@ -173,11 +169,7 @@ export default class MovieModel {
      * @param {any} description
      */
     set description(description) {
-        if (Validator.validateMovieDescription(description)) {
-            this._description = description;
-        } else {
-            this._description = null;
-        }
+        this._description = description;
     }
 
     /**
@@ -185,13 +177,6 @@ export default class MovieModel {
      * @param {any} producer
      */
     set producer(producer) {
-        const nameParts = producer.toString().split(' ');
-        for (const part of nameParts) {
-            if (!Validator.validateName(part)) {
-                this._producer = null;
-                return;
-            }
-        }
         this._producer = producer.toString();
     }
 
@@ -200,11 +185,7 @@ export default class MovieModel {
      * @param {any} ageGroup
      */
     set ageGroup(ageGroup) {
-        if (Validator.validateMovieAgeLimit(ageGroup)) {
-            this._ageGroup = ageGroup;
-        } else {
-            this._ageGroup = null;
-        }
+        this._ageGroup = ageGroup;
     }
 
 
@@ -213,11 +194,7 @@ export default class MovieModel {
      * @param {any} country
      */
     set country(country) {
-        if (Validator.validateName(country)) {
-            this._country = country;
-        } else {
-            this._country = null;
-        }
+        this._country = country;
     }
 
     /**
@@ -225,11 +202,7 @@ export default class MovieModel {
      * @param {any} duration
      */
     set duration(duration) {
-        if (Validator.validateMovieDuration(duration)) {
-            this._duration = duration;
-        } else {
-            this._duration = null;
-        }
+        this._duration = duration;
     }
 
     /**
