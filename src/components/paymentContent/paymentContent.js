@@ -31,7 +31,7 @@ export default class PaymentContent extends Component {
         })).render();
 
         this._context.OnlinePay = (new StandardButton({
-            buttonName: 'Оплата онлайн',
+            buttonName: 'Банковская карта',
             event: Events.PaymentOnline,
         })).render();
         this._context.Ethereum = (new StandardButton({

@@ -74,27 +74,19 @@ export default class PaymentView extends View {
      * Method that shows login view
      */
     async _onOnlinePayment() {
-        const responseTicketViewModel = this._ticketViewModel.buyTicketCommand.exec();
 
-        await responseTicketViewModel
-            .then(() => {
-                document.querySelector('.payment__crypto').style.display = 'none';
-                document.querySelector('.payment__options').style.display = 'none';
-                document.querySelector('.payment__success').style.display = 'block';
-                setTimeout(() => {
-                    EventBus.emit(Events.ChangePath, {path: Routes.ProfilePage});
-                }, 2000);
-            }).catch((err) => {
-                const validation = document.querySelector('.validation-block');
-                validation.innerHTML = err.message;
-                validation.classList.remove('validation-display-none');
-            });
+        const validation = document.querySelector('.validation-block');
+        validation.innerHTML = 'На данный момент оплата банковской картой недоступна';
+        validation.classList.remove('validation-display-none');
+
     }
     /**
      * Method that shows login view
      */
     async _onCryptoPayment() {
         document.querySelector('.payment__crypto').style.display = 'block';
+        const validation = document.querySelector('.validation-block');
+        validation.classList.add('validation-display-none');
     }
 
     /**
