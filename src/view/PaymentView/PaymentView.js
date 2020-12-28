@@ -29,7 +29,6 @@ export default class PaymentView extends View {
             await EventBus.emit(Events.ChangePath, {path: Routes.Login});
             return;
         }
-        console.log(routeData);
         this._ticketViewModel = routeData.ticketViewModel;
 
         this._onOnlinePaymentHandler = this._onOnlinePayment.bind(this);

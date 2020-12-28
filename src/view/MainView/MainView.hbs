@@ -2,12 +2,14 @@
     {{{ Slider }}}
 </div>
 <div class="movie-list">
-    <div id="film_premiers" class="movie-list__header">Премьеры</div>
+    <div id="film_premiers" class="movie-list__header">Сейчас в кино</div>
     {{{ MovieList }}}
     {{{ Validation }}}
     <hr class="header__line movie-list__line">
 </div>
 <div class="movie-list">
-    <div id="film_recommendations" class="movie-list__header">Рекомендации</div>
+    {{#if ratingMovieName }}<div id="film_recommendations" class="movie-list__header">Потому Вам понравился {{ratingMovieName}}</div>{{else}}
+        <div id="film_recommendations" class="movie-list__header">На основне популярных фильмов</div>
+    {{/if}}
     {{{ MovieRecommendation }}}
 </div>

@@ -54,6 +54,7 @@ export default class MainView extends View {
                 message: 'На данный момент нет актуальных сеансов',
                 visibility: this._visibility,
             })).render(),
+            ratingMovieName: this.ratingMovieName,
         };
 
         await super.show(this._template(data), {isSlider: true, sliderMovies: movieRecommendationContext});
@@ -155,16 +156,19 @@ export default class MainView extends View {
     async getMovieRecommendationContext() {
         const movieRecommendationContext = [];
 
-        const responseMovieListViewModel = (new MovieListViewModel()).getRecommendationsListCommand.exec();
+        let movieListViewModel = new MovieListViewModel();
+        const responseMovieListViewModel = movieListViewModel.getRecommendationsListCommand.exec();
 
         await responseMovieListViewModel
             .then((response) => {
                 for (let i = 0; i < response.length; i++) {
                     movieRecommendationContext.push(response[i]);
+
                 }
             }).catch(() => {
 
             });
+        this.ratingMovieName = movieListViewModel.ratingMovieName;
         return movieRecommendationContext;
     }
 }
