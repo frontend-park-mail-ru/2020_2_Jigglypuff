@@ -58,13 +58,9 @@ export default class TicketViewModel {
             hours * 60;
 
         const currentDate = new Date();
-        const currentMinutes = currentDate.getHours() * 60 + currentDate.getMinutes();
+        const ticketDate = new Date(year, month - 1, day, hours, minutes);
 
-        if (!(year < currentDate.getFullYear()) &&
-            !(month < currentDate.getMonth()) &&
-            !(day < currentDate.getDate()) &&
-            !(minutes < currentMinutes)
-        ) {
+        if (ticketDate.getTime() > currentDate.getTime()) {
             this.stateActualTicketList.push(this.state[this.state.length - 1]);
         } else {
             this.stateHistoryTicketList.push(this.state[this.state.length - 1]);

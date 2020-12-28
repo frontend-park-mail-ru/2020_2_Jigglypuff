@@ -69,11 +69,7 @@ export default class CinemaModel {
      * @param {any} address
      */
     set address(address) {
-        if (Validator.validateAddress(address)) {
-            this._address = address.toString();
-        } else {
-            this._address = null;
-        }
+        this._address = address.toString();
     }
 
     /**
