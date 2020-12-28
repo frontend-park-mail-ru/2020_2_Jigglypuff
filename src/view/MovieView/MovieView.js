@@ -149,9 +149,7 @@ export default class MovieView extends View {
      * @param {Object} data
      */
     async onSubmitReply(data) {
-        console.log(data);
         let responseMovieViewModel;
-        console.log(data.reply);
         if (data.reply) {
             responseMovieViewModel = this.movieViewModel.updateReplyCommand.exec(this._replyText, data.reply);
         } else {
@@ -253,7 +251,6 @@ export default class MovieView extends View {
                     visibility: this._visibility,
                 },
             )).render();
-            console.log(schedule.innerHTML);
             schedule.innerHTML = await (new MovieSchedule(movieScheduleContext)).render();
 
             const scroll = document.getElementById('schedule');

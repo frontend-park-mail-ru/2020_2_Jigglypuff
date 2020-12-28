@@ -56,7 +56,6 @@ export default class SignUpViewModel extends BaseViewModel {
         }
 
         const response = await userModel.register();
-        console.log(response);
         if (response.ok) {
             const responseCSRF = await CSRF.getCSRF();
             return response.ok & responseCSRF.ok;
