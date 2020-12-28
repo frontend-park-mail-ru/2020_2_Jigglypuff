@@ -5,12 +5,12 @@
                 <div class="item__layout">
                     <div class="layout__main">
                         <div class="layout__main_roles">
-                            <div>
-                                <p>
-                                    {{#each actorList }}
+                            <div style="display: flex; flex-direction: column;">
+                                {{#each actorList }}
+                                    <p>
                                         {{ this }}
-                                    {{/each}}
-                                </p>
+                                    </p>
+                                {{/each}}
                             </div>
                         </div>
                         <p class="layout__main_headline">{{ name }}</p>
